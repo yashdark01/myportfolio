@@ -8,10 +8,12 @@ import Contact from "./sections/Contact";
 import Skills from "./sections/Skills";
 import Experience from "./sections/Experience";
 import { motion } from "framer-motion";
+import Cursor from "./components/cursor";
 
 const App = () => {
   return (
     <div>
+      <Cursor/>
       <Navbar />
       <Home />
       <About />

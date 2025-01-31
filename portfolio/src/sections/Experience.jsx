@@ -1,61 +1,97 @@
-import React from "react";
+import React, { useState } from "react";
 import { Element } from "react-scroll";
-import { motion } from "framer-motion";
+import { FaSuitcase } from "react-icons/fa"; // Icon for job experiences
 
 const experiences = [
   {
+    title: "Frontend Developer Intern",
     company: "Webintegratorz Technologies Pvt. Ltd.",
-    role: "Frontend Developer Intern",
-    duration: "Aug 2023 - Present",
+    duration: "July 2024 - Present",
     description:
-      "Worked on developing responsive UIs using React.js and Tailwind CSS. Implemented Redux for state management and optimized API calls with Axios.",
+      "Worked on various web development projects using React, Tailwind CSS, and Node.js. Responsible for building responsive web pages and handling front-end development tasks.",
+    fullDescription:
+      "In this role, I have developed several responsive web pages and contributed to large-scale projects, ensuring performance optimization and implementing new features. I have also collaborated with UI/UX designers to create smooth user interactions and cross-browser compatibility. I integrated third-party APIs and worked on improving the accessibility of websites.",
+    technologies: ["React.js", "Tailwind CSS", "JavaScript", "Node.js"],
   },
   {
-    company: "Freelance Projects",
-    role: "Full Stack Developer",
-    duration: "Jan 2023 - Aug 2023",
+    title: "Full Stack Developer",
+    company: "Freelance",
+    duration: "Jan 2023 - June 2024",
     description:
-      "Developed multiple full-stack applications using React.js, Node.js, and MongoDB. Focused on building scalable and interactive web applications.",
+      "Developed full-stack applications with React for the frontend and Node.js with Express for the backend. Implemented real-time functionality and database management using MongoDB.",
+    fullDescription:
+      "As a full-stack developer, I was responsible for creating both front-end and back-end solutions. On the front end, I used React to build dynamic user interfaces while integrating them with back-end APIs using Express and Node.js. I used MongoDB for the database and Socket.io for real-time communication. I focused on building scalable, interactive, and secure applications.",
+    technologies: ["React.js", "Node.js", "MongoDB", "Express.js", "Socket.io"],
   },
   {
-    company: "Personal Projects",
-    role: "Self-Learning & Open Source",
-    duration: "2022 - Present",
+    title: "Web Developer Intern",
+    company: "ABC Corp",
+    duration: "June 2022 - Dec 2022",
     description:
-      "Contributed to open-source projects and built various personal projects to improve problem-solving and development skills.",
+      "Built and maintained websites for clients, optimizing user experience and ensuring mobile responsiveness. Collaborated with cross-functional teams for UI/UX improvements.",
+    fullDescription:
+      "During this internship, I developed websites from scratch, optimized them for mobile devices, and ensured that they were fully responsive. I collaborated with senior developers to understand industry best practices, worked on client requirements, and helped in content management and CMS integration for the websites.",
+    technologies: ["HTML", "CSS", "JavaScript", "WordPress"],
   },
 ];
 
 const Experience = () => {
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
+  const toggleDescription = (index) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
   return (
-    <Element name="experience" className="py-20 bg-gradient-to-t from-black/100 to-black/90 text-zinc-700">
-      <motion.div
-        className="max-w-4xl mx-auto px-6"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ once: true }}
-      >
-        <h2 className="text-4xl font-bold text-center mb-10 text-white">Experience</h2>
-        <div className="relative border-l-4 border-blue-500 pl-6">
+    <Element name="experience" className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white py-20">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Heading */}
+        <h2 className="text-5xl font-extrabold text-center mb-12 glow-text">My Experience</h2>
+
+        {/* Experience Timeline */}
+        <div className="space-y-12">
           {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              className="mb-8"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="absolute w-4 h-4 bg-blue-500 transition duration-4000  rounded-full -left-2.5"></div>
-              <h3 className="text-2xl font-semibold">{exp.role}</h3>
-              <p className="text-lg text-gray-700 font-medium">{exp.company}</p>
-              <p className="text-sm text-gray-500">{exp.duration}</p>
-              <p className="mt-2 text-gray-700">{exp.description}</p>
-            </motion.div>
+            <div key={index} className="relative p-8 bg-gray-800 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+              {/* Experience Heading */}
+              <div className="absolute top-0 left-0 -translate-x-16">
+                <FaSuitcase size={40} className="text-cyan-500" />
+              </div>
+              <h3 className="text-3xl font-semibold">{exp.title}</h3>
+              <h4 className="text-lg font-light text-gray-400">{exp.company}</h4>
+              <p className="text-sm text-gray-400 my-2">{exp.duration}</p>
+              <p className="text-gray-300 mb-4">{exp.description}</p>
+
+              {/* Technologies Used */}
+              <div className="flex flex-wrap gap-4">
+                {exp.technologies.map((tech, idx) => (
+                  <span key={idx} className="bg-gray-700 text-cyan-500 px-4 py-2 rounded-full text-sm">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {/* Read More / Less Button */}
+              <button
+                onClick={() => toggleDescription(index)}
+                className="text-cyan-400 mt-4 text-lg font-semibold"
+              >
+                {expandedIndex === index ? "Read Less" : "Read More"}
+              </button>
+
+              {/* Full Description */}
+              {expandedIndex === index && (
+                <p className="text-gray-400 mt-4">{exp.fullDescription}</p>
+              )}
+            </div>
           ))}
         </div>
-      </motion.div>
+      </div>
+
+      <style jsx>{`
+        .glow-text {
+          text-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
+        }
+      `}</style>
     </Element>
   );
 };
