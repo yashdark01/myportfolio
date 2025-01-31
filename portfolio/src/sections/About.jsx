@@ -22,7 +22,7 @@ const About = () => {
           About Me
         </motion.h2>
 
-        <div className="lg:flex lg:space-x-12">
+        <div className=" flex flex-col-reverse lg:flex-row gap-y-6 lg:gap-y-0 lg:space-y-0  lg:space-x-12">
           {/* Left Section */}
           <div className="lg:w-1/2 mb-8 lg:mb-0">
             <motion.p

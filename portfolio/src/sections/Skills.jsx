@@ -1,13 +1,29 @@
 import React from "react";
 import { Element } from "react-scroll";
 import { FaReact, FaNodeJs, FaCss3Alt, FaDatabase, FaJsSquare, FaGitSquare } from "react-icons/fa"; // Corrected icons
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Register Chart.js components
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const skills = [
   {
     name: "React.js",
-    level: 90,
+    level: 80,
     icon: <FaReact size={30} />,
-    description: "Used for building dynamic user interfaces and single-page applications with a reactive approach.",
+    description:
+      "Used for building dynamic user interfaces and single-page applications with a reactive approach.",
   },
   {
     name: "Node.js",
@@ -17,7 +33,7 @@ const skills = [
   },
   {
     name: "Tailwind CSS",
-    level: 85,
+    level: 90,
     icon: <FaCss3Alt size={30} />, // Using the CSS icon as a placeholder for Tailwind CSS
     description: "Utility-first CSS framework used to create responsive and modern user interfaces.",
   },
@@ -31,22 +47,24 @@ const skills = [
     name: "JavaScript",
     level: 90,
     icon: <FaJsSquare size={30} />, // JavaScript icon
-    description: "Programming language for building interactive web applications and server-side logic.",
+    description:
+      "Programming language for building interactive web applications and server-side logic.",
   },
   {
     name: "Express.js",
     level: 80,
     icon: <FaGitSquare size={30} />, // Placeholder for Express.js
-    description: "Minimal and flexible Node.js web application framework used for building robust APIs and backend services.",
+    description:
+      "Minimal and flexible Node.js web application framework used for building robust APIs and backend services.",
   },
 ];
 
 const softSkills = [
-  { name: "Communication", level: 90 },
+  { name: "Communication", level: 80 },
   { name: "Problem Solving", level: 85 },
-  { name: "Teamwork", level: 80 },
+  { name: "Teamwork", level: 90 },
   { name: "Leadership", level: 75 },
-  { name: "Time Management", level: 85 },
+  { name: "Time Management", level: 90 },
   { name: "Adaptability", level: 90 },
 ];
 
@@ -62,6 +80,33 @@ const certifications = [
     icon: <FaNodeJs size={30} />, // Node.js icon for Full Stack Development
   },
 ];
+
+// Bar chart data for soft skills
+const chartData = {
+  labels: softSkills.map((skill) => skill.name), // Names of soft skills
+  datasets: [
+    {
+      label: "Proficiency Level",
+      data: softSkills.map((skill) => skill.level), // Levels of soft skills
+      backgroundColor: "rgba(0, 255, 255, 0.5)",
+      borderColor: "rgba(0, 255, 255, 1)",
+      borderWidth: 1,
+    },
+  ],
+};
+
+const chartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Soft Skills Proficiency",
+    },
+  },
+};
 
 const Skills = () => {
   return (
@@ -103,8 +148,10 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Soft Skills Section */}
-        <h3 className="text-4xl font-extrabold text-center mt-20 mb-8 glow-text">Soft Skills</h3>
+       
+
+        {/* Soft Skills Section - Circular Progress Bars */}
+        <h3 className="text-4xl font-extrabold text-center mt-20 mb-8 glow-text">Soft Skills (Circular)</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {softSkills.map((skill, index) => (
             <div
@@ -112,15 +159,19 @@ const Skills = () => {
               className="p-6 bg-gray-800 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
             >
               <h4 className="text-xl font-semibold mb-4">{skill.name}</h4>
-              <div className="w-full bg-gray-700 rounded-full h-2.5">
-                <div
-                  className="h-2.5 rounded-full bg-cyan-500"
-                  style={{ width: `${skill.level}%` }}
+              <div className="w-24 h-24 mx-auto">
+                <CircularProgressbar
+                  value={skill.level}
+                  text={`${skill.level}%`}
+                  strokeWidth={10}
+                  className="w-full h-full"
                 />
               </div>
             </div>
           ))}
         </div>
+
+       
 
         {/* Certifications Section */}
         <h3 className="text-4xl font-extrabold text-center mt-20 mb-8 glow-text">Certifications</h3>
