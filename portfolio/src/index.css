@@ -12,55 +12,39 @@ body {
 
   
 }
-/* Main Cursor Style */
-/* Main Cursor Style */
-#cursor {
+
+.cursor, .cursor-trail {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #fff;
   pointer-events: none;
-  transform: translate(-50%, -50%);
   z-index: 9999;
-  transition: width 0.2s, height 0.2s, background-color 0.2s;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: transform 0.2s ease-out, background 0.3s ease-out;
 }
 
-/* First Additional Circle (Larger and Transparent) */
-#circle1 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: rgba(0, 123, 255, 0.4); /* Light blue with transparency */
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 9998;
-  transition: top 0.3s, left 0.3s, width 0.3s, height 0.3s;
+/* Main Cursor */
+.cursor {
+  background: rgba(0, 191, 255, 0.9); /* Sky Blue */
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.8), 0 0 20px rgba(0, 191, 255, 0.6);
 }
 
-/* Second Additional Circle (Smaller with Gradient Effect) */
-#circle2 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 0, 150, 0.5), rgba(255, 255, 255, 0)); /* Gradient effect */
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 9997;
-  transition: top 0.3s, left 0.3s, width 0.3s, height 0.3s;
+/* Smooth Trailing Effect */
+.cursor-trail {
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 123, 255, 0.2); /* Deep Blue */
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), 0 0 30px rgba(0, 123, 255, 0.4);
 }
-/* Add additional hoverable class styles if needed */
+
 .hoverable:hover {
-  cursor: none; /* Hide the default cursor on hoverable elements */
+  cursor: none;
 }
+
+
+
 /* Custom Clip Path for Diagonal */
 /* @layer utilities {
   .clip-path-triangle {

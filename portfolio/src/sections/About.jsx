@@ -52,7 +52,7 @@ const About = () => {
               className="mt-8 inline-block bg-cyan-500 text-white py-2 px-6 rounded-lg text-lg font-semibold hover:bg-cyan-600 transition-all duration-300"
               whileHover={{ scale: 1.1 }}
             >
-              Download Resume
+             View Resume
             </motion.a>
           </div>
 
