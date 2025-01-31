@@ -4,10 +4,7 @@ import { motion } from "framer-motion"; // For smooth animations
 
 const About = () => {
   return (
-    <Element
-      name="about"
-      className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white py-20"
-    >
+    <Element name="about" className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white py-20">
       <motion.div
         className="max-w-6xl mx-auto px-6"
         initial={{ opacity: 0, y: 50 }}
@@ -25,7 +22,7 @@ const About = () => {
           About Me
         </motion.h2>
 
-        <div className="flex flex-col-reverse lg:flex-row gap-y-6 lg:gap-y-0 lg:space-y-0 lg:space-x-12">
+        <div className=" flex flex-col-reverse lg:flex-row gap-y-6 lg:gap-y-0 lg:space-y-0  lg:space-x-12">
           {/* Left Section */}
           <div className="lg:w-1/2 mb-8 lg:mb-0">
             <motion.p
@@ -34,11 +31,9 @@ const About = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
             >
-              Hello! I’m Yash Patidar, a passionate Full Stack Developer with a
-              focus on creating dynamic and interactive web applications. With
-              expertise in frontend technologies like React.js and backend
-              technologies like Node.js, I strive to deliver efficient,
-              scalable, and visually appealing solutions.
+              Hello! I’m Yash Patidar, a passionate Full Stack Developer with a focus on creating dynamic and
+              interactive web applications. With expertise in frontend technologies like React.js and backend
+              technologies like Node.js, I strive to deliver efficient, scalable, and visually appealing solutions.
             </motion.p>
             <motion.p
               className="text-lg text-gray-300"
@@ -46,21 +41,18 @@ const About = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
             >
-              I'm always learning new technologies and expanding my skill set to
-              stay ahead in this ever-evolving field. I believe in clean,
-              maintainable code and always aim for best practices in every
-              project I work on.
+              I'm always learning new technologies and expanding my skill set to stay ahead in this ever-evolving
+              field. I believe in clean, maintainable code and always aim for best practices in every project I work on.
             </motion.p>
 
-            {/* Direct Resume Download Button */}
+            {/* Download Resume Button with hover effect */}
             <motion.a
-              href="/src/assets/main_tex.pdf" // Local resume file path
-              target="_blank" // Opens in a new tab
-              rel="noopener noreferrer" // Security best practice
+              href="https://docs.google.com/document/d/14K7lXnsrYhl1p1ActzVusnshZ51geGQgyphn62NXMPs/edit?usp=sharing" target="__blank" // Replace with your actual resume file path
+              download
               className="mt-8 inline-block bg-cyan-500 text-white py-2 px-6 rounded-lg text-lg font-semibold hover:bg-cyan-600 transition-all duration-300"
               whileHover={{ scale: 1.1 }}
             >
-              View Resume
+             View Resume
             </motion.a>
           </div>
 

@@ -20,7 +20,7 @@ const Navbar = () => {
           setIsVisible(true); // Show navbar when scrolling up
         }
         setLastScrollY(window.scrollY);
-      }, 100); // Adjust delay for smoother experience
+      }, 10); // Adjust delay for smoother experience
     };
 
     window.addEventListener("scroll", handleScroll);
