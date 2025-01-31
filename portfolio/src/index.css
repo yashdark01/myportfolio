@@ -1,1 +1,17 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Geist', sans-serif;
+}
+
+/* Custom Clip Path for Diagonal */
+/* @layer utilities {
+  .clip-path-triangle {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 75%, 50% 50%, 0 25%);
+  }
+} */
