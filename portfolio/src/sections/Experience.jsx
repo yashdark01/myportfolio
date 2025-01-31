@@ -6,7 +6,7 @@ const experiences = [
   {
     title: "Frontend Developer Intern",
     company: "Webintegratorz Technologies Pvt. Ltd.",
-    duration: "July 2024 - Present",
+    duration: "January 2024 - Present",
     description:
       "Worked on various web development projects using React, Tailwind CSS, and Node.js. Responsible for building responsive web pages and handling front-end development tasks.",
     fullDescription:
@@ -16,23 +16,14 @@ const experiences = [
   {
     title: "Full Stack Developer",
     company: "Freelance",
-    duration: "Jan 2023 - June 2024",
+    duration: "July 2023 - Present",
     description:
       "Developed full-stack applications with React for the frontend and Node.js with Express for the backend. Implemented real-time functionality and database management using MongoDB.",
     fullDescription:
       "As a full-stack developer, I was responsible for creating both front-end and back-end solutions. On the front end, I used React to build dynamic user interfaces while integrating them with back-end APIs using Express and Node.js. I used MongoDB for the database and Socket.io for real-time communication. I focused on building scalable, interactive, and secure applications.",
     technologies: ["React.js", "Node.js", "MongoDB", "Express.js", "Socket.io"],
   },
-  {
-    title: "Web Developer Intern",
-    company: "ABC Corp",
-    duration: "June 2022 - Dec 2022",
-    description:
-      "Built and maintained websites for clients, optimizing user experience and ensuring mobile responsiveness. Collaborated with cross-functional teams for UI/UX improvements.",
-    fullDescription:
-      "During this internship, I developed websites from scratch, optimized them for mobile devices, and ensured that they were fully responsive. I collaborated with senior developers to understand industry best practices, worked on client requirements, and helped in content management and CMS integration for the websites.",
-    technologies: ["HTML", "CSS", "JavaScript", "WordPress"],
-  },
+  
 ];
 
 const Experience = () => {
