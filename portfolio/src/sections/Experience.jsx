@@ -11,7 +11,7 @@ const experiences = [
       "Worked on various web development projects using React, Tailwind CSS, and Node.js. Responsible for building responsive web pages and handling front-end development tasks.",
     fullDescription:
       "In this role, I have developed several responsive web pages and contributed to large-scale projects, ensuring performance optimization and implementing new features. I have also collaborated with UI/UX designers to create smooth user interactions and cross-browser compatibility. I integrated third-party APIs and worked on improving the accessibility of websites.",
-    technologies: ["HTML", "CSS", "React.js", "Tailwind CSS", "JavaScript", "Node.js", "MongoDB", "Express.js", "Socket.io"],
+    technologies: ["HTML", "CSS", "JavaScript", "React.js", "Tailwind CSS", "Node.js", "MongoDB", "Express.js", "Socket.io"],
   },
   {
     title: "Full Stack Developer",
