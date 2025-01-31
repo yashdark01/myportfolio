@@ -1,5 +1,7 @@
 import { Element } from "react-scroll";
 import React from "react";
+import myprofile from "../../public/myprofile.jpeg"
+
 import { motion } from "framer-motion";
 
 const Home = () => (
@@ -24,7 +26,7 @@ const Home = () => (
         <div className="bg-gradient-radial from-gray-800 to-black p-2 rounded-full">
           <div className="size-48 rounded-full bg-black border-4 border-blue-600 overflow-hidden">
             <img
-              src="https://via.placeholder.com/150" // Replace with your profile image URL
+              src={myprofile} // Replace with your profile image URL
               alt=""
               className="w-full h-full object-cover"
             />
