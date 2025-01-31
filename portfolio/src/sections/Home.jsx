@@ -72,7 +72,7 @@ const Home = () => (
         transition={{ duration: 0.8, delay: 1.2 }}
       >
         <a
-          href="#contact"
+          href="https://www.linkedin.com/in/yash-patidar-97a8861b3/"
           className="inline-block bg-blue-600 hover:bg-blue-500 text-white text-lg px-6 py-3 rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105"
         >
           Get in Touch
