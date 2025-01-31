@@ -22,8 +22,9 @@ const App = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2 }}
       >
-        <Skills />
+       
         <Experience />
+        <Skills />
       </motion.div>  
       <Projects />
       <Contact />
