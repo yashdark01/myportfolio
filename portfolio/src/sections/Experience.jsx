@@ -28,7 +28,7 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <Element name="experience" className="py-20 bg-gray-100 text-gray-900">
+    <Element name="experience" className="py-20 bg-gradient-to-t from-black/100 to-black/90 text-zinc-700">
       <motion.div
         className="max-w-4xl mx-auto px-6"
         initial={{ opacity: 0, y: 50 }}
@@ -36,7 +36,7 @@ const Experience = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <h2 className="text-4xl font-bold text-center mb-10">Experience</h2>
+        <h2 className="text-4xl font-bold text-center mb-10 text-white">Experience</h2>
         <div className="relative border-l-4 border-blue-500 pl-6">
           {experiences.map((exp, index) => (
             <motion.div

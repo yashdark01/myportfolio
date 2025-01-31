@@ -12,7 +12,7 @@ const skills = [
 
 const Skills = () => {
   return (
-    <Element name="skills" className="py-20 bg-gray-900 text-white">
+    <Element name="skills" className="py-20  text-white bg-gradient-to-t from-black/90 to-black/80">
       <motion.div
         className="max-w-4xl mx-auto px-6"
         initial={{ opacity: 0, y: 50 }}
@@ -25,7 +25,7 @@ const Skills = () => {
           {skills.map((skill, index) => (
             <motion.div
               key={index}
-              className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-500"
+              className="bg-white/10 p-6 rounded-3xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-500"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
