@@ -10,7 +10,6 @@ import Experience from "./sections/Experience";
 import { motion } from "framer-motion";
 import Cursor from "./components/Cursor";
 
-
 const App = () => {
   return (
     <div>
