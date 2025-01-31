@@ -1,1 +1,66 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Geist', sans-serif;
+  
+}
+/* Main Cursor Style */
+/* Main Cursor Style */
+#cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #fff;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* First Additional Circle (Larger and Transparent) */
+#circle1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(0, 123, 255, 0.4); /* Light blue with transparency */
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  transition: top 0.3s, left 0.3s, width 0.3s, height 0.3s;
+}
+
+/* Second Additional Circle (Smaller with Gradient Effect) */
+#circle2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 0, 150, 0.5), rgba(255, 255, 255, 0)); /* Gradient effect */
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9997;
+  transition: top 0.3s, left 0.3s, width 0.3s, height 0.3s;
+}
+/* Add additional hoverable class styles if needed */
+.hoverable:hover {
+  cursor: none; /* Hide the default cursor on hoverable elements */
+}
+/* Custom Clip Path for Diagonal */
+/* @layer utilities {
+  .clip-path-triangle {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 75%, 50% 50%, 0 25%);
+  }
+} */

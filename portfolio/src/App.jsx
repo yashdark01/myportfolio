@@ -1,23 +1,34 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Projects from "./pages/Projects";
-import Skills from "./pages/Skills";
-import Contact from "./pages/Contact";
+import "./index.css";
 import Navbar from "./components/Navbar";
+import Home from "./sections/Home";
+import About from "./sections/About";
+import Projects from "./sections/Projects";
+import Contact from "./sections/Contact";
+import Skills from "./sections/Skills";
+import Experience from "./sections/Experience";
+import { motion } from "framer-motion";
+import Cursor from "./components/cursor";
 
-const App = () => (
-  <Router>
-    <Navbar />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/projects" element={<Projects />} />
-      <Route path="/skills" element={<Skills />} />
-      <Route path="/contact" element={<Contact />} />
-    </Routes>
-  </Router>
-);
+const App = () => {
+  return (
+    <div>
+      <Cursor/>
+      <Navbar />
+      <Home />
+      <About />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2 }}
+      >
+        <Skills />
+        <Experience />
+      </motion.div>  
+      <Projects />
+      <Contact />
+    </div>
+  );
+};
 
 export default App;
