@@ -14,7 +14,7 @@ const Navbar = () => {
       if (timeout) clearTimeout(timeout);
 
       timeout = setTimeout(() => {
-        if (window.scrollY > lastScrollY) {
+        if (window.scrollY > lastScrollY && !isMenuOpen) {
           setIsVisible(false); // Hide navbar when scrolling down
         } else {
           setIsVisible(true); // Show navbar when scrolling up
@@ -28,7 +28,7 @@ const Navbar = () => {
       clearTimeout(timeout);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollY]);
+  }, [lastScrollY, isMenuOpen]);
 
   const handleSetActiveLink = (link) => {
     setActiveLink(link); // Update active link when clicked
@@ -36,7 +36,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full bg-black/90 text-white p-6 flex justify-between items-center z-40 transition-transform duration-300 shadow-lg ${
+      className={`fixed top-0 w-full bg-black/90 text-white p-6 flex justify-between items-center z-50 transition-transform duration-300 shadow-lg ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
@@ -68,17 +68,17 @@ const Navbar = () => {
       <div className="md:hidden">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="text-2xl focus:outline-none"
+          className="text-2xl focus:outline-none z-50"
         >
-          {isMenuOpen ? <FaTimes className="transform rotate-90 transition-all duration-300" /> : <FaBars />}
+          {isMenuOpen ? <FaTimes className="transition-transform duration-300" /> : <FaBars />}
         </button>
       </div>
 
       {/* Mobile Navbar */}
       <div
-        className={`${
-          isMenuOpen ? "block" : "hidden"
-        } absolute top-0 left-0 w-full h-full bg-black/90 flex flex-col items-center justify-center space-y-6`}
+        className={`fixed top-0 left-0 w-full h-screen bg-black/95 flex flex-col items-center justify-center space-y-8 transition-all duration-500 ${
+          isMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
+        }`}
       >
         {["home", "about", "skills", "experience", "projects", "contact"].map(
           (item) => (
@@ -87,7 +87,7 @@ const Navbar = () => {
               to={item}
               smooth={true}
               duration={500}
-              className="text-lg text-white cursor-pointer hover:text-zinc-700 transition-all ease-in-out duration-300"
+              className="text-xl text-white cursor-pointer hover:text-cyan-500 transition-all ease-in-out duration-300"
               onClick={() => {
                 setIsMenuOpen(false); // Close menu on link click
                 handleSetActiveLink(item); // Set active link on click
