@@ -46,7 +46,15 @@ const Home = () => (
 
       {/* Typing Effect for Subtitle */}
       <motion.p
-        className="text-2xl mt-3 text-gray-400 typing-effect"
+        className="hidden md:block text-2xl mt-3 text-gray-400 typing-effect"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.6 }}
+      >
+        Full Stack Developer | Building Interactive Web Experiences
+      </motion.p>
+      <motion.p
+        className="text-2xl mt-3 text-gray-400 md:hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.6 }}

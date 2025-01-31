@@ -36,7 +36,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full bg-black/90 text-white p-6 flex justify-between items-center z-50 transition-transform duration-300 shadow-lg ${
+      className={`fixed top-0 w-full bg-black/90 text-white p-4 md:p-6 flex justify-between items-center z-50 transition-transform duration-300 shadow-lg ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
@@ -44,7 +44,7 @@ const Navbar = () => {
       <div className="text-2xl font-bold">Yash</div>
 
       {/* Desktop Navbar */}
-      <div className="hidden md:flex justify-center space-x-12">
+      <div className="hidden md:flex justify-center space-x-8 md:space-x-12">
         {["home", "about", "skills", "experience", "projects", "contact"].map(
           (item) => (
             <Link
