@@ -4,7 +4,7 @@ import { FaSuitcase } from "react-icons/fa"; // Icon for job experiences
 
 const experiences = [
   {
-    title: "Frontend Developer Intern",
+    title: "Full Stack Developer Intern",
     company: "Webintegratorz Technologies Pvt. Ltd.",
     duration: "January 2024 - Present",
     description:
