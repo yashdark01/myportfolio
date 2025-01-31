@@ -25,7 +25,7 @@ const Home = () => (
           <div className="size-48 rounded-full bg-black border-4 border-blue-600 overflow-hidden">
             <img
               src="https://via.placeholder.com/150" // Replace with your profile image URL
-              alt="Yash Patidar"
+              alt=""
               className="w-full h-full object-cover"
             />
           </div>
