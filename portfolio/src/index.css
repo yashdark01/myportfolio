@@ -3,10 +3,13 @@
 
 html {
   scroll-behavior: smooth;
+
 }
 
 body {
   font-family: 'Geist', sans-serif;
+  background-color: black;
+
   
 }
 /* Main Cursor Style */
