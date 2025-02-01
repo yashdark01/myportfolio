@@ -55,7 +55,7 @@ const Experience = () => {
               {/* Technologies Used */}
               <div className="flex flex-wrap gap-4">
                 {exp.technologies.map((tech, idx) => (
-                  <span key={idx} className="bg-gray-700 text-cyan-500 px-4 py-2 rounded-full text-sm">
+                  <span key={idx} className="bg-gray-700 cursor-pointer hover:scale-110 hover:text-cyan-300 text-cyan-500 px-4 py-2 rounded-full text-sm">
                     {tech}
                   </span>
                 ))}

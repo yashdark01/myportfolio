@@ -81,32 +81,7 @@ const certifications = [
   },
 ];
 
-// Bar chart data for soft skills
-const chartData = {
-  labels: softSkills.map((skill) => skill.name), // Names of soft skills
-  datasets: [
-    {
-      label: "Proficiency Level",
-      data: softSkills.map((skill) => skill.level), // Levels of soft skills
-      backgroundColor: "rgba(0, 255, 255, 0.5)",
-      borderColor: "rgba(0, 255, 255, 1)",
-      borderWidth: 1,
-    },
-  ],
-};
 
-const chartOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Soft Skills Proficiency",
-    },
-  },
-};
 
 const Skills = () => {
   return (
@@ -151,7 +126,7 @@ const Skills = () => {
        
 
         {/* Soft Skills Section - Circular Progress Bars */}
-        <h3 className="text-4xl font-extrabold text-center mt-20 mb-8 glow-text">Soft Skills (Circular)</h3>
+        <h3 className="text-4xl font-extrabold text-center mt-20 mb-8 glow-text">Soft Skills</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {softSkills.map((skill, index) => (
             <div
