@@ -14,14 +14,12 @@ const projects = [
     liveLink: "https://course-enrollment-system.com",
   },
   {
-    title: "Project One",
-    description:
-      "A full-stack web application built with React, Node.js, and MongoDB. It allows users to sign up, log in, and interact with real-time features.",
-    fullDescription:
-      "In this project, I created a full-stack web application where users can create accounts, log in, and interact with real-time messaging features. I used React for the front-end, Node.js for the back-end, and MongoDB for the database. This app also incorporates authentication via JWT and uses Socket.io for real-time updates.",
-    technologies: ["React.js", "Node.js", "MongoDB", "JWT", "Socket.io"],
-    githubLink: "https://github.com/username/project-one",
-    liveLink: "https://project-one.com",
+    title: "SNS Website",
+    description: "An animated UI design built with React, showcasing smooth transitions and interactive elements.",
+    fullDescription: "This project focuses on creating an engaging user interface with smooth animations, responsive design, and interactive components. Built using React, it includes modern UI elements like animated buttons, dynamic cards, and seamless page transitions for an enhanced user experience.",
+    technologies: ["React.js", "CSS Animations", "Framer Motion", "Responsive Design"],
+    githubLink: "https://github.com/yashdark01/sns-website",
+    liveLink: "#"
   },
   {
     title: "Project Two",
@@ -58,7 +56,7 @@ const Projects = () => {
               {/* Technologies Used */}
               <div className="flex flex-wrap gap-4 mt-4">
                 {project.technologies.map((tech, idx) => (
-                  <span key={idx} className="bg-gray-700 text-cyan-500 px-4 py-2 rounded-full text-sm">
+                  <span key={idx} className="bg-gray-700 text-cyan-500 hover:text-cyan-300 hover:scale-110 px-4 py-2 rounded-full text-sm">
                     {tech}
                   </span>
                 ))}
