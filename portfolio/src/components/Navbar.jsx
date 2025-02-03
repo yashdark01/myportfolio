@@ -68,7 +68,7 @@ const Navbar = () => {
       <div className="md:hidden">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="text-2xl focus:outline-none z-50"
+          className="text-2xl focus:outline-none z-50 relative"
         >
           {isMenuOpen ? <FaTimes className="transition-transform duration-300" /> : <FaBars />}
         </button>

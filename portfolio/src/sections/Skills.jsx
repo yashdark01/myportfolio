@@ -3,7 +3,7 @@ import { Element } from "react-scroll";
 import { FaReact, FaNodeJs, FaCss3Alt, FaDatabase, FaJsSquare, FaGitSquare } from "react-icons/fa"; // Corrected icons
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { Bar } from "react-chartjs-2";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,7 +15,7 @@ import {
 } from "chart.js";
 
 // Register Chart.js components
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 const skills = [
   {
@@ -131,7 +131,7 @@ const Skills = () => {
           {softSkills.map((skill, index) => (
             <div
               key={index}
-              className="p-6 bg-gray-800 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+              className="p-6 bg-gray-800 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 group"
             >
               <h4 className="text-xl font-semibold mb-4">{skill.name}</h4>
               <div className="w-24 h-24 mx-auto">

@@ -44,7 +44,7 @@ const Cursor = () => {
     <>
       {/* Main Cursor */}
       <div
-        className="cursor"
+        className="cursor hidden md:flex"
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
@@ -55,7 +55,7 @@ const Cursor = () => {
 
       {/* Smooth Trailing Effect */}
       <div
-        className="cursor-trail"
+        className="cursor-trail hidden md:flex"
         style={{
           left: `${trail.x}px`,
           top: `${trail.y}px`,
