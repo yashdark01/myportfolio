@@ -1,6 +1,7 @@
 import React from "react";
 import { Element } from "react-scroll";
 import { motion } from "framer-motion"; // For smooth animations
+import mern from "../../public/mern-1.webp"
 
 const About = () => {
   return (
@@ -47,7 +48,7 @@ const About = () => {
 
             {/* Download Resume Button with hover effect */}
             <motion.a
-              href="https://docs.google.com/document/d/14K7lXnsrYhl1p1ActzVusnshZ51geGQgyphn62NXMPs/edit?usp=sharing" target="__blank" // Replace with your actual resume file path
+              href="https://drive.google.com/file/d/1ucKq9n3L5Pasr5eIWRqdnZfTPCarq9yU/view?usp=sharing" target="__blank" // Replace with your actual resume file path
               download
               className="mt-8 inline-block bg-cyan-500 text-white py-2 px-6 rounded-lg text-lg font-semibold hover:bg-cyan-600 transition-all duration-300"
               whileHover={{ scale: 1.1 }}
@@ -59,8 +60,8 @@ const About = () => {
           {/* Right Section (Profile Image with animation) */}
           <div className="lg:w-1/2 flex justify-center">
             <motion.img
-              src="/path/to/your-profile-photo.jpg" // Replace with your image path
-              alt="Yash Patidar"
+              src={mern} // Replace with your image path
+              alt="MERN STACK"
               className="rounded-full bg-white w-72 h-72 object-cover shadow-lg"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}

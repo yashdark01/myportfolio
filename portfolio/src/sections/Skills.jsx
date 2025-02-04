@@ -1,5 +1,6 @@
 import React from "react";
 import { Element } from "react-scroll";
+import { motion } from "framer-motion";
 import { FaReact, FaNodeJs, FaCss3Alt, FaDatabase, FaJsSquare, FaGitSquare } from "react-icons/fa"; // Corrected icons
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -61,12 +62,12 @@ const softSkills = [
 const certifications = [
   {
     title: "MERN Stack Certification",
-    link: "https://github.com/yashdark01/myresume/blob/main/Wi%20Yash%20Training.png", // Link to certificate
+    link: "https://drive.google.com/file/d/1bfQGh-mu-Xd7VwA-g-UfjPdRIgUjb4L_/view?usp=sharing", // Link to certificate
     icon: <FaReact size={30} />, // React icon for MERN stack
   },
   {
     title: "Full Stack Development Certification",
-    link: "https://github.com/yashdark01/myresume/blob/main/Webintegratorz%20certificate%20formate%20(2).png", // Link to certificate
+    link: "https://drive.google.com/file/d/1qYoMDvkR9KY2-OBPCbPy0hwpukH8RV7d/view?usp=sharing", // Link to certificate
     icon: <FaNodeJs size={30} />, // Node.js icon for Full Stack Development
   },
 ];
@@ -76,7 +77,7 @@ const certifications = [
 const Skills = () => {
   return (
     <Element name="skills" className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white py-20">
-      <div className="max-w-6xl mx-auto px-6">
+      <motion.div className="max-w-6xl mx-auto px-6">
         {/* Heading */}
         <h2 className="text-5xl font-extrabold text-center mb-12 glow-text">My Skills</h2>
 
@@ -156,7 +157,7 @@ const Skills = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
       
 
       <style jsx>{`

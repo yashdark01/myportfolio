@@ -22,14 +22,14 @@ const projects = [
     liveLink: "https://sns-website-nine.vercel.app/"
   },
   {
-    title: "Project Two",
+    title: "In-Progress...",
     description:
-      "A responsive e-commerce website built with React and Stripe API for payments. Includes product listing, cart, and checkout functionality.",
+      " ",
     fullDescription:
-      "This e-commerce site allows users to browse products, add them to the cart, and proceed to checkout using Stripe for payment processing. It is built with React and uses the Stripe API for secure transactions. I also optimized the site for mobile devices, ensuring a seamless user experience across all screen sizes.",
-    technologies: ["React.js", "Stripe API", "CSS", "JavaScript"],
-    githubLink: "https://github.com/username/project-two",
-    liveLink: "https://project-two.com",
+      "",
+    technologies: [""],
+    githubLink: "#",
+    liveLink: "#",
   },
 ];
 
