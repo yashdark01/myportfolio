@@ -19,7 +19,7 @@ const projects = [
     fullDescription: "This project focuses on creating an engaging user interface with smooth animations, responsive design, and interactive components. Built using React, it includes modern UI elements like animated buttons, dynamic cards, and seamless page transitions for an enhanced user experience.",
     technologies: ["React.js", "CSS Animations", "Framer Motion", "Responsive Design"],
     githubLink: "https://github.com/yashdark01/sns-website",
-    liveLink: "#"
+    liveLink: "https://sns-website-nine.vercel.app/"
   },
   {
     title: "Project Two",

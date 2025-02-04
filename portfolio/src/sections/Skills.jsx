@@ -4,18 +4,8 @@ import { FaReact, FaNodeJs, FaCss3Alt, FaDatabase, FaJsSquare, FaGitSquare } fro
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
 
-// Register Chart.js components
-ChartJS.register(CategoryScale, LinearScale, Title, Tooltip, Legend);
+
 
 const skills = [
   {
