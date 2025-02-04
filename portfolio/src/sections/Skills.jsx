@@ -145,13 +145,19 @@ const Skills = () => {
             <div key={index} className="bg-gray-800 p-6 rounded-lg w-64 text-center hover:scale-105 transition-transform duration-300">
               <div className="text-3xl text-cyan-500 mb-4">{cert.icon}</div>
               <h4 className="text-lg font-semibold text-white mb-4">{cert.title}</h4>
-              <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-                View Certificate
-              </a>
+              <motion.a
+              href={cert.link} target="__blank" // Replace with your actual resume file path
+              download
+              className="mt-8 inline-block bg-cyan-500 text-white py-2 px-6 rounded-lg text-lg font-semibold hover:bg-cyan-600 transition-all duration-300"
+              whileHover={{ scale: 1.1 }}
+            >
+             View Certificate
+            </motion.a>
             </div>
           ))}
         </div>
       </div>
+      
 
       <style jsx>{`
         .glow-text {
