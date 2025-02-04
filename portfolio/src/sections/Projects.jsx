@@ -11,7 +11,7 @@ const projects = [
       "In this project, I built a full-stack course enrollment system using React, Node.js, and MongoDB. The system allows students to sign up, log in, browse available courses, and enroll in them. The admin panel enables administrators to manage courses, approve students, and track enrollment data. I implemented user authentication with JWT and ensured the system is responsive using Tailwind CSS.",
     technologies: ["React.js", "Node.js", "MongoDB", "JWT", "Tailwind CSS"],
     githubLink: "https://github.com/yashdark01/project-1",
-    liveLink: "#",
+    liveLink: "https://project-1-two-gamma.vercel.app/",
   },
   {
     title: "SNS Website",
