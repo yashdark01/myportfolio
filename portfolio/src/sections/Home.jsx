@@ -45,6 +45,7 @@ const Home = () => (
       </motion.h1>
 
       {/* Typing Effect for Subtitle */}
+      <div className=" w-auto">
       <motion.p
         className="hidden md:block text-2xl mt-3 text-gray-400 typing-effect"
         initial={{ opacity: 0 }}
@@ -53,6 +54,8 @@ const Home = () => (
       >
         Full Stack Developer | Building Interactive Web Experiences
       </motion.p>
+      </div>
+      
       <motion.p
         className="text-2xl mt-3 text-gray-400 md:hidden"
         initial={{ opacity: 0 }}
@@ -110,7 +113,7 @@ const Home = () => (
         white-space: nowrap;
         border-right: 2px solid #3b82f6;
         width: 0;
-        animation: typing 3s steps(40, end) forwards, blink 0.8s infinite;
+        animation: typing 3s steps(40, end) forwards, blink 0.8s step-end infinite;
       }
 
       @keyframes typing {
