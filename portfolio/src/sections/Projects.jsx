@@ -20,17 +20,7 @@ const projects = [
     technologies: ["React.js", "CSS Animations", "Framer Motion", "Responsive Design"],
     githubLink: "https://github.com/yashdark01/sns-website",
     liveLink: "https://sns-website-nine.vercel.app/"
-  },
-  {
-    title: "In-Progress...",
-    description:
-      " ",
-    fullDescription:
-      "",
-    technologies: [""],
-    githubLink: "#",
-    liveLink: "#",
-  },
+  }
 ];
 
 const Projects = () => {
