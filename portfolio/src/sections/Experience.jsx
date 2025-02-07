@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Element } from "react-scroll";
-import { FaSuitcase } from "react-icons/fa"; // Icon for job experiences
+import { FaSuitcase } from "react-icons/fa";
 
 const experiences = [
   {
@@ -60,8 +60,7 @@ const Experience = () => {
                   </span>
                 ))}
               </div>
-
-              {/* Read More / Less Button */}
+              
               <button
                 onClick={() => toggleDescription(index)}
                 className="text-cyan-400 mt-4 text-lg font-semibold"
@@ -69,7 +68,6 @@ const Experience = () => {
                 {expandedIndex === index ? "Read Less" : "Read More"}
               </button>
 
-              {/* Full Description */}
               {expandedIndex === index && (
                 <p className="text-gray-400 mt-4">{exp.fullDescription}</p>
               )}
