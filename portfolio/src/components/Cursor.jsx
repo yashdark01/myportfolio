@@ -42,7 +42,6 @@ const Cursor = () => {
 
   return (
     <>
-      {/* Main Cursor */}
       <div
         className="cursor hidden md:flex"
         style={{
@@ -52,8 +51,7 @@ const Cursor = () => {
           background: isHovering ? "rgba(0, 140, 255, 0.8)" : "rgba(0, 191, 255, 0.9)",
         }}
       />
-
-      {/* Smooth Trailing Effect */}
+      
       <div
         className="cursor-trail hidden md:flex"
         style={{
