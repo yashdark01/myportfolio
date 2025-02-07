@@ -6,17 +6,15 @@ import { motion } from "framer-motion";
 
 const Home = () => (
   <Element name="home" className="h-screen relative z-10 text-gray-300 overflow-hidden bg-black">
-    {/* Background Overlay */}
+    
     <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black opacity-95"></div>
 
-    {/* Content */}
     <motion.div
       className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: "easeOut" }}
     >
-      {/* Profile Circle with Neon Glow */}
       <motion.div
         className="bg-gradient-to-r from-blue-700 to-blue-900 p-2 rounded-full shadow-blue animate-glow"
         initial={{ scale: 0.8, opacity: 0 }}
@@ -26,7 +24,7 @@ const Home = () => (
         <div className="bg-gradient-radial from-gray-800 to-black p-2 rounded-full">
           <div className="size-48 rounded-full bg-black border-4 border-blue-600 overflow-hidden">
             <img
-              src={myprofile} // Replace with your profile image URL
+              src={myprofile}
               alt=""
               className="w-full h-full object-cover"
             />
@@ -34,7 +32,6 @@ const Home = () => (
         </div>
       </motion.div>
 
-      {/* Name with Animated Font */}
       <motion.h1
         className="text-5xl font-extrabold text-white mt-6 animated-gradient-text"
         initial={{ opacity: 0, y: -20 }}
@@ -44,7 +41,6 @@ const Home = () => (
         Hi, I'm <span className="text-blue-400">Yash Patidar</span>
       </motion.h1>
 
-      {/* Typing Effect for Subtitle */}
       <div className=" w-auto">
       <motion.p
         className="hidden md:block text-2xl mt-3 text-gray-400 typing-effect"
@@ -65,7 +61,6 @@ const Home = () => (
         Full Stack Developer | Building Interactive Web Experiences
       </motion.p>
 
-      {/* Intro Paragraph */}
       <motion.p
         className="text-lg mt-4 text-gray-400 max-w-2xl"
         initial={{ opacity: 0 }}
@@ -74,8 +69,7 @@ const Home = () => (
       >
         I specialize in building fast, modern, and scalable web applications using the latest technologies.
       </motion.p>
-
-      {/* CTA Button */}
+      
       <motion.div
         className="mt-8"
         initial={{ opacity: 0, scale: 0.8 }}
@@ -91,7 +85,6 @@ const Home = () => (
       </motion.div>
     </motion.div>
 
-    {/* CSS for Animated Font */}
     <style jsx>{`
       /* Gradient Text Animation */
       .animated-gradient-text {
