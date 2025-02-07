@@ -6,8 +6,6 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 
-
-
 const skills = [
   {
     name: "React.js",
@@ -25,26 +23,26 @@ const skills = [
   {
     name: "Tailwind CSS",
     level: 90,
-    icon: <FaCss3Alt size={30} />, // Using the CSS icon as a placeholder for Tailwind CSS
+    icon: <FaCss3Alt size={30} />,
     description: "Utility-first CSS framework used to create responsive and modern user interfaces.",
   },
   {
     name: "MongoDB",
     level: 75,
-    icon: <FaDatabase size={30} />, // Database icon for MongoDB
+    icon: <FaDatabase size={30} />,
     description: "NoSQL database used for scalable data storage in backend applications.",
   },
   {
     name: "JavaScript",
     level: 90,
-    icon: <FaJsSquare size={30} />, // JavaScript icon
+    icon: <FaJsSquare size={30} />,
     description:
       "Programming language for building interactive web applications and server-side logic.",
   },
   {
     name: "Express.js",
     level: 80,
-    icon: <FaGitSquare size={30} />, // Placeholder for Express.js
+    icon: <FaGitSquare size={30} />,
     description:
       "Minimal and flexible Node.js web application framework used for building robust APIs and backend services.",
   },
@@ -62,13 +60,13 @@ const softSkills = [
 const certifications = [
   {
     title: "MERN Stack Certification",
-    link: "https://drive.google.com/file/d/1bfQGh-mu-Xd7VwA-g-UfjPdRIgUjb4L_/view?usp=sharing", // Link to certificate
-    icon: <FaReact size={30} />, // React icon for MERN stack
+    link: "https://drive.google.com/file/d/1bfQGh-mu-Xd7VwA-g-UfjPdRIgUjb4L_/view?usp=sharing",
+    icon: <FaReact size={30} />,
   },
   {
     title: "Full Stack Development Certification",
-    link: "https://drive.google.com/file/d/1qYoMDvkR9KY2-OBPCbPy0hwpukH8RV7d/view?usp=sharing", // Link to certificate
-    icon: <FaNodeJs size={30} />, // Node.js icon for Full Stack Development
+    link: "https://drive.google.com/file/d/1qYoMDvkR9KY2-OBPCbPy0hwpukH8RV7d/view?usp=sharing",
+    icon: <FaNodeJs size={30} />,
   },
 ];
 
@@ -78,27 +76,22 @@ const Skills = () => {
   return (
     <Element name="skills" className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white py-20">
       <motion.div className="max-w-6xl mx-auto px-6">
-        {/* Heading */}
         <h2 className="text-5xl font-extrabold text-center mb-12 glow-text">My Skills</h2>
 
-        {/* Skills Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {skills.map((skill, index) => (
             <div
               key={index}
               className="group relative p-6 bg-gray-800 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
             >
-              {/* Skill Icon */}
               <div className="absolute top-0 left-0 w-full h-full bg-black/60 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 flex items-center justify-center">
                 <div className="text-white text-4xl">{skill.icon}</div>
               </div>
 
-              {/* Card Content */}
               <div className="z-20">
                 <h3 className="text-2xl font-semibold text-center mb-4">{skill.name}</h3>
                 <p className="text-gray-300 text-sm mb-4">{skill.description}</p>
 
-                {/* Progress Bar */}
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-lg text-gray-400">Proficiency</span>
                   <span className="text-lg font-semibold text-gray-200">{skill.level}%</span>
@@ -114,9 +107,6 @@ const Skills = () => {
           ))}
         </div>
 
-       
-
-        {/* Soft Skills Section - Circular Progress Bars */}
         <h3 className="text-4xl font-extrabold text-center mt-20 mb-8 glow-text">Soft Skills</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {softSkills.map((skill, index) => (
@@ -138,8 +128,6 @@ const Skills = () => {
         </div>
 
        
-
-        {/* Certifications Section */}
         <h3 className="text-4xl font-extrabold text-center mt-20 mb-8 glow-text">Certifications</h3>
         <div className="flex flex-wrap justify-center gap-8">
           {certifications.map((cert, index) => (
@@ -147,7 +135,7 @@ const Skills = () => {
               <div className="text-3xl text-cyan-500 mb-4">{cert.icon}</div>
               <h4 className="text-lg font-semibold text-white mb-4">{cert.title}</h4>
               <motion.a
-              href={cert.link} target="__blank" // Replace with your actual resume file path
+              href={cert.link} target="__blank"
               download
               className="mt-8 inline-block bg-cyan-500 text-white py-2 px-6 rounded-lg text-lg font-semibold hover:bg-cyan-600 transition-all duration-300"
               whileHover={{ scale: 1.1 }}
