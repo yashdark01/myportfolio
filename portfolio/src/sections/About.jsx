@@ -1,6 +1,6 @@
 import React from "react";
 import { Element } from "react-scroll";
-import { motion } from "framer-motion"; // For smooth animations
+import { motion } from "framer-motion"; 
 import mern from "../../public/mern-1.webp"
 
 const About = () => {
@@ -13,7 +13,7 @@ const About = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        {/* Animated Heading */}
+        
         <motion.h2
           className="text-5xl font-extrabold text-center mb-12 glow-text"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -24,7 +24,6 @@ const About = () => {
         </motion.h2>
 
         <div className=" flex flex-col-reverse lg:flex-row gap-y-6 lg:gap-y-0 lg:space-y-0  lg:space-x-12">
-          {/* Left Section */}
           <div className="lg:w-1/2 mb-8 lg:mb-0">
             <motion.p
               className="text-lg text-gray-300 mb-6"
@@ -45,8 +44,7 @@ const About = () => {
               I'm always learning new technologies and expanding my skill set to stay ahead in this ever-evolving
               field. I believe in clean, maintainable code and always aim for best practices in every project I work on.
             </motion.p>
-
-            {/* Download Resume Button with hover effect */}
+            
             <motion.a
               href="https://drive.google.com/file/d/1omieK6kN0vlEfrwVdzSeORjvEn2sSNDW/view?usp=sharing" target="__blank" // Replace with your actual resume file path
               download
@@ -57,10 +55,9 @@ const About = () => {
             </motion.a>
           </div>
 
-          {/* Right Section (Profile Image with animation) */}
           <div className="lg:w-1/2 flex justify-center">
             <motion.img
-              src={mern} // Replace with your image path
+              src={mern}
               alt="MERN STACK"
               className="rounded-full bg-white w-72 h-72 object-cover shadow-lg"
               initial={{ scale: 0 }}
