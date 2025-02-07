@@ -7,7 +7,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
-  const [formStatus, setFormStatus] = useState(""); // To show success or error message
+  const [formStatus, setFormStatus] = useState(""); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,7 +19,6 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here, handle form submission to backend (e.g., via an API)
     setFormStatus("Thank you for reaching out! I will get back to you soon.");
     setFormData({
       name: "",
@@ -33,9 +32,9 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-5xl font-extrabold text-center mb-12 glow-text">Contact Me</h2>
 
-        {/* Contact Form */}
+        
         <div className="flex flex-col lg:flex-row gap-10">
-          {/* Left Side - Information */}
+          
           <div className="flex-1 text-center lg:text-left">
             <p className="text-lg mb-6">
               I'm always open to new opportunities! You can reach me via the form below or on my social media. I look forward to hearing from you.
@@ -52,7 +51,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Right Side - Contact Form */}
+          
           <div className="flex-1">
             <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg">
               <h3 className="text-2xl font-semibold mb-4 text-center">Send Me a Message</h3>
