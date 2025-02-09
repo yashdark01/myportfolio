@@ -28,7 +28,7 @@ const Contact = () => {
   };
 
   return (
-    <Element name="contact" className="min-h-screen bg-gradient-to-t from-black via-gray-800 to-black text-white py-20">
+    <Element name="contact" className="h-full bg-gradient-to-t from-black via-gray-800 to-black text-white py-20">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-5xl font-extrabold text-center mb-12 glow-text">Contact Me</h2>
 
