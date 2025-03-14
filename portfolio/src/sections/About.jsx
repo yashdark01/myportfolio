@@ -46,7 +46,7 @@ const About = () => {
             </motion.p>
             
             <motion.a
-              href="https://drive.google.com/file/d/1ikc6hOb3GpSfAgq-vUZd-OhWeAnPsxDR/view?usp=sharing" target="__blank" 
+              href="https://drive.google.com/file/d/1ohZeVtdC0HqPbN1iHxBsfKMdP95tFf04/view?usp=sharing" target="__blank" 
               className="mt-8 inline-block bg-cyan-500 text-white py-2 px-6 rounded-lg text-lg font-semibold hover:bg-cyan-600 transition-all duration-300"
               whileHover={{ scale: 1.1 }}
             >
