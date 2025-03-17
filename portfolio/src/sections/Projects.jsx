@@ -60,7 +60,8 @@ const Projects = () => {
                 ))}
               </div>
 
-              <button
+              <div className = "absolute bottom-6 left-6">
+                <button
                 onClick={() => toggleDescription(index)}
                 className=" text-cyan-400 mt-4 text-lg font-semibold hover:text-cyan-500"
               >
@@ -68,8 +69,9 @@ const Projects = () => {
               </button>
 
               {expandedIndex === index && (
-                <p className="text-gray-400 mt-4">{project.fullDescription}</p>
+                <p className="text-gray-400 my-4 ">{project.fullDescription}</p>
               )}
+              </div>
 
               <div className="absolute bottom-6 right-6  flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
