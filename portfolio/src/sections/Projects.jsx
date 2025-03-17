@@ -4,6 +4,16 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const projects = [
   {
+    title: "Music Player (Spotify Clone)",
+    description:
+      "A fully functional Spotify Clone built with the MERN stack and ShadCN UI, featuring authentication, playlists, and music controls.",
+    fullDescription:
+      "Developed a fully functional Spotify Clone using the MERN Stack with a modern UI built using ShadCN. The frontend is built with React.js, while the backend is powered by Node.js and Express.js to handle user authentication, song storage, and playlist management. MongoDB is used as the database to store user data, playlists, and song metadata efficiently. Integrated Redux Toolkit for state management and added features like play/pause controls, Trending Songs, and Made For You playlists.",
+    technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "Redux Toolkit", "ShadCN UI", "Tailwind CSS"],
+    githubLink: "https://github.com/yashdark01/spotify.git",
+    liveLink: "https://spotify-clone.com", // Update if you have a live version
+  },
+  {
     title: "Course Enrollment System",
     description:
       "A full-stack application for managing course enrollments. Students can register, log in, browse courses, and enroll. Admins can manage courses and users.",
