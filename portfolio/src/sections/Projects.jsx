@@ -71,7 +71,7 @@ const Projects = () => {
                 <p className="text-gray-400 mt-4">{project.fullDescription}</p>
               )}
 
-              <div className="absolute bottom-6 left-6  flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute bottom-6 right-6  flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
                   <FaGithub size={30} className="text-cyan-400 hover:text-cyan-500 transition-colors" />
                 </a>
