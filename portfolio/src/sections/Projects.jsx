@@ -11,7 +11,7 @@ const projects = [
       "Developed a fully functional Spotify Clone using the MERN Stack with a modern UI built using ShadCN. The frontend is built with React.js, while the backend is powered by Node.js and Express.js to handle user authentication, song storage, and playlist management. MongoDB is used as the database to store user data, playlists, and song metadata efficiently. Integrated Redux Toolkit for state management and added features like play/pause controls, Trending Songs, and Made For You playlists.",
     technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "Redux Toolkit", "ShadCN UI", "Tailwind CSS"],
     githubLink: "https://github.com/yashdark01/spotify.git",
-    liveLink: "#", // Update if you have a live version
+    liveLink: "#",
   },
   {
     title: "Course Enrollment System",
@@ -47,7 +47,7 @@ const Projects = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-12">
           {projects.map((project, index) => (
-            <div key={index} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 relative group">
+            <div key={index} className="relative bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 relative group">
               
               <h3 className="text-2xl font-semibold">{project.title}</h3>
               <p className="text-gray-300 mt-4">{project.description}</p>
@@ -62,7 +62,7 @@ const Projects = () => {
 
               <button
                 onClick={() => toggleDescription(index)}
-                className="text-cyan-400 mt-4 text-lg font-semibold hover:text-cyan-500"
+                className="absolute bottom-6 left-6 text-cyan-400 mt-4 text-lg font-semibold hover:text-cyan-500"
               >
                 {expandedIndex === index ? "Read Less" : "Read More"}
               </button>
@@ -75,7 +75,7 @@ const Projects = () => {
                 <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
                   <FaGithub size={30} className="text-cyan-400 hover:text-cyan-500 transition-colors" />
                 </a>
-                <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className = {`${project.liveLink === '#' ? "hidden" : "block"} `}>
                   <FaExternalLinkAlt size={30} className="text-cyan-400 hover:text-cyan-500 transition-colors" />
                 </a>
               </div>
