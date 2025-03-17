@@ -45,7 +45,7 @@ const Projects = () => {
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-5xl font-extrabold text-center mb-12 glow-text">My Projects</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2  gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-12">
           {projects.map((project, index) => (
             <div key={index} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 relative group">
               
