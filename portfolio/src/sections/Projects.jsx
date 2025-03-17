@@ -62,7 +62,7 @@ const Projects = () => {
 
               <button
                 onClick={() => toggleDescription(index)}
-                className="absolute bottom-6 left-6 text-cyan-400 mt-4 text-lg font-semibold hover:text-cyan-500"
+                className=" text-cyan-400 mt-4 text-lg font-semibold hover:text-cyan-500"
               >
                 {expandedIndex === index ? "Read Less" : "Read More"}
               </button>
