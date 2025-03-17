@@ -75,8 +75,8 @@ const Projects = () => {
                 <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
                   <FaGithub size={30} className="text-cyan-400 hover:text-cyan-500 transition-colors" />
                 </a>
-                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className = {`${project.liveLink === '#'}`}>
-                  <FaExternalLinkAlt size={30} className="text-cyan-400 hover:text-cyan-500 transition-colors" />
+                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" >
+                  <FaExternalLinkAlt size={30}  className = {`${project.liveLink === '#' ? "hidden" : "block"} text-cyan-400 hover:text-cyan-500 transition-colors`}/>
                 </a>
               </div>
             </div>
