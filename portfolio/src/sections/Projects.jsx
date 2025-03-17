@@ -47,7 +47,7 @@ const Projects = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-12">
           {projects.map((project, index) => (
-            <div key={index} className="relative bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 relative group">
+            <div key={index} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 relative group">
               
               <h3 className="text-2xl font-semibold">{project.title}</h3>
               <p className="text-gray-300 mt-4">{project.description}</p>
@@ -71,7 +71,7 @@ const Projects = () => {
                 <p className="text-gray-400 mt-4">{project.fullDescription}</p>
               )}
 
-              <div className="absolute bottom-6 right-6 flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className=" flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
                   <FaGithub size={30} className="text-cyan-400 hover:text-cyan-500 transition-colors" />
                 </a>
