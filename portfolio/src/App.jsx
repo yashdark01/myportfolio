@@ -24,9 +24,10 @@ const App = () => {
       >
        
         <Experience />
+         <Projects />
         <Skills />
       </motion.div>  
-      <Projects />
+     
       <Contact />
     </div>
   );
