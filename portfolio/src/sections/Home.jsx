@@ -1,6 +1,6 @@
 import { Element } from "react-scroll";
 import React from "react";
-import myprofile from "../../public/myprofile.png"
+import myprofile from "../assets/myprofile.png"
 
 import { motion } from "framer-motion";
 

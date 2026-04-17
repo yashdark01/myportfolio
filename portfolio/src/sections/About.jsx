@@ -1,7 +1,7 @@
 import React from "react";
 import { Element } from "react-scroll";
 import { motion } from "framer-motion"; 
-import mern from "../../public/mern-1.webp"
+import mern from "../assets/mern-1.webp"
 
 const About = () => {
   return (
