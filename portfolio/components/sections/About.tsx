@@ -17,11 +17,11 @@ export default function About() {
           transition={{ duration: 0.4 }}
           className="text-lg leading-relaxed text-text-muted"
         >
-          I&apos;m a Full Stack Software Engineer skilled in building
-          enterprise-grade ESG and AI-driven platforms with React.js, Next.js,
-          Node.js, and FastAPI. I focus on RESTful microservices, RAG-based LLM
-          systems, and high-performance frontends that measurably improve how
-          teams work.
+          I&apos;m a Founding Engineer and Full Stack Developer at Horizon17
+          Technology and Sustainability Pvt. Ltd., building enterprise-grade ESG
+          and AI-driven platforms with React.js, Next.js, Node.js, and applied LLM
+          systems. I focus on RESTful services, RAG pipelines, and
+          high-performance frontends that measurably improve how teams work.
         </motion.p>
 
         <motion.p
@@ -31,7 +31,7 @@ export default function About() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="leading-relaxed text-text-muted"
         >
-          At Horizon17 & EcoMS, I contribute to the Ecometer sustainability
+          At Horizon17, I contribute to Ecometer — EcoMS&apos;s sustainability
           platform — helping brands and agencies measure and report campaign
           environmental impact. Before that, I shipped 4+ production apps during
           my internship at WebIntegratorz — from JWT-secured backends to

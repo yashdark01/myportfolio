@@ -5,11 +5,16 @@ export default function JsonLd() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: site.name,
-    jobTitle: "Full Stack Software Engineer",
+    jobTitle: "Founding Engineer · Full Stack Developer",
     description: site.tagline,
     email: site.email,
     url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://yashpatidar.vercel.app",
     sameAs: [site.links.linkedin, site.links.github],
+    worksFor: {
+      "@type": "Organization",
+      name: "Horizon17 Technology and Sustainability Pvt. Ltd.",
+      url: "https://www.horizon17ww.com/",
+    },
     alumniOf: {
       "@type": "CollegeOrUniversity",
       name: "Indian Institute of Information Technology, Nagpur",

@@ -172,15 +172,16 @@ export const caseStudies: CaseStudy[] = [
     ...projects[1],
     caseStudyTitle:
       "Embedding sustainability intelligence into every stage of campaign and event execution",
-    timeline: "Apr 2025 – Present · Full Stack Developer · Horizon17 Technology",
+    timeline:
+      "Apr 2025 – Present · Founding Engineer · Full Stack Developer · Horizon17 Technology and Sustainability Pvt. Ltd.",
     showTechnicalDetails: false,
     sections: [
       {
         title: "Where I work",
         content:
-          "I'm a Full Stack Developer at Horizon17 Technology — the tech company behind our sustainability products. EcoMS (EcoMedia Solutions) is our business company offering end-to-end sustainability services to brands, agencies, and enterprises. Ecometer is EcoMS's patent-filed product platform.",
+          "I'm a Founding Engineer and Full Stack Developer at Horizon17 Technology and Sustainability Pvt. Ltd. — the tech company behind our sustainability products. EcoMS (EcoMedia Solutions) is our business company offering end-to-end sustainability services to brands, agencies, and enterprises. Ecometer is EcoMS's patent-filed product platform.",
         bullets: [
-          "Horizon17 Technology — horizon17ww.com — technology & sustainability innovation (AI-CEA, blockchain CCE, IoT)",
+          "Horizon17 Technology and Sustainability Pvt. Ltd. — horizon17ww.com — technology & sustainability innovation (AI-CEA, blockchain CCE, IoT)",
           "EcoMS — ecomsww.com — business company: consulting, ESG reporting, carbon offsetting, and platform delivery",
           "Ecometer — our product: sustainability intelligence for campaigns and events",
         ],
@@ -210,7 +211,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "My role",
         content:
-          "As Full Stack Developer at Horizon17 Technology, I build features on Ecometer — the product our business company EcoMS delivers to clients. Implementation details are confidential; this case study covers publicly available product and company context only.",
+          "As Founding Engineer and Full Stack Developer at Horizon17 Technology and Sustainability Pvt. Ltd., I build core features on Ecometer — the product our business company EcoMS delivers to clients. Implementation details are confidential; this case study covers publicly available product and company context only.",
       },
       {
         title: "Results",

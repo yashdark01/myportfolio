@@ -11,11 +11,12 @@ export const timeline: TimelineEntry[] = [
   {
     id: "horizon17",
     period: "Apr 2025 — Present",
-    title: "Full Stack Developer",
-    organization: "Horizon17 Technology · EcoMS · Gurgaon",
+    title: "Founding Engineer · Full Stack Developer",
+    organization:
+      "Horizon17 Technology and Sustainability Pvt. Ltd. · Gurgaon",
     description:
-      "Full Stack Developer on Ecometer — EcoMS's sustainability intelligence platform for campaign and event carbon measurement, BRSR-aligned reporting, and interactive dashboards.",
-    badge: "Ecometer · Enterprise platform",
+      "Founding engineer building Ecometer — EcoMS's sustainability intelligence platform for campaign and event carbon measurement, BRSR-aligned reporting, and interactive dashboards.",
+    badge: "Founding Engineer · Ecometer",
   },
   {
     id: "webintegratorz",

@@ -1,6 +1,6 @@
 export const site = {
   name: "Yash Patidar",
-  title: "Full Stack Engineer · React/Next.js · Horizon17",
+  title: "Founding Engineer · Full Stack Developer · Horizon17",
   tagline:
     "I ship products end-to-end — enterprise ESG dashboards to RAG-based AI assistants with measurable performance gains.",
   institution: "IIIT Nagpur · B.Tech CSE",
@@ -141,13 +141,13 @@ export const expertiseGroups = [
 ] as const;
 
 export const recruiterSnapshot = {
-  headline: "Full Stack Engineer · React/Next.js · RAG/LLM · IIIT Nagpur",
+  headline: "Founding Engineer · Full Stack Developer · React/Next.js · IIIT Nagpur",
   summary:
-    "Production experience at Horizon17 & EcoMS on the Ecometer sustainability platform. Shipped Krashaq AI — personal full-stack AI farming project with live demo and open-source repo.",
+    "Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd., building Ecometer — EcoMS's sustainability intelligence platform. Shipped Krashaq AI — personal full-stack AI farming project with live demo and open-source repo.",
   highlights: [
+    "Founding Engineer · Full Stack Developer at Horizon17 (Apr 2025 – Present)",
     "Ecometer · enterprise sustainability platform (Horizon17 & EcoMS)",
     "Krashaq AI · open-source, live at krashaq-agritech.vercel.app",
-    "Horizon17 · Full Stack Developer (Apr 2025 – Present)",
   ],
   topStack: ["Next.js", "React", "LangGraph", "MongoDB", "TypeScript", "RAG"],
 };
