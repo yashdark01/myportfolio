@@ -47,15 +47,15 @@ export const pinnedRepos: PinnedRepo[] = [
     topics: ["MERN", "Redux", "MongoDB", "ShadCN"],
   },
   {
-    name: "sns",
+    name: "sns-website",
     description:
       "Social platform with scroll-triggered animations and Framer Motion — responsive UI with +30% engagement patterns.",
-    url: "https://github.com/yashdark01/sns",
-    live: "https://sns-cyan.vercel.app",
+    url: "https://github.com/yashdark01/sns-website",
+    live: "https://sns-website-nine.vercel.app/",
     language: "TypeScript",
     topics: ["React", "Framer Motion", "Tailwind CSS"],
   },
 ];
 
 /** Repo names fetched for activity strip via /api/github */
-export const trackedRepos = ["Krashaq-Ai", "spotify", "sns", "rentbuddy"] as const;
+export const trackedRepos = ["Krashaq-Ai", "spotify", "sns-website", "rentbuddy"] as const;
