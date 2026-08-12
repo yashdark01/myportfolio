@@ -25,6 +25,7 @@ export const githubProfile = {
 export const pinnedRepos: PinnedRepo[] = [
   {
     name: "Krashaq-Ai",
+    displayName: "Krashaq AI",
     description:
       "Multilingual AI smart farming platform — crop advisory, weather alerts, supplier subscriptions, and live production demo.",
     url: "https://github.com/yashdark01/Krashaq-Ai",
@@ -33,6 +34,7 @@ export const pinnedRepos: PinnedRepo[] = [
     topics: ["Next.js", "LangGraph", "RAG", "MongoDB"],
     ciBadge:
       "https://github.com/yashdark01/Krashaq-Ai/actions/workflows/ci.yml/badge.svg",
+    status: "ongoing",
   },
   {
     name: "archflow",
