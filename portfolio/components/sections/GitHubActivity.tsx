@@ -70,6 +70,19 @@ export default function GitHubActivity() {
         </div>
         <div className="flex flex-wrap gap-3">
           <a
+            href={githubProfile.contributionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              trackEvent("social_link_click", {
+                platform: "github_contributions",
+              })
+            }
+            className="rounded-lg border border-white/10 px-4 py-2 text-sm text-text-primary transition-colors hover:border-white/20 hover:text-accent"
+          >
+            Contribution graph ↗
+          </a>
+          <a
             href={githubProfile.url}
             target="_blank"
             rel="noopener noreferrer"
@@ -78,7 +91,7 @@ export default function GitHubActivity() {
             }
             className="rounded-lg border border-white/10 px-4 py-2 text-sm text-text-primary transition-colors hover:border-white/20 hover:text-accent"
           >
-            GitHub profile · @{githubProfile.username} ↗
+            @{githubProfile.username} ↗
           </a>
         </div>
       </div>
