@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getAllBlogSlugs } from "@/data/blog";
 import { getAllCaseStudySlugs } from "@/data/case-studies";
 
 const siteUrl =
@@ -12,6 +13,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const blogPages = [
+    {
+      url: `${siteUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    ...getAllBlogSlugs().map((slug) => ({
+      url: `${siteUrl}/blog/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ];
+
   return [
     {
       url: siteUrl,
@@ -20,5 +36,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     ...caseStudyPages,
+    ...blogPages,
   ];
 }

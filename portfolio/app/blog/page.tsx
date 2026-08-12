@@ -1,0 +1,47 @@
+import Link from "next/link";
+import Tag from "@/components/ui/Tag";
+import { blogPosts } from "@/data/blog";
+
+export default function BlogIndexPage() {
+  return (
+    <div className="mx-auto max-w-3xl px-6 py-28">
+      <Link
+        href="/#writing"
+        className="section-label inline-flex transition-colors hover:text-accent"
+      >
+        ← Back to home
+      </Link>
+
+      <h1 className="mt-8 text-4xl font-semibold tracking-tight md:text-5xl">
+        Writing
+      </h1>
+      <p className="mt-4 text-text-muted">
+        Technical notes on AI systems, performance, and shipping production
+        software.
+      </p>
+
+      <div className="mt-12 space-y-6">
+        {blogPosts.map((post) => (
+          <Link
+            key={post.slug}
+            href={`/blog/${post.slug}`}
+            className="group card-surface block p-6 md:p-8"
+          >
+            <p className="section-label">
+              {post.date} · {post.readTime}
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold group-hover:text-accent">
+              {post.title}
+            </h2>
+            <p className="mt-2 text-text-muted">{post.excerpt}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {post.tags.map((tag) => (
+                <Tag key={tag}>{tag}</Tag>
+              ))}
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
