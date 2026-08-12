@@ -34,91 +34,95 @@ export const projectCategories = [
 export const projects: Project[] = [
   {
     id: "krashaq",
-    title: "Krashaq",
+    title: "Krashaq AI",
     subtitle:
-      "Multilingual AI farming assistant with WhatsApp + local LLM fallback",
+      "Multilingual smart farming platform — crop advisory, weather alerts, and supplier-managed farmer access",
     category: "ai",
     featured: true,
     metrics: [
+      { value: "Live", label: "production demo" },
       { value: "3", label: "languages" },
-      { value: "Live", label: "weather data" },
-      { value: "Redis", label: "multi-tenant cache" },
+      { value: "Multi-role", label: "farmer · supplier · admin" },
     ],
     problem:
-      "Farmers need real-time, multilingual crop advice but lack access to expert agronomists and timely irrigation guidance.",
-    role: "Solo full-stack — designed the API, LLM pipeline, WhatsApp integration, and smart irrigation engine across frontend + backend repos.",
+      "Smallholder farmers need timely crop advice in Hindi, Hinglish, and English — while ag-input suppliers need a scalable way to license access and manage farmer subscriptions at scale.",
+    role: "Solo full-stack — owned product design through production: AI advisory chat, knowledge-base retrieval, role-based dashboards, subscription licensing, and proactive crop alerts.",
     outcome:
-      "Built a full-stack assistant with Ollama (local LLM) + Gemini fallback for Hindi/Hinglish/English, two-way WhatsApp via Twilio, and proactive crop alerts powered by WeatherAPI and APScheduler.",
+      "Shipped a live platform where farmers receive multilingual crop guidance and weather-driven irrigation advice; suppliers manage subscriptions and send proactive alerts; admins oversee licensing and platform operations.",
     tradeoffs: [
-      "Ollama locally for cost + privacy; Gemini as cloud fallback when local model confidence is low.",
-      "Redis for session + advisory cache instead of hitting WeatherAPI on every request.",
-      "MongoDB for flexible farmer profiles vs PostgreSQL — faster iteration for multi-tenant schema changes.",
+      "Next.js monolith over split frontend/backend repos — one Vercel deploy, shared types, no cross-service auth.",
+      "MongoDB hybrid RAG (keyword + vector in kb_chunks) over Pinecone — vectors co-located with app data, fewer dependencies.",
+      "Groq default + configurable fallback chain (OpenAI, Gemini, Anthropic…) — low latency without single-vendor lock-in.",
+      "In-app alerts + hourly Vercel cron before SMS/WhatsApp — validated delivery semantics before external channels.",
     ],
-    architecture: `Farmer (Web / WhatsApp)
+    architecture: `Browser (Farmer / Supplier / Admin)
         ↓
-Next.js Frontend ──→ FastAPI Backend ──→ Ollama (local LLM)
-        ↓                    ↓
-   WeatherAPI          Gemini (fallback)
-        ↓                    ↓
-   APScheduler         LangChain router
-        ↓                    ↓
-   Redis cache         MongoDB (profiles)`,
+Next.js 16 Monolith — Vercel (bom1)
+  ├── App Router UI + /api/* routes
+  ├── LangGraph agent (tool routing, deduped KB fetch)
+  ├── Hybrid RAG (RRF + MMR + category boost)
+  ├── B2B2C RBAC (admin → supplier → farmer sub)
+  └── Cron (/api/cron/alerts) + in-app notifications
+        ↓
+MongoDB Atlas (+ optional Upstash Redis)
+        ↓
+Groq · OpenAI · Gemini · Anthropic · WeatherAPI`,
     stack: [
-      "FastAPI",
-      "Next.js",
+      "Next.js 16",
+      "TypeScript",
       "MongoDB",
-      "LangChain",
-      "Ollama",
-      "Redis",
-      "Twilio",
+      "LangGraph",
+      "Groq",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Jest",
+      "Vercel",
     ],
-    github: "https://github.com/yashdark01/krashaq-agritech",
-    githubSecondary: "https://github.com/yashdark01/krashaq-backend",
+    github: "https://github.com/yashdark01/Krashaq-Ai",
     live: "https://krashaq-agritech.vercel.app",
   },
   {
     id: "horizon17-esg",
-    title: "Enterprise ESG Platform",
-    subtitle: "ESG dashboard with 40% faster loads + RAG document assistant",
+    title: "Ecometer",
+    subtitle:
+      "Sustainability intelligence platform — measure, manage, and report environmental impact across campaigns and events",
     category: "enterprise",
     featured: true,
-    builtAt: "Horizon17 Technology",
+    builtAt: "Horizon17 Technology · EcoMS",
     metrics: [
-      { value: "40%", label: "faster loads" },
-      { value: "45%", label: "backend gain" },
-      { value: "RAG", label: "AI assistant" },
+      { value: "Scope 1–3", label: "carbon accounting" },
+      { value: "BRSR", label: "audit-ready reporting" },
+      { value: "Enterprise", label: "production platform" },
     ],
     problem:
-      "Enterprise teams needed faster ESG dashboards and an AI-powered way to query sustainability documents and draft reports.",
-    role: "Full Stack Developer at Horizon17 — architected frontend performance, RAG pipeline, and backend microservices.",
+      "Brands, agencies, and event organizers need to embed sustainability into OOH, DOOH, print, digital, and experiential work — from planning through post-campaign recovery — with credible, audit-ready ESG reporting aligned to BRSR standards.",
+    role: "Full Stack Developer at Horizon17 Technology — contributing to Ecometer platform development across dashboards, reporting workflows, and sustainability data visualisation.",
     outcome:
-      "Delivered 40% faster page loads via SSR and code splitting, 45% backend performance via Redis caching, and a Notion-style AI editor that cut report drafting time by 60%.",
+      "Contributed to a patent-filed platform trusted by leading brands and enterprises — improving dashboard performance and accelerating sustainability report workflows for analyst teams.",
     tradeoffs: [
-      "SSR + code splitting over pure CSR — better LCP for dashboard-heavy pages at the cost of more complex data fetching.",
-      "Redis cache for hot ESG metrics queries; invalidated on write to avoid stale sustainability data.",
-      "LangGraph for multi-step RAG flows vs single-shot prompts — better accuracy for long compliance documents.",
+      "Unified platform over point solutions — one system for measure-through-report instead of disconnected spreadsheets and tools.",
+      "Audit-ready reporting over quick exports — BRSR-aligned outputs that stand up to scrutiny, even when generation takes longer.",
+      "Modular campaign types (OOH, events, digital) under shared reporting standards — flexibility without losing comparability.",
     ],
-    architecture: `Next.js Dashboard (SSR / lazy routes)
+    architecture: `Brands · Agencies · Event Organizers
         ↓
-Node.js REST microservices
+Ecometer Platform (EcoMS)
+  ├── Measure — real-time carbon across OOH, DOOH, print, digital, experiential
+  ├── Manage — optimize materials, media choices, and execution
+  ├── Circularity — post-campaign recovery, recycling, and reuse
+  ├── Report — BRSR- and ESG-aligned, audit-ready outputs
+  └── Visualise — interactive sustainability dashboards
         ↓
-Redis cache ←→ PostgreSQL / MongoDB
+Horizon17 Technology — AI · IoT · blockchain sustainability infrastructure
         ↓
-RAG Pipeline (LangChain + LangGraph)
-        ↓
-Vector store + document ingestion
-        ↓
-Notion-style AI editor (HITL review)`,
+Scope 1, 2 & 3 emissions · SDG-aligned assessments`,
     stack: [
       "React.js",
       "Next.js",
+      "TypeScript",
       "Node.js",
-      "Redis",
-      "LangChain",
-      "LangGraph",
-      "GitHub Actions",
     ],
-    github: "https://github.com/yashdark01/RAG-Frontend",
+    live: "https://ecomsww.com/",
   },
   {
     id: "music-player",

@@ -5,7 +5,7 @@ export const site = {
     "I ship products end-to-end — enterprise ESG dashboards to RAG-based AI assistants with measurable performance gains.",
   institution: "IIIT Nagpur · B.Tech CSE",
   status: "Open to opportunities",
-  recentlyShipped: "Krashaq · AI Smart Farming",
+  recentlyShipped: "Krashaq AI · Smart Farming Platform",
   email: "yashpatidar9691@gmail.com",
   phone: "+91 7987386670",
   resumeUrl: "/Yash-Patidar-CV.pdf",
@@ -143,11 +143,11 @@ export const expertiseGroups = [
 export const recruiterSnapshot = {
   headline: "Full Stack Engineer · React/Next.js · RAG/LLM · IIIT Nagpur",
   summary:
-    "Production experience at Horizon17 building ESG platforms and RAG assistants. Shipped Krashaq — multilingual AI farming assistant with live demo.",
+    "Production experience at Horizon17 & EcoMS on the Ecometer sustainability platform. Shipped Krashaq AI — personal full-stack AI farming project with live demo and open-source repo.",
   highlights: [
-    "40% faster page loads · 45% backend gain · 60% faster report drafting",
-    "Krashaq live at krashaq-agritech.vercel.app",
+    "Ecometer · enterprise sustainability platform (Horizon17 & EcoMS)",
+    "Krashaq AI · open-source, live at krashaq-agritech.vercel.app",
     "Horizon17 · Full Stack Developer (Apr 2025 – Present)",
   ],
-  topStack: ["Next.js", "React", "Node.js", "FastAPI", "LangChain", "Redis"],
+  topStack: ["Next.js", "React", "LangGraph", "MongoDB", "TypeScript", "RAG"],
 };

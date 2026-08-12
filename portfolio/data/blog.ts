@@ -11,85 +11,85 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: "building-krashaq-llm-pipeline",
-    title: "Building Krashaq: A Multilingual LLM Pipeline for Farmers",
+    title: "Building Krashaq AI: Multilingual Crop Intelligence at Scale",
     excerpt:
-      "How I designed Ollama + Gemini fallback, WhatsApp integration, and Redis caching for a production AI farming assistant.",
+      "How I designed an AI farming platform with multilingual advisory, knowledge-base retrieval, supplier licensing, and proactive crop alerts.",
     date: "2026-04-12",
-    readTime: "6 min read",
-    tags: ["AI", "LangChain", "FastAPI", "Next.js"],
+    readTime: "7 min read",
+    tags: ["AI", "LangGraph", "RAG", "Next.js"],
     sections: [
       {
         title: "The problem",
         content:
-          "Farmers in India need crop advice in Hindi, Hinglish, and English — often over WhatsApp, not a desktop browser. A generic ChatGPT wrapper doesn't work: latency, cost, and language mixing all break the experience.",
+          "Farmers in India need crop advice in Hindi, Hinglish, and English — on mobile, with low bandwidth. Suppliers need to license access and manage subscriptions. A generic ChatGPT wrapper doesn't work: latency, retrieval quality, and role-based access all break the experience.",
       },
       {
         title: "Architecture overview",
         content:
-          "Krashaq splits into a Next.js frontend, FastAPI backend, and optional WhatsApp channel via Twilio webhooks. The LLM layer uses LangChain for intent routing — crop advisory, weather, irrigation — before hitting the model.",
+          "Krashaq is a Next.js 16 monolith on Vercel. Chat flows through a LangGraph StateGraph agent that routes to weather, irrigation, and KB search tools. Retrieved context is injected before the LLM invoke; Groq is the default provider with a configurable fallback chain.",
         bullets: [
-          "Ollama runs locally for high-volume, low-cost inference",
-          "Gemini activates when local confidence scores fall below threshold",
-          "WeatherAPI + APScheduler drive proactive irrigation alerts",
-          "Redis caches weather responses and hot advisory paths",
+          "Hybrid RAG: keyword + vector search over MongoDB kb_chunks with RRF fusion and MMR re-ranking",
+          "Request-scoped RAG cache prevents redundant retrieval in multi-tool agent turns",
+          "B2B2C flow: admin → supplier license → farmer subscription with gated login",
+          "Hourly Vercel cron delivers supplier-created alerts as in-app notifications",
         ],
       },
       {
-        title: "Key trade-off: local LLM vs cloud",
+        title: "Key trade-off: monolith vs microservices",
         content:
-          "Cloud-only would be simpler to ship but expensive at scale and useless offline. Local-only fails on edge cases in Hinglish. The fallback pattern adds complexity but mirrors how production AI products actually ship.",
+          "The project started as split Next.js + FastAPI repos with Ollama, Twilio WhatsApp, and Redis. I consolidated into one codebase because Vercel serverless + MongoDB Atlas covers the production path — fewer deploys, shared types, and simpler auth. WhatsApp/SMS alert delivery is deferred; in-app notifications ship first.",
       },
       {
         title: "What I'd do differently",
         content:
-          "Ship the WhatsApp loop on day one — it forced mobile-first UX decisions early. I'd also add structured evaluation tests for Hinglish queries before expanding language support.",
+          "The agent graph taught me that retrieval caching and tool deduplication matter as much as model choice. I'd add golden-set regression tests for Hinglish queries and instrument RAG cache hit rates from day one.",
         bullets: [
-          "Add golden-set regression tests for LLM routing",
-          "Instrument cache hit rates from the start",
-          "Document API contracts before splitting microservices",
+          "Add structured eval tests for Hindi/Hinglish crop queries before expanding KB",
+          "LangGraph Mongo checkpointer for multi-turn session persistence",
+          "Port WhatsApp webhooks once in-app alert delivery semantics are stable",
         ],
       },
       {
         title: "Links",
         content:
-          "Live demo, case study, and repos are linked below. If you're building applied LLM products and want to compare notes — reach out.",
+          "Live demo, case study, and repo are linked below. If you're building applied LLM products and want to compare notes — reach out.",
       },
     ],
   },
   {
     slug: "esg-dashboard-performance",
-    title: "How I Cut ESG Dashboard Load Times by 40%",
+    title: "Performance Patterns for Enterprise Sustainability Dashboards",
     excerpt:
-      "SSR, code splitting, and Redis caching patterns that measurably improved Core Web Vitals on an enterprise sustainability platform.",
+      "Lessons from building chart-heavy, compliance-sensitive dashboards on a production sustainability platform.",
     date: "2025-11-08",
     readTime: "5 min read",
-    tags: ["Next.js", "Performance", "Redis", "Enterprise"],
+    tags: ["Next.js", "Performance", "Enterprise", "Sustainability"],
     sections: [
       {
         title: "Starting point",
         content:
-          "Enterprise ESG dashboards load heavy charts, filters, and document panels. Users open the same views daily — slow LCP directly impacts daily workflow, not just first impressions.",
+          "Sustainability dashboards load heavy charts, campaign impact filters, and environmental reporting panels. Analysts open the same views daily — slow load times directly impact workflow, not just first impressions.",
       },
       {
         title: "What moved the needle",
         content:
-          "Performance wins came from specific, measurable changes — not vague 'optimization'.",
+          "Performance wins came from specific, measurable frontend and backend changes — not vague 'optimisation'. Details are from my professional work; specific platform internals are confidential.",
         bullets: [
-          "SSR + selective lazy loading for chart-heavy routes",
-          "Code splitting per dashboard module instead of one bundle",
-          "Redis cache for hot ESG metric queries with write-through invalidation",
-          "Query tuning on Node.js microservices — 45% API latency reduction",
+          "Server-side rendering + selective lazy loading for chart-heavy routes",
+          "Code splitting per dashboard module instead of one monolithic bundle",
+          "Caching hot metric queries with write-through invalidation for compliance-sensitive data",
+          "API query tuning on backend services serving sustainability metrics",
         ],
       },
       {
         title: "Caching with compliance in mind",
         content:
-          "ESG data has compliance implications. We invalidated cache on write rather than chasing hit rate. Stale sustainability metrics are worse than a cache miss.",
+          "ESG and BRSR reporting data has compliance implications. We invalidated cache on write rather than chasing hit rate. Stale sustainability metrics are worse than a cache miss.",
       },
       {
-        title: "Takeaway for interviews",
+        title: "Takeaway",
         content:
-          "Always tie performance work to a metric and technique. 'I made it faster' loses to 'SSR + route-level splitting cut LCP 40% on dashboard entry'.",
+          "Always tie performance work to a metric and technique. In compliance-heavy domains, cache correctness matters as much as speed — stale sustainability data is worse than a cache miss.",
       },
     ],
   },

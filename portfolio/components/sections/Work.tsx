@@ -198,7 +198,7 @@ function ProjectCard({
                     }
                     className="text-sm text-accent hover:text-accent-hover"
                   >
-                    {project.id === "krashaq" ? "Frontend repo ↗" : "GitHub ↗"}
+                    GitHub ↗
                   </a>
                 )}
                 {project.githubSecondary && (

@@ -31,10 +31,11 @@ export default function About() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="leading-relaxed text-text-muted"
         >
-          At Horizon17, I architect ESG dashboards and AI assistants that cut
-          page loads by 40%, backend latency by 45%, and report drafting time by
-          60%. Before that, I shipped 4+ production apps during my internship at
-          WebIntegratorz — from JWT-secured backends to mobile-first PWAs.
+          At Horizon17 & EcoMS, I contribute to the Ecometer sustainability
+          platform — helping brands and agencies measure and report campaign
+          environmental impact. Before that, I shipped 4+ production apps during
+          my internship at WebIntegratorz — from JWT-secured backends to
+          mobile-first PWAs.
         </motion.p>
 
         <motion.div

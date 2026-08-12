@@ -17,106 +17,204 @@ export interface CaseStudy extends Project {
 export const caseStudies: CaseStudy[] = [
   {
     ...projects[0],
-    caseStudyTitle: "Building a multilingual AI farming assistant for real farmers",
-    timeline: "Apr 2026 · Solo full-stack project",
+    caseStudyTitle:
+      "Bringing expert crop intelligence to farmers who need it most",
+    timeline: "2025 – 2026 · Solo full-stack project",
     sections: [
       {
         title: "Context",
         content:
-          "Smallholder farmers in India often lack timely access to agronomists. Advice needs to work in Hindi, Hinglish, and English — often over low-bandwidth connections and sometimes via WhatsApp, not a web app.",
+          "Smallholder farmers in India often lack timely access to agronomists. Advice must work in Hindi, Hinglish, and English — over low-bandwidth connections and mobile-first UIs. Ag-input suppliers also need a way to license platform access and manage farmer subscriptions, not just a standalone chatbot.",
       },
       {
         title: "What I built",
         content:
-          "An end-to-end platform: Next.js web app, FastAPI backend, LLM advisory pipeline, WeatherAPI-driven irrigation engine, and two-way WhatsApp via Twilio webhooks.",
+          "Krashaq AI is a production smart farming platform with three role-based experiences: farmers get multilingual AI chat and weather tools; suppliers manage farmers, subscriptions, and alerts; admins onboard suppliers, run the alert scheduler, and view usage analytics.",
         bullets: [
-          "LangChain router for intent-based query handling (crop, weather, irrigation)",
-          "Ollama for local inference; Gemini fallback when confidence is low",
-          "Redis-cached weather + advisory responses for multi-tenant farmers",
-          "APScheduler for proactive crop alerts before critical weather events",
+          "LangGraph StateGraph agent with tool routing — weather, irrigation, KB search — and deduped tool/KB calls per request",
+          "Hybrid RAG pipeline: keyword + vector search over MongoDB kb_chunks with RRF fusion, MMR re-ranking, and category boost",
+          "Request-scoped RAG cache so multi-step agent flows don't re-fetch the same corpus chunks",
+          "B2B2C licensing: admin issues supplier licenses → supplier sells farmer subscriptions (trial/basic/standard/premium)",
+          "Proactive alerts: supplier creates crop/weather alerts → hourly Vercel cron delivers in-app notifications",
+          "53 Jest unit tests covering auth, RAG, agent graph, and supplier APIs",
+        ],
+      },
+      {
+        title: "AI & retrieval architecture",
+        content:
+          "The chat pipeline is not a thin wrapper around an LLM API. User messages flow through a LangGraph agent that decides which tools to invoke, injects retrieved KB context as system messages, and streams responses back to the UI with deduplicated tool chips and citations.",
+        bullets: [
+          "Default provider: Groq (fast inference); fallback chain configurable across OpenAI, Gemini, Anthropic, and others",
+          "KB corpus lives in content/kb/ — ingested via npm run kb:ingest into MongoDB with chunked embeddings",
+          "Hybrid search combines BM25-style keyword scoring with vector similarity, fused via reciprocal rank fusion",
+          "MMR re-ranking reduces redundant chunks; category boost prioritizes crop-specific docs for crop queries",
+          "Streaming chat UI (/api/chat/stream) with real-time tool status and citation deduplication",
+        ],
+      },
+      {
+        title: "Platform & data model",
+        content:
+          "Everything runs in one repo (Krashaq-Ai) with src/app for pages and API routes, src/lib/server for MongoDB, JWT auth, LLM, RAG, and services. The legacy Python FastAPI backend was archived and removed — recoverable via git tag legacy/python-backend-v1.",
+        bullets: [
+          "MongoDB Atlas: users, refresh_tokens, chat_sessions, kb_chunks, supplier licenses, farmer subscriptions, farmer_alerts, notifications",
+          "JWT access (30m) + refresh (7d) tokens via jose; bcrypt password hashes; role-based route guards",
+          "Demo seed (npm run db:reset): 3 users, supplier license, farmer subscription, chat sessions, 4 KB docs (8 chunks)",
+          "Manual Vercel deploy — root directory empty, Mumbai region (bom1), CRON_SECRET for /api/cron/alerts",
+          "Optional Upstash Redis for session/cache; WeatherAPI.com for live weather and irrigation recommendations",
+        ],
+      },
+      {
+        title: "Agent graph & tool orchestration",
+        content:
+          "The LangGraph StateGraph in src/lib/server/agents/graph.ts defines explicit nodes for routing, tool execution, and response synthesis. The router inspects user intent and selects from weather lookup, irrigation calculation, and KB search tools — with deduplication so the same tool or KB query never fires twice in one request.",
+        bullets: [
+          "Graph nodes: router → tool_executor → synthesizer → stream output",
+          "Tools registered in src/lib/server/agents/tools/ — each returns structured context injected as system messages",
+          "resolveLLM() in src/lib/server/llm/ picks provider from UI selection with automatic fallback chain on failure",
+          "processChat() and /api/chat/stream handle SSE streaming with per-chunk tool status events",
+          "Chat UI deduplicates tool chips and citation sources so multi-step agent runs don't clutter the interface",
+        ],
+      },
+      {
+        title: "Hybrid RAG pipeline",
+        content:
+          "Retrieval lives in src/lib/server/rag/ — not a third-party vector DB. Documents in content/kb/ are chunked and embedded into MongoDB kb_chunks, then searched with a hybrid pipeline that outperforms pure vector search on short Hindi/Hinglish crop queries.",
+        bullets: [
+          "Ingestion: npm run kb:ingest reads markdown, chunks, embeds, and upserts into kb_chunks collection",
+          "Keyword leg: BM25-style scoring over chunk text and metadata fields",
+          "Vector leg: cosine similarity on stored embeddings",
+          "Fusion: reciprocal rank fusion (RRF) merges both ranked lists into a single candidate set",
+          "Re-ranking: MMR reduces near-duplicate chunks; category boost elevates crop-specific docs for crop queries",
+          "Request-scoped cache (Map keyed by query hash) — agent turns that hit retrieval twice reuse the same result set",
+        ],
+      },
+      {
+        title: "API surface & auth",
+        content:
+          "All backend logic is native Next.js API routes under src/app/api/. JWT auth uses jose for access (30m) and refresh (7d) tokens; bcrypt for password hashes. Role guards enforce farmer, supplier, and admin boundaries on every protected route.",
+        bullets: [
+          "Chat: POST /api/chat, POST /api/chat/stream",
+          "Auth: POST /api/auth/login, /api/auth/signup, /api/auth/refresh",
+          "Supplier: /api/supplier/farmers, /api/supplier/subscriptions, /api/supplier/alerts",
+          "Admin: /api/admin/suppliers, /api/admin/licenses, /api/admin/scheduler",
+          "Cron: POST /api/cron/alerts (Vercel cron, CRON_SECRET header) — hourly alert delivery",
+          "Scripts: db:reset, kb:ingest, alerts:run, qa:roles, qa:suppliers",
+        ],
+      },
+      {
+        title: "Testing & deployment",
+        content:
+          "53 Jest tests in __tests__/ cover auth middleware, RAG scoring, agent graph routing, and supplier API contracts. CI runs lint + test + build on every push. Production deploys manually via Vercel (root directory empty, bom1 region).",
+        bullets: [
+          "npm run test — Jest with ts-jest, mocks for MongoDB and LLM providers",
+          "npm run build — Next.js production build validates all API route types",
+          "GitHub Actions: ci.yml on push; deploy-vercel.yml on workflow_dispatch only",
+          "Demo seed: npm run db:reset creates admin@krashaq.dev, supplier@krashaq.dev, farmer@krashaq.dev + KB corpus",
         ],
       },
       {
         title: "Technical decisions",
         content:
-          "Every major choice was driven by cost, latency, and offline/low-connectivity constraints — not resume-driven architecture.",
+          "Every major choice was driven by deploy simplicity, latency, and the reality of building applied LLM products — not resume-driven microservices.",
         bullets: [
-          "Local LLM first → avoids per-query cloud cost for high-volume advisory",
-          "Gemini fallback → reliability when Ollama returns low-confidence answers",
-          "MongoDB → flexible schema for farmer profiles across regions/crops",
-          "Microservice repos split (frontend, backend, gateway) → easier independent deploy",
+          "Monolith over split repos → one Vercel deploy, shared types, no cross-service auth complexity",
+          "MongoDB hybrid RAG over Pinecone → vectors co-located with app data, fewer external dependencies",
+          "Groq + multi-provider fallback → speed for happy path, reliability when a provider is down or rate-limited",
+          "In-app alerts before WhatsApp/SMS → validate the cron + notification loop without Twilio integration cost",
+          "LangGraph over single-shot prompts → explicit tool routing and observable agent steps for debugging",
         ],
       },
       {
         title: "Results",
         content:
-          "Shipped a live production deployment with multilingual support and real-time weather integration. The system demonstrates applied LLM engineering — not just a chat UI wrapping an API.",
+          "Shipped a live production deployment with multilingual AI chat, real weather integration, supplier analytics, and a working B2B2C subscription flow. The codebase demonstrates end-to-end LLM engineering — retrieval design, agent orchestration, RBAC, and cron-driven alerts — not just a chat UI.",
         bullets: [
           "Live demo: krashaq-agritech.vercel.app",
-          "Separate frontend + backend repos with clear API boundaries",
-          "WhatsApp channel for farmers who never open the web app",
+          "Repo: github.com/yashdark01/Krashaq-Ai",
+          "Case study: yashpatidar.vercel.app/work/krashaq",
+          "CI: GitHub Actions (lint, test, build); deploy via manual workflow_dispatch",
         ],
       },
     ],
     challenges: [
-      "Routing Hinglish queries reliably without over-triggering English-only responses",
-      "Balancing WeatherAPI rate limits with real-time irrigation recommendations",
-      "Designing Twilio webhook flows that feel conversational, not form-like",
+      "Consolidating a split Next.js + Python backend into one monolith without losing API parity",
+      "Preventing duplicate KB fetches and tool invocations in multi-step LangGraph agent flows",
+      "Tuning hybrid search (RRF + MMR + category boost) for Hindi/Hinglish crop queries with a small KB corpus",
+      "Designing B2B2C subscription gating so farmers linked to a supplier see clear trial/expiry states",
+      "Working within Vercel serverless limits for streaming chat and hourly cron alert delivery",
     ],
     learnings: [
-      "Applied LLM products need fallback paths — one model is never enough in production",
-      "Cache hot advisory paths early; API costs add up fast with weather + LLM combined",
-      "Ship the WhatsApp loop early — it forces you to design for terse, mobile-first UX",
+      "Request-scoped RAG cache is essential when agents call retrieval multiple times per turn",
+      "Monolith consolidation cut deploy complexity dramatically vs coordinating Python + Node services",
+      "Applied LLM products need explicit fallback chains — one provider is never enough in production",
+      "Ship the in-app notification loop before external channels; it forces you to design delivery semantics early",
+      "Hybrid retrieval quality comes from fusion + re-ranking design, not just embedding model choice",
     ],
   },
   {
     ...projects[1],
-    caseStudyTitle: "Enterprise ESG platform — performance + RAG at scale",
-    timeline: "Apr 2025 – Present · Horizon17 Technology",
+    caseStudyTitle:
+      "Embedding sustainability intelligence into every stage of campaign and event execution",
+    timeline: "Apr 2025 – Present · Horizon17 Technology · EcoMS",
     sections: [
       {
-        title: "Context",
+        title: "Company context",
         content:
-          "Horizon17 builds sustainability software for enterprise teams. Dashboards were slow, report drafting was manual, and compliance documents were too large for simple keyword search.",
-      },
-      {
-        title: "What I built",
-        content:
-          "Full-stack features across the ESG platform: performance-optimized dashboards, Redis-backed microservices, and a RAG pipeline for document querying plus a Notion-style AI editor.",
+          "Horizon17 Technology and Sustainability is a Gurgaon-based company delivering accredited sustainability solutions aligned with UN SDGs — spanning AI-based carbon emission assessment (Scope 1, 2, and 3), blockchain-based carbon credit exchange, and IoT integration for environmental monitoring. EcoMedia Solutions (EcoMS), part of the same ecosystem, is a boutique end-to-end sustainability firm powering brands, agencies, governments, and NGOs to plan, implement, and communicate impact transparently.",
         bullets: [
-          "SSR + code splitting + lazy loading → 40% faster page loads (Core Web Vitals)",
-          "Redis caching + query tuning → 45% backend latency reduction",
-          "LangChain + LangGraph RAG pipeline for sustainability document Q&A",
-          "AI editor with HITL review flow → 60% faster report drafting",
-          "GitHub Actions CI/CD for automated build-and-deploy",
+          "Horizon17: horizon17ww.com — AI-CEA platform, blockchain CCE, IoT/STP integrations",
+          "EcoMS: ecomsww.com — consulting, ESG reporting, carbon offsetting, and the Ecometer platform",
+          "Accredited practices aligned with ISO 14001, ISO 50001, and global sustainability standards",
+          "Trusted by Nivea, Omicom, HDFC, Amazon, Wonder Cement, SIWI, and more",
         ],
       },
       {
-        title: "Technical decisions",
+        title: "The product — Ecometer",
         content:
-          "Enterprise ESG data has compliance implications — stale cache and hallucinated answers are both unacceptable.",
+          "Ecometer is EcoMS's patent-filed sustainability intelligence platform. It gives brands, agencies, and event organizers one unified system to measure, manage, and report environmental performance across OOH, DOOH, print, digital, and experiential campaigns — from media planning through post-campaign recovery, without compromising creativity or speed.",
         bullets: [
-          "SSR over CSR for dashboard LCP — users open heavy analytics views daily",
-          "Cache invalidation on write for ESG metrics — correctness over hit rate",
-          "LangGraph multi-step RAG vs single prompt — better for long PDF compliance docs",
-          "Vector search + metadata filters — scope retrieval to client/document type",
+          "Measure — real-time carbon footprint across all major campaign and event channels",
+          "Manage — data-driven insights to optimize materials, media choices, and execution",
+          "Circularity — accountability for materials beyond campaign closure; recycling and reuse built in",
+          "Report — BRSR- and ESG-aligned reporting designed to stand up to audit scrutiny",
+          "Visualise — interactive dashboards that translate complex sustainability data into actionable insights",
         ],
+      },
+      {
+        title: "Industries & clients",
+        content:
+          "The platform serves manufacturing, chemicals, oil & gas, renewable energy, pharmaceuticals, financial services, power, mining, infrastructure, media & communications, and hospitality. Published case studies include large-scale corporate events and campaigns for leading brands.",
+        bullets: [
+          "Events: Tata Motors ABRM 2025, Amazon Water Dialogues 2025, Amazon Prime Day 2025, Regional AI Impact Summit 2025, Global Energy Leaders' Summit (GELS) 2025 with Government of Odisha",
+          "Campaigns: Wonder Cement OOH, HDFC Mutual Fund, Nykaa Pink Friday Sale, Nivea Soft OOH, Toyota HyRyder OOH, Meta WhatsApp OOH",
+          "Services: sustainability audits, ESG reporting, carbon offsetting & management, ESG communication",
+        ],
+      },
+      {
+        title: "My role",
+        content:
+          "As Full Stack Developer at Horizon17 Technology, I work on the Ecometer platform — contributing to features that sustainability analysts and campaign teams use daily. Specific implementation details are confidential; below is the publicly available product context.",
       },
       {
         title: "Results",
         content:
-          "Measurable improvements across frontend performance, backend throughput, and content team velocity. Work is under NDA — public repo shows the RAG frontend patterns without exposing client data.",
+          "Ecometer is in active production use across enterprise sustainability workflows. Detailed engineering metrics and architecture are not disclosed publicly.",
+        bullets: [
+          "Platform: ecomsww.com/ecometer-the-carbon-economy-for-advertising",
+          "Company: horizon17ww.com",
+          "EcoMS: ecomsww.com",
+        ],
       },
     ],
     challenges: [
-      "Large compliance PDFs breaking naive chunking strategies",
-      "Balancing SSR complexity with dynamic dashboard personalization",
-      "Preventing AI-generated report content from bypassing human review",
+      "Designing intuitive sustainability UX across very different campaign types — OOH, digital, print, and experiential each have distinct data inputs",
+      "Balancing speed of campaign execution with rigorous environmental measurement requirements",
+      "Communicating complex carbon data to non-technical brand and agency stakeholders",
     ],
     learnings: [
-      "In enterprise AI, HITL isn't optional — it's a product requirement",
-      "Performance wins (40% load time) are interview gold when tied to specific techniques",
-      "RAG quality comes from retrieval design, not bigger models",
+      "Sustainability software must earn trust — transparency and audit-readiness are product features, not afterthoughts",
+      "Enterprise platforms succeed when measurement embeds into existing workflows rather than adding separate reporting steps",
+      "Working on production sustainability tools deepened my understanding of compliance-driven product design",
     ],
   },
   {

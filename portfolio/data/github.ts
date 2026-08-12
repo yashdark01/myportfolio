@@ -9,21 +9,13 @@ export interface PinnedRepo {
 
 export const pinnedRepos: PinnedRepo[] = [
   {
-    name: "krashaq-agritech",
+    name: "Krashaq-Ai",
     description:
-      "Full-stack AI farming platform — Next.js frontend with multilingual LLM assistant and live deployment.",
-    url: "https://github.com/yashdark01/krashaq-agritech",
+      "Multilingual AI smart farming platform — crop advisory, weather alerts, supplier subscriptions, and live production demo.",
+    url: "https://github.com/yashdark01/Krashaq-Ai",
     live: "https://krashaq-agritech.vercel.app",
     language: "TypeScript",
-    topics: ["Next.js", "AI", "FastAPI", "LangChain"],
-  },
-  {
-    name: "krashaq-backend",
-    description:
-      "FastAPI backend with Ollama + Gemini fallback, Twilio WhatsApp webhooks, and Redis-cached multi-tenant APIs.",
-    url: "https://github.com/yashdark01/krashaq-backend",
-    language: "Python",
-    topics: ["FastAPI", "LangChain", "Redis", "Twilio"],
+    topics: ["Next.js", "LangGraph", "RAG", "MongoDB"],
   },
   {
     name: "RAG-Frontend",
@@ -40,5 +32,14 @@ export const pinnedRepos: PinnedRepo[] = [
     url: "https://github.com/yashdark01/spotify",
     language: "JavaScript",
     topics: ["MERN", "Redux", "MongoDB", "ShadCN"],
+  },
+  {
+    name: "sns",
+    description:
+      "Social platform with scroll-triggered animations and Framer Motion — responsive UI with +30% engagement patterns.",
+    url: "https://github.com/yashdark01/sns",
+    live: "https://sns-cyan.vercel.app",
+    language: "TypeScript",
+    topics: ["React", "Framer Motion", "Tailwind CSS"],
   },
 ];

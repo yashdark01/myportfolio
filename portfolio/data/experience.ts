@@ -12,10 +12,10 @@ export const timeline: TimelineEntry[] = [
     id: "horizon17",
     period: "Apr 2025 — Present",
     title: "Full Stack Developer",
-    organization: "Horizon17 Technology · Gurgaon",
+    organization: "Horizon17 Technology · EcoMS · Gurgaon",
     description:
-      "Architecting enterprise ESG platforms with React/Next.js, building RAG-based AI assistants, and optimizing backend performance with Redis and CI/CD pipelines.",
-    badge: "40% faster loads · RAG AI shipped",
+      "Full Stack Developer on Ecometer — EcoMS's sustainability intelligence platform for campaign and event carbon measurement, BRSR-aligned reporting, and interactive dashboards.",
+    badge: "Ecometer · Enterprise platform",
   },
   {
     id: "webintegratorz",
