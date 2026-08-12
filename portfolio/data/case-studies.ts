@@ -310,23 +310,23 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     ...musicPlayerProject,
-    caseStudyTitle: "Full-stack music streaming with production-grade patterns",
+    caseStudyTitle: "Full-stack music streaming with Clerk auth and admin CRUD",
     timeline: "Mar 2025 · Personal project",
     sections: [
       {
         title: "Context",
         content:
-          "Built to demonstrate full MERN proficiency with modern UI (ShadCN), state management, and audio streaming patterns used in real consumer apps.",
+          "Built to demonstrate full MERN proficiency with modern UI (ShadCN), OAuth auth, state management, and audio streaming patterns used in real consumer apps.",
       },
       {
         title: "What I built",
         content:
-          "A Spotify-style streaming platform with authentication, playlists, search, recommendations, and audio playback controls.",
+          "A streaming-style music platform with Clerk sign-in, discovery feeds, album playback, friends sidebar, and an admin dashboard for catalog management.",
         bullets: [
-          "JWT-secured auth with protected routes and user sessions",
-          "Redux Toolkit for player state, queue, and playlist management",
-          "MongoDB aggregation pipelines for recommendations and trending songs",
-          "Audio caching layer → ~25% faster repeat load times",
+          "Clerk OAuth with protected API routes and automatic session token refresh",
+          "Redux Toolkit for player state, queue, next/previous, and route-safe playback",
+          "MongoDB aggregation ($sample) for Featured, Made for You, and Trending sections",
+          "Admin upload/delete for songs and albums via Cloudinary + email-gated routes",
         ],
       },
       {
@@ -334,24 +334,25 @@ export const caseStudies: CaseStudy[] = [
         content:
           "Focused on patterns recruiters recognize from consumer streaming products.",
         bullets: [
-          "Redux Toolkit over Context — predictable state for complex player flows",
-          "Server-side aggregation vs shipping full song lists to client",
-          "ShadCN + Tailwind for accessible, consistent UI components",
+          "Clerk over custom JWT — faster auth delivery with admin email gating built in",
+          "Server-side aggregation vs shipping full song lists to the client",
+          "Separate client/ and server/ packages with env-based API URL and CORS config",
+          "Supertest integration tests for public health check and auth-protected routes",
         ],
       },
       {
         title: "Results",
         content:
-          "Production-ready codebase demonstrating end-to-end ownership: API design, database modeling, frontend UX, and auth — the baseline product companies expect from SDE-1 candidates.",
+          "Production-ready codebase demonstrating end-to-end ownership: API design, database modeling, OAuth integration, admin CRUD, frontend UX, and test coverage on core flows.",
       },
     ],
     challenges: [
-      "Managing audio state across route changes without playback glitches",
-      "Designing MongoDB schemas that support both playlists and recommendation queries",
+      "Fixing global auth middleware that blocked public health checks and caused 401s on browse routes",
+      "Keeping audio playback stable across route changes without duplicate player logic fighting the same element",
     ],
     learnings: [
       "Audio apps are state-management problems disguised as UI projects",
-      "Aggregation pipelines are underrated — they reduce frontend complexity significantly",
+      "Third-party auth (Clerk) saves weeks — invest time in route guards and admin gates instead",
     ],
   },
 ];

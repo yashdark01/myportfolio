@@ -162,39 +162,41 @@ Production deploy — rentbuddy.in`,
 export const musicPlayerProject: Project = {
   id: "music-player",
   title: "Music Player",
-  subtitle: "Full-stack streaming app with JWT auth + audio caching (−25% load)",
+  subtitle: "Full-stack streaming app with Clerk auth, admin CRUD, and Redux player state",
   category: "fullstack",
   featured: false,
   metrics: [
-    { value: "25%", label: "faster loads" },
-    { value: "JWT", label: "secured auth" },
+    { value: "Clerk", label: "OAuth auth" },
+    { value: "Admin", label: "upload + delete" },
     { value: "MERN", label: "full stack" },
   ],
   problem:
-    "Users wanted a full-featured music streaming experience with playlists, search, and personalized recommendations.",
-  role: "Built the entire MERN stack application — auth, audio streaming, playlist management, and UI.",
+    "Users wanted a streaming-style music app with sign-in, discovery feeds, album playback, and an admin path to manage catalog content.",
+  role: "Built the full stack — Clerk auth, Express API, MongoDB models, Redux player, ShadCN UI, and admin upload/delete via Cloudinary.",
   outcome:
-    "Delivered a production-ready streaming platform with MongoDB aggregation pipelines, audio caching, and Redux Toolkit state management.",
+    "Shipped a production-ready streaming app with protected routes, featured/trending discovery, album pages, admin dashboard, and integration tests on core API flows.",
   tradeoffs: [
-    "Redux Toolkit for predictable audio + playlist state vs Context — easier debugging for complex player flows.",
-    "MongoDB aggregation for recommendations instead of client-side filtering — reduced payload size by ~25%.",
-    "JWT + httpOnly-style session pattern for auth; RBAC-ready structure for future admin roles.",
+    "Clerk over custom JWT — faster OAuth, session refresh, and admin email gating without building auth infra.",
+    "Redux Toolkit for player queue/state vs Context — predictable next/prev and route-safe playback.",
+    "Cloudinary for admin media vs local-only storage — scalable uploads with seeded static assets for demo tracks.",
   ],
-  architecture: `React + ShadCN UI
+  architecture: `React + ShadCN UI (client/)
         ↓
 Redux Toolkit (player / playlist state)
         ↓
-Express.js REST API
+Express REST API (server/)
         ↓
-JWT auth middleware
+Clerk middleware + route guards
         ↓
-MongoDB (users, songs, playlists)`,
+MongoDB (users, songs, albums) + Cloudinary uploads`,
   stack: [
     "React.js",
     "Node.js",
     "Express.js",
     "MongoDB",
+    "Clerk",
     "Redux Toolkit",
+    "Cloudinary",
     "ShadCN UI",
     "Tailwind CSS",
   ],
@@ -223,8 +225,8 @@ export const moreProjects: MoreProject[] = [
     id: "music-player",
     title: "Music Player",
     description:
-      "Spotify-style MERN streaming app — JWT auth, Redux player state, MongoDB aggregation pipelines.",
-    tags: ["MERN", "Redux", "JWT"],
+      "Streaming MERN app — Clerk OAuth, Redux player queue, MongoDB discovery feeds, and admin upload/delete via Cloudinary.",
+    tags: ["MERN", "Clerk", "Redux"],
     github: "https://github.com/yashdark01/spotify",
     caseStudyPath: "/work/music-player",
   },

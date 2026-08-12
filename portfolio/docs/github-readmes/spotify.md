@@ -1,55 +1,48 @@
-# Spotify Clone — MERN Music Streaming Platform
+# Music Player — MERN Streaming Platform
 
-Full-stack music streaming app with **JWT auth**, **Redux Toolkit**, **ShadCN UI**, and **MongoDB aggregation** pipelines.
+Full-stack music streaming app with **Clerk auth**, **Redux Toolkit**, **ShadCN UI**, **Cloudinary admin uploads**, and **MongoDB aggregation** feeds.
 
 [![Case Study](https://img.shields.io/badge/case_study-read-10b981?style=flat-square)](https://yashpatidar.vercel.app/work/music-player)
 
 ## Features
 
-- User authentication (JWT + bcrypt)
-- Play / pause, queue, and playlist management
-- Trending songs + personalized recommendations
-- MongoDB aggregation for efficient queries
-- Audio caching layer (~25% faster repeat loads)
-- Responsive UI with ShadCN + Tailwind CSS
+- Audio playback with queue, next/previous, play/pause
+- Featured, Made for You, and Trending discovery sections
+- Album pages with linked songs
+- Clerk OAuth — sign in, session tokens, auto-refresh
+- Admin upload/delete for songs & albums (Cloudinary + email gate)
 
-## Tech Stack
+## Tech stack
 
-`React` · `Node.js` · `Express` · `MongoDB` · `Redux Toolkit` · `ShadCN UI` · `Tailwind CSS`
+| Layer | Technologies |
+|-------|--------------|
+| Frontend | React 19, Vite, Redux Toolkit, ShadCN UI, Clerk |
+| Backend | Node.js, Express, MongoDB, Mongoose, Clerk Express SDK |
+| Media | Cloudinary (admin uploads), static assets for seeded demo |
 
-## Architecture
-
-```
-React + ShadCN UI
-      ↓
-Redux Toolkit (player state)
-      ↓
-Express.js REST API
-      ↓
-JWT middleware
-      ↓
-MongoDB (users, songs, playlists)
-```
-
-## Setup
+## Quick start
 
 ```bash
 git clone https://github.com/yashdark01/spotify
 cd spotify
 
-# Backend
-cd server && npm install && cp .env.example .env && npm run dev
-
-# Frontend (new terminal)
-cd client && npm install && npm run dev
+cd server && cp .env.example .env && npm install && npm run dev
+cd ../client && cp .env.example .env && npm install && npm run dev
 ```
 
-## Key Decisions
+- **App:** http://localhost:3000
+- **API:** http://localhost:3001/api
 
-- **Redux Toolkit** over Context for complex audio player state
-- **Server-side aggregation** instead of shipping full song lists to client
-- **JWT auth** with RBAC-ready structure for future admin roles
+See [docs/SETUP.md](https://github.com/yashdark01/spotify/blob/main/docs/SETUP.md) for Clerk, MongoDB, and Cloudinary setup.
 
-## Author
+## Highlights
+
+- **Clerk auth** with per-route guards and admin email gating
+- **Redux Toolkit** for predictable player queue and playback state
+- **MongoDB aggregation** for discovery feeds without over-fetching
+- **Admin CRUD** with Cloudinary media storage
+- **Integration tests** for health check and auth-protected routes
+
+---
 
 [Yash Patidar](https://yashpatidar.vercel.app) · [Case Study](https://yashpatidar.vercel.app/work/music-player)

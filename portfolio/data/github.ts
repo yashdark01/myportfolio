@@ -41,10 +41,10 @@ export const pinnedRepos: PinnedRepo[] = [
   {
     name: "spotify",
     description:
-      "MERN music streaming app with JWT auth, Redux Toolkit state, ShadCN UI, and MongoDB aggregation pipelines.",
+      "MERN music streaming app with Clerk auth, Redux player state, admin CRUD, Cloudinary uploads, and MongoDB aggregation feeds.",
     url: "https://github.com/yashdark01/spotify",
     language: "JavaScript",
-    topics: ["MERN", "Redux", "MongoDB", "ShadCN"],
+    topics: ["MERN", "Clerk", "Redux", "MongoDB", "ShadCN"],
   },
   {
     name: "sns-website",
