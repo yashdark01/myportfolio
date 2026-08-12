@@ -1,5 +1,7 @@
 export interface PinnedRepo {
   name: string;
+  /** Optional friendly label for the UI (defaults to `name`) */
+  displayName?: string;
   description: string;
   url: string;
   live?: string;
@@ -40,6 +42,7 @@ export const pinnedRepos: PinnedRepo[] = [
   },
   {
     name: "Music-Player",
+    displayName: "Music Player",
     description:
       "MERN music streaming app with Clerk auth, Redux player state, admin CRUD, Cloudinary uploads, and MongoDB aggregation feeds.",
     url: "https://github.com/yashdark01/Music-Player",

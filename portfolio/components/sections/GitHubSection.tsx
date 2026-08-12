@@ -31,12 +31,12 @@ export default function GitHubSection() {
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
                 <h3 className="font-mono text-sm font-medium text-accent">
-                  {repo.name}
+                  {repo.displayName ?? repo.name}
                 </h3>
                 {repo.ciBadge && (
                   <Image
                     src={repo.ciBadge}
-                    alt={`${repo.name} CI status`}
+                    alt={`${repo.displayName ?? repo.name} CI status`}
                     width={88}
                     height={20}
                     unoptimized
@@ -66,7 +66,7 @@ export default function GitHubSection() {
                 rel="noopener noreferrer"
                 onClick={() =>
                   trackEvent("project_link_click", {
-                    project: repo.name,
+                    project: repo.displayName ?? repo.name,
                     type: "github",
                   })
                 }
