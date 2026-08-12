@@ -88,7 +88,8 @@ Groq · OpenAI · Gemini · Anthropic · WeatherAPI`,
       "Sustainability intelligence platform — measure, manage, and report environmental impact across campaigns and events",
     category: "enterprise",
     featured: true,
-    builtAt: "Horizon17 Technology · EcoMS",
+    builtAt: "Horizon17 Technology",
+    role: "Full Stack Developer at Horizon17 Technology — building Ecometer, the sustainability intelligence product delivered by EcoMS.",
     metrics: [
       { value: "Scope 1–3", label: "carbon accounting" },
       { value: "BRSR", label: "audit-ready reporting" },
@@ -96,7 +97,6 @@ Groq · OpenAI · Gemini · Anthropic · WeatherAPI`,
     ],
     problem:
       "Brands, agencies, and event organizers need to embed sustainability into OOH, DOOH, print, digital, and experiential work — from planning through post-campaign recovery — with credible, audit-ready ESG reporting aligned to BRSR standards.",
-    role: "Full Stack Developer at Horizon17 Technology — contributing to Ecometer platform development across dashboards, reporting workflows, and sustainability data visualisation.",
     outcome:
       "Contributed to a patent-filed platform trusted by leading brands and enterprises — improving dashboard performance and accelerating sustainability report workflows for analyst teams.",
     tradeoffs: [

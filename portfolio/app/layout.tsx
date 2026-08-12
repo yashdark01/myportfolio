@@ -8,6 +8,8 @@ import MobileResumeFab from "@/components/layout/MobileResumeFab";
 import Navbar from "@/components/layout/Navbar";
 import RecruiterMode from "@/components/RecruiterMode";
 import JsonLd from "@/components/JsonLd";
+import SectionScrollHandler from "@/components/SectionScrollHandler";
+import SkipToContent from "@/components/layout/SkipToContent";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -71,12 +73,8 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-text-primary antialiased">
         <JsonLd />
-        <a
-          href="#hero"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-background"
-        >
-          Skip to content
-        </a>
+        <SectionScrollHandler />
+        <SkipToContent />
         <Navbar />
         <main>{children}</main>
         <Footer />

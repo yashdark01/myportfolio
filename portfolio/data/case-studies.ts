@@ -12,6 +12,11 @@ export interface CaseStudy extends Project {
   sections: CaseStudySection[];
   challenges: string[];
   learnings: string[];
+  /** When true, renders a separate "Technical deep dive" block below the case study */
+  showTechnicalDetails?: boolean;
+  technicalSections?: CaseStudySection[];
+  technicalChallenges?: string[];
+  technicalLearnings?: string[];
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -20,6 +25,7 @@ export const caseStudies: CaseStudy[] = [
     caseStudyTitle:
       "Bringing expert crop intelligence to farmers who need it most",
     timeline: "2025 – 2026 · Solo full-stack project",
+    showTechnicalDetails: true,
     sections: [
       {
         title: "Context",
@@ -31,14 +37,36 @@ export const caseStudies: CaseStudy[] = [
         content:
           "Krashaq AI is a production smart farming platform with three role-based experiences: farmers get multilingual AI chat and weather tools; suppliers manage farmers, subscriptions, and alerts; admins onboard suppliers, run the alert scheduler, and view usage analytics.",
         bullets: [
-          "LangGraph StateGraph agent with tool routing — weather, irrigation, KB search — and deduped tool/KB calls per request",
-          "Hybrid RAG pipeline: keyword + vector search over MongoDB kb_chunks with RRF fusion, MMR re-ranking, and category boost",
-          "Request-scoped RAG cache so multi-step agent flows don't re-fetch the same corpus chunks",
-          "B2B2C licensing: admin issues supplier licenses → supplier sells farmer subscriptions (trial/basic/standard/premium)",
-          "Proactive alerts: supplier creates crop/weather alerts → hourly Vercel cron delivers in-app notifications",
-          "53 Jest unit tests covering auth, RAG, agent graph, and supplier APIs",
+          "Multilingual AI crop advisory for farmers in Hindi, Hinglish, and English",
+          "Live weather and irrigation guidance tied to local conditions",
+          "Supplier-managed farmer subscriptions and licensing tiers",
+          "Proactive crop and weather alerts delivered in-app",
+          "Admin dashboard for supplier onboarding and platform operations",
+          "Live demo with open-source repository",
         ],
       },
+      {
+        title: "Results",
+        content:
+          "Shipped a live production deployment with multilingual AI chat, real weather integration, supplier analytics, and a working subscription flow from admin through supplier to farmer.",
+        bullets: [
+          "Live demo: krashaq-agritech.vercel.app",
+          "Repo: github.com/yashdark01/Krashaq-Ai",
+          "Full technical deep dive below — architecture, RAG, agent graph, and API surface",
+        ],
+      },
+    ],
+    challenges: [
+      "Designing for farmers on low-bandwidth mobile connections across three languages",
+      "Building a subscription model that works for suppliers licensing access to many farmers",
+      "Delivering timely crop alerts without relying on SMS or WhatsApp in v1",
+    ],
+    learnings: [
+      "Applied AI products need a clear product loop — not just a chat interface",
+      "Role-based access (farmer, supplier, admin) forces early clarity on who owns what data",
+      "Shipping a live demo with real weather and auth builds more credibility than mockups alone",
+    ],
+    technicalSections: [
       {
         title: "AI & retrieval architecture",
         content:
@@ -124,26 +152,15 @@ export const caseStudies: CaseStudy[] = [
           "LangGraph over single-shot prompts → explicit tool routing and observable agent steps for debugging",
         ],
       },
-      {
-        title: "Results",
-        content:
-          "Shipped a live production deployment with multilingual AI chat, real weather integration, supplier analytics, and a working B2B2C subscription flow. The codebase demonstrates end-to-end LLM engineering — retrieval design, agent orchestration, RBAC, and cron-driven alerts — not just a chat UI.",
-        bullets: [
-          "Live demo: krashaq-agritech.vercel.app",
-          "Repo: github.com/yashdark01/Krashaq-Ai",
-          "Case study: yashpatidar.vercel.app/work/krashaq",
-          "CI: GitHub Actions (lint, test, build); deploy via manual workflow_dispatch",
-        ],
-      },
     ],
-    challenges: [
+    technicalChallenges: [
       "Consolidating a split Next.js + Python backend into one monolith without losing API parity",
       "Preventing duplicate KB fetches and tool invocations in multi-step LangGraph agent flows",
       "Tuning hybrid search (RRF + MMR + category boost) for Hindi/Hinglish crop queries with a small KB corpus",
       "Designing B2B2C subscription gating so farmers linked to a supplier see clear trial/expiry states",
       "Working within Vercel serverless limits for streaming chat and hourly cron alert delivery",
     ],
-    learnings: [
+    technicalLearnings: [
       "Request-scoped RAG cache is essential when agents call retrieval multiple times per turn",
       "Monolith consolidation cut deploy complexity dramatically vs coordinating Python + Node services",
       "Applied LLM products need explicit fallback chains — one provider is never enough in production",
@@ -155,23 +172,23 @@ export const caseStudies: CaseStudy[] = [
     ...projects[1],
     caseStudyTitle:
       "Embedding sustainability intelligence into every stage of campaign and event execution",
-    timeline: "Apr 2025 – Present · Horizon17 Technology · EcoMS",
+    timeline: "Apr 2025 – Present · Full Stack Developer · Horizon17 Technology",
+    showTechnicalDetails: false,
     sections: [
       {
-        title: "Company context",
+        title: "Where I work",
         content:
-          "Horizon17 Technology and Sustainability is a Gurgaon-based company delivering accredited sustainability solutions aligned with UN SDGs — spanning AI-based carbon emission assessment (Scope 1, 2, and 3), blockchain-based carbon credit exchange, and IoT integration for environmental monitoring. EcoMedia Solutions (EcoMS), part of the same ecosystem, is a boutique end-to-end sustainability firm powering brands, agencies, governments, and NGOs to plan, implement, and communicate impact transparently.",
+          "I'm a Full Stack Developer at Horizon17 Technology — the tech company behind our sustainability products. EcoMS (EcoMedia Solutions) is our business company offering end-to-end sustainability services to brands, agencies, and enterprises. Ecometer is EcoMS's patent-filed product platform.",
         bullets: [
-          "Horizon17: horizon17ww.com — AI-CEA platform, blockchain CCE, IoT/STP integrations",
-          "EcoMS: ecomsww.com — consulting, ESG reporting, carbon offsetting, and the Ecometer platform",
-          "Accredited practices aligned with ISO 14001, ISO 50001, and global sustainability standards",
-          "Trusted by Nivea, Omicom, HDFC, Amazon, Wonder Cement, SIWI, and more",
+          "Horizon17 Technology — horizon17ww.com — technology & sustainability innovation (AI-CEA, blockchain CCE, IoT)",
+          "EcoMS — ecomsww.com — business company: consulting, ESG reporting, carbon offsetting, and platform delivery",
+          "Ecometer — our product: sustainability intelligence for campaigns and events",
         ],
       },
       {
         title: "The product — Ecometer",
         content:
-          "Ecometer is EcoMS's patent-filed sustainability intelligence platform. It gives brands, agencies, and event organizers one unified system to measure, manage, and report environmental performance across OOH, DOOH, print, digital, and experiential campaigns — from media planning through post-campaign recovery, without compromising creativity or speed.",
+          "Ecometer gives brands, agencies, and event organizers one unified system to measure, manage, and report environmental performance across OOH, DOOH, print, digital, and experiential campaigns — from media planning through post-campaign recovery, without compromising creativity or speed.",
         bullets: [
           "Measure — real-time carbon footprint across all major campaign and event channels",
           "Manage — data-driven insights to optimize materials, media choices, and execution",
@@ -193,7 +210,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "My role",
         content:
-          "As Full Stack Developer at Horizon17 Technology, I work on the Ecometer platform — contributing to features that sustainability analysts and campaign teams use daily. Specific implementation details are confidential; below is the publicly available product context.",
+          "As Full Stack Developer at Horizon17 Technology, I build features on Ecometer — the product our business company EcoMS delivers to clients. Implementation details are confidential; this case study covers publicly available product and company context only.",
       },
       {
         title: "Results",

@@ -1,6 +1,6 @@
 export const site = {
   name: "Yash Patidar",
-  title: "Full Stack Engineer · React/Next.js · ex-Horizon17",
+  title: "Full Stack Engineer · React/Next.js · Horizon17",
   tagline:
     "I ship products end-to-end — enterprise ESG dashboards to RAG-based AI assistants with measurable performance gains.",
   institution: "IIIT Nagpur · B.Tech CSE",

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { navItems, site } from "@/data/site";
 import Button from "@/components/ui/Button";
+import SectionLink from "@/components/ui/SectionLink";
 import { trackEvent } from "@/lib/analytics";
 
 export default function Navbar() {
@@ -59,18 +60,18 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <a
-          href="#hero"
+        <SectionLink
+          sectionId="hero"
           className="text-sm font-semibold tracking-tight text-text-primary"
         >
           {site.name}
-        </a>
+        </SectionLink>
 
         <div className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => (
-            <a
+            <SectionLink
               key={item.id}
-              href={`#${item.id}`}
+              sectionId={item.id}
               className={`text-sm transition-colors duration-200 ${
                 activeSection === item.id
                   ? "text-accent"
@@ -78,7 +79,7 @@ export default function Navbar() {
               }`}
             >
               {item.label}
-            </a>
+            </SectionLink>
           ))}
         </div>
 
@@ -130,14 +131,14 @@ export default function Navbar() {
         }`}
       >
         {navItems.map((item) => (
-          <a
+          <SectionLink
             key={item.id}
-            href={`#${item.id}`}
+            sectionId={item.id}
             onClick={() => setIsMenuOpen(false)}
             className="text-2xl font-medium text-text-primary"
           >
             {item.label}
-          </a>
+          </SectionLink>
         ))}
         <Button
           href={site.resumeUrl}

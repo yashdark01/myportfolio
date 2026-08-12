@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ReactNode, MouseEvent } from "react";
+import SectionLink from "@/components/ui/SectionLink";
 
 interface ButtonProps {
   href: string;
@@ -45,7 +46,33 @@ export default function Button({
     );
   }
 
-  if (href.startsWith("#") || href.startsWith("mailto:")) {
+  if (href.startsWith("#")) {
+    const sectionId = href.slice(1);
+    return (
+      <SectionLink
+        sectionId={sectionId}
+        onClick={onClick}
+        className={`${base} ${variants[variant]} ${className}`}
+      >
+        {children}
+      </SectionLink>
+    );
+  }
+
+  if (href.startsWith("/#")) {
+    const sectionId = href.slice(2);
+    return (
+      <SectionLink
+        sectionId={sectionId}
+        onClick={onClick}
+        className={`${base} ${variants[variant]} ${className}`}
+      >
+        {children}
+      </SectionLink>
+    );
+  }
+
+  if (href.startsWith("mailto:")) {
     return (
       <a
         href={href}
