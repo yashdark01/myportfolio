@@ -5,13 +5,13 @@ import { useState } from "react";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import MetricCard from "@/components/ui/MetricCard";
-import { Persona, site } from "@/data/site";
+import { Persona, site, socialLinks } from "@/data/site";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Hero() {
   const [persona, setPersona] = useState<Persona>("product");
 
-  const stats =
-    persona === "product" ? site.heroStats : site.aiHeroStats;
+  const stats = persona === "product" ? site.heroStats : site.aiHeroStats;
 
   return (
     <section
@@ -33,7 +33,21 @@ export default function Hero() {
           </Badge>
           <span className="text-sm text-text-muted">
             Recently shipped:{" "}
-            <span className="text-text-primary">{site.recentlyShipped}</span>
+            <a
+              href="https://krashaq-agritech.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent("project_link_click", {
+                  project: "krashaq",
+                  type: "live",
+                  source: "hero",
+                })
+              }
+              className="text-text-primary underline decoration-white/20 underline-offset-4 hover:text-accent"
+            >
+              {site.recentlyShipped}
+            </a>
           </span>
         </motion.div>
 
@@ -114,12 +128,40 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-10 flex flex-wrap gap-4"
         >
-          <Button href={site.resumeUrl} external>
+          <Button
+            href={site.resumeUrl}
+            external
+            onClick={() =>
+              trackEvent("resume_download", { source: "hero" })
+            }
+          >
             Resume
           </Button>
           <Button href="#contact" variant="secondary">
             Get in touch
           </Button>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2"
+        >
+          {socialLinks.map((link) => (
+            <a
+              key={link.id}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent("social_link_click", { platform: link.id })
+              }
+              className="text-sm text-text-muted transition-colors hover:text-accent"
+            >
+              {link.label} ↗
+            </a>
+          ))}
         </motion.div>
       </div>
     </section>

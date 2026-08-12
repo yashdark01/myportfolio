@@ -8,7 +8,7 @@ export default function JsonLd() {
     jobTitle: "Full Stack Software Engineer",
     description: site.tagline,
     email: site.email,
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://yashpatidar.dev",
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://yashpatidar.vercel.app",
     sameAs: [site.links.linkedin, site.links.github],
     alumniOf: {
       "@type": "CollegeOrUniversity",

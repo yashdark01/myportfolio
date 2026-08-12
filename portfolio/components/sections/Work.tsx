@@ -11,6 +11,7 @@ import {
   projects,
   ProjectCategory,
 } from "@/data/projects";
+import { trackEvent } from "@/lib/analytics";
 
 const categoryLabels: Record<ProjectCategory, string> = {
   fullstack: "Full Stack",
@@ -27,6 +28,14 @@ function ProjectCard({
 }) {
   const [expanded, setExpanded] = useState(false);
 
+  const toggleExpanded = () => {
+    const next = !expanded;
+    if (next) {
+      trackEvent("project_expand", { project: project.id });
+    }
+    setExpanded(next);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -37,15 +46,18 @@ function ProjectCard({
     >
       <button
         type="button"
-        onClick={() => setExpanded(!expanded)}
+        onClick={toggleExpanded}
         className="w-full p-6 text-left md:p-8"
         aria-expanded={expanded}
       >
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <Badge variant="muted" className="mb-3">
-              {categoryLabels[project.category]}
-            </Badge>
+            <div className="mb-3 flex flex-wrap gap-2">
+              <Badge variant="muted">{categoryLabels[project.category]}</Badge>
+              {project.builtAt && (
+                <Badge variant="accent">Built at {project.builtAt}</Badge>
+              )}
+            </div>
             <h3 className="text-xl font-semibold md:text-2xl">
               {project.title}
             </h3>
@@ -64,6 +76,45 @@ function ProjectCard({
             </Badge>
           ))}
         </div>
+
+        {(project.live || project.github) && (
+          <div className="mt-4 flex flex-wrap gap-4">
+            {project.live && (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  trackEvent("project_link_click", {
+                    project: project.id,
+                    type: "live",
+                  });
+                }}
+                className="text-sm text-accent hover:text-accent-hover"
+              >
+                Live demo ↗
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  trackEvent("project_link_click", {
+                    project: project.id,
+                    type: "github",
+                  });
+                }}
+                className="text-sm text-accent hover:text-accent-hover"
+              >
+                GitHub ↗
+              </a>
+            )}
+          </div>
+        )}
       </button>
 
       <AnimatePresence initial={false}>
@@ -94,6 +145,26 @@ function ProjectCard({
                   {project.outcome}
                 </p>
               </div>
+              <div>
+                <p className="section-label mb-2">Trade-offs</p>
+                <ul className="space-y-2">
+                  {project.tradeoffs.map((item) => (
+                    <li
+                      key={item}
+                      className="flex gap-2 text-sm leading-relaxed text-text-muted"
+                    >
+                      <span className="text-accent">→</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="section-label mb-2">Architecture</p>
+                <pre className="overflow-x-auto rounded-lg border border-white/5 bg-background p-4 font-mono text-xs leading-relaxed text-text-muted">
+                  {project.architecture}
+                </pre>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {project.stack.map((tech) => (
                   <Tag key={tech}>{tech}</Tag>
@@ -105,9 +176,31 @@ function ProjectCard({
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("project_link_click", {
+                        project: project.id,
+                        type: "github",
+                      })
+                    }
                     className="text-sm text-accent hover:text-accent-hover"
                   >
-                    GitHub ↗
+                    {project.id === "krashaq" ? "Frontend repo ↗" : "GitHub ↗"}
+                  </a>
+                )}
+                {project.githubSecondary && (
+                  <a
+                    href={project.githubSecondary}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("project_link_click", {
+                        project: project.id,
+                        type: "github_backend",
+                      })
+                    }
+                    className="text-sm text-accent hover:text-accent-hover"
+                  >
+                    Backend repo ↗
                   </a>
                 )}
                 {project.live && (
@@ -115,6 +208,12 @@ function ProjectCard({
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("project_link_click", {
+                        project: project.id,
+                        type: "live",
+                      })
+                    }
                     className="text-sm text-accent hover:text-accent-hover"
                   >
                     Live demo ↗
@@ -189,6 +288,12 @@ export default function Work() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("project_link_click", {
+                        project: project.id,
+                        type: "github",
+                      })
+                    }
                     className="ml-2 text-xs text-accent hover:text-accent-hover"
                   >
                     GitHub ↗
@@ -199,6 +304,12 @@ export default function Work() {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("project_link_click", {
+                        project: project.id,
+                        type: "live",
+                      })
+                    }
                     className="text-xs text-accent hover:text-accent-hover"
                   >
                     Live ↗

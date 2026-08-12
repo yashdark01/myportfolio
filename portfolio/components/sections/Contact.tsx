@@ -5,11 +5,13 @@ import { useState } from "react";
 import Button from "@/components/ui/Button";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { site } from "@/data/site";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
 
   const copyEmail = async () => {
+    trackEvent("email_copy");
     try {
       await navigator.clipboard.writeText(site.email);
       setCopied(true);
@@ -50,13 +52,42 @@ export default function Contact() {
             </button>
 
             <div className="flex flex-wrap gap-3 pt-2">
-              <Button href={site.links.linkedin} variant="secondary" external>
+              <Button
+                href={site.links.linkedin}
+                variant="secondary"
+                external
+                onClick={() =>
+                  trackEvent("social_link_click", { platform: "linkedin" })
+                }
+              >
                 LinkedIn ↗
               </Button>
-              <Button href={site.links.github} variant="secondary" external>
+              <Button
+                href={site.links.github}
+                variant="secondary"
+                external
+                onClick={() =>
+                  trackEvent("social_link_click", { platform: "github" })
+                }
+              >
                 GitHub ↗
               </Button>
-              <Button href={site.resumeUrl} variant="secondary" external>
+              <Button
+                href={site.links.leetcode}
+                variant="secondary"
+                external
+                onClick={() => trackEvent("leetcode_click")}
+              >
+                LeetCode ↗
+              </Button>
+              <Button
+                href={site.resumeUrl}
+                variant="secondary"
+                external
+                onClick={() =>
+                  trackEvent("resume_download", { source: "contact" })
+                }
+              >
                 Resume ↗
               </Button>
             </div>
@@ -76,6 +107,7 @@ export default function Contact() {
           </p>
           <a
             href={`mailto:${site.email}?subject=Opportunity%20-%20Yash%20Patidar&body=Hi%20Yash%2C%0A%0A`}
+            onClick={() => trackEvent("contact_email_click")}
             className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-accent px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-accent-hover"
           >
             Open in email client

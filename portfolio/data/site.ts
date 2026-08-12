@@ -1,7 +1,8 @@
 export const site = {
   name: "Yash Patidar",
-  title: "Full Stack Engineer · AI & Enterprise Products",
-  tagline: "I ship products end-to-end — enterprise dashboards to RAG-based AI assistants.",
+  title: "Full Stack Engineer · React/Next.js · ex-Horizon17",
+  tagline:
+    "I ship products end-to-end — enterprise ESG dashboards to RAG-based AI assistants with measurable performance gains.",
   institution: "IIIT Nagpur · B.Tech CSE",
   status: "Open to opportunities",
   recentlyShipped: "Krashaq · AI Smart Farming",
@@ -11,6 +12,7 @@ export const site = {
   links: {
     linkedin: "https://linkedin.com/in/yash-patidar-97a8861b3",
     github: "https://github.com/yashdark01",
+    leetcode: "https://leetcode.com/u/yashdark_01/",
     email: "mailto:yashpatidar9691@gmail.com",
   },
   heroStats: [
@@ -25,11 +27,18 @@ export const site = {
     { value: "LLM", label: "local + cloud fallback" },
     { value: "60%", label: "faster content drafting" },
   ],
+  coding: {
+    leetcode: {
+      url: "https://leetcode.com/u/yashdark_01/",
+      label: "LeetCode",
+      note: "DSA prep — problem solving for product company interviews",
+    },
+  },
   openTo: {
     roles: [
       "Full Stack Engineer",
       "Frontend Engineer (React/Next.js)",
-      "AI/ML Engineer (Applied LLM)",
+      "Applied AI / LLM Engineer",
     ],
     stage: "Product companies · Series A–D · Enterprise SaaS",
     location: "Remote · Gurgaon/Delhi NCR · Open to relocation",
@@ -39,9 +48,16 @@ export const site = {
 
 export type Persona = "product" | "ai";
 
+export const socialLinks = [
+  { id: "github", label: "GitHub", href: site.links.github },
+  { id: "linkedin", label: "LinkedIn", href: site.links.linkedin },
+  { id: "leetcode", label: "LeetCode", href: site.links.leetcode },
+] as const;
+
 export const navItems = [
   { id: "work", label: "Work" },
   { id: "process", label: "Process" },
+  { id: "github", label: "GitHub" },
   { id: "about", label: "About" },
   { id: "journey", label: "Journey" },
   { id: "contact", label: "Contact" },
@@ -70,7 +86,7 @@ export const processSteps = [
     number: "04",
     title: "Finish with proof",
     description:
-      "Every project here has a live URL or GitHub repo. I don't list ideas — I list shipped work.",
+      "Featured projects ship with live demos or open-source repos. When work is under NDA, I show architecture and trade-offs instead of a public URL.",
   },
 ] as const;
 
@@ -112,3 +128,15 @@ export const expertiseGroups = [
     ],
   },
 ] as const;
+
+export const recruiterSnapshot = {
+  headline: "Full Stack Engineer · React/Next.js · RAG/LLM · IIIT Nagpur",
+  summary:
+    "Production experience at Horizon17 building ESG platforms and RAG assistants. Shipped Krashaq — multilingual AI farming assistant with live demo.",
+  highlights: [
+    "40% faster page loads · 45% backend gain · 60% faster report drafting",
+    "Krashaq live at krashaq-agritech.vercel.app",
+    "Horizon17 · Full Stack Developer (Apr 2025 – Present)",
+  ],
+  topStack: ["Next.js", "React", "Node.js", "FastAPI", "LangChain", "Redis"],
+};

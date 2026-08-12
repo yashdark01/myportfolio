@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { navItems, site } from "@/data/site";
 import Button from "@/components/ui/Button";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
@@ -82,7 +83,14 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:block">
-          <Button href={site.resumeUrl} variant="secondary" external>
+          <Button
+            href={site.resumeUrl}
+            variant="secondary"
+            external
+            onClick={() =>
+              trackEvent("resume_download", { source: "navbar" })
+            }
+          >
             Resume ↗
           </Button>
         </div>
@@ -136,6 +144,9 @@ export default function Navbar() {
           variant="secondary"
           external
           className="mt-4"
+          onClick={() =>
+            trackEvent("resume_download", { source: "mobile_nav" })
+          }
         >
           Resume ↗
         </Button>
