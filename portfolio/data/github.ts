@@ -58,11 +58,11 @@ export const pinnedRepos: PinnedRepo[] = [
   {
     name: "sns-website",
     description:
-      "Social platform with scroll-triggered animations and Framer Motion — responsive UI with +30% engagement patterns.",
+      "SAP digital transformation landing page — AOS scroll animations, responsive Tailwind UI, and GitHub Actions CI.",
     url: "https://github.com/yashdark01/sns-website",
     live: "https://sns-website-nine.vercel.app/",
-    language: "TypeScript",
-    topics: ["React", "Framer Motion", "Tailwind CSS"],
+    language: "JavaScript",
+    topics: ["React", "Vite", "Tailwind CSS", "AOS"],
     ciBadge:
       "https://github.com/yashdark01/sns-website/actions/workflows/ci.yml/badge.svg",
   },

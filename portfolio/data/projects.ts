@@ -234,8 +234,8 @@ export const moreProjects: MoreProject[] = [
     id: "sns",
     title: "SNS Website",
     description:
-      "Social platform with scroll-triggered animations and +30% engagement via Framer Motion.",
-    tags: ["React.js", "Framer Motion", "Tailwind CSS"],
+      "SAP digital transformation landing page — AOS scroll animations, responsive Tailwind UI, and smooth section navigation.",
+    tags: ["React.js", "JavaScript", "Tailwind CSS"],
     github: "https://github.com/yashdark01/sns-website",
     live: "https://sns-website-nine.vercel.app/",
   },
