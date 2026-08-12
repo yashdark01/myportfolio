@@ -193,7 +193,7 @@ export const moreProjects: MoreProject[] = [
       "4+ production-ready web applications built during internship — responsive UIs with JWT-secured access.",
     tags: ["React.js", "Node.js", "MongoDB"],
     github: "https://github.com/yashdark01/rentbuddy",
-    live: "https://github.com/yashdark01/rentbuddy-website",
+    live: "https://rentbuddy.in/home",
   },
   {
     id: "course-enrollment",
