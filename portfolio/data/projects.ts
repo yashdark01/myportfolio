@@ -234,8 +234,8 @@ export const moreProjects: MoreProject[] = [
     description:
       "Social platform with scroll-triggered animations and +30% engagement via Framer Motion.",
     tags: ["React.js", "Framer Motion", "Tailwind CSS"],
-    github: "https://github.com/yashdark01/sns",
-    live: "https://sns-cyan.vercel.app",
+    github: "https://github.com/yashdark01/sns-website",
+    live: "https://sns-website-nine.vercel.app/",
   },
   {
     id: "course-enrollment",
