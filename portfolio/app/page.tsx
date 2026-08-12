@@ -7,7 +7,6 @@ import Journey from "@/components/sections/Journey";
 import OpenTo from "@/components/sections/OpenTo";
 import Process from "@/components/sections/Process";
 import Work from "@/components/sections/Work";
-import RecruiterMode from "@/components/RecruiterMode";
 
 export default function Home() {
   return (
@@ -21,7 +20,6 @@ export default function Home() {
       <About />
       <OpenTo />
       <Contact />
-      <RecruiterMode />
     </>
   );
 }

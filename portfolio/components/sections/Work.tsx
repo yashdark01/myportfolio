@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 import { useState } from "react";
 import Badge from "@/components/ui/Badge";
 import SectionWrapper from "@/components/ui/SectionWrapper";
@@ -79,6 +80,13 @@ function ProjectCard({
 
         {(project.live || project.github) && (
           <div className="mt-4 flex flex-wrap gap-4">
+            <Link
+              href={`/work/${project.id}`}
+              onClick={(e) => e.stopPropagation()}
+              className="text-sm font-medium text-text-primary hover:text-accent"
+            >
+              Read case study →
+            </Link>
             {project.live && (
               <a
                 href={project.live}
@@ -171,6 +179,12 @@ function ProjectCard({
                 ))}
               </div>
               <div className="flex flex-wrap gap-4 pt-2">
+                <Link
+                  href={`/work/${project.id}`}
+                  className="text-sm font-medium text-text-primary hover:text-accent"
+                >
+                  Full case study →
+                </Link>
                 {project.github && (
                   <a
                     href={project.github}

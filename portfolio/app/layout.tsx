@@ -4,13 +4,15 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import Footer from "@/components/layout/Footer";
+import MobileResumeFab from "@/components/layout/MobileResumeFab";
 import Navbar from "@/components/layout/Navbar";
+import RecruiterMode from "@/components/RecruiterMode";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/data/site";
 import "./globals.css";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://yashpatidar.dev";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://yashpatidar.vercel.app";
 
 export const viewport: Viewport = {
   themeColor: "#10b981",
@@ -78,6 +80,8 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <RecruiterMode />
+        <MobileResumeFab />
         <Analytics />
         <SpeedInsights />
       </body>
