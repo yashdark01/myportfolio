@@ -15,7 +15,7 @@ export const timeline: TimelineEntry[] = [
     organization:
       "Horizon17 Technology and Sustainability Pvt. Ltd. · Gurgaon",
     description:
-      "Founding engineer building Ecometer — EcoMS's sustainability intelligence platform for campaign and event carbon measurement, BRSR-aligned reporting, and interactive dashboards.",
+      "Founding engineer building Ecometer — EcoMS's sustainability intelligence platform for campaign and event carbon measurement, BRSR-aligned reporting, and interactive dashboards. Work spans microservices, CI/CD, Docker, Nginx, NATS, and S3/MinIO object storage.",
     badge: "Founding Engineer · Ecometer",
   },
   {

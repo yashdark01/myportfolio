@@ -20,8 +20,9 @@ export default function About() {
           I&apos;m a Founding Engineer and Full Stack Developer at Horizon17
           Technology and Sustainability Pvt. Ltd., building enterprise-grade ESG
           and AI-driven platforms with React.js, Next.js, Node.js, and applied LLM
-          systems. I focus on RESTful services, RAG pipelines, and
-          high-performance frontends that measurably improve how teams work.
+          systems. I focus on RESTful and microservice backends, RAG pipelines,
+          CI/CD and Docker-based deployments, and high-performance frontends that
+          measurably improve how teams work.
         </motion.p>
 
         <motion.p
@@ -33,10 +34,12 @@ export default function About() {
         >
           At Horizon17, I contribute to Ecometer — EcoMS&apos;s sustainability
           platform — helping brands and agencies measure and report campaign
-          environmental impact. Before that, I shipped 4+ production apps during
-          my internship at WebIntegratorz — from JWT-secured backends to
-          mobile-first PWAs. I keep interview-ready with structured DSA practice
-          on LeetCode alongside shipping production code.
+          environmental impact. I&apos;ve worked with microservices, Docker,
+          CI/CD, Nginx, NATS, and object storage (S3/MinIO), and I&apos;m
+          building depth in event-driven systems (Kafka), system design, and AWS
+          EC2/Lambda. Before that, I shipped 4+ production apps during my
+          internship at WebIntegratorz — from JWT-secured backends to mobile-first
+          PWAs.
         </motion.p>
 
         <motion.div
@@ -64,7 +67,7 @@ export default function About() {
                 <h4 className="font-medium">{group.title}</h4>
                 <p className="mt-1 text-xs text-text-muted">{group.subtitle}</p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
-                  {group.tags.slice(0, 4).map((tag) => (
+                  {group.tags.slice(0, 6).map((tag) => (
                     <Tag key={tag}>{tag}</Tag>
                   ))}
                 </div>

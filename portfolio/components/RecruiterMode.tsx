@@ -162,7 +162,7 @@ export default function RecruiterMode() {
                     <p key={group.title} className="text-xs text-text-muted">
                       <span className="text-text-primary">{group.title}</span>
                       {" · "}
-                      {group.tags.slice(0, 3).join(", ")}
+                      {group.tags.slice(0, 4).join(", ")}
                     </p>
                   ))}
                 </div>
