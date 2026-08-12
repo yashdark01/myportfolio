@@ -11,8 +11,6 @@ export interface PinnedRepo {
 export const githubProfile = {
   url: "https://github.com/yashdark01",
   username: "yashdark01",
-  /** Rolling last-year graph — do not add ?from=&to= (hardcoded ranges break over time) */
-  contributionsUrl: "https://github.com/users/yashdark01/contributions",
   highlights: [
     { label: "Flagship repo", value: "Krashaq-Ai" },
     { label: "Quality gate", value: "CI — lint, test, build on push" },
