@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
+import FeaturedProject from "@/components/sections/FeaturedProject";
 import { Persona, site, socialLinks } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
 
@@ -143,6 +144,15 @@ export default function Hero() {
             </div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="mt-10"
+        >
+          <FeaturedProject />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Tag from "@/components/ui/Tag";
-import { pinnedRepos } from "@/data/github";
+import GitHubActivity from "@/components/sections/GitHubActivity";
+import { githubProfile, pinnedRepos } from "@/data/github";
 import { trackEvent } from "@/lib/analytics";
 
 export default function GitHubSection() {
@@ -11,9 +13,10 @@ export default function GitHubSection() {
     <SectionWrapper id="github" label="Code" title="Open Source & GitHub">
       <p className="-mt-8 mb-8 max-w-2xl text-sm leading-relaxed text-text-muted">
         Production repos with live deployments where available. Recruiters
-        typically check GitHub before scheduling — these are the repos worth
-        reviewing first.
+        typically check GitHub before scheduling — activity and CI status below.
       </p>
+
+      <GitHubActivity />
 
       <div className="grid gap-4 md:grid-cols-2">
         {pinnedRepos.map((repo, index) => (
@@ -26,9 +29,21 @@ export default function GitHubSection() {
             className="card-surface flex flex-col p-5"
           >
             <div className="flex items-start justify-between gap-3">
-              <h3 className="font-mono text-sm font-medium text-accent">
-                {repo.name}
-              </h3>
+              <div className="min-w-0">
+                <h3 className="font-mono text-sm font-medium text-accent">
+                  {repo.name}
+                </h3>
+                {repo.ciBadge && (
+                  <Image
+                    src={repo.ciBadge}
+                    alt={`${repo.name} CI status`}
+                    width={88}
+                    height={20}
+                    unoptimized
+                    className="mt-2 h-5 w-auto"
+                  />
+                )}
+              </div>
               <span className="rounded-md bg-surface-elevated px-2 py-0.5 font-mono text-xs text-text-muted">
                 {repo.language}
               </span>
@@ -87,7 +102,7 @@ export default function GitHubSection() {
         className="mt-8 text-center"
       >
         <a
-          href="https://github.com/yashdark01"
+          href={githubProfile.url}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() =>

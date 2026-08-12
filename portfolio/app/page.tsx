@@ -6,6 +6,7 @@ import Hero from "@/components/sections/Hero";
 import Journey from "@/components/sections/Journey";
 import OpenTo from "@/components/sections/OpenTo";
 import Process from "@/components/sections/Process";
+import SocialProof from "@/components/sections/SocialProof";
 import Work from "@/components/sections/Work";
 import Writing from "@/components/sections/Writing";
 import { site } from "@/data/site";
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <Process />
       <Work />
+      <SocialProof />
       <GitHubSection />
       <Writing />
       {site.showLeetCode && <Coding />}

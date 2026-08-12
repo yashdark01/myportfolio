@@ -31,6 +31,7 @@ export const projectCategories = [
   { id: "enterprise", label: "Enterprise" },
 ] as const;
 
+/** Featured on homepage — depth over breadth (3 max) */
 export const projects: Project[] = [
   {
     id: "krashaq",
@@ -98,7 +99,7 @@ Groq · OpenAI · Gemini · Anthropic · WeatherAPI`,
     problem:
       "Brands, agencies, and event organizers need to embed sustainability into OOH, DOOH, print, digital, and experiential work — from planning through post-campaign recovery — with credible, audit-ready ESG reporting aligned to BRSR standards.",
     outcome:
-      "Contributed to a patent-filed platform trusted by leading brands and enterprises — improving dashboard performance and accelerating sustainability report workflows for analyst teams.",
+      "Contributing to a patent-filed platform in production — helping brands and agencies measure and report campaign environmental impact through the EcoMS ecosystem.",
     tradeoffs: [
       "Unified platform over point solutions — one system for measure-through-report instead of disconnected spreadsheets and tools.",
       "Audit-ready reporting over quick exports — BRSR-aligned outputs that stand up to scrutiny, even when generation takes longer.",
@@ -116,36 +117,70 @@ Ecometer Platform (EcoMS)
 Horizon17 Technology — AI · IoT · blockchain sustainability infrastructure
         ↓
 Scope 1, 2 & 3 emissions · SDG-aligned assessments`,
-    stack: [
-      "React.js",
-      "Next.js",
-      "TypeScript",
-      "Node.js",
-    ],
+    stack: [],
     live: "https://ecomsww.com/",
   },
   {
-    id: "music-player",
-    title: "Music Player",
-    subtitle: "Full-stack streaming app with JWT auth + audio caching (−25% load)",
+    id: "rent-buddy",
+    title: "Rent Buddy",
+    subtitle:
+      "Production rental platform — live client deployment from internship delivery",
     category: "fullstack",
     featured: true,
+    builtAt: "WebIntegratorz · Internship",
     metrics: [
-      { value: "25%", label: "faster loads" },
-      { value: "JWT", label: "secured auth" },
-      { value: "MERN", label: "full stack" },
+      { value: "Live", label: "rentbuddy.in" },
+      { value: "4+", label: "production apps shipped" },
+      { value: "JWT", label: "secured access" },
     ],
     problem:
-      "Users wanted a full-featured music streaming experience with playlists, search, and personalized recommendations.",
-    role: "Built the entire MERN stack application — auth, audio streaming, playlist management, and UI.",
+      "Property rental workflows need responsive, production-grade web apps with secure authentication — built and maintained under real client deadlines, not classroom timelines.",
+    role: "Full-stack developer during internship — built and shipped production web applications including Rent Buddy, with JWT-secured APIs, responsive UI, and client-facing deployments.",
     outcome:
-      "Delivered a production-ready streaming platform with MongoDB aggregation pipelines, audio caching, and Redux Toolkit state management.",
+      "Delivered Rent Buddy as a live production platform at rentbuddy.in, alongside 3+ additional client apps — demonstrating end-to-end delivery under internship constraints.",
     tradeoffs: [
-      "Redux Toolkit for predictable audio + playlist state vs Context — easier debugging for complex player flows.",
-      "MongoDB aggregation for recommendations instead of client-side filtering — reduced payload size by ~25%.",
-      "JWT + httpOnly-style session pattern for auth; RBAC-ready structure for future admin roles.",
+      "React + Node monorepo patterns over separate repos — faster iteration for client sprints.",
+      "JWT session auth over OAuth — matched client infra and timeline; RBAC-ready for admin flows.",
+      "Mobile-first responsive UI over native apps — broader reach for rental users on low-end devices.",
     ],
-    architecture: `React + ShadCN UI
+    architecture: `Users (renters · owners · admins)
+        ↓
+React.js SPA — responsive, mobile-first
+        ↓
+Node.js REST API + JWT middleware
+        ↓
+MongoDB (listings, users, bookings)
+        ↓
+Production deploy — rentbuddy.in`,
+    stack: ["React.js", "Node.js", "MongoDB", "JWT", "Tailwind CSS"],
+    github: "https://github.com/yashdark01/rentbuddy",
+    live: "https://rentbuddy.in/home",
+  },
+];
+
+/** Full project data for demoted projects that still have case study pages */
+export const musicPlayerProject: Project = {
+  id: "music-player",
+  title: "Music Player",
+  subtitle: "Full-stack streaming app with JWT auth + audio caching (−25% load)",
+  category: "fullstack",
+  featured: false,
+  metrics: [
+    { value: "25%", label: "faster loads" },
+    { value: "JWT", label: "secured auth" },
+    { value: "MERN", label: "full stack" },
+  ],
+  problem:
+    "Users wanted a full-featured music streaming experience with playlists, search, and personalized recommendations.",
+  role: "Built the entire MERN stack application — auth, audio streaming, playlist management, and UI.",
+  outcome:
+    "Delivered a production-ready streaming platform with MongoDB aggregation pipelines, audio caching, and Redux Toolkit state management.",
+  tradeoffs: [
+    "Redux Toolkit for predictable audio + playlist state vs Context — easier debugging for complex player flows.",
+    "MongoDB aggregation for recommendations instead of client-side filtering — reduced payload size by ~25%.",
+    "JWT + httpOnly-style session pattern for auth; RBAC-ready structure for future admin roles.",
+  ],
+  architecture: `React + ShadCN UI
         ↓
 Redux Toolkit (player / playlist state)
         ↓
@@ -154,18 +189,24 @@ Express.js REST API
 JWT auth middleware
         ↓
 MongoDB (users, songs, playlists)`,
-    stack: [
-      "React.js",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Redux Toolkit",
-      "ShadCN UI",
-      "Tailwind CSS",
-    ],
-    github: "https://github.com/yashdark01/spotify",
-  },
-];
+  stack: [
+    "React.js",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "Redux Toolkit",
+    "ShadCN UI",
+    "Tailwind CSS",
+  ],
+  github: "https://github.com/yashdark01/spotify",
+};
+
+export function getProjectById(id: string): Project | undefined {
+  const featured = projects.find((p) => p.id === id);
+  if (featured) return featured;
+  if (id === musicPlayerProject.id) return musicPlayerProject;
+  return undefined;
+}
 
 export interface MoreProject {
   id: string;
@@ -174,26 +215,27 @@ export interface MoreProject {
   tags: string[];
   github?: string;
   live?: string;
+  caseStudyPath?: string;
 }
 
 export const moreProjects: MoreProject[] = [
   {
+    id: "music-player",
+    title: "Music Player",
+    description:
+      "Spotify-style MERN streaming app — JWT auth, Redux player state, MongoDB aggregation pipelines.",
+    tags: ["MERN", "Redux", "JWT"],
+    github: "https://github.com/yashdark01/spotify",
+    caseStudyPath: "/work/music-player",
+  },
+  {
     id: "sns",
     title: "SNS Website",
     description:
-      "Social platform with scroll-triggered animations and +30% engagement via Framer Motion and Intersection Observer.",
+      "Social platform with scroll-triggered animations and +30% engagement via Framer Motion.",
     tags: ["React.js", "Framer Motion", "Tailwind CSS"],
     github: "https://github.com/yashdark01/sns",
     live: "https://sns-cyan.vercel.app",
-  },
-  {
-    id: "rent-buddy",
-    title: "Rent Buddy & Client Apps",
-    description:
-      "4+ production-ready web applications built during internship — responsive UIs with JWT-secured access.",
-    tags: ["React.js", "Node.js", "MongoDB"],
-    github: "https://github.com/yashdark01/rentbuddy",
-    live: "https://rentbuddy.in/home",
   },
   {
     id: "course-enrollment",

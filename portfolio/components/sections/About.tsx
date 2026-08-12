@@ -35,7 +35,8 @@ export default function About() {
           platform — helping brands and agencies measure and report campaign
           environmental impact. Before that, I shipped 4+ production apps during
           my internship at WebIntegratorz — from JWT-secured backends to
-          mobile-first PWAs.
+          mobile-first PWAs. I keep interview-ready with structured DSA practice
+          on LeetCode alongside shipping production code.
         </motion.p>
 
         <motion.div

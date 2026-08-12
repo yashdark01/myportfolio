@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
+import ProjectPreviewGallery from "@/components/case-study/ProjectPreviewGallery";
 import SectionLink from "@/components/ui/SectionLink";
 import Tag from "@/components/ui/Tag";
 import { CaseStudy } from "@/data/case-studies";
@@ -99,20 +100,34 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
           )}
           {hasTechnical && (
             <Button href="#technical" variant="secondary">
-              Technical deep dive ↓
+              Engineering ↓
             </Button>
           )}
         </div>
       </header>
 
-      {/* ── Case study (product / narrative) ── */}
+      {/* ── Overview (product / narrative) ── */}
       <div className="mt-12 space-y-10">
         <div className="border-b border-white/10 pb-4">
-          <h2 className="section-label">Case study</h2>
+          <h2 className="section-label">Overview</h2>
           <p className="mt-1 text-sm text-text-muted">
             Product context, problem, and outcomes.
           </p>
         </div>
+
+        {(study.previewImages?.length || study.previewVideo) && (
+          <ProjectPreviewGallery
+            images={study.previewImages}
+            video={study.previewVideo}
+            defaultDomain={
+              study.id === "horizon17-esg"
+                ? "ecomsww.com"
+                : study.id === "rent-buddy"
+                  ? "rentbuddy.in"
+                  : "krashaq-agritech.vercel.app"
+            }
+          />
+        )}
 
         <div className="space-y-10">
           {study.sections.map((section) => (
@@ -132,11 +147,11 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
         )}
       </div>
 
-      {/* ── Technical deep dive (personal / open-source projects) ── */}
+      {/* ── Engineering (personal / open-source projects) ── */}
       {hasTechnical && (
         <div id="technical" className="mt-20 scroll-mt-28 space-y-10">
           <div className="border-b border-white/10 pb-4">
-            <h2 className="section-label text-accent">Technical deep dive</h2>
+            <h2 className="section-label text-accent">Engineering</h2>
             <p className="mt-1 text-sm text-text-muted">
               Architecture, implementation details, and engineering decisions.
             </p>
@@ -206,7 +221,7 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
           {hasTechnical ? (
             <>
               <Link href="#technical" className="text-accent hover:text-accent-hover">
-                Technical deep dive ↑
+                Engineering ↑
               </Link>
               {" · "}
             </>

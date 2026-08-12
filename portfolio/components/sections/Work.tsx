@@ -85,8 +85,17 @@ function ProjectCard({
               onClick={(e) => e.stopPropagation()}
               className="text-sm font-medium text-text-primary hover:text-accent"
             >
-              Read case study →
+              Overview →
             </Link>
+            {project.github && project.id === "krashaq" && (
+              <Link
+                href={`/work/${project.id}#technical`}
+                onClick={(e) => e.stopPropagation()}
+                className="text-sm text-accent hover:text-accent-hover"
+              >
+                Engineering ↓
+              </Link>
+            )}
             {project.live && (
               <a
                 href={project.live}
@@ -173,18 +182,28 @@ function ProjectCard({
                   {project.architecture}
                 </pre>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {project.stack.map((tech) => (
-                  <Tag key={tech}>{tech}</Tag>
-                ))}
-              </div>
+              {project.stack.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {project.stack.map((tech) => (
+                    <Tag key={tech}>{tech}</Tag>
+                  ))}
+                </div>
+              )}
               <div className="flex flex-wrap gap-4 pt-2">
                 <Link
                   href={`/work/${project.id}`}
                   className="text-sm font-medium text-text-primary hover:text-accent"
                 >
-                  Full case study →
+                  Full overview →
                 </Link>
+                {project.github && project.id === "krashaq" && (
+                  <Link
+                    href={`/work/${project.id}#technical`}
+                    className="text-sm text-accent hover:text-accent-hover"
+                  >
+                    Engineering ↓
+                  </Link>
+                )}
                 {project.github && (
                   <a
                     href={project.github}
@@ -252,6 +271,11 @@ export default function Work() {
 
   return (
     <SectionWrapper id="work" label="Work" title="Selected Projects">
+      <p className="-mt-8 mb-8 max-w-2xl text-sm leading-relaxed text-text-muted">
+        Three flagship projects — enterprise product work, applied AI with live
+        demo, and production internship delivery. Supporting projects are
+        listed below.
+      </p>
       <div className="mb-8 flex flex-wrap gap-2">
         {projectCategories.map((cat) => (
           <button
@@ -312,6 +336,14 @@ export default function Work() {
                   >
                     GitHub ↗
                   </a>
+                )}
+                {project.caseStudyPath && (
+                  <Link
+                    href={project.caseStudyPath}
+                    className="text-xs text-accent hover:text-accent-hover"
+                  >
+                    Overview →
+                  </Link>
                 )}
                 {project.live && (
                   <a

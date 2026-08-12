@@ -2,7 +2,7 @@ export const site = {
   name: "Yash Patidar",
   title: "Founding Engineer · Full Stack Developer · Horizon17",
   tagline:
-    "I ship products end-to-end — enterprise ESG dashboards to RAG-based AI assistants with measurable performance gains.",
+    "Founding engineer at Horizon17 building Ecometer for enterprise sustainability — and shipping applied AI products end-to-end, from RAG pipelines to live demos.",
   institution: "IIIT Nagpur · B.Tech CSE",
   status: "Open to opportunities",
   recentlyShipped: "Krashaq AI · Smart Farming Platform",
@@ -18,17 +18,29 @@ export const site = {
     email: "mailto:yashpatidar9691@gmail.com",
   },
   heroStats: [
-    { value: "40%", label: "faster page loads" },
-    { value: "45%", label: "backend perf gain" },
-    { value: "60%", label: "faster report drafting" },
-    { value: "4+", label: "production apps" },
+    { value: "Ecometer", label: "enterprise product · EcoMS" },
+    { value: "BRSR", label: "audit-ready reporting" },
+    { value: "Scope 1–3", label: "carbon accounting" },
+    { value: "4+", label: "production apps shipped" },
   ],
   aiHeroStats: [
+    { value: "Live", label: "Krashaq AI demo" },
+    { value: "53", label: "automated tests" },
+    { value: "RAG", label: "hybrid retrieval pipeline" },
     { value: "3", label: "languages supported" },
-    { value: "RAG", label: "document querying" },
-    { value: "LLM", label: "local + cloud fallback" },
-    { value: "60%", label: "faster content drafting" },
   ],
+  featuredProject: {
+    id: "krashaq",
+    title: "Krashaq AI",
+    badge: "Featured project · Personal",
+    headline:
+      "Multilingual AI farming platform — live demo, open-source repo, full case study",
+    outcome:
+      "Solo-built production app: AI crop advisory, supplier subscriptions, weather tools, and proactive alerts.",
+    live: "https://krashaq-agritech.vercel.app",
+    github: "https://github.com/yashdark01/Krashaq-Ai",
+    caseStudyPath: "/work/krashaq",
+  },
   coding: {
     leetcode: {
       url: "https://leetcode.com/u/yashdark_01/",

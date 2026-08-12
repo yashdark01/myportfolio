@@ -1,4 +1,4 @@
-import { Project, projects } from "./projects";
+import { musicPlayerProject, Project, projects } from "./projects";
 
 export interface CaseStudySection {
   title: string;
@@ -12,6 +12,8 @@ export interface CaseStudy extends Project {
   sections: CaseStudySection[];
   challenges: string[];
   learnings: string[];
+  previewImages?: { src: string; alt: string; caption: string }[];
+  previewVideo?: { src: string; poster?: string; caption: string; domain?: string };
   /** When true, renders a separate "Technical deep dive" block below the case study */
   showTechnicalDetails?: boolean;
   technicalSections?: CaseStudySection[];
@@ -26,6 +28,24 @@ export const caseStudies: CaseStudy[] = [
       "Bringing expert crop intelligence to farmers who need it most",
     timeline: "2025 – 2026 · Solo full-stack project",
     showTechnicalDetails: true,
+    previewVideo: {
+      src: "/projects/krashaq/demo.mp4",
+      poster: "/projects/krashaq/dashboard.png",
+      caption: "Product walkthrough — dashboard, login, and AI chat",
+      domain: "krashaq-agritech.vercel.app",
+    },
+    previewImages: [
+      {
+        src: "/projects/krashaq/dashboard.png",
+        alt: "Krashaq AI farmer dashboard with weather and crop tools",
+        caption: "Farmer dashboard — weather, crops, and AI chat entry points",
+      },
+      {
+        src: "/projects/krashaq/login.png",
+        alt: "Krashaq AI login with farmer, supplier, and admin roles",
+        caption: "Role-based access — farmer, supplier, and admin flows",
+      },
+    ],
     sections: [
       {
         title: "Context",
@@ -175,6 +195,18 @@ export const caseStudies: CaseStudy[] = [
     timeline:
       "Apr 2025 – Present · Founding Engineer · Full Stack Developer · Horizon17 Technology and Sustainability Pvt. Ltd.",
     showTechnicalDetails: false,
+    previewImages: [
+      {
+        src: "/projects/ecometer/platform.png",
+        alt: "EcoMS Ecometer sustainability platform marketing page",
+        caption: "Public EcoMS platform — sustainability intelligence for campaigns and events",
+      },
+      {
+        src: "/projects/ecometer/case-studies.png",
+        alt: "EcoMS public case studies for enterprise brands",
+        caption: "Published case studies — Amazon, Tata Motors, HDFC, and other enterprise clients",
+      },
+    ],
     sections: [
       {
         title: "Where I work",
@@ -236,7 +268,48 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    ...projects[2],
+    ...projects.find((p) => p.id === "rent-buddy")!,
+    caseStudyTitle:
+      "Shipping production client apps during internship — Rent Buddy live at scale",
+    timeline: "2024 – 2025 · WebIntegratorz internship",
+    sections: [
+      {
+        title: "Context",
+        content:
+          "During my internship at WebIntegratorz, I worked on real client deliverables — not toy apps. Rent Buddy is a property rental platform that needed secure auth, responsive UI, and a production deployment timeline.",
+      },
+      {
+        title: "What I built",
+        content:
+          "Full-stack features across Rent Buddy and additional client apps — JWT-secured APIs, listing and booking flows, and mobile-first UI shipped to production.",
+        bullets: [
+          "Live production deployment at rentbuddy.in",
+          "JWT authentication and role-aware access patterns",
+          "Responsive React UI for renters and property owners",
+          "Part of 4+ production apps delivered during the internship",
+        ],
+      },
+      {
+        title: "Results",
+        content:
+          "Rent Buddy remains live in production — a concrete proof point for internship-era delivery under client constraints, complementing my current founding-engineer work on Ecometer.",
+        bullets: [
+          "Live: rentbuddy.in/home",
+          "Repo: github.com/yashdark01/rentbuddy",
+        ],
+      },
+    ],
+    challenges: [
+      "Balancing client feature requests with maintainable code under tight sprint deadlines",
+      "Designing auth flows that work for multiple user types without over-engineering v1",
+    ],
+    learnings: [
+      "Production internship work teaches deployment and client communication — not just coding",
+      "Shipping 4+ apps builds velocity habits that carry into founding-engineer roles",
+    ],
+  },
+  {
+    ...musicPlayerProject,
     caseStudyTitle: "Full-stack music streaming with production-grade patterns",
     timeline: "Mar 2025 · Personal project",
     sections: [
