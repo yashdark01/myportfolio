@@ -9,6 +9,8 @@ export const site = {
   email: "yashpatidar9691@gmail.com",
   phone: "+91 7987386670",
   resumeUrl: "/Yash-Patidar-CV.pdf",
+  /** Set to true when you want LeetCode visible (recommended: 150+ Medium) */
+  showLeetCode: false,
   links: {
     linkedin: "https://linkedin.com/in/yash-patidar-97a8861b3",
     github: "https://github.com/yashdark01",
@@ -48,11 +50,20 @@ export const site = {
 
 export type Persona = "product" | "ai";
 
-export const socialLinks = [
+const baseSocialLinks = [
   { id: "github", label: "GitHub", href: site.links.github },
   { id: "linkedin", label: "LinkedIn", href: site.links.linkedin },
-  { id: "leetcode", label: "LeetCode", href: site.links.leetcode },
 ] as const;
+
+const leetcodeLink = {
+  id: "leetcode",
+  label: "LeetCode",
+  href: site.links.leetcode,
+} as const;
+
+export const socialLinks = site.showLeetCode
+  ? [...baseSocialLinks, leetcodeLink]
+  : [...baseSocialLinks];
 
 export const navItems = [
   { id: "work", label: "Work" },

@@ -132,7 +132,9 @@ export default function RecruiterMode() {
                 {[
                   { label: "LinkedIn", href: site.links.linkedin },
                   { label: "GitHub", href: site.links.github },
-                  { label: "LeetCode", href: site.links.leetcode },
+                  ...(site.showLeetCode
+                    ? [{ label: "LeetCode", href: site.links.leetcode }]
+                    : []),
                   {
                     label: "Krashaq Live",
                     href: "https://krashaq-agritech.vercel.app",

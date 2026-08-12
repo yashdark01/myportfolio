@@ -72,4 +72,4 @@ uvicorn main:app --reload
 ## Author
 
 **Yash Patidar** — Full Stack Engineer · IIIT Nagpur  
-[Portfolio](https://yashpatidar.vercel.app) · [LinkedIn](https://linkedin.com/in/yash-patidar-97a8861b3) · [LeetCode](https://leetcode.com/u/yashdark_01/)
+[Portfolio](https://yashpatidar.vercel.app) · [LinkedIn](https://linkedin.com/in/yash-patidar-97a8861b3)

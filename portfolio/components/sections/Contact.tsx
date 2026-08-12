@@ -72,14 +72,16 @@ export default function Contact() {
               >
                 GitHub ↗
               </Button>
-              <Button
-                href={site.links.leetcode}
-                variant="secondary"
-                external
-                onClick={() => trackEvent("leetcode_click")}
-              >
-                LeetCode ↗
-              </Button>
+              {site.showLeetCode && (
+                <Button
+                  href={site.links.leetcode}
+                  variant="secondary"
+                  external
+                  onClick={() => trackEvent("leetcode_click")}
+                >
+                  LeetCode ↗
+                </Button>
+              )}
               <Button
                 href={site.resumeUrl}
                 variant="secondary"

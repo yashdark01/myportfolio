@@ -8,6 +8,7 @@ import OpenTo from "@/components/sections/OpenTo";
 import Process from "@/components/sections/Process";
 import Work from "@/components/sections/Work";
 import Writing from "@/components/sections/Writing";
+import { site } from "@/data/site";
 
 export default function Home() {
   return (
@@ -17,7 +18,7 @@ export default function Home() {
       <Work />
       <GitHubSection />
       <Writing />
-      <Coding />
+      {site.showLeetCode && <Coding />}
       <Journey />
       <About />
       <OpenTo />
