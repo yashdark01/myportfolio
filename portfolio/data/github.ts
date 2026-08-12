@@ -63,6 +63,8 @@ export const pinnedRepos: PinnedRepo[] = [
     live: "https://sns-website-nine.vercel.app/",
     language: "TypeScript",
     topics: ["React", "Framer Motion", "Tailwind CSS"],
+    ciBadge:
+      "https://github.com/yashdark01/sns-website/actions/workflows/ci.yml/badge.svg",
   },
 ];
 
