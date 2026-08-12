@@ -316,7 +316,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Context",
         content:
-          "Built to demonstrate full MERN proficiency with modern UI (ShadCN), OAuth auth, state management, and audio streaming patterns used in real consumer apps.",
+          "Built to demonstrate full MERN proficiency with modern UI (ShadCN), OAuth auth, state management, and audio streaming patterns — open source at github.com/yashdark01/Music-Player.",
       },
       {
         title: "What I built",

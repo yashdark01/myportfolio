@@ -39,10 +39,10 @@ export const pinnedRepos: PinnedRepo[] = [
     topics: ["React", "RAG", "LangChain", "Vector Search"],
   },
   {
-    name: "spotify",
+    name: "Music-Player",
     description:
       "MERN music streaming app with Clerk auth, Redux player state, admin CRUD, Cloudinary uploads, and MongoDB aggregation feeds.",
-    url: "https://github.com/yashdark01/spotify",
+    url: "https://github.com/yashdark01/Music-Player",
     language: "JavaScript",
     topics: ["MERN", "Clerk", "Redux", "MongoDB", "ShadCN"],
   },
@@ -58,4 +58,4 @@ export const pinnedRepos: PinnedRepo[] = [
 ];
 
 /** Repo names fetched for activity strip via /api/github */
-export const trackedRepos = ["Krashaq-Ai", "spotify", "sns-website", "rentbuddy"] as const;
+export const trackedRepos = ["Krashaq-Ai", "Music-Player", "sns-website", "rentbuddy"] as const;

@@ -23,8 +23,8 @@ Full-stack music streaming app with **Clerk auth**, **Redux Toolkit**, **ShadCN 
 ## Quick start
 
 ```bash
-git clone https://github.com/yashdark01/spotify
-cd spotify
+git clone https://github.com/yashdark01/Music-Player.git
+cd Music-Player
 
 cd server && cp .env.example .env && npm install && npm run dev
 cd ../client && cp .env.example .env && npm install && npm run dev
@@ -33,7 +33,7 @@ cd ../client && cp .env.example .env && npm install && npm run dev
 - **App:** http://localhost:3000
 - **API:** http://localhost:3001/api
 
-See [docs/SETUP.md](https://github.com/yashdark01/spotify/blob/main/docs/SETUP.md) for Clerk, MongoDB, and Cloudinary setup.
+See [docs/SETUP.md](https://github.com/yashdark01/Music-Player/blob/main/docs/SETUP.md) for Clerk, MongoDB, and Cloudinary setup.
 
 ## Highlights
 
@@ -45,4 +45,4 @@ See [docs/SETUP.md](https://github.com/yashdark01/spotify/blob/main/docs/SETUP.m
 
 ---
 
-[Yash Patidar](https://yashpatidar.vercel.app) · [Case Study](https://yashpatidar.vercel.app/work/music-player)
+[Yash Patidar](https://yashpatidar.vercel.app) · [Case Study](https://yashpatidar.vercel.app/work/music-player) · [GitHub](https://github.com/yashdark01/Music-Player)

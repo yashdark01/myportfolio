@@ -200,7 +200,7 @@ MongoDB (users, songs, albums) + Cloudinary uploads`,
     "ShadCN UI",
     "Tailwind CSS",
   ],
-  github: "https://github.com/yashdark01/spotify",
+  github: "https://github.com/yashdark01/Music-Player",
 };
 
 export function getProjectById(id: string): Project | undefined {
@@ -227,7 +227,7 @@ export const moreProjects: MoreProject[] = [
     description:
       "Streaming MERN app — Clerk OAuth, Redux player queue, MongoDB discovery feeds, and admin upload/delete via Cloudinary.",
     tags: ["MERN", "Clerk", "Redux"],
-    github: "https://github.com/yashdark01/spotify",
+    github: "https://github.com/yashdark01/Music-Player",
     caseStudyPath: "/work/music-player",
   },
   {

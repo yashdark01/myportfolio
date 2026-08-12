@@ -9,7 +9,7 @@ Recruiter-friendly README files for your pinned repositories.
 3. Pin these 4 repos on your GitHub profile:
    - `Krashaq-Ai`
    - `RAG-Frontend`
-   - `spotify`
+   - `Music-Player`
    - `sns`
 
 ## Templates
@@ -18,7 +18,7 @@ Recruiter-friendly README files for your pinned repositories.
 |------|---------------|
 | Krashaq-Ai | [krashaq-ai.md](./github-readmes/krashaq-ai.md) |
 | krashaq-backend (deprecated) | [krashaq-backend.md](./github-readmes/krashaq-backend.md) |
-| spotify | [spotify.md](./github-readmes/spotify.md) |
+| Music-Player | [music-player.md](./github-readmes/music-player.md) |
 | RAG-Frontend | [RAG-Frontend.md](./github-readmes/RAG-Frontend.md) |
 
 ## Quick copy commands
@@ -26,7 +26,7 @@ Recruiter-friendly README files for your pinned repositories.
 ```bash
 # From portfolio repo root — paste into each cloned repo
 cp docs/github-readmes/krashaq-ai.md ~/Krashaq-Ai/README.md
-cp docs/github-readmes/spotify.md ~/spotify/README.md
+cp docs/github-readmes/music-player.md ~/Music-Player/README.md
 cp docs/github-readmes/RAG-Frontend.md ~/RAG-Frontend/README.md
 ```
 
