@@ -30,9 +30,16 @@ export default function GitHubSection() {
           >
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <h3 className="font-mono text-sm font-medium text-accent">
-                  {repo.displayName ?? repo.name}
-                </h3>
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="font-mono text-sm font-medium text-accent">
+                    {repo.displayName ?? repo.name}
+                  </h3>
+                  {repo.status === "ongoing" && (
+                    <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-amber-300">
+                      Ongoing
+                    </span>
+                  )}
+                </div>
                 {repo.ciBadge && (
                   <Image
                     src={repo.ciBadge}

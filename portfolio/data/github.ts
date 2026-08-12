@@ -8,6 +8,8 @@ export interface PinnedRepo {
   language: string;
   topics: string[];
   ciBadge?: string;
+  /** e.g. "ongoing" — shown as a status pill on the repo card */
+  status?: "ongoing";
 }
 
 export const githubProfile = {
@@ -33,12 +35,14 @@ export const pinnedRepos: PinnedRepo[] = [
       "https://github.com/yashdark01/Krashaq-Ai/actions/workflows/ci.yml/badge.svg",
   },
   {
-    name: "RAG-Frontend",
+    name: "archflow",
+    displayName: "Archflow",
     description:
-      "RAG-powered document querying UI — vector search interface for enterprise sustainability document workflows.",
-    url: "https://github.com/yashdark01/RAG-Frontend",
+      "In-browser canvas to design, visualize, and share system architectures — drag-drop nodes, connections, AI assistance, and diagram-as-code.",
+    url: "https://github.com/yashdark01/archflow",
     language: "TypeScript",
-    topics: ["React", "RAG", "LangChain", "Vector Search"],
+    topics: ["System Design", "Canvas", "React", "AI"],
+    status: "ongoing",
   },
   {
     name: "Music-Player",
@@ -61,4 +65,4 @@ export const pinnedRepos: PinnedRepo[] = [
 ];
 
 /** Repo names fetched for activity strip via /api/github */
-export const trackedRepos = ["Krashaq-Ai", "Music-Player", "sns-website", "rentbuddy"] as const;
+export const trackedRepos = ["Krashaq-Ai", "archflow", "Music-Player", "sns-website", "rentbuddy"] as const;
