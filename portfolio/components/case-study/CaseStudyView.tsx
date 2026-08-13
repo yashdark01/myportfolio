@@ -140,6 +140,19 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
                 campaigns. Internal engineering UI stays in the abstract deep
                 dive below.
               </>
+            ) : study.id === "rent-buddy" ? (
+              <>
+                Live captures from{" "}
+                <a
+                  href="https://rentbuddy.in/home"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:text-accent-hover"
+                >
+                  rentbuddy.in
+                </a>
+                — home, product catalog, and JWT-secured login.
+              </>
             ) : undefined
           }
         />

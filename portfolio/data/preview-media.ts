@@ -83,21 +83,31 @@ export const previewMediaByProject: Record<string, PreviewMediaItem[]> = {
       id: "home",
       type: "image",
       src: "/projects/rent-buddy/home.png",
-      alt: "Rent Buddy furnishing rental marketplace homepage",
-      caption: "Browse by city and category — rentbuddy.in",
-      domain: "rentbuddy.in",
-      status: "coming-soon",
-      comingSoonLabel: "Marketplace homepage",
+      alt: "Rent Buddy marketplace homepage — browse furnishings by city and category",
+      caption: "Home — browse by city and category at rentbuddy.in/home",
+      domain: "rentbuddy.in/home",
+      status: "ready",
+      objectFit: "cover",
     },
     {
-      id: "listing",
+      id: "product",
       type: "image",
-      src: "/projects/rent-buddy/listing.png",
-      alt: "Rent Buddy product listing and order flow",
-      caption: "Listing detail and tracked doorstep delivery flow",
-      domain: "rentbuddy.in",
-      status: "coming-soon",
-      comingSoonLabel: "Listing & order flow",
+      src: "/projects/rent-buddy/product.png",
+      alt: "Rent Buddy product catalog — listing detail and rental flow",
+      caption: "Product — catalog browse and listing detail at rentbuddy.in/product",
+      domain: "rentbuddy.in/product",
+      status: "ready",
+      objectFit: "cover",
+    },
+    {
+      id: "login",
+      type: "image",
+      src: "/projects/rent-buddy/login.png",
+      alt: "Rent Buddy login — JWT-secured user sign-in",
+      caption: "Login — JWT-secured sign-in at rentbuddy.in/login",
+      domain: "rentbuddy.in/login",
+      status: "ready",
+      objectFit: "cover",
     },
   ],
   archflow: [
@@ -132,6 +142,7 @@ export function getPreviewMedia(projectId: string): PreviewMediaItem[] {
 const heroMediaPreference: Record<string, string> = {
   "horizon17-esg": "overview",
   krashaq: "dashboard",
+  "rent-buddy": "home",
 };
 
 export function getHeroPreviewMedia(
@@ -150,7 +161,7 @@ export function getDefaultMediaDomain(projectId: string): string {
     case "horizon17-esg":
       return "ecomsww.com/ecometer";
     case "rent-buddy":
-      return "rentbuddy.in";
+      return "rentbuddy.in/home";
     case "archflow":
       return "archflow · side project";
     case "music-player":
