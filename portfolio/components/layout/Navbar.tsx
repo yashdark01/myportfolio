@@ -1,10 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { navItems, site } from "@/data/site";
+import { profileNavImagePath } from "@/lib/site-url";
 import Button from "@/components/ui/Button";
 import SectionLink from "@/components/ui/SectionLink";
 import { useScrollLock } from "@/lib/useScrollLock";
@@ -157,7 +159,7 @@ export default function Navbar() {
         <AnimatePresence>
           {isMenuOpen && (
             <>
-              <motion.button
+              <m.button
                 type="button"
                 aria-label="Close menu"
                 initial={{ opacity: 0 }}
@@ -168,7 +170,7 @@ export default function Navbar() {
                 onClick={closeMenu}
               />
 
-              <motion.nav
+              <m.nav
                 ref={menuPanelRef}
                 id="mobile-nav-panel"
                 role="dialog"
@@ -195,7 +197,7 @@ export default function Navbar() {
                   {navItems.map((item, index) => {
                     const isActive = activeSection === item.id;
                     return (
-                      <motion.div
+                      <m.div
                         key={item.id}
                         custom={index}
                         variants={itemVariants}
@@ -216,7 +218,7 @@ export default function Navbar() {
                             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                           )}
                         </SectionLink>
-                      </motion.div>
+                      </m.div>
                     );
                   })}
                 </div>
@@ -235,7 +237,7 @@ export default function Navbar() {
                     Resume ↗
                   </Button>
                 </div>
-              </motion.nav>
+              </m.nav>
             </>
           )}
         </AnimatePresence>,
@@ -258,9 +260,19 @@ export default function Navbar() {
           <SectionLink
             sectionId="hero"
             onClick={closeMenu}
-            className="min-h-10 truncate pr-3 text-sm font-semibold tracking-tight text-text-primary sm:text-base"
+            className="flex min-h-10 items-center gap-2.5 pr-3 text-sm font-semibold tracking-tight text-text-primary sm:text-base"
           >
-            {site.name}
+            <Image
+              src={profileNavImagePath}
+              alt=""
+              width={32}
+              height={32}
+              sizes="32px"
+              quality={75}
+              className="h-8 w-8 shrink-0 rounded-full border border-white/10 bg-surface object-cover object-top"
+              priority
+            />
+            <span className="truncate">{site.name}</span>
           </SectionLink>
 
           <div className="hidden items-center gap-6 lg:gap-8 md:flex">

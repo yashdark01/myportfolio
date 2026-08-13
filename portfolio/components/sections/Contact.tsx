@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useState } from "react";
 import Button from "@/components/ui/Button";
 import SectionWrapper from "@/components/ui/SectionWrapper";
@@ -24,7 +24,7 @@ export default function Contact() {
   return (
     <SectionWrapper id="contact" label="Contact" title="Get in Touch">
       <div className="grid gap-10 md:grid-cols-2">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -94,9 +94,9 @@ export default function Contact() {
               </Button>
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -117,7 +117,7 @@ export default function Contact() {
           <p className="mt-4 text-center font-mono text-xs text-text-muted">
             {site.phone}
           </p>
-        </motion.div>
+        </m.div>
       </div>
     </SectionWrapper>
   );

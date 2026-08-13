@@ -1,6 +1,8 @@
+import { getProfileImageUrl, getSiteUrl } from "@/lib/site-url";
 import { site } from "@/data/site";
 
 export default function JsonLd() {
+  const siteUrl = getSiteUrl();
   const schema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -8,12 +10,13 @@ export default function JsonLd() {
     jobTitle: "Founding Engineer · Full Stack Developer",
     description: site.tagline,
     email: site.email,
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://yashpatidar.vercel.app",
+    url: siteUrl,
+    image: getProfileImageUrl(),
     sameAs: [site.links.linkedin, site.links.github],
     worksFor: {
       "@type": "Organization",
       name: "Horizon17 Technology and Sustainability Pvt. Ltd.",
-      url: "https://www.horizon17ww.com/",
+      url: site.links.horizon17,
     },
     alumniOf: {
       "@type": "CollegeOrUniversity",

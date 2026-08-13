@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { site } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
@@ -9,7 +9,7 @@ export default function Coding() {
   return (
     <SectionWrapper id="coding" label="Interview Prep" title="DSA & Problem Solving">
       <div className="card-surface max-w-2xl p-6 md:p-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -34,7 +34,7 @@ export default function Coding() {
           <p className="mt-4 font-mono text-xs text-text-muted">
             leetcode.com/u/yashdark_01
           </p>
-        </motion.div>
+        </m.div>
       </div>
     </SectionWrapper>
   );

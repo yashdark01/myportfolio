@@ -1,15 +1,17 @@
-import About from "@/components/sections/About";
-import Coding from "@/components/sections/Coding";
-import Contact from "@/components/sections/Contact";
-import GitHubSection from "@/components/sections/GitHubSection";
+import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
-import Journey from "@/components/sections/Journey";
-import OpenTo from "@/components/sections/OpenTo";
-import Process from "@/components/sections/Process";
-import SocialProof from "@/components/sections/SocialProof";
-import Work from "@/components/sections/Work";
-import Writing from "@/components/sections/Writing";
 import { site } from "@/data/site";
+
+const Process = dynamic(() => import("@/components/sections/Process"));
+const Work = dynamic(() => import("@/components/sections/Work"));
+const SocialProof = dynamic(() => import("@/components/sections/SocialProof"));
+const GitHubSection = dynamic(() => import("@/components/sections/GitHubSection"));
+const Writing = dynamic(() => import("@/components/sections/Writing"));
+const Coding = dynamic(() => import("@/components/sections/Coding"));
+const Journey = dynamic(() => import("@/components/sections/Journey"));
+const About = dynamic(() => import("@/components/sections/About"));
+const OpenTo = dynamic(() => import("@/components/sections/OpenTo"));
+const Contact = dynamic(() => import("@/components/sections/Contact"));
 
 export default function Home() {
   return (

@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import Tag from "@/components/ui/Tag";
+import StackTags from "@/components/ui/StackTags";
 import GitHubActivity from "@/components/sections/GitHubActivity";
 import { githubProfile, pinnedRepos } from "@/data/github";
 import { trackEvent } from "@/lib/analytics";
@@ -20,7 +20,7 @@ export default function GitHubSection() {
 
       <div className="grid gap-4 md:grid-cols-2">
         {pinnedRepos.map((repo, index) => (
-          <motion.article
+          <m.article
             key={repo.name}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -60,10 +60,8 @@ export default function GitHubSection() {
               {repo.description}
             </p>
 
-            <div className="mt-4 flex flex-wrap gap-1.5">
-              {repo.topics.map((topic) => (
-                <Tag key={topic}>{topic}</Tag>
-              ))}
+            <div className="mt-4">
+              <StackTags items={repo.topics} className="gap-1.5" />
             </div>
 
             <div className="mt-4 flex gap-4">
@@ -98,11 +96,11 @@ export default function GitHubSection() {
                 </a>
               )}
             </div>
-          </motion.article>
+          </m.article>
         ))}
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -119,7 +117,7 @@ export default function GitHubSection() {
         >
           View all repositories on GitHub ↗
         </a>
-      </motion.div>
+      </m.div>
     </SectionWrapper>
   );
 }

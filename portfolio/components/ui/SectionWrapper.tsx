@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ReactNode } from "react";
 
 interface SectionWrapperProps {
@@ -21,7 +21,7 @@ export default function SectionWrapper({
   return (
     <section id={id} className={`py-20 sm:py-24 md:py-32 ${className}`}>
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
@@ -32,7 +32,7 @@ export default function SectionWrapper({
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
             {title}
           </h2>
-        </motion.div>
+        </m.div>
         {children}
       </div>
     </section>

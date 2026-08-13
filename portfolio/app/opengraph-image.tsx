@@ -44,7 +44,7 @@ export default function OpenGraphImage() {
         <div
           style={{
             fontSize: 32,
-            color: "#71717a",
+            color: "#8b8b95",
             marginTop: 20,
             maxWidth: 800,
             lineHeight: 1.4,
@@ -72,7 +72,7 @@ export default function OpenGraphImage() {
               }}
             >
               <span style={{ fontSize: 28, fontWeight: 600 }}>{stat.value}</span>
-              <span style={{ fontSize: 16, color: "#71717a" }}>{stat.label}</span>
+              <span style={{ fontSize: 16, color: "#8b8b95" }}>{stat.label}</span>
             </div>
           ))}
         </div>

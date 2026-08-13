@@ -2,8 +2,9 @@ import type { MetadataRoute } from "next";
 import { getAllBlogSlugs } from "@/data/blog";
 import { getAllCaseStudySlugs } from "@/data/case-studies";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://yashpatidar.vercel.app";
+import { getSiteUrl } from "@/lib/site-url";
+
+const siteUrl = getSiteUrl();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const caseStudyPages = getAllCaseStudySlugs().map((slug) => ({

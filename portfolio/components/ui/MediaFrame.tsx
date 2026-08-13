@@ -11,6 +11,7 @@ interface MediaFrameProps {
   domain?: string;
   variant?: "hero" | "gallery";
   className?: string;
+  priority?: boolean;
 }
 
 function BrowserChrome({
@@ -116,9 +117,11 @@ export default function MediaFrame({
   domain = "app.example.com",
   variant = "gallery",
   className = "",
+  priority,
 }: MediaFrameProps) {
   const isHero = variant === "hero";
-  const { ref, inView } = useInView<HTMLElement>({ enabled: !isHero });
+  const eagerLoad = priority ?? isHero;
+  const { ref, inView } = useInView<HTMLElement>({ enabled: !eagerLoad });
   const [mediaLoaded, setMediaLoaded] = useState(false);
   const [loadFailed, setLoadFailed] = useState(false);
 
@@ -127,7 +130,7 @@ export default function MediaFrame({
     setLoadFailed(false);
   }, [item.id, item.src, item.poster]);
 
-  const shouldLoad = isHero || inView;
+  const shouldLoad = eagerLoad || inView;
   const isReady = item.status === "ready" && Boolean(item.src || item.poster);
   const showStatusOverlay = !isReady || loadFailed;
   const showSkeleton =
@@ -194,8 +197,8 @@ export default function MediaFrame({
             alt={item.alt}
             fill
             className={`${imageClassName} transition-opacity duration-300 ${mediaLoaded ? "opacity-100" : "opacity-0"}`}
-            priority={isHero}
-            loading={isHero ? "eager" : "lazy"}
+            priority={eagerLoad}
+            loading={eagerLoad ? "eager" : "lazy"}
             sizes={
               isHero
                 ? "(max-width: 768px) 100vw, 640px"

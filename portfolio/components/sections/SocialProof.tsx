@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Link from "next/link";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Tag from "@/components/ui/Tag";
@@ -21,7 +21,7 @@ export default function SocialProof() {
       title="Trusted in production"
     >
       {featuredTestimonial && (
-        <motion.blockquote
+        <m.blockquote
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -49,11 +49,11 @@ export default function SocialProof() {
               </>
             )}
           </footer>
-        </motion.blockquote>
+        </m.blockquote>
       )}
 
       <div className="grid gap-8 lg:grid-cols-2">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -84,9 +84,9 @@ export default function SocialProof() {
           >
             Public EcoMS case studies ↗
           </a>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -115,7 +115,7 @@ export default function SocialProof() {
           >
             {socialProof.linkedInLabel} ↗
           </Link>
-        </motion.div>
+        </m.div>
       </div>
     </SectionWrapper>
   );

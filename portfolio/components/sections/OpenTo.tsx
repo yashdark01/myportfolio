@@ -1,10 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { site } from "@/data/site";
 
 const fields = [
+  { label: "Experience", value: site.yearsExperience },
   { label: "Roles", value: site.openTo.roles.join(" · ") },
   { label: "Stage", value: site.openTo.stage },
   { label: "Location", value: site.openTo.location },
@@ -16,7 +17,7 @@ export default function OpenTo() {
     <SectionWrapper id="open-to" label="Next" title="What I'm Looking For">
       <div className="grid gap-4 md:grid-cols-2">
         {fields.map((field, index) => (
-          <motion.div
+          <m.div
             key={field.label}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -28,7 +29,7 @@ export default function OpenTo() {
             <p className="text-sm leading-relaxed text-text-primary">
               {field.value}
             </p>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </SectionWrapper>
