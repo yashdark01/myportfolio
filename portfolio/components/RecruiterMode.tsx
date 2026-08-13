@@ -1,21 +1,17 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "@/components/ui/Button";
 import Tag from "@/components/ui/Tag";
 import { expertiseGroups, recruiterSnapshot, site } from "@/data/site";
+import { useScrollLock } from "@/lib/useScrollLock";
 import { trackEvent } from "@/lib/analytics";
 
 export default function RecruiterMode() {
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
+  useScrollLock(open);
 
   const handleOpen = () => {
     trackEvent("recruiter_mode_open");
@@ -36,7 +32,11 @@ export default function RecruiterMode() {
         type="button"
         onClick={handleOpen}
         aria-label="Open recruiter mode"
-        className="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-accent/30 bg-accent text-background shadow-lg shadow-accent/20 md:hidden"
+        className="fixed z-40 flex h-12 w-12 items-center justify-center rounded-full border border-accent/30 bg-accent text-background shadow-lg shadow-accent/20 md:hidden"
+        style={{
+          bottom: "max(1.5rem, env(safe-area-inset-bottom))",
+          right: "max(1.5rem, env(safe-area-inset-right))",
+        }}
       >
         <span className="text-xs font-bold">HR</span>
       </button>

@@ -17,6 +17,12 @@
 html {
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
+  overflow-x: clip;
+}
+
+html,
+body {
+  max-width: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -39,6 +45,10 @@ body {
   color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+section[id] {
+  scroll-margin-top: calc(4.5rem + env(safe-area-inset-top));
 }
 
 ::selection {
@@ -95,4 +105,13 @@ body {
 button:focus:not(:focus-visible),
 a:focus:not(:focus-visible) {
   outline: none;
+}
+
+body.mobile-nav-open .mobile-resume-fab {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.5rem);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }

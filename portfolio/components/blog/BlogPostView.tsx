@@ -5,7 +5,7 @@ import { getReadTime } from "@/lib/blog";
 
 export default function BlogPostView({ post }: { post: BlogPost }) {
   return (
-    <article className="mx-auto max-w-3xl px-6 py-28">
+    <article className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-28">
       <Link
         href="/blog"
         className="section-label inline-flex items-center gap-2 transition-colors hover:text-accent"

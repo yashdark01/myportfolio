@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
-import ProjectPreviewGallery from "@/components/case-study/ProjectPreviewGallery";
+import ProjectMediaGallery from "@/components/case-study/ProjectMediaGallery";
 import SectionLink from "@/components/ui/SectionLink";
 import Tag from "@/components/ui/Tag";
+import { getDefaultMediaDomain, getPreviewMedia } from "@/data/preview-media";
 import { CaseStudy } from "@/data/case-studies";
 
 interface CaseStudyViewProps {
@@ -63,7 +64,7 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
     study.technicalSections.length > 0;
 
   return (
-    <article className="mx-auto max-w-3xl px-6 py-28">
+    <article className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-28">
       <SectionLink
         sectionId="work"
         className="section-label inline-flex items-center gap-2 transition-colors hover:text-accent"
@@ -120,19 +121,28 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
           </p>
         </div>
 
-        {(study.previewImages?.length || study.previewVideo) && (
-          <ProjectPreviewGallery
-            images={study.previewImages}
-            video={study.previewVideo}
-            defaultDomain={
-              study.id === "horizon17-esg"
-                ? "ecomsww.com"
-                : study.id === "rent-buddy"
-                  ? "rentbuddy.in"
-                  : "krashaq-agritech.vercel.app"
-            }
-          />
-        )}
+        <ProjectMediaGallery
+          items={getPreviewMedia(study.id)}
+          defaultDomain={getDefaultMediaDomain(study.id)}
+          intro={
+            study.id === "horizon17-esg" ? (
+              <>
+                Live website captures from{" "}
+                <a
+                  href="https://ecomsww.com/ecometer-the-carbon-economy-for-advertising"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:text-accent-hover"
+                >
+                  ecomsww.com
+                </a>
+                — platform page, Visualise, and published client
+                campaigns. Internal engineering UI stays in the abstract deep
+                dive below.
+              </>
+            ) : undefined
+          }
+        />
 
         <div className="space-y-10">
           {study.sections.map((section) => (

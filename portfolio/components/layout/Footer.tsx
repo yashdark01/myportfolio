@@ -2,8 +2,10 @@ import { site, socialLinks } from "@/data/site";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 py-8">
-      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 md:flex-row md:items-center md:justify-between">
+    <footer
+      className="border-t border-white/5 py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] md:pb-8"
+    >
+      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 sm:px-6 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-sm text-text-muted">
             © {new Date().getFullYear()} {site.name}

@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
+import HighlightText from "@/components/ui/HighlightText";
 import FeaturedProject from "@/components/sections/FeaturedProject";
 import { usePersona } from "@/components/PersonaContext";
 import { Persona, personas, site, socialLinks } from "@/data/site";
@@ -13,6 +14,13 @@ const personaOptions = [
   { id: "ai" as Persona, label: "AI / LLM" },
 ] as const;
 
+const heroHighlights = {
+  title: ["Founding Engineer", "Horizon17"],
+  institution: ["IIIT Nagpur"],
+  product: ["Horizon17"],
+  ai: ["RAG", "LangGraph"],
+} as const;
+
 export default function Hero() {
   const { persona, setPersona } = usePersona();
 
@@ -22,22 +30,22 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center pt-20"
+      className="relative flex min-h-[100dvh] items-center pt-[calc(4.5rem+env(safe-area-inset-top))]"
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.06),transparent_50%)]" />
 
-      <div className="relative mx-auto max-w-5xl px-6 py-20">
+      <div className="relative mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-8 flex flex-wrap items-center gap-3"
+          className="mb-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
         >
           <Badge variant="accent">
             <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-accent" />
             {site.status}
           </Badge>
-          <span className="text-sm text-text-muted">
+          <span className="text-sm leading-relaxed text-text-muted">
             Recently shipped:{" "}
             <a
               href="https://krashaq-agritech.vercel.app"
@@ -64,7 +72,6 @@ export default function Hero() {
           className="mb-10"
         >
           <p className="section-label mb-4">Viewing as</p>
-          {/* Equal-width tabs — prevents horizontal shift when active tab changes */}
           <div
             className="grid w-full max-w-md grid-cols-2 gap-1 rounded-lg border border-white/10 p-1"
             role="tablist"
@@ -77,7 +84,7 @@ export default function Hero() {
                 role="tab"
                 aria-selected={persona === option.id}
                 onClick={() => setPersona(option.id)}
-                className={`rounded-md px-3 py-2 text-center text-sm transition-colors duration-200 sm:px-4 ${
+                className={`rounded-md px-2.5 py-2.5 text-center text-xs transition-colors duration-200 sm:px-4 sm:py-2 sm:text-sm ${
                   persona === option.id
                     ? "bg-white/10 text-text-primary"
                     : "text-text-muted hover:text-text-primary"
@@ -94,39 +101,42 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h1 className="text-5xl font-semibold tracking-tight md:text-7xl">
+          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-7xl">
             {site.name}
           </h1>
-          <p className="mt-4 text-xl text-text-muted md:text-2xl">
-            {site.title}
+          <p className="mt-4 text-lg text-text-muted sm:text-xl md:text-2xl">
+            <HighlightText text={site.title} terms={heroHighlights.title} />
           </p>
           <p className="mt-2 font-mono text-sm text-text-muted">
-            {site.institution}
+            <HighlightText
+              text={site.institution}
+              terms={heroHighlights.institution}
+            />
           </p>
         </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-8 max-w-2xl text-lg leading-relaxed text-text-muted"
+        {/* Fixed-height tagline — absolute crossfade prevents layout shift */}
+        <div
+          className="relative mt-8 min-h-[6.5rem] max-w-2xl md:min-h-[5.5rem]"
           aria-live="polite"
         >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
+          <AnimatePresence mode="sync" initial={false}>
+            <motion.p
               key={persona}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              className="block"
+              className="absolute inset-0 text-lg leading-relaxed text-text-muted"
             >
-              {tagline}
-            </motion.span>
+              <HighlightText
+                text={tagline}
+                terms={heroHighlights[persona]}
+              />
+            </motion.p>
           </AnimatePresence>
-        </motion.p>
+        </div>
 
-        {/* Fixed-height metric grid — crossfade only, no remount / slide-in */}
         <div
           className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4"
           aria-live="polite"
@@ -146,7 +156,7 @@ export default function Hero() {
                   transition={{ duration: 0.15 }}
                   className="absolute inset-0 flex flex-col justify-center p-4 md:p-5"
                 >
-                  <p className="text-2xl font-semibold tracking-tight text-text-primary md:text-3xl">
+                  <p className="min-h-[2rem] text-2xl font-semibold tracking-tight text-text-primary md:min-h-[2.25rem] md:text-3xl">
                     {stat.value}
                   </p>
                   <p className="mt-1 min-h-[2.5rem] text-xs leading-snug text-text-muted md:text-sm">

@@ -4,8 +4,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import Badge from "@/components/ui/Badge";
+import MediaFrame from "@/components/ui/MediaFrame";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Tag from "@/components/ui/Tag";
+import {
+  getDefaultMediaDomain,
+  getHeroPreviewMedia,
+} from "@/data/preview-media";
 import {
   moreProjects,
   projectCategories,
@@ -31,6 +36,7 @@ function ProjectCard({
   index: number;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const previewMedia = getHeroPreviewMedia(project.id);
 
   const toggleExpanded = () => {
     const next = !expanded;
@@ -147,6 +153,13 @@ function ProjectCard({
             className="overflow-hidden"
           >
             <div className="space-y-4 border-t border-white/5 px-6 pb-6 pt-4 md:px-8 md:pb-8">
+              {previewMedia && (
+                <MediaFrame
+                  item={previewMedia}
+                  domain={getDefaultMediaDomain(project.id)}
+                  variant="hero"
+                />
+              )}
               <div>
                 <p className="section-label mb-2">Problem</p>
                 <p className="text-sm leading-relaxed text-text-muted">
@@ -323,7 +336,12 @@ export default function Work() {
               className="card-surface flex flex-col gap-3 p-4 md:flex-row md:items-center md:justify-between md:p-5"
             >
               <div>
-                <h4 className="font-medium">{project.title}</h4>
+                <div className="mb-1 flex flex-wrap items-center gap-2">
+                  <h4 className="font-medium">{project.title}</h4>
+                  {project.previewComingSoon && (
+                    <Badge variant="muted">Preview coming soon</Badge>
+                  )}
+                </div>
                 <p className="mt-1 text-sm text-text-muted">
                   {project.description}
                 </p>

@@ -4,7 +4,7 @@ import { blogPosts, getReadTime } from "@/data/blog";
 
 export default function BlogIndexPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-28">
+    <div className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-28">
       <Link
         href="/#writing"
         className="section-label inline-flex transition-colors hover:text-accent"

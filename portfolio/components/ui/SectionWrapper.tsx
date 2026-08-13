@@ -19,8 +19,8 @@ export default function SectionWrapper({
   className = "",
 }: SectionWrapperProps) {
   return (
-    <section id={id} className={`py-24 md:py-32 ${className}`}>
-      <div className="mx-auto max-w-5xl px-6">
+    <section id={id} className={`py-20 sm:py-24 md:py-32 ${className}`}>
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ export default function SectionWrapper({
           className="mb-12 md:mb-16"
         >
           <p className="section-label mb-3">{label}</p>
-          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
             {title}
           </h2>
         </motion.div>

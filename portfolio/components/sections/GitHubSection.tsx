@@ -11,13 +11,9 @@ import { trackEvent } from "@/lib/analytics";
 export default function GitHubSection() {
   return (
     <SectionWrapper id="github" label="Code" title="Open Source & GitHub">
-      <p className="-mt-8 mb-4 max-w-2xl text-sm leading-relaxed text-text-muted">
+      <p className="-mt-8 mb-8 max-w-2xl text-sm leading-relaxed text-text-muted">
         Production repos with live deployments where available. Recruiters
         typically check GitHub before scheduling — activity and CI status below.
-      </p>
-      <p className="mb-8 max-w-2xl rounded-lg border border-white/10 bg-surface px-4 py-3 font-mono text-xs leading-relaxed text-text-muted">
-        <span className="text-text-primary">Suggested profile bio: </span>
-        {githubProfile.bio}
       </p>
 
       <GitHubActivity />

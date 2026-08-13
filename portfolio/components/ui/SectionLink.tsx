@@ -8,6 +8,10 @@ import {
   homeSectionHref,
   scrollToHomeSection,
 } from "@/lib/sections";
+import {
+  isBodyScrollLocked,
+  releaseScrollLockForNavigation,
+} from "@/lib/useScrollLock";
 
 interface SectionLinkProps {
   sectionId: string;
@@ -25,14 +29,30 @@ export default function SectionLink({
   const pathname = usePathname();
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    onClick?.(event);
-
     if (pathname === "/") {
       event.preventDefault();
-      if (scrollToHomeSection(sectionId)) {
-        cleanHomeUrl();
+      onClick?.(event);
+
+      const wasLocked =
+        releaseScrollLockForNavigation() || isBodyScrollLocked();
+
+      const scrollToSection = () => {
+        if (scrollToHomeSection(sectionId)) {
+          cleanHomeUrl();
+        }
+      };
+
+      if (wasLocked) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(scrollToSection);
+        });
+      } else {
+        scrollToSection();
       }
+      return;
     }
+
+    onClick?.(event);
   };
 
   return (

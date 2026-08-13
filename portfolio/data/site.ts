@@ -180,7 +180,7 @@ export const processSteps = [
     number: "03",
     title: "Measure, then optimize",
     description:
-      "On Ecometer's chart-heavy dashboards, per-module code splitting and query tuning cut repeat-load time on filter-heavy views — numbers guided the decision, not intuition. Same discipline on Krashaq: Core Web Vitals and streaming chat latency before adding complexity.",
+      "On Ecometer's chart-heavy dashboards, per-module code splitting and query tuning cut repeat-load time on filter-heavy views — numbers guided the decision, not intuition. On Rent Buddy I shaved ~30% off hot listing API paths. On Krashaq: 53 Jest tests and streaming chat latency before adding agent complexity.",
   },
   {
     number: "04",

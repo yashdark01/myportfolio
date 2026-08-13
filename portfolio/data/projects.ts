@@ -167,6 +167,41 @@ Production deploy — rentbuddy.in`,
 ];
 
 /** Full project data for demoted projects that still have case study pages */
+export const archflowProject: Project = {
+  id: "archflow",
+  title: "Archflow",
+  subtitle:
+    "In-browser system design canvas — drag-drop nodes, connections, and AI-assisted architecture diagrams",
+  category: "fullstack",
+  featured: false,
+  metrics: [
+    { value: "Active", label: "side project" },
+    { value: "Canvas", label: "in-browser editor" },
+    { value: "AI", label: "diagram assist" },
+  ],
+  problem:
+    "System design prep and architecture reviews still happen on whiteboards or generic diagram tools that don't understand software components, data flows, or interview-style constraints.",
+  role: "Solo builder — designing the canvas engine, node/edge model, export flow, and AI-assisted diagram generation on top of an open-source repo.",
+  outcome:
+    "Active side project on GitHub: drag-drop architecture nodes, connection routing, and AI-assisted diagram generation. Public demo ships when the canvas UX is stable enough to share.",
+  tradeoffs: [
+    "Custom canvas over Mermaid-only — richer drag-drop and layout control for interview-style diagrams.",
+    "In-browser first — no account required for v1; export/share before multi-user collaboration.",
+    "AI assist as optional layer — core canvas must work without an API key before demo goes live.",
+  ],
+  architecture: `React UI (canvas + toolbar)
+        ↓
+Node/edge state (positions, connections, labels)
+        ↓
+Canvas renderer (drag-drop, snap, routing)
+        ↓
+Optional AI layer → suggested components & connections
+        ↓
+Export (PNG / JSON diagram)`,
+  stack: ["TypeScript", "React", "Canvas", "System Design", "AI"],
+  github: "https://github.com/yashdark01/archflow",
+};
+
 export const musicPlayerProject: Project = {
   id: "music-player",
   title: "Music Player",
@@ -214,6 +249,7 @@ MongoDB (users, songs, albums) + Cloudinary uploads`,
 export function getProjectById(id: string): Project | undefined {
   const featured = projects.find((p) => p.id === id);
   if (featured) return featured;
+  if (id === archflowProject.id) return archflowProject;
   if (id === musicPlayerProject.id) return musicPlayerProject;
   return undefined;
 }
@@ -226,6 +262,7 @@ export interface MoreProject {
   github?: string;
   live?: string;
   caseStudyPath?: string;
+  previewComingSoon?: boolean;
 }
 
 export const moreProjects: MoreProject[] = [
@@ -236,6 +273,8 @@ export const moreProjects: MoreProject[] = [
       "In-browser system design canvas — drag-drop nodes, connections, and AI-assisted architecture diagrams. Active side project; demo coming soon.",
     tags: ["System Design", "React", "Canvas"],
     github: "https://github.com/yashdark01/archflow",
+    caseStudyPath: "/work/archflow",
+    previewComingSoon: true,
   },
   {
     id: "music-player",

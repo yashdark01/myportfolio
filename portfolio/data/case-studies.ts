@@ -1,4 +1,4 @@
-import { musicPlayerProject, Project, projects } from "./projects";
+import { archflowProject, musicPlayerProject, Project, projects } from "./projects";
 
 export interface CaseStudySection {
   title: string;
@@ -13,8 +13,6 @@ export interface CaseStudy extends Project {
   sections: CaseStudySection[];
   challenges: string[];
   learnings: string[];
-  previewImages?: { src: string; alt: string; caption: string }[];
-  previewVideo?: { src: string; poster?: string; caption: string; domain?: string };
   /** When true, renders a separate "Technical deep dive" block below the case study */
   showTechnicalDetails?: boolean;
   technicalSections?: CaseStudySection[];
@@ -29,13 +27,6 @@ export const caseStudies: CaseStudy[] = [
       "Bringing expert crop intelligence to farmers who need it most",
     timeline: "2025 – 2026 · Solo full-stack project",
     showTechnicalDetails: true,
-    previewImages: [
-      {
-        src: "/projects/krashaq/preview.png",
-        alt: "Krashaq AI smart farming platform preview",
-        caption: "Krashaq AI — smart farming platform preview",
-      },
-    ],
     sections: [
       {
         title: "Context",
@@ -198,13 +189,6 @@ Farmer (end user)
     timeline:
       "Apr 2025 – Present · Founding Engineer · Full Stack Developer · Horizon17 Technology and Sustainability Pvt. Ltd.",
     showTechnicalDetails: true,
-    previewImages: [
-      {
-        src: "/projects/ecometer/preview.png",
-        alt: "Ecometer sustainability intelligence platform preview",
-        caption: "Ecometer — enterprise sustainability platform preview",
-      },
-    ],
     sections: [
       {
         title: "Where I work",
@@ -421,6 +405,47 @@ Farmer (end user)
     learnings: [
       "Audio apps are state-management problems disguised as UI projects",
       "Third-party auth (Clerk) saves weeks — invest time in route guards and admin gates instead",
+    ],
+  },
+  {
+    ...archflowProject,
+    caseStudyTitle: "Building an in-browser system design canvas",
+    timeline: "2025 – 2026 · Active side project",
+    sections: [
+      {
+        title: "Why I'm building this",
+        content:
+          "System design interviews and architecture reviews deserve better than one-size-fits-all whiteboard tools. Archflow is my side project to combine drag-drop canvas UX, software-specific node types, and optional AI-assisted diagram generation — all in the browser without installing Excalidraw plugins or fighting generic diagram editors.",
+      },
+      {
+        title: "What exists today",
+        content:
+          "The repo is active on GitHub with ongoing commits. Core focus areas: canvas rendering, node/edge state, connection routing, and export. A public hosted demo is intentionally deferred until the editor feels stable enough to share — the portfolio shows a preview placeholder until then.",
+        bullets: [
+          "Drag-drop architecture nodes with labeled connections",
+          "In-browser canvas — no desktop install for v1",
+          "AI-assisted suggestions planned as an optional layer on top of a usable manual editor",
+          "Open source: github.com/yashdark01/archflow",
+        ],
+      },
+      {
+        title: "What ships next",
+        content:
+          "Before a public demo URL goes live: polish snap/grid behavior, PNG + JSON export, and a small template library (microservices, event-driven, RAG pipeline) so diagrams are useful out of the box.",
+        bullets: [
+          "Canvas UX stable on mobile-width viewports",
+          "Export/share flow for interview prep and README embeds",
+          "Optional AI layer — must not block core canvas when API is unavailable",
+        ],
+      },
+    ],
+    challenges: [
+      "Building responsive canvas interactions without fighting the browser's default touch/scroll behavior",
+      "Keeping the data model simple enough for export while supporting arbitrary node types",
+    ],
+    learnings: [
+      "Side projects need a visible 'building' state — honest placeholders beat silent empty cards",
+      "Canvas tools are state-management products; rendering is the easy part",
     ],
   },
 ];
