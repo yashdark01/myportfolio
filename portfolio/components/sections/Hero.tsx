@@ -1,11 +1,11 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import FeaturedProject from "@/components/sections/FeaturedProject";
-import { Persona, site, socialLinks } from "@/data/site";
+import { usePersona } from "@/components/PersonaContext";
+import { Persona, personas, site, socialLinks } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
 
 const personaOptions = [
@@ -14,9 +14,10 @@ const personaOptions = [
 ] as const;
 
 export default function Hero() {
-  const [persona, setPersona] = useState<Persona>("product");
+  const { persona, setPersona } = usePersona();
 
   const stats = persona === "product" ? site.heroStats : site.aiHeroStats;
+  const tagline = personas[persona].tagline;
 
   return (
     <section
@@ -109,8 +110,20 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-8 max-w-2xl text-lg leading-relaxed text-text-muted"
+          aria-live="polite"
         >
-          {site.tagline}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={persona}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+              className="block"
+            >
+              {tagline}
+            </motion.span>
+          </AnimatePresence>
         </motion.p>
 
         {/* Fixed-height metric grid — crossfade only, no remount / slide-in */}

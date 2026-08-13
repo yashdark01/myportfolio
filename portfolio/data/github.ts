@@ -15,6 +15,8 @@ export interface PinnedRepo {
 export const githubProfile = {
   url: "https://github.com/yashdark01",
   username: "yashdark01",
+  /** Paste this into github.com → Settings → Profile → Bio */
+  bio: "Founding Engineer @Horizon17 · Full Stack + AI/LLM · Building Krashaq AI (multilingual RAG farming platform) and Ecometer (enterprise sustainability) · Next.js · LangGraph · MongoDB",
   highlights: [
     { label: "Flagship repo", value: "Krashaq-Ai" },
     { label: "Quality gate", value: "CI — lint, test, build on push" },
@@ -40,7 +42,7 @@ export const pinnedRepos: PinnedRepo[] = [
     name: "archflow",
     displayName: "Archflow",
     description:
-      "In-browser canvas to design, visualize, and share system architectures — drag-drop nodes, connections, AI assistance, and diagram-as-code.",
+      "In-browser canvas to design and share system architectures — drag-drop nodes, connections, and AI-assisted diagram generation. Active side project; demo coming soon.",
     url: "https://github.com/yashdark01/archflow",
     language: "TypeScript",
     topics: ["System Design", "Canvas", "React", "AI"],
@@ -56,17 +58,16 @@ export const pinnedRepos: PinnedRepo[] = [
     topics: ["MERN", "Clerk", "Redux", "MongoDB", "ShadCN"],
   },
   {
-    name: "sns-website",
+    name: "rentbuddy",
+    displayName: "Rent Buddy",
     description:
-      "SAP digital transformation landing page — AOS scroll animations, responsive Tailwind UI, and GitHub Actions CI.",
-    url: "https://github.com/yashdark01/sns-website",
-    live: "https://sns-website-nine.vercel.app/",
+      "Production rental platform — JWT-secured React + Node.js app with live client deployment at rentbuddy.in.",
+    url: "https://github.com/yashdark01/rentbuddy",
+    live: "https://rentbuddy.in/home",
     language: "JavaScript",
-    topics: ["React", "Vite", "Tailwind CSS", "AOS"],
-    ciBadge:
-      "https://github.com/yashdark01/sns-website/actions/workflows/ci.yml/badge.svg",
+    topics: ["React", "Node.js", "MongoDB", "JWT"],
   },
 ];
 
 /** Repo names fetched for activity strip via /api/github */
-export const trackedRepos = ["Krashaq-Ai", "archflow", "Music-Player", "sns-website", "rentbuddy"] as const;
+export const trackedRepos = ["Krashaq-Ai", "archflow", "Music-Player", "rentbuddy"] as const;

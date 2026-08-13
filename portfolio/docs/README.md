@@ -9,8 +9,8 @@ Recruiter-friendly README files for your pinned repositories.
 3. Pin these 4 repos on your GitHub profile:
    - `Krashaq-Ai`
    - `archflow`
+   - `rentbuddy`
    - `Music-Player`
-   - `sns`
 
 ## Templates
 

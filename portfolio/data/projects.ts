@@ -41,9 +41,9 @@ export const projects: Project[] = [
     category: "ai",
     featured: true,
     metrics: [
-      { value: "Live", label: "production demo" },
-      { value: "3", label: "languages" },
-      { value: "Multi-role", label: "farmer · supplier · admin" },
+      { value: "53", label: "automated tests" },
+      { value: "Groq", label: "Llama 3.3 70B default" },
+      { value: "3", label: "languages supported" },
     ],
     problem:
       "Smallholder farmers need timely crop advice in Hindi, Hinglish, and English — while ag-input suppliers need a scalable way to license access and manage farmer subscriptions at scale.",
@@ -90,16 +90,16 @@ Groq · OpenAI · Gemini · Anthropic · WeatherAPI`,
     category: "enterprise",
     featured: true,
     builtAt: "Horizon17 Technology and Sustainability Pvt. Ltd.",
-    role: "Founding Engineer · Full Stack Developer — building Ecometer, the sustainability intelligence product delivered by EcoMS.",
+    role: "Founding Engineer · Full Stack Developer — I own frontend architecture on Ecometer (chart-heavy Next.js dashboards, SSR, compliance-ready export flows) and work across event-driven microservices on the backend (NATS messaging, Docker deployments, MinIO object storage).",
     metrics: [
-      { value: "Scope 1–3", label: "carbon accounting" },
+      { value: "10+", label: "published client campaigns" },
+      { value: "Patent-filed", label: "platform · EcoMS" },
       { value: "BRSR", label: "audit-ready reporting" },
-      { value: "Enterprise", label: "production platform" },
     ],
     problem:
       "Brands, agencies, and event organizers need to embed sustainability into OOH, DOOH, print, digital, and experiential work — from planning through post-campaign recovery — with credible, audit-ready ESG reporting aligned to BRSR standards.",
     outcome:
-      "Contributing to a patent-filed platform in production — helping brands and agencies measure and report campaign environmental impact through the EcoMS ecosystem.",
+      "Contributing to a patent-filed platform in production across enterprise sustainability workflows — from Amazon and Tata Motors events to OOH campaigns for HDFC, Nykaa, and Nivea.",
     tradeoffs: [
       "Unified platform over point solutions — one system for measure-through-report instead of disconnected spreadsheets and tools.",
       "Audit-ready reporting over quick exports — BRSR-aligned outputs that stand up to scrutiny, even when generation takes longer.",
@@ -107,49 +107,57 @@ Groq · OpenAI · Gemini · Anthropic · WeatherAPI`,
     ],
     architecture: `Brands · Agencies · Event Organizers
         ↓
-Ecometer Platform (EcoMS)
-  ├── Measure — real-time carbon across OOH, DOOH, print, digital, experiential
-  ├── Manage — optimize materials, media choices, and execution
-  ├── Circularity — post-campaign recovery, recycling, and reuse
-  ├── Report — BRSR- and ESG-aligned, audit-ready outputs
-  └── Visualise — interactive sustainability dashboards
+Next.js dashboards (SSR, chart modules, export flows)
         ↓
-Horizon17 Technology — AI · IoT · blockchain sustainability infrastructure
+Event-driven microservices (NATS messaging)
         ↓
-Scope 1, 2 & 3 emissions · SDG-aligned assessments`,
-    stack: [],
+Metric services · compliance reporting · MinIO/S3 document storage
+        ↓
+Ecometer Platform (EcoMS) — Measure · Manage · Circularity · Report · Visualise
+        ↓
+Scope 1–3 emissions · BRSR-aligned outputs · SDG assessments`,
+    stack: [
+      "Next.js",
+      "React",
+      "Microservices",
+      "NATS",
+      "Docker",
+      "MinIO / S3",
+      "Nginx",
+      "CI/CD",
+    ],
     live: "https://ecomsww.com/",
   },
   {
     id: "rent-buddy",
     title: "Rent Buddy",
     subtitle:
-      "Production rental platform — live client deployment from internship delivery",
+      "Furniture & furnishing rental marketplace — browse by city and category, order with tracked doorstep delivery",
     category: "fullstack",
     featured: true,
     builtAt: "WebIntegratorz · Internship",
     metrics: [
       { value: "Live", label: "rentbuddy.in" },
-      { value: "4+", label: "production apps shipped" },
+      { value: "30%", label: "faster API responses" },
       { value: "JWT", label: "secured access" },
     ],
     problem:
-      "Property rental workflows need responsive, production-grade web apps with secure authentication — built and maintained under real client deadlines, not classroom timelines.",
-    role: "Full-stack developer during internship — built and shipped production web applications including Rent Buddy, with JWT-secured APIs, responsive UI, and client-facing deployments.",
+      "Rentbuddy Furnishing Solutions needed a consumer-facing rental marketplace — users browse furniture and home products by city and category, place orders, and get tracked delivery. It had to ship under real client deadlines, not classroom timelines.",
+    role: "Full-stack developer on the WebIntegratorz delivery team — owned Rent Buddy feature work end-to-end: JWT-secured REST APIs, listing and category flows, responsive React UI, and production deployment at rentbuddy.in.",
     outcome:
-      "Delivered Rent Buddy as a live production platform at rentbuddy.in, alongside 3+ additional client apps — demonstrating end-to-end delivery under internship constraints.",
+      "Rent Buddy remains live in production for Rentbuddy Furnishing Solutions — a concrete internship proof point alongside my founding-engineer work on Ecometer.",
     tradeoffs: [
-      "React + Node monorepo patterns over separate repos — faster iteration for client sprints.",
-      "JWT session auth over OAuth — matched client infra and timeline; RBAC-ready for admin flows.",
-      "Mobile-first responsive UI over native apps — broader reach for rental users on low-end devices.",
+      "JWT session auth over OAuth — matched client infra and sprint timeline; RBAC-ready for admin flows without third-party auth dependency.",
+      "React SPA + Node API over SSR — faster client iteration for category/search UX under tight delivery deadlines.",
+      "Mobile-first responsive UI over native apps — broader reach for rental customers on low-end devices.",
     ],
-    architecture: `Users (renters · owners · admins)
+    architecture: `Renters (web · mobile browser)
         ↓
-React.js SPA — responsive, mobile-first
+React.js SPA — city/category browse, search, product detail
         ↓
 Node.js REST API + JWT middleware
         ↓
-MongoDB (listings, users, bookings)
+MongoDB (listings, users, categories, orders)
         ↓
 Production deploy — rentbuddy.in`,
     stack: ["React.js", "Node.js", "MongoDB", "JWT", "Tailwind CSS"],
@@ -222,30 +230,20 @@ export interface MoreProject {
 
 export const moreProjects: MoreProject[] = [
   {
+    id: "archflow",
+    title: "Archflow",
+    description:
+      "In-browser system design canvas — drag-drop nodes, connections, and AI-assisted architecture diagrams. Active side project; demo coming soon.",
+    tags: ["System Design", "React", "Canvas"],
+    github: "https://github.com/yashdark01/archflow",
+  },
+  {
     id: "music-player",
     title: "Music Player",
     description:
-      "Streaming MERN app — Clerk OAuth, Redux player queue, MongoDB discovery feeds, and admin upload/delete via Cloudinary.",
+      "Streaming MERN app — Clerk OAuth, Redux player queue, MongoDB aggregation feeds, Supertest on auth routes, and admin CRUD via Cloudinary. Full engineering case study.",
     tags: ["MERN", "Clerk", "Redux"],
     github: "https://github.com/yashdark01/Music-Player",
     caseStudyPath: "/work/music-player",
-  },
-  {
-    id: "sns",
-    title: "SNS Website",
-    description:
-      "SAP digital transformation landing page — AOS scroll animations, responsive Tailwind UI, and smooth section navigation.",
-    tags: ["React.js", "JavaScript", "Tailwind CSS"],
-    github: "https://github.com/yashdark01/sns-website",
-    live: "https://sns-website-nine.vercel.app/",
-  },
-  {
-    id: "course-enrollment",
-    title: "Course Enrollment System",
-    description:
-      "Full-stack enrollment platform with admin panel, JWT auth, and role-based access control.",
-    tags: ["React.js", "Node.js", "MongoDB", "JWT"],
-    github: "https://github.com/yashdark01/project-1",
-    live: "https://project-1-two-gamma.vercel.app/",
   },
 ];

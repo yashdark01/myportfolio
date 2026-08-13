@@ -24,8 +24,8 @@ export const timeline: TimelineEntry[] = [
     title: "Full Stack Developer Intern",
     organization: "WebIntegratorz Technologies · Indore",
     description:
-      "Developed 4+ production web applications with React, Node.js, and MongoDB. Implemented JWT/RBAC security and reduced API response times by 30%.",
-    badge: "4+ production apps",
+      "Delivered multiple production web applications with React, Node.js, and MongoDB — including Rent Buddy (live at rentbuddy.in). Implemented JWT/RBAC security and reduced API response times by 30%.",
+    badge: "Rent Buddy · live",
   },
   {
     id: "iiit",

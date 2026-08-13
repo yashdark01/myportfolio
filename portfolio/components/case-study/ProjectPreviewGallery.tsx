@@ -62,7 +62,7 @@ export default function ProjectPreviewGallery({
       <p className="mb-6 text-sm text-text-muted">
         {hasVideo
           ? "Screenshots and walkthrough from live deployments."
-          : "Screenshots from live deployments and public marketing pages."}
+          : "Screenshots from live deployments — add preview.png per project folder when ready."}
       </p>
 
       {hasVideo && (

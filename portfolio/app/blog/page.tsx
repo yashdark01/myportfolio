@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Tag from "@/components/ui/Tag";
-import { blogPosts } from "@/data/blog";
+import { blogPosts, getReadTime } from "@/data/blog";
 
 export default function BlogIndexPage() {
   return (
@@ -16,8 +16,8 @@ export default function BlogIndexPage() {
         Writing
       </h1>
       <p className="mt-4 text-text-muted">
-        Technical notes on AI systems, performance, and shipping production
-        software.
+        Long-form technical notes — companion pieces to the case studies on this
+        site.
       </p>
 
       <div className="mt-12 space-y-6">
@@ -28,7 +28,7 @@ export default function BlogIndexPage() {
             className="group card-surface block p-6 md:p-8"
           >
             <p className="section-label">
-              {post.date} · {post.readTime}
+              {post.date} · {getReadTime(post.sections, post.excerpt)}
             </p>
             <h2 className="mt-2 text-2xl font-semibold group-hover:text-accent">
               {post.title}

@@ -10,8 +10,11 @@ import {
   moreProjects,
   projectCategories,
   projects,
+  Project,
   ProjectCategory,
 } from "@/data/projects";
+import { usePersona } from "@/components/PersonaContext";
+import { personas } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
 
 const categoryLabels: Record<ProjectCategory, string> = {
@@ -87,7 +90,7 @@ function ProjectCard({
             >
               Overview →
             </Link>
-            {project.github && project.id === "krashaq" && (
+            {["krashaq", "horizon17-esg"].includes(project.id) && (
               <Link
                 href={`/work/${project.id}#technical`}
                 onClick={(e) => e.stopPropagation()}
@@ -196,7 +199,7 @@ function ProjectCard({
                 >
                   Full overview →
                 </Link>
-                {project.github && project.id === "krashaq" && (
+                {["krashaq", "horizon17-esg"].includes(project.id) && (
                   <Link
                     href={`/work/${project.id}#technical`}
                     className="text-sm text-accent hover:text-accent-hover"
@@ -261,20 +264,28 @@ function ProjectCard({
   );
 }
 
+function orderProjects(list: Project[], order: readonly string[]) {
+  const rank = new Map(order.map((id, index) => [id, index]));
+  return [...list].sort(
+    (a, b) => (rank.get(a.id) ?? order.length) - (rank.get(b.id) ?? order.length),
+  );
+}
+
 export default function Work() {
+  const { persona } = usePersona();
   const [filter, setFilter] = useState<string>("all");
+
+  const orderedProjects = orderProjects(projects, personas[persona].projectOrder);
 
   const filtered =
     filter === "all"
-      ? projects
-      : projects.filter((p) => p.category === filter);
+      ? orderedProjects
+      : orderedProjects.filter((p) => p.category === filter);
 
   return (
     <SectionWrapper id="work" label="Work" title="Selected Projects">
       <p className="-mt-8 mb-8 max-w-2xl text-sm leading-relaxed text-text-muted">
-        Three flagship projects — enterprise product work, applied AI with live
-        demo, and production internship delivery. Supporting projects are
-        listed below.
+        {personas[persona].workIntro}
       </p>
       <div className="mb-8 flex flex-wrap gap-2">
         {projectCategories.map((cat) => (

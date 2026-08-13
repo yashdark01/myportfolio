@@ -13,12 +13,17 @@ interface CaseStudyViewProps {
 function SectionBlock({
   section,
 }: {
-  section: { title: string; content: string; bullets?: string[] };
+  section: { title: string; content: string; bullets?: string[]; diagram?: string };
 }) {
   return (
     <section>
       <h3 className="text-lg font-semibold">{section.title}</h3>
       <p className="mt-3 leading-relaxed text-text-muted">{section.content}</p>
+      {section.diagram && (
+        <pre className="mt-4 overflow-x-auto rounded-lg border border-white/5 bg-surface p-4 font-mono text-xs leading-relaxed text-text-muted">
+          {section.diagram}
+        </pre>
+      )}
       {section.bullets && (
         <ul className="mt-4 space-y-2">
           {section.bullets.map((bullet) => (
