@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+import { PersonaProvider } from "@/components/PersonaContext";
 import Footer from "@/components/layout/Footer";
 import MobileResumeFab from "@/components/layout/MobileResumeFab";
 import Navbar from "@/components/layout/Navbar";
@@ -71,12 +72,14 @@ export default function RootLayout({
       lang="en"
       className={`${GeistSans.variable} ${GeistMono.variable} scroll-smooth`}
     >
-      <body className="min-h-screen bg-background text-text-primary antialiased">
+      <body className="min-h-screen overflow-x-clip bg-background text-text-primary antialiased">
         <JsonLd />
         <SectionScrollHandler />
         <SkipToContent />
         <Navbar />
-        <main>{children}</main>
+        <PersonaProvider>
+          <main>{children}</main>
+        </PersonaProvider>
         <Footer />
         <RecruiterMode />
         <MobileResumeFab />

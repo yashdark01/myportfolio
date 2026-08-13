@@ -2,7 +2,7 @@ export const site = {
   name: "Yash Patidar",
   title: "Founding Engineer · Full Stack Developer · Horizon17",
   tagline:
-    "Founding engineer at Horizon17 building Ecometer for enterprise sustainability — and shipping applied AI products end-to-end, from RAG pipelines to live demos.",
+    "Founding Engineer at Horizon17 — building production AI systems and enterprise sustainability platforms end-to-end.",
   institution: "IIIT Nagpur · B.Tech CSE",
   status: "Open to opportunities",
   recentlyShipped: "Krashaq AI · Smart Farming Platform",
@@ -21,7 +21,7 @@ export const site = {
     { value: "Ecometer", label: "enterprise product · EcoMS" },
     { value: "BRSR", label: "audit-ready reporting" },
     { value: "Scope 1–3", label: "carbon accounting" },
-    { value: "4+", label: "production apps shipped" },
+    { value: "10+", label: "published client campaigns" },
   ],
   aiHeroStats: [
     { value: "Live", label: "Krashaq AI demo" },
@@ -40,6 +40,7 @@ export const site = {
     live: "https://krashaq-agritech.vercel.app",
     github: "https://github.com/yashdark01/Krashaq-Ai",
     caseStudyPath: "/work/krashaq",
+    showTechnicalDeepDive: true,
   },
   coding: {
     leetcode: {
@@ -55,12 +56,88 @@ export const site = {
       "Applied AI / LLM Engineer",
     ],
     stage: "Product companies · Series A–D · Enterprise SaaS",
-    location: "Remote · Gurgaon/Delhi NCR · Open to relocation",
+    location:
+      "Remote-first · Gurgaon/Delhi NCR · Open to Bengaluru, Mumbai, Pune",
     available: "Immediately · B.Tech CSE, IIIT Nagpur (Jun 2025)",
   },
 } as const;
 
 export type Persona = "product" | "ai";
+
+export interface FeaturedProjectConfig {
+  id: string;
+  title: string;
+  badge: string;
+  headline: string;
+  outcome: string;
+  live?: string;
+  github?: string;
+  caseStudyPath: string;
+  showTechnicalDeepDive?: boolean;
+}
+
+export const personas: Record<
+  Persona,
+  {
+    tagline: string;
+    workIntro: string;
+    featuredProject: FeaturedProjectConfig;
+    projectOrder: readonly string[];
+    expertiseOrder: readonly string[];
+  }
+> = {
+  product: {
+    tagline:
+      "Founding Engineer at Horizon17. I build production-grade full-stack systems — from microservice backends to chart-heavy enterprise dashboards.",
+    workIntro:
+      "Enterprise product work first — applied AI with a live demo and production internship delivery below.",
+    featuredProject: {
+      id: "horizon17-esg",
+      title: "Ecometer",
+      badge: "Featured project · Horizon17",
+      headline:
+        "Enterprise sustainability intelligence — measure, manage, and report campaign environmental impact",
+      outcome:
+        "Founding engineer on EcoMS's patent-filed platform in production across enterprise brands including Amazon, Tata Motors, and HDFC.",
+      live: "https://ecomsww.com/ecometer-the-carbon-economy-for-advertising",
+      caseStudyPath: "/work/horizon17-esg",
+      showTechnicalDeepDive: true,
+    },
+    projectOrder: ["horizon17-esg", "krashaq", "rent-buddy"],
+    expertiseOrder: [
+      "Frontend & Product",
+      "Backend & Systems",
+      "Platform & DevOps",
+      "AI & LLM",
+    ],
+  },
+  ai: {
+    tagline:
+      "I build applied AI products end-to-end — RAG pipelines, LangGraph agents, streaming chat — with live demos and open-source code.",
+    workIntro:
+      "Applied AI with a live demo first — enterprise platform work and production internship delivery below.",
+    featuredProject: {
+      id: "krashaq",
+      title: "Krashaq AI",
+      badge: "Featured project · Personal",
+      headline:
+        "Multilingual AI farming platform — live demo, open-source repo, full case study",
+      outcome:
+        "Solo-built production app: hybrid RAG crop advisory, LangGraph agent, supplier subscriptions, and proactive alerts.",
+      live: "https://krashaq-agritech.vercel.app",
+      github: "https://github.com/yashdark01/Krashaq-Ai",
+      caseStudyPath: "/work/krashaq",
+      showTechnicalDeepDive: true,
+    },
+    projectOrder: ["krashaq", "horizon17-esg", "rent-buddy"],
+    expertiseOrder: [
+      "AI & LLM",
+      "Backend & Systems",
+      "Frontend & Product",
+      "Platform & DevOps",
+    ],
+  },
+};
 
 const baseSocialLinks = [
   { id: "github", label: "GitHub", href: site.links.github },
@@ -91,7 +168,7 @@ export const processSteps = [
     number: "01",
     title: "Understand the problem first",
     description:
-      "Before writing code, I map user flows, constraints, and success metrics — especially for enterprise dashboards where performance and clarity matter.",
+      "Before writing code, I map user flows, constraints, and success metrics — for Krashaq that meant designing for Hindi/Hinglish farmers on 2G before touching the LLM API.",
   },
   {
     number: "02",
@@ -103,7 +180,7 @@ export const processSteps = [
     number: "03",
     title: "Measure, then optimize",
     description:
-      "SSR, code splitting, Redis caching, query tuning — I optimize with Core Web Vitals and API latency numbers, not guesses.",
+      "On Ecometer's chart-heavy dashboards, per-module code splitting and query tuning cut repeat-load time on filter-heavy views — numbers guided the decision, not intuition. On Rent Buddy I shaved ~30% off hot listing API paths. On Krashaq: 53 Jest tests and streaming chat latency before adding agent complexity.",
   },
   {
     number: "04",
@@ -167,6 +244,13 @@ export const expertiseGroups = [
     ],
   },
 ] as const;
+
+export function getExpertiseForPersona(persona: Persona) {
+  const order = personas[persona].expertiseOrder;
+  return order
+    .map((title) => expertiseGroups.find((group) => group.title === title))
+    .filter((group): group is (typeof expertiseGroups)[number] => group != null);
+}
 
 export const recruiterSnapshot = {
   headline: "Founding Engineer · Full Stack Developer · React/Next.js · IIIT Nagpur",

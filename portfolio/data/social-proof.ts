@@ -26,9 +26,9 @@ export const testimonials: Testimonial[] = [];
 export const socialProof = {
   headline: "Trusted in production",
   ecosystem:
-    "Ecometer is part of the EcoMS sustainability ecosystem — publicly featured case studies include enterprise events and campaigns for leading brands.",
-  linkedInLabel: "View my profile & recommendations on LinkedIn",
+    "Enterprise brands whose sustainability campaigns and events run on Ecometer — part of the EcoMS ecosystem. Published case studies cover large-scale corporate events and OOH campaigns.",
+  linkedInLabel: "View my LinkedIn profile",
   linkedInHref: "https://linkedin.com/in/yash-patidar-97a8861b3",
-  testimonialPlaceholder:
-    "Requesting LinkedIn recommendations from Horizon17 and internship managers — professional endorsements appear on my profile today.",
+  linkedInSummary:
+    "Skills endorsements, internship delivery history, and founding-engineer context on Ecometer — all on my LinkedIn profile.",
 } as const;

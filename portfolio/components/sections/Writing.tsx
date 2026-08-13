@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Tag from "@/components/ui/Tag";
-import { blogPosts } from "@/data/blog";
+import { blogPosts, getReadTime } from "@/data/blog";
 
 export default function Writing() {
   return (
-    <SectionWrapper id="writing" label="Writing" title="Building in Public">
+    <SectionWrapper id="writing" label="Writing" title="Technical Writing">
       <p className="-mt-8 mb-8 max-w-2xl text-sm leading-relaxed text-text-muted">
-        Technical notes on shipping AI features and performance work — the kind
-        of thinking I bring to product engineering interviews.
+        Long-form notes on applied AI and enterprise frontend work — companion
+        pieces to the case studies above.
       </p>
 
       <div className="space-y-4">
@@ -28,7 +28,7 @@ export default function Writing() {
               className="group card-surface block p-6 transition-colors md:p-8"
             >
               <p className="section-label">
-                {post.date} · {post.readTime}
+                {post.date} · {getReadTime(post.sections, post.excerpt)}
               </p>
               <h3 className="mt-2 text-xl font-semibold group-hover:text-accent">
                 {post.title}

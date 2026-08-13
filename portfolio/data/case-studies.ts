@@ -1,9 +1,10 @@
-import { musicPlayerProject, Project, projects } from "./projects";
+import { archflowProject, musicPlayerProject, Project, projects } from "./projects";
 
 export interface CaseStudySection {
   title: string;
   content: string;
   bullets?: string[];
+  diagram?: string;
 }
 
 export interface CaseStudy extends Project {
@@ -12,8 +13,6 @@ export interface CaseStudy extends Project {
   sections: CaseStudySection[];
   challenges: string[];
   learnings: string[];
-  previewImages?: { src: string; alt: string; caption: string }[];
-  previewVideo?: { src: string; poster?: string; caption: string; domain?: string };
   /** When true, renders a separate "Technical deep dive" block below the case study */
   showTechnicalDetails?: boolean;
   technicalSections?: CaseStudySection[];
@@ -28,24 +27,6 @@ export const caseStudies: CaseStudy[] = [
       "Bringing expert crop intelligence to farmers who need it most",
     timeline: "2025 – 2026 · Solo full-stack project",
     showTechnicalDetails: true,
-    previewVideo: {
-      src: "/projects/krashaq/demo.mp4",
-      poster: "/projects/krashaq/dashboard.png",
-      caption: "Product walkthrough — dashboard, login, and AI chat",
-      domain: "krashaq-agritech.vercel.app",
-    },
-    previewImages: [
-      {
-        src: "/projects/krashaq/dashboard.png",
-        alt: "Krashaq AI farmer dashboard with weather and crop tools",
-        caption: "Farmer dashboard — weather, crops, and AI chat entry points",
-      },
-      {
-        src: "/projects/krashaq/login.png",
-        alt: "Krashaq AI login with farmer, supplier, and admin roles",
-        caption: "Role-based access — farmer, supplier, and admin flows",
-      },
-    ],
     sections: [
       {
         title: "Context",
@@ -55,24 +36,37 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "What I built",
         content:
-          "Krashaq AI is a production smart farming platform with three role-based experiences: farmers get multilingual AI chat and weather tools; suppliers manage farmers, subscriptions, and alerts; admins onboard suppliers, run the alert scheduler, and view usage analytics.",
+          "Krashaq AI is a production smart farming platform with three role-based experiences: farmers get multilingual AI chat and weather tools; suppliers manage farmers, subscriptions, and alerts; admins onboard suppliers, run the alert scheduler, and view usage analytics. Live at krashaq-agritech.vercel.app with an open-source repo.",
+      },
+      {
+        title: "B2B2C subscription model",
+        content:
+          "Krashaq is licensed B2B2C — not a standalone chatbot. Admins onboard suppliers and set license tiers; suppliers sell farmer subscriptions; farmers get gated access to chat, weather, and alerts based on active subscription status.",
         bullets: [
-          "Multilingual AI crop advisory for farmers in Hindi, Hinglish, and English",
-          "Live weather and irrigation guidance tied to local conditions",
-          "Supplier-managed farmer subscriptions and licensing tiers",
-          "Proactive crop and weather alerts delivered in-app",
-          "Admin dashboard for supplier onboarding and platform operations",
-          "Live demo with open-source repository",
+          "Admin → supplier license → farmer subscription (trial/expiry states visible before chat access)",
+          "Supplier dashboard: farmer roster, subscription management, proactive crop/weather alerts",
+          "Farmer dashboard: multilingual AI chat, weather tools, in-app notifications",
         ],
+        diagram: `Admin (platform ops)
+    │  onboard suppliers · set license tiers
+    ▼
+Supplier (ag-input company)
+    │  sell farmer subscriptions · send alerts
+    ▼
+Farmer (end user)
+    └── gated access → AI chat · weather · notifications`,
       },
       {
         title: "Results",
         content:
-          "Shipped a live production deployment with multilingual AI chat, real weather integration, supplier analytics, and a working subscription flow from admin through supplier to farmer.",
+          "Shipped a live production deployment with measurable engineering output — not just a demo wrapper around an LLM API.",
         bullets: [
-          "Live demo: krashaq-agritech.vercel.app",
-          "Repo: github.com/yashdark01/Krashaq-Ai",
-          "Full technical deep dive below — architecture, RAG, agent graph, and API surface",
+          "53 Jest tests — auth middleware, RAG scoring, agent graph routing, supplier API contracts",
+          "90+ Next.js API routes — chat, auth, supplier/admin dashboards, cron alerts, LLM sessions",
+          "KB corpus: 4 markdown docs → 8 chunks after ingestion (npm run kb:ingest)",
+          "Default LLM: Groq · Llama 3.3 70B — configurable fallback chain (OpenAI, Gemini, Anthropic)",
+          "3 languages — Hindi, Hinglish, and English crop advisory",
+          "Live demo: krashaq-agritech.vercel.app · Repo: github.com/yashdark01/Krashaq-Ai",
         ],
       },
     ],
@@ -102,7 +96,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Platform & data model",
         content:
-          "Everything runs in one repo (Krashaq-Ai) with src/app for pages and API routes, src/lib/server for MongoDB, JWT auth, LLM, RAG, and services. The legacy Python FastAPI backend was archived and removed — recoverable via git tag legacy/python-backend-v1.",
+          "Everything runs in one repo (Krashaq-Ai) with src/app for pages and 90+ API routes, src/lib/server for MongoDB, JWT auth, LLM, RAG, and services. The legacy Python FastAPI backend was archived and removed — recoverable via git tag legacy/python-backend-v1.",
         bullets: [
           "MongoDB Atlas: users, refresh_tokens, chat_sessions, kb_chunks, supplier licenses, farmer subscriptions, farmer_alerts, notifications",
           "JWT access (30m) + refresh (7d) tokens via jose; bcrypt password hashes; role-based route guards",
@@ -194,19 +188,7 @@ export const caseStudies: CaseStudy[] = [
       "Embedding sustainability intelligence into every stage of campaign and event execution",
     timeline:
       "Apr 2025 – Present · Founding Engineer · Full Stack Developer · Horizon17 Technology and Sustainability Pvt. Ltd.",
-    showTechnicalDetails: false,
-    previewImages: [
-      {
-        src: "/projects/ecometer/platform.png",
-        alt: "EcoMS Ecometer sustainability platform marketing page",
-        caption: "Public EcoMS platform — sustainability intelligence for campaigns and events",
-      },
-      {
-        src: "/projects/ecometer/case-studies.png",
-        alt: "EcoMS public case studies for enterprise brands",
-        caption: "Published case studies — Amazon, Tata Motors, HDFC, and other enterprise clients",
-      },
-    ],
+    showTechnicalDetails: true,
     sections: [
       {
         title: "Where I work",
@@ -243,69 +225,139 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "My role",
         content:
-          "As Founding Engineer and Full Stack Developer at Horizon17 Technology and Sustainability Pvt. Ltd., I build core features on Ecometer — the product our business company EcoMS delivers to clients. Implementation details are confidential; this case study covers publicly available product and company context only.",
+          "As Founding Engineer and Full Stack Developer at Horizon17, I build core product features on Ecometer — the platform EcoMS delivers to enterprise clients. I can't share internal architecture diagrams or proprietary business logic, but here's the type of engineering work I own day-to-day:",
+        bullets: [
+          "Frontend architecture — chart-heavy sustainability dashboards in Next.js with SSR, dynamic data fetching, and compliance-ready export flows",
+          "Backend services — event-driven microservices with NATS messaging, Docker-based deployments, and MinIO/S3 object storage for audit-ready documents",
+          "Performance — query tuning and caching on dashboard routes where chart render time directly affects analyst workflows",
+          "Trade-off conversations — I can walk through specific decisions in an interview even when implementation details stay under NDA",
+        ],
       },
       {
         title: "Results",
         content:
-          "Ecometer is in active production use across enterprise sustainability workflows. Detailed engineering metrics and architecture are not disclosed publicly.",
+          "Ecometer is in active production across enterprise sustainability workflows. Public proof points from EcoMS marketing and published case studies:",
         bullets: [
+          "10+ published enterprise campaigns and events — Amazon, Tata Motors, HDFC, Nykaa, Nivea, Wonder Cement, and others",
+          "5 channel types measured — OOH, DOOH, print, digital, and experiential activations",
+          "Patent-filed platform serving 12+ industries from manufacturing to financial services",
           "Platform: ecomsww.com/ecometer-the-carbon-economy-for-advertising",
-          "Company: horizon17ww.com",
-          "EcoMS: ecomsww.com",
         ],
       },
     ],
     challenges: [
-      "Designing intuitive sustainability UX across very different campaign types — OOH, digital, print, and experiential each have distinct data inputs",
-      "Balancing speed of campaign execution with rigorous environmental measurement requirements",
-      "Communicating complex carbon data to non-technical brand and agency stakeholders",
+      "Building chart modules that stay responsive when analysts filter across campaign types with very different data shapes — OOH billboards vs digital impressions vs on-ground events",
+      "Designing cache invalidation for compliance-sensitive metrics — stale sustainability data is worse than a slow load",
+      "Shipping dashboard features under NDA while still being able to explain engineering trade-offs to hiring teams",
     ],
     learnings: [
-      "Sustainability software must earn trust — transparency and audit-readiness are product features, not afterthoughts",
-      "Enterprise platforms succeed when measurement embeds into existing workflows rather than adding separate reporting steps",
-      "Working on production sustainability tools deepened my understanding of compliance-driven product design",
+      "Audit-readiness is a product constraint, not a reporting afterthought — export flows and data lineage matter as much as the charts",
+      "Activity-based carbon measurement (localized emission factors) requires UX that makes assumptions visible to non-technical stakeholders",
+      "Event-driven microservices pay off when campaign types share reporting standards but have distinct ingestion paths",
+    ],
+    technicalSections: [
+      {
+        title: "Platform architecture (abstract)",
+        content:
+          "Ecometer runs as an event-driven platform — campaign and event data flows through microservices that compute environmental metrics, generate compliance outputs, and serve interactive dashboards. Specific service boundaries and schemas are confidential; this describes the shape without revealing proprietary internals.",
+        bullets: [
+          "Event-driven microservices communicating over NATS — decoupled ingestion, calculation, and reporting paths",
+          "Next.js frontend with SSR for chart-heavy dashboard routes and selective lazy loading per module",
+          "MinIO/S3 object storage for audit-ready document exports and compliance artifacts",
+          "Docker-based deployments with CI/CD pipelines across the service mesh",
+        ],
+      },
+      {
+        title: "Frontend — dashboards & exports",
+        content:
+          "My primary ownership is the analyst-facing UI — sustainability dashboards that load heavy charts, campaign filters, and environmental reporting panels teams open daily.",
+        bullets: [
+          "Server-side rendering + code splitting per dashboard module — avoids one monolithic bundle for chart-heavy views",
+          "Dynamic data fetching patterns tuned for filter-heavy analyst workflows",
+          "Compliance-ready export flows — BRSR-aligned outputs that stand up to audit scrutiny, even when generation takes longer",
+          "Core Web Vitals and chart render time as the optimization targets, not vanity bundle size",
+        ],
+      },
+      {
+        title: "Backend & data flow",
+        content:
+          "Backend work spans metric computation services, reporting pipelines, and the messaging layer that connects campaign ingestion to dashboard updates.",
+        bullets: [
+          "REST APIs across microservices — specific endpoints and schemas are confidential",
+          "NATS messaging for event propagation between ingestion, calculation, and reporting services",
+          "Query tuning on hot metric paths — measurable chart render improvements guided optimization decisions",
+          "Write-through cache invalidation for compliance-sensitive data — correctness over hit rate",
+        ],
+      },
+      {
+        title: "Technical decisions",
+        content:
+          "Every major choice balances enterprise compliance requirements with the speed analysts need in daily workflows.",
+        bullets: [
+          "Unified platform over point solutions — one measure-through-report system instead of disconnected spreadsheets",
+          "Audit-ready reporting over quick exports — BRSR-aligned outputs even when generation takes longer",
+          "Modular campaign types under shared reporting standards — OOH, digital, print, experiential flexibility without losing comparability",
+          "SSR for dashboard routes over pure client rendering — faster first meaningful paint for chart-heavy views",
+        ],
+      },
+    ],
+    technicalChallenges: [
+      "Keeping dashboard modules performant when each campaign type (OOH, DOOH, print, digital, experiential) has distinct data inputs and chart requirements",
+      "Balancing cache hit rates against compliance correctness — sustainability metrics cannot go stale silently",
+      "Coordinating frontend export flows with backend reporting services without exposing proprietary calculation logic",
+    ],
+    technicalLearnings: [
+      "In compliance-heavy domains, cache invalidation strategy is a product decision — not just an infrastructure detail",
+      "Chart-heavy enterprise dashboards need module-level code splitting, not page-level lazy loading alone",
+      "Abstract architecture descriptions in portfolios still land when they're specific about trade-offs, even under NDA",
     ],
   },
   {
     ...projects.find((p) => p.id === "rent-buddy")!,
     caseStudyTitle:
-      "Shipping production client apps during internship — Rent Buddy live at scale",
-    timeline: "2024 – 2025 · WebIntegratorz internship",
+      "Shipping a live furnishing rental marketplace during internship",
+    timeline: "Jan — Dec 2024 · WebIntegratorz internship",
     sections: [
       {
         title: "Context",
         content:
-          "During my internship at WebIntegratorz, I worked on real client deliverables — not toy apps. Rent Buddy is a property rental platform that needed secure auth, responsive UI, and a production deployment timeline.",
+          "During my internship at WebIntegratorz, I worked on client deliverables for Rentbuddy Furnishing Solutions — a furnishing rental business where consumers browse products by city and category, place orders, and receive tracked doorstep delivery. Rent Buddy is the live consumer platform at rentbuddy.in.",
       },
       {
-        title: "What I built",
+        title: "My contribution",
         content:
-          "Full-stack features across Rent Buddy and additional client apps — JWT-secured APIs, listing and booking flows, and mobile-first UI shipped to production.",
+          "I was one of the full-stack developers on the WebIntegratorz delivery team — not the sole builder, but I owned significant feature work on Rent Buddy from API through UI:",
         bullets: [
-          "Live production deployment at rentbuddy.in",
-          "JWT authentication and role-aware access patterns",
-          "Responsive React UI for renters and property owners",
-          "Part of 4+ production apps delivered during the internship",
+          "Built and maintained JWT-secured REST endpoints for listings, categories, and user sessions",
+          "Implemented responsive React flows for city/category browse, search, and product discovery",
+          "Optimized hot API paths — contributed to ~30% faster response times on key listing endpoints",
+          "Shipped and supported the production deployment at rentbuddy.in under client sprint deadlines",
         ],
+      },
+      {
+        title: "Technical decision",
+        content:
+          "We chose JWT session auth over OAuth because the client's existing infra and timeline didn't need social login — email/password with role-aware middleware was enough for v1, and it kept the auth surface area small for a rental marketplace MVP.",
       },
       {
         title: "Results",
         content:
-          "Rent Buddy remains live in production — a concrete proof point for internship-era delivery under client constraints, complementing my current founding-engineer work on Ecometer.",
+          "Rent Buddy remains live in production — a concrete proof point for internship-era delivery under client constraints.",
         bullets: [
-          "Live: rentbuddy.in/home",
+          "Live: rentbuddy.in/home — furnishing rental marketplace for Rentbuddy Furnishing Solutions",
           "Repo: github.com/yashdark01/rentbuddy",
+          "Outcome: production platform still serving customers; complements my current founding-engineer work on Ecometer",
         ],
       },
     ],
     challenges: [
       "Balancing client feature requests with maintainable code under tight sprint deadlines",
-      "Designing auth flows that work for multiple user types without over-engineering v1",
+      "Designing category and search UX that works on mobile-first traffic without over-engineering v1",
+      "Tuning listing API queries without access to a dedicated performance team",
     ],
     learnings: [
       "Production internship work teaches deployment and client communication — not just coding",
-      "Shipping 4+ apps builds velocity habits that carry into founding-engineer roles",
+      "JWT + RBAC patterns learned here carried directly into Krashaq's multi-role auth design",
     ],
   },
   {
@@ -353,6 +405,47 @@ export const caseStudies: CaseStudy[] = [
     learnings: [
       "Audio apps are state-management problems disguised as UI projects",
       "Third-party auth (Clerk) saves weeks — invest time in route guards and admin gates instead",
+    ],
+  },
+  {
+    ...archflowProject,
+    caseStudyTitle: "Building an in-browser system design canvas",
+    timeline: "2025 – 2026 · Active side project",
+    sections: [
+      {
+        title: "Why I'm building this",
+        content:
+          "System design interviews and architecture reviews deserve better than one-size-fits-all whiteboard tools. Archflow is my side project to combine drag-drop canvas UX, software-specific node types, and optional AI-assisted diagram generation — all in the browser without installing Excalidraw plugins or fighting generic diagram editors.",
+      },
+      {
+        title: "What exists today",
+        content:
+          "The repo is active on GitHub with ongoing commits. Core focus areas: canvas rendering, node/edge state, connection routing, and export. A public hosted demo is intentionally deferred until the editor feels stable enough to share — the portfolio shows a preview placeholder until then.",
+        bullets: [
+          "Drag-drop architecture nodes with labeled connections",
+          "In-browser canvas — no desktop install for v1",
+          "AI-assisted suggestions planned as an optional layer on top of a usable manual editor",
+          "Open source: github.com/yashdark01/archflow",
+        ],
+      },
+      {
+        title: "What ships next",
+        content:
+          "Before a public demo URL goes live: polish snap/grid behavior, PNG + JSON export, and a small template library (microservices, event-driven, RAG pipeline) so diagrams are useful out of the box.",
+        bullets: [
+          "Canvas UX stable on mobile-width viewports",
+          "Export/share flow for interview prep and README embeds",
+          "Optional AI layer — must not block core canvas when API is unavailable",
+        ],
+      },
+    ],
+    challenges: [
+      "Building responsive canvas interactions without fighting the browser's default touch/scroll behavior",
+      "Keeping the data model simple enough for export while supporting arbitrary node types",
+    ],
+    learnings: [
+      "Side projects need a visible 'building' state — honest placeholders beat silent empty cards",
+      "Canvas tools are state-management products; rendering is the easy part",
     ],
   },
 ];

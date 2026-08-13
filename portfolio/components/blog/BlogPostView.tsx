@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Tag from "@/components/ui/Tag";
 import { BlogPost } from "@/data/blog";
+import { getReadTime } from "@/lib/blog";
 
 export default function BlogPostView({ post }: { post: BlogPost }) {
   return (
-    <article className="mx-auto max-w-3xl px-6 py-28">
+    <article className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-28">
       <Link
         href="/blog"
         className="section-label inline-flex items-center gap-2 transition-colors hover:text-accent"
@@ -14,7 +15,7 @@ export default function BlogPostView({ post }: { post: BlogPost }) {
 
       <header className="mt-8">
         <p className="section-label">
-          {post.date} · {post.readTime}
+          {post.date} · {getReadTime(post.sections, post.excerpt)}
         </p>
         <h1 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">
           {post.title}
@@ -34,6 +35,16 @@ export default function BlogPostView({ post }: { post: BlogPost }) {
             <p className="mt-3 leading-relaxed text-text-muted">
               {section.content}
             </p>
+            {section.code?.map((block, index) => (
+              <figure key={`${section.title}-code-${index}`} className="mt-4">
+                <figcaption className="section-label mb-2">
+                  {block.language}
+                </figcaption>
+                <pre className="overflow-x-auto rounded-lg border border-white/5 bg-surface p-4 font-mono text-xs leading-relaxed text-text-muted">
+                  <code>{block.code}</code>
+                </pre>
+              </figure>
+            ))}
             {section.bullets && (
               <ul className="mt-4 space-y-2">
                 {section.bullets.map((bullet) => (
@@ -58,6 +69,12 @@ export default function BlogPostView({ post }: { post: BlogPost }) {
             <Link href="/work/krashaq" className="text-accent hover:text-accent-hover">
               Krashaq case study →
             </Link>
+            <Link
+              href="/blog/b2b2c-subscription-gating-nextjs"
+              className="text-accent hover:text-accent-hover"
+            >
+              B2B2C gating post →
+            </Link>
             <a
               href="https://krashaq-agritech.vercel.app"
               target="_blank"
@@ -66,6 +83,23 @@ export default function BlogPostView({ post }: { post: BlogPost }) {
             >
               Live demo ↗
             </a>
+          </div>
+        </div>
+      )}
+
+      {post.slug === "b2b2c-subscription-gating-nextjs" && (
+        <div className="mt-12 card-surface p-6">
+          <p className="section-label mb-3">Related</p>
+          <div className="flex flex-wrap gap-4 text-sm">
+            <Link
+              href="/blog/building-krashaq-llm-pipeline"
+              className="text-accent hover:text-accent-hover"
+            >
+              Krashaq LLM pipeline →
+            </Link>
+            <Link href="/work/krashaq" className="text-accent hover:text-accent-hover">
+              Case study →
+            </Link>
           </div>
         </div>
       )}

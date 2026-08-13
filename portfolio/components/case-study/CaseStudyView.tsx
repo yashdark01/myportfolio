@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
-import ProjectPreviewGallery from "@/components/case-study/ProjectPreviewGallery";
+import ProjectMediaGallery from "@/components/case-study/ProjectMediaGallery";
 import SectionLink from "@/components/ui/SectionLink";
 import Tag from "@/components/ui/Tag";
+import { getDefaultMediaDomain, getPreviewMedia } from "@/data/preview-media";
 import { CaseStudy } from "@/data/case-studies";
 
 interface CaseStudyViewProps {
@@ -13,12 +14,17 @@ interface CaseStudyViewProps {
 function SectionBlock({
   section,
 }: {
-  section: { title: string; content: string; bullets?: string[] };
+  section: { title: string; content: string; bullets?: string[]; diagram?: string };
 }) {
   return (
     <section>
       <h3 className="text-lg font-semibold">{section.title}</h3>
       <p className="mt-3 leading-relaxed text-text-muted">{section.content}</p>
+      {section.diagram && (
+        <pre className="mt-4 overflow-x-auto rounded-lg border border-white/5 bg-surface p-4 font-mono text-xs leading-relaxed text-text-muted">
+          {section.diagram}
+        </pre>
+      )}
       {section.bullets && (
         <ul className="mt-4 space-y-2">
           {section.bullets.map((bullet) => (
@@ -58,7 +64,7 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
     study.technicalSections.length > 0;
 
   return (
-    <article className="mx-auto max-w-3xl px-6 py-28">
+    <article className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-28">
       <SectionLink
         sectionId="work"
         className="section-label inline-flex items-center gap-2 transition-colors hover:text-accent"
@@ -115,19 +121,28 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
           </p>
         </div>
 
-        {(study.previewImages?.length || study.previewVideo) && (
-          <ProjectPreviewGallery
-            images={study.previewImages}
-            video={study.previewVideo}
-            defaultDomain={
-              study.id === "horizon17-esg"
-                ? "ecomsww.com"
-                : study.id === "rent-buddy"
-                  ? "rentbuddy.in"
-                  : "krashaq-agritech.vercel.app"
-            }
-          />
-        )}
+        <ProjectMediaGallery
+          items={getPreviewMedia(study.id)}
+          defaultDomain={getDefaultMediaDomain(study.id)}
+          intro={
+            study.id === "horizon17-esg" ? (
+              <>
+                Live website captures from{" "}
+                <a
+                  href="https://ecomsww.com/ecometer-the-carbon-economy-for-advertising"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:text-accent-hover"
+                >
+                  ecomsww.com
+                </a>
+                — platform page, Visualise, and published client
+                campaigns. Internal engineering UI stays in the abstract deep
+                dive below.
+              </>
+            ) : undefined
+          }
+        />
 
         <div className="space-y-10">
           {study.sections.map((section) => (

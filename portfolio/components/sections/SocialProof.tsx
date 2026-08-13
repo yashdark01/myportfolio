@@ -95,12 +95,10 @@ export default function SocialProof() {
         >
           <div>
             <p className="section-label mb-3">
-              {featuredTestimonial ? "More on LinkedIn" : "Recommendations"}
+              {featuredTestimonial ? "More on LinkedIn" : "LinkedIn"}
             </p>
             <p className="leading-relaxed text-text-muted">
-              {featuredTestimonial
-                ? "Additional skills endorsements, internship delivery (4+ production apps), and founding-engineer context on Ecometer."
-                : socialProof.testimonialPlaceholder}
+              {socialProof.linkedInSummary}
             </p>
           </div>
           <Link
