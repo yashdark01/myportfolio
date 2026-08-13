@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Link from "next/link";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import Tag from "@/components/ui/Tag";
+import StackTags from "@/components/ui/StackTags";
 import { blogPosts, getReadTime } from "@/data/blog";
 
 export default function Writing() {
@@ -16,7 +16,7 @@ export default function Writing() {
 
       <div className="space-y-4">
         {blogPosts.map((post, index) => (
-          <motion.article
+          <m.article
             key={post.slug}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -36,14 +36,10 @@ export default function Writing() {
               <p className="mt-2 text-sm leading-relaxed text-text-muted">
                 {post.excerpt}
               </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <Tag key={tag}>{tag}</Tag>
-                ))}
-              </div>
+              <StackTags items={post.tags} className="mt-4" />
               <p className="mt-4 text-sm text-accent">Read article →</p>
             </Link>
-          </motion.article>
+          </m.article>
         ))}
       </div>
 

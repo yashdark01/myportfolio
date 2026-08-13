@@ -1,9 +1,9 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useState } from "react";
 import Button from "@/components/ui/Button";
-import Tag from "@/components/ui/Tag";
+import StackTags from "@/components/ui/StackTags";
 import { expertiseGroups, recruiterSnapshot, site } from "@/data/site";
 import { useScrollLock } from "@/lib/useScrollLock";
 import { trackEvent } from "@/lib/analytics";
@@ -31,7 +31,7 @@ export default function RecruiterMode() {
       <button
         type="button"
         onClick={handleOpen}
-        aria-label="Open recruiter mode"
+        aria-label="HR — Open recruiter mode"
         className="fixed z-40 flex h-12 w-12 items-center justify-center rounded-full border border-accent/30 bg-accent text-background shadow-lg shadow-accent/20 md:hidden"
         style={{
           bottom: "max(1.5rem, env(safe-area-inset-bottom))",
@@ -44,7 +44,7 @@ export default function RecruiterMode() {
       <AnimatePresence>
         {open && (
           <>
-            <motion.button
+            <m.button
               type="button"
               aria-label="Close recruiter mode"
               initial={{ opacity: 0 }}
@@ -53,7 +53,7 @@ export default function RecruiterMode() {
               className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
               onClick={() => setOpen(false)}
             />
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 24, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 24, scale: 0.98 }}
@@ -101,11 +101,7 @@ export default function RecruiterMode() {
                 ))}
               </ul>
 
-              <div className="mt-5 flex flex-wrap gap-2">
-                {recruiterSnapshot.topStack.map((tech) => (
-                  <Tag key={tech}>{tech}</Tag>
-                ))}
-              </div>
+              <StackTags items={recruiterSnapshot.topStack} />
 
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 <Button
@@ -167,7 +163,7 @@ export default function RecruiterMode() {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

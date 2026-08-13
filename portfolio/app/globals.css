@@ -6,7 +6,7 @@
   --color-surface-elevated: #1c1c1f;
   --color-border: rgba(255, 255, 255, 0.06);
   --color-text-primary: #fafafa;
-  --color-text-muted: #71717a;
+  --color-text-muted: #8b8b95;
   --color-accent: #10b981;
   --color-accent-hover: #059669;
   --color-accent-muted: rgba(16, 185, 129, 0.12);
@@ -81,6 +81,15 @@ section[id] {
   border-color: rgba(255, 255, 255, 0.1);
 }
 
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 .gradient-fade-bottom {
   background: linear-gradient(to bottom, transparent, var(--color-background));
 }
@@ -114,4 +123,33 @@ body.mobile-nav-open .mobile-resume-fab {
   transition:
     opacity 0.2s ease,
     transform 0.2s ease;
+}
+
+@keyframes media-frame-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.media-frame-skeleton {
+  background: linear-gradient(
+    90deg,
+    #121214 0%,
+    #18181b 35%,
+    #27272a 50%,
+    #18181b 65%,
+    #121214 100%
+  );
+  background-size: 200% 100%;
+  animation: media-frame-shimmer 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media-frame-skeleton {
+    animation: none;
+    background: #18181b;
+  }
 }

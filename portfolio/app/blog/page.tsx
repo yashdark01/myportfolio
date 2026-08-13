@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Tag from "@/components/ui/Tag";
+import StackTags from "@/components/ui/StackTags";
 import { blogPosts, getReadTime } from "@/data/blog";
 
 export default function BlogIndexPage() {
@@ -34,11 +34,7 @@ export default function BlogIndexPage() {
               {post.title}
             </h2>
             <p className="mt-2 text-text-muted">{post.excerpt}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <Tag key={tag}>{tag}</Tag>
-              ))}
-            </div>
+            <StackTags items={post.tags} className="mt-4" />
           </Link>
         ))}
       </div>

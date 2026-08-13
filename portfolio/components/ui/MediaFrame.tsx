@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Badge from "@/components/ui/Badge";
+import { useInView } from "@/lib/useInView";
 import type { PreviewMediaItem, PreviewMediaStatus } from "@/types/preview-media";
 
 interface MediaFrameProps {
@@ -10,6 +11,7 @@ interface MediaFrameProps {
   domain?: string;
   variant?: "hero" | "gallery";
   className?: string;
+  priority?: boolean;
 }
 
 function BrowserChrome({
@@ -64,13 +66,50 @@ function overlayCopy(status: PreviewMediaStatus, label: string) {
   };
 }
 
-async function assetExists(src: string) {
-  try {
-    const res = await fetch(src, { method: "HEAD" });
-    return res.ok;
-  } catch {
-    return false;
-  }
+function MediaSkeleton({ label }: { label?: string }) {
+  return (
+    <div
+      className="media-frame-skeleton absolute inset-0"
+      aria-hidden={!label}
+      aria-label={label}
+      role={label ? "status" : undefined}
+    />
+  );
+}
+
+function StatusOverlay({
+  item,
+  overlay,
+}: {
+  item: PreviewMediaItem;
+  overlay: ReturnType<typeof overlayCopy>;
+}) {
+  return (
+    <>
+      <div
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.08),transparent_55%)]"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.04)_0%,transparent_50%,rgba(16,185,129,0.06)_100%)]"
+        aria-hidden
+      />
+      <div className="absolute inset-0 flex items-center justify-center p-6">
+        <div className="max-w-xs rounded-xl border border-white/10 bg-background/80 px-5 py-4 text-center backdrop-blur-sm">
+          <Badge
+            variant={item.status === "restricted" ? "muted" : "accent"}
+            className="mb-3"
+          >
+            {overlay.badge}
+          </Badge>
+          <p className="text-sm font-medium text-text-primary">{overlay.title}</p>
+          <p className="mt-2 text-xs leading-relaxed text-text-muted">
+            {overlay.hint}
+          </p>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default function MediaFrame({
@@ -78,66 +117,75 @@ export default function MediaFrame({
   domain = "app.example.com",
   variant = "gallery",
   className = "",
+  priority,
 }: MediaFrameProps) {
-  const [assetReady, setAssetReady] = useState(false);
-
-  const shouldCheckAsset =
-    item.status === "ready" && Boolean(item.src || item.poster);
+  const isHero = variant === "hero";
+  const eagerLoad = priority ?? isHero;
+  const { ref, inView } = useInView<HTMLElement>({ enabled: !eagerLoad });
+  const [mediaLoaded, setMediaLoaded] = useState(false);
+  const [loadFailed, setLoadFailed] = useState(false);
 
   useEffect(() => {
-    if (!shouldCheckAsset) {
-      setAssetReady(false);
-      return;
-    }
+    setMediaLoaded(false);
+    setLoadFailed(false);
+  }, [item.id, item.src, item.poster]);
 
-    const src =
-      item.type === "video" ? item.src! : item.src!;
-    let cancelled = false;
+  const shouldLoad = eagerLoad || inView;
+  const isReady = item.status === "ready" && Boolean(item.src || item.poster);
+  const showStatusOverlay = !isReady || loadFailed;
+  const showSkeleton =
+    isReady && !loadFailed && shouldLoad && !mediaLoaded;
+  const showSkeletonPlaceholder = isReady && !loadFailed && !shouldLoad;
+  const showMedia = isReady && !loadFailed && shouldLoad;
 
-    assetExists(src).then((ok) => {
-      if (!cancelled) setAssetReady(ok);
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [shouldCheckAsset, item.src, item.type]);
-
-  const showMedia =
-    item.status === "ready" &&
-    assetReady &&
-    (item.type === "video" ? item.src : item.src);
-
-  const showPlaceholder = !showMedia;
-  const overlay = overlayCopy(
-    showPlaceholder && item.status === "ready" ? "coming-soon" : item.status,
-    item.comingSoonLabel ?? item.alt,
-  );
+  const overlay = overlayCopy(item.status, item.comingSoonLabel ?? item.alt);
 
   const aspectClass =
     item.type === "video"
       ? "aspect-video"
-      : variant === "hero"
+      : isHero
         ? "h-52 w-full sm:h-64 md:h-72 lg:h-80"
         : "aspect-[16/10]";
 
   const mediaBg =
     item.objectFit === "contain" ? "bg-[#050505]" : "bg-background";
 
+  const imageClassName =
+    item.objectFit === "contain"
+      ? "object-contain object-center p-2"
+      : isHero
+        ? "object-cover object-center"
+        : "object-cover object-top";
+
   return (
     <figure
-      className={`overflow-hidden rounded-xl border border-white/10 bg-[#111] shadow-[0_18px_50px_-24px_rgba(0,0,0,0.85)] ${variant === "hero" ? "rounded-lg border-white/[0.08]" : ""} ${className}`}
+      ref={ref}
+      className={`overflow-hidden rounded-xl border border-white/10 bg-[#111] shadow-[0_18px_50px_-24px_rgba(0,0,0,0.85)] ${isHero ? "rounded-lg border-white/[0.08]" : ""} ${className}`}
     >
       <BrowserChrome domain={item.domain ?? domain} variant={variant} />
 
       <div className={`relative ${mediaBg} ${aspectClass}`}>
+        {(showSkeleton || showSkeletonPlaceholder) && (
+          <MediaSkeleton
+            label={
+              showSkeletonPlaceholder ? "Loading preview frame" : "Loading image"
+            }
+          />
+        )}
+
+        {showStatusOverlay && (
+          <StatusOverlay item={item} overlay={overlay} />
+        )}
+
         {showMedia && item.type === "video" && item.src && (
           <video
-            className="h-full w-full object-cover object-top"
+            className={`h-full w-full object-cover object-top transition-opacity duration-300 ${mediaLoaded ? "opacity-100" : "opacity-0"}`}
             controls
             playsInline
-            preload="metadata"
+            preload={shouldLoad ? "metadata" : "none"}
             poster={item.poster}
+            onLoadedData={() => setMediaLoaded(true)}
+            onError={() => setLoadFailed(true)}
           >
             <source src={item.src} type="video/mp4" />
           </video>
@@ -148,49 +196,17 @@ export default function MediaFrame({
             src={item.src}
             alt={item.alt}
             fill
-            className={
-              item.objectFit === "contain"
-                ? "object-contain object-center p-2"
-                : variant === "hero"
-                  ? "object-cover object-center"
-                  : "object-cover object-top"
-            }
-            priority={variant === "hero"}
+            className={`${imageClassName} transition-opacity duration-300 ${mediaLoaded ? "opacity-100" : "opacity-0"}`}
+            priority={eagerLoad}
+            loading={eagerLoad ? "eager" : "lazy"}
             sizes={
-              variant === "hero"
+              isHero
                 ? "(max-width: 768px) 100vw, 640px"
                 : "(max-width: 768px) 100vw, 50vw"
             }
+            onLoad={() => setMediaLoaded(true)}
+            onError={() => setLoadFailed(true)}
           />
-        )}
-
-        {showPlaceholder && (
-          <>
-            <div
-              className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.08),transparent_55%)]"
-              aria-hidden
-            />
-            <div
-              className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.04)_0%,transparent_50%,rgba(16,185,129,0.06)_100%)]"
-              aria-hidden
-            />
-            <div className="absolute inset-0 flex items-center justify-center p-6">
-              <div className="max-w-xs rounded-xl border border-white/10 bg-background/80 px-5 py-4 text-center backdrop-blur-sm">
-                <Badge
-                  variant={item.status === "restricted" ? "muted" : "accent"}
-                  className="mb-3"
-                >
-                  {overlay.badge}
-                </Badge>
-                <p className="text-sm font-medium text-text-primary">
-                  {overlay.title}
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-text-muted">
-                  {overlay.hint}
-                </p>
-              </div>
-            </div>
-          </>
         )}
       </div>
 

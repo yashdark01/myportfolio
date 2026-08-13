@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import MediaFrame from "@/components/ui/MediaFrame";
@@ -18,7 +18,7 @@ export default function FeaturedProject() {
   return (
     <div className="relative min-h-[44rem] sm:min-h-[42rem] md:min-h-[44rem]">
       <AnimatePresence mode="sync" initial={false}>
-        <motion.div
+        <m.div
           key={project.id}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -41,6 +41,7 @@ export default function FeaturedProject() {
                 item={heroPreview}
                 domain={getDefaultMediaDomain(project.id)}
                 variant="hero"
+                priority={false}
                 className="border-white/5 bg-transparent"
               />
             </div>
@@ -93,7 +94,7 @@ export default function FeaturedProject() {
               )}
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </AnimatePresence>
     </div>
   );

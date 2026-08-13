@@ -3,7 +3,7 @@ import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import ProjectMediaGallery from "@/components/case-study/ProjectMediaGallery";
 import SectionLink from "@/components/ui/SectionLink";
-import Tag from "@/components/ui/Tag";
+import StackTags from "@/components/ui/StackTags";
 import { getDefaultMediaDomain, getPreviewMedia } from "@/data/preview-media";
 import { CaseStudy } from "@/data/case-studies";
 
@@ -140,6 +140,19 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
                 campaigns. Internal engineering UI stays in the abstract deep
                 dive below.
               </>
+            ) : study.id === "rent-buddy" ? (
+              <>
+                Live captures from{" "}
+                <a
+                  href="https://rentbuddy.in/home"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:text-accent-hover"
+                >
+                  rentbuddy.in
+                </a>
+                — home, product catalog, and JWT-secured login.
+              </>
             ) : undefined
           }
         />
@@ -222,11 +235,7 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
 
           <section>
             <h3 className="section-label mb-3">Stack</h3>
-            <div className="flex flex-wrap gap-2">
-              {study.stack.map((tech) => (
-                <Tag key={tech}>{tech}</Tag>
-              ))}
-            </div>
+            <StackTags items={study.stack} />
           </section>
         </div>
       )}

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Badge from "@/components/ui/Badge";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { timeline } from "@/data/experience";
@@ -13,7 +13,7 @@ export default function Journey() {
 
         <div className="space-y-8">
           {timeline.map((entry, index) => (
-            <motion.div
+            <m.div
               key={entry.id}
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -34,7 +34,7 @@ export default function Journey() {
                   {entry.badge}
                 </Badge>
               )}
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

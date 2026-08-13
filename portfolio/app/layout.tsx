@@ -5,17 +5,17 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import { PersonaProvider } from "@/components/PersonaContext";
 import Footer from "@/components/layout/Footer";
-import MobileResumeFab from "@/components/layout/MobileResumeFab";
+import DeferredWidgets from "@/components/layout/DeferredWidgets";
+import MotionProvider from "@/components/MotionProvider";
 import Navbar from "@/components/layout/Navbar";
-import RecruiterMode from "@/components/RecruiterMode";
 import JsonLd from "@/components/JsonLd";
 import SectionScrollHandler from "@/components/SectionScrollHandler";
 import SkipToContent from "@/components/layout/SkipToContent";
+import { getSiteUrl, profileIconPath, profileImagePath } from "@/lib/site-url";
 import { site } from "@/data/site";
 import "./globals.css";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://yashpatidar.vercel.app";
+const siteUrl = getSiteUrl();
 
 export const viewport: Viewport = {
   themeColor: "#10b981",
@@ -37,9 +37,14 @@ export const metadata: Metadata = {
     "AI Engineer",
     "LangChain",
     "IIIT Nagpur",
+    "2+ years experience",
   ],
   authors: [{ name: site.name, url: siteUrl }],
   creator: site.name,
+  icons: {
+    icon: [{ url: profileIconPath, type: "image/webp" }],
+    apple: [{ url: profileIconPath, type: "image/webp" }],
+  },
   openGraph: {
     title: `${site.name} — Full Stack Engineer`,
     description: site.tagline,
@@ -47,6 +52,14 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "en_IN",
     type: "website",
+    images: [
+      {
+        url: profileImagePath,
+        width: 256,
+        height: 256,
+        alt: `${site.name} — profile`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -76,13 +89,14 @@ export default function RootLayout({
         <JsonLd />
         <SectionScrollHandler />
         <SkipToContent />
-        <Navbar />
-        <PersonaProvider>
-          <main>{children}</main>
-        </PersonaProvider>
-        <Footer />
-        <RecruiterMode />
-        <MobileResumeFab />
+        <MotionProvider>
+          <Navbar />
+          <PersonaProvider>
+            <main>{children}</main>
+          </PersonaProvider>
+          <Footer />
+          <DeferredWidgets />
+        </MotionProvider>
         <Analytics />
         <SpeedInsights />
       </body>

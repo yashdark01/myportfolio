@@ -4,6 +4,7 @@ export const site = {
   tagline:
     "Founding Engineer at Horizon17 — building production AI systems and enterprise sustainability platforms end-to-end.",
   institution: "IIIT Nagpur · B.Tech CSE",
+  yearsExperience: "2+ years of experience",
   status: "Open to opportunities",
   recentlyShipped: "Krashaq AI · Smart Farming Platform",
   email: "yashpatidar9691@gmail.com",
@@ -12,6 +13,7 @@ export const site = {
   /** Set to true when you want LeetCode visible (recommended: 150+ Medium) */
   showLeetCode: false,
   links: {
+    horizon17: "https://www.horizon17ww.com/",
     linkedin: "https://linkedin.com/in/yash-patidar-97a8861b3",
     github: "https://github.com/yashdark01",
     leetcode: "https://leetcode.com/u/yashdark_01/",
@@ -52,6 +54,7 @@ export const site = {
   openTo: {
     roles: [
       "Full Stack Engineer",
+      "Backend Engineer",
       "Frontend Engineer (React/Next.js)",
       "Applied AI / LLM Engineer",
     ],
@@ -208,6 +211,7 @@ export const expertiseGroups = [
     subtitle: "Scalable services",
     tags: [
       "Node.js",
+      "Express.js",
       "FastAPI",
       "Microservices",
       "REST APIs",
@@ -253,9 +257,9 @@ export function getExpertiseForPersona(persona: Persona) {
 }
 
 export const recruiterSnapshot = {
-  headline: "Founding Engineer · Full Stack Developer · React/Next.js · IIIT Nagpur",
+  headline: "Founding Engineer · Full Stack Developer · 2+ yrs · React/Next.js · IIIT Nagpur",
   summary:
-    "Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd., building Ecometer — EcoMS's sustainability intelligence platform. Shipped Krashaq AI — personal full-stack AI farming project with live demo and open-source repo. Experienced with microservices, CI/CD, Docker, and event-driven patterns (NATS, Kafka); comfortable with Nginx, S3/MinIO, and AWS EC2/Lambda fundamentals.",
+    "Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd., building Ecometer — EcoMS's sustainability intelligence platform. Shipped Krashaq AI — personal full-stack AI farming project with live demo and open-source repo. Experienced with Node.js/Express.js services, microservices, CI/CD, Docker, and event-driven patterns (NATS, Kafka); comfortable with Nginx, S3/MinIO, and AWS EC2/Lambda fundamentals.",
   highlights: [
     "Founding Engineer · Full Stack Developer at Horizon17 (Apr 2025 – Present)",
     "Ecometer · enterprise sustainability platform (Horizon17 & EcoMS)",
@@ -265,6 +269,8 @@ export const recruiterSnapshot = {
   topStack: [
     "Next.js",
     "React",
+    "Node.js",
+    "Express.js",
     "Microservices",
     "Docker",
     "CI/CD",
