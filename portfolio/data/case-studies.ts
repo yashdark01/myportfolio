@@ -283,7 +283,7 @@ Farmer (end user)
         content:
           "Backend work spans metric computation services, reporting pipelines, and the messaging layer that connects campaign ingestion to dashboard updates.",
         bullets: [
-          "REST APIs across microservices — specific endpoints and schemas are confidential",
+          "REST APIs across Node.js / Express.js microservices — specific endpoints and schemas are confidential",
           "NATS messaging for event propagation between ingestion, calculation, and reporting services",
           "Query tuning on hot metric paths — measurable chart render improvements guided optimization decisions",
           "Write-through cache invalidation for compliance-sensitive data — correctness over hit rate",
@@ -328,7 +328,7 @@ Farmer (end user)
         content:
           "I was one of the full-stack developers on the WebIntegratorz delivery team — not the sole builder, but I owned significant feature work on Rent Buddy from API through UI:",
         bullets: [
-          "Built and maintained JWT-secured REST endpoints for listings, categories, and user sessions",
+          "Built and maintained JWT-secured Express.js REST endpoints for listings, categories, and user sessions",
           "Implemented responsive React flows for city/category browse, search, and product discovery",
           "Optimized hot API paths — contributed to ~30% faster response times on key listing endpoints",
           "Shipped and supported the production deployment at rentbuddy.in under client sprint deadlines",
@@ -368,7 +368,7 @@ Farmer (end user)
       {
         title: "Context",
         content:
-          "Built to demonstrate full MERN proficiency with modern UI (ShadCN), OAuth auth, state management, and audio streaming patterns — open source at github.com/yashdark01/Music-Player.",
+          "Built with React, Node.js, Express.js, and MongoDB — plus modern UI (ShadCN), OAuth auth, state management, and audio streaming patterns — open source at github.com/yashdark01/Music-Player.",
       },
       {
         title: "What I built",

@@ -23,6 +23,7 @@ export default function JsonLd() {
       "React.js",
       "Next.js",
       "Node.js",
+      "Express.js",
       "FastAPI",
       "LangChain",
       "System Design",

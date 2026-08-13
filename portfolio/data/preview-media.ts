@@ -56,16 +56,6 @@ export const previewMediaByProject: Record<string, PreviewMediaItem[]> = {
       objectFit: "cover",
     },
     {
-      id: "visualise",
-      type: "image",
-      src: "/projects/ecometer/visualise.png",
-      alt: "Ecometer Visualise section on ecomsww.com — interactive sustainability dashboards and graphs",
-      caption: "Visualise — interactive dashboards for analyst decision-making",
-      domain: "ecomsww.com/ecometer",
-      status: "ready",
-      objectFit: "cover",
-    },
-    {
       id: "platform-info",
       type: "image",
       src: "/projects/ecometer/platform-info.png",

@@ -115,3 +115,32 @@ body.mobile-nav-open .mobile-resume-fab {
     opacity 0.2s ease,
     transform 0.2s ease;
 }
+
+@keyframes media-frame-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.media-frame-skeleton {
+  background: linear-gradient(
+    90deg,
+    #121214 0%,
+    #18181b 35%,
+    #27272a 50%,
+    #18181b 65%,
+    #121214 100%
+  );
+  background-size: 200% 100%;
+  animation: media-frame-shimmer 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media-frame-skeleton {
+    animation: none;
+    background: #18181b;
+  }
+}

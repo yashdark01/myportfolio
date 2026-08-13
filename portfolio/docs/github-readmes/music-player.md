@@ -1,4 +1,4 @@
-# Music Player — MERN Streaming Platform
+# Music Player — Full-Stack Streaming Platform
 
 Full-stack music streaming app with **Clerk auth**, **Redux Toolkit**, **ShadCN UI**, **Cloudinary admin uploads**, and **MongoDB aggregation** feeds.
 

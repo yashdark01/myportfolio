@@ -52,20 +52,20 @@ export const pinnedRepos: PinnedRepo[] = [
     name: "Music-Player",
     displayName: "Music Player",
     description:
-      "MERN music streaming app with Clerk auth, Redux player state, admin CRUD, Cloudinary uploads, and MongoDB aggregation feeds.",
+      "Music streaming app — React, Node.js, Express.js, MongoDB, Clerk auth, Redux player state, admin CRUD, Cloudinary uploads, and MongoDB aggregation feeds.",
     url: "https://github.com/yashdark01/Music-Player",
     language: "JavaScript",
-    topics: ["MERN", "Clerk", "Redux", "MongoDB", "ShadCN"],
+    topics: ["React.js", "Node.js", "Express.js", "MongoDB", "Clerk", "Redux", "ShadCN"],
   },
   {
     name: "rentbuddy",
     displayName: "Rent Buddy",
     description:
-      "Production rental platform — JWT-secured React + Node.js app with live client deployment at rentbuddy.in.",
+      "Production rental platform — JWT-secured React + Express.js API with live client deployment at rentbuddy.in.",
     url: "https://github.com/yashdark01/rentbuddy",
     live: "https://rentbuddy.in/home",
     language: "JavaScript",
-    topics: ["React", "Node.js", "MongoDB", "JWT"],
+    topics: ["React", "Node.js", "Express.js", "MongoDB", "JWT"],
   },
 ];
 

@@ -23,7 +23,7 @@ export default function About() {
         >
           I&apos;m a Founding Engineer and Full Stack Developer at Horizon17
           Technology and Sustainability Pvt. Ltd., building enterprise-grade ESG
-          and AI-driven platforms with React.js, Next.js, Node.js, and applied LLM
+          and AI-driven platforms with React.js, Next.js, Node.js, Express.js, and applied LLM
           systems. I focus on RESTful and microservice backends, RAG pipelines,
           CI/CD and Docker-based deployments, and high-performance frontends that
           measurably improve how teams work.
@@ -43,7 +43,7 @@ export default function About() {
           building depth in event-driven systems (Kafka), system design, and AWS
           EC2/Lambda. Before that, I delivered production client apps during my
           internship at WebIntegratorz — including Rent Buddy (live at rentbuddy.in),
-          with JWT-secured backends and mobile-first UIs.
+          with JWT-secured Express.js backends and mobile-first UIs.
         </motion.p>
 
         <motion.div

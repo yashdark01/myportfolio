@@ -208,6 +208,7 @@ export const expertiseGroups = [
     subtitle: "Scalable services",
     tags: [
       "Node.js",
+      "Express.js",
       "FastAPI",
       "Microservices",
       "REST APIs",
@@ -255,7 +256,7 @@ export function getExpertiseForPersona(persona: Persona) {
 export const recruiterSnapshot = {
   headline: "Founding Engineer · Full Stack Developer · React/Next.js · IIIT Nagpur",
   summary:
-    "Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd., building Ecometer — EcoMS's sustainability intelligence platform. Shipped Krashaq AI — personal full-stack AI farming project with live demo and open-source repo. Experienced with microservices, CI/CD, Docker, and event-driven patterns (NATS, Kafka); comfortable with Nginx, S3/MinIO, and AWS EC2/Lambda fundamentals.",
+    "Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd., building Ecometer — EcoMS's sustainability intelligence platform. Shipped Krashaq AI — personal full-stack AI farming project with live demo and open-source repo. Experienced with Node.js/Express.js services, microservices, CI/CD, Docker, and event-driven patterns (NATS, Kafka); comfortable with Nginx, S3/MinIO, and AWS EC2/Lambda fundamentals.",
   highlights: [
     "Founding Engineer · Full Stack Developer at Horizon17 (Apr 2025 – Present)",
     "Ecometer · enterprise sustainability platform (Horizon17 & EcoMS)",
@@ -265,6 +266,8 @@ export const recruiterSnapshot = {
   topStack: [
     "Next.js",
     "React",
+    "Node.js",
+    "Express.js",
     "Microservices",
     "Docker",
     "CI/CD",

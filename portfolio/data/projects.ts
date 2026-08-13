@@ -111,7 +111,9 @@ Next.js dashboards (SSR, chart modules, export flows)
         ↓
 Event-driven microservices (NATS messaging)
         ↓
-Metric services · compliance reporting · MinIO/S3 document storage
+Node.js / Express.js REST services · metric & reporting APIs
+        ↓
+MinIO/S3 document storage · compliance artifacts
         ↓
 Ecometer Platform (EcoMS) — Measure · Manage · Circularity · Report · Visualise
         ↓
@@ -119,6 +121,8 @@ Scope 1–3 emissions · BRSR-aligned outputs · SDG assessments`,
     stack: [
       "Next.js",
       "React",
+      "Node.js",
+      "Express.js",
       "Microservices",
       "NATS",
       "Docker",
@@ -155,12 +159,12 @@ Scope 1–3 emissions · BRSR-aligned outputs · SDG assessments`,
         ↓
 React.js SPA — city/category browse, search, product detail
         ↓
-Node.js REST API + JWT middleware
+Express.js REST API + JWT middleware
         ↓
 MongoDB (listings, users, categories, orders)
         ↓
 Production deploy — rentbuddy.in`,
-    stack: ["React.js", "Node.js", "MongoDB", "JWT", "Tailwind CSS"],
+    stack: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT", "Tailwind CSS"],
     github: "https://github.com/yashdark01/rentbuddy",
     live: "https://rentbuddy.in/home",
   },
@@ -211,7 +215,7 @@ export const musicPlayerProject: Project = {
   metrics: [
     { value: "Clerk", label: "OAuth auth" },
     { value: "Admin", label: "upload + delete" },
-    { value: "MERN", label: "full stack" },
+    { value: "Express.js", label: "REST API" },
   ],
   problem:
     "Users wanted a streaming-style music app with sign-in, discovery feeds, album playback, and an admin path to manage catalog content.",
@@ -280,8 +284,8 @@ export const moreProjects: MoreProject[] = [
     id: "music-player",
     title: "Music Player",
     description:
-      "Streaming MERN app — Clerk OAuth, Redux player queue, MongoDB aggregation feeds, Supertest on auth routes, and admin CRUD via Cloudinary. Full engineering case study.",
-    tags: ["MERN", "Clerk", "Redux"],
+      "Streaming app — React, Node.js, Express.js, MongoDB, Clerk OAuth, Redux player queue, MongoDB aggregation feeds, Supertest on auth routes, and admin CRUD via Cloudinary. Full engineering case study.",
+    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "Clerk", "Redux"],
     github: "https://github.com/yashdark01/Music-Player",
     caseStudyPath: "/work/music-player",
   },
