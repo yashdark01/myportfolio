@@ -6,6 +6,7 @@ import SectionLink from "@/components/ui/SectionLink";
 import StackTags from "@/components/ui/StackTags";
 import { getDefaultMediaDomain, getPreviewMedia } from "@/data/preview-media";
 import { CaseStudy } from "@/data/case-studies";
+import DiagramRenderer from "@/components/case-study/DiagramRenderer";
 
 interface CaseStudyViewProps {
   study: CaseStudy;
@@ -20,11 +21,7 @@ function SectionBlock({
     <section>
       <h3 className="text-lg font-semibold">{section.title}</h3>
       <p className="mt-3 leading-relaxed text-text-muted">{section.content}</p>
-      {section.diagram && (
-        <pre className="mt-4 overflow-x-auto rounded-lg border border-white/5 bg-surface p-4 font-mono text-xs leading-relaxed text-text-muted">
-          {section.diagram}
-        </pre>
-      )}
+      {section.diagram && <DiagramRenderer diagram={section.diagram} />}
       {section.bullets && (
         <ul className="mt-4 space-y-2">
           {section.bullets.map((bullet) => (
@@ -193,9 +190,7 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
 
           <section>
             <h3 className="text-lg font-semibold">Architecture</h3>
-            <pre className="mt-4 overflow-x-auto rounded-xl border border-white/5 bg-surface p-5 font-mono text-xs leading-relaxed text-text-muted">
-              {study.architecture}
-            </pre>
+            <DiagramRenderer diagram={study.architecture} />
           </section>
 
           <section>

@@ -27,18 +27,18 @@ export const site = {
   ],
   aiHeroStats: [
     { value: "Live", label: "Krashaq AI demo" },
-    { value: "53", label: "automated tests" },
-    { value: "RAG", label: "hybrid retrieval pipeline" },
-    { value: "3", label: "languages supported" },
+    { value: "9", label: "microservices" },
+    { value: "630+", label: "automated tests" },
+    { value: "26", label: "governed agent tools" },
   ],
   featuredProject: {
     id: "krashaq",
     title: "Krashaq AI",
     badge: "Featured project · Personal",
     headline:
-      "Multilingual AI farming platform — live demo, open-source repo, full case study",
+      "Production-grade AI agritech platform — 9 microservices, multi-agent harness, hybrid RAG, live demo",
     outcome:
-      "Solo-built production app: AI crop advisory, supplier subscriptions, weather tools, and proactive alerts.",
+      "Solo architect: two-layer platform with LangGraph agent harness, 26 tools, Qdrant/BM25 RAG, and PostgreSQL outbox alerts.",
     live: "https://krashaq-agritech.vercel.app",
     github: "https://github.com/yashdark01/Krashaq-Ai",
     caseStudyPath: "/work/krashaq",
@@ -124,9 +124,9 @@ export const personas: Record<
       title: "Krashaq AI",
       badge: "Featured project · Personal",
       headline:
-        "Multilingual AI farming platform — live demo, open-source repo, full case study",
+        "Production AI agritech platform — 9 microservices, multi-agent harness, hybrid RAG, live demo",
       outcome:
-        "Solo-built production app: hybrid RAG crop advisory, LangGraph agent, supplier subscriptions, and proactive alerts.",
+        "Solo architect: two-layer platform with LangGraph agent harness, 26 tools, Qdrant/BM25 RAG, and event-driven alerts.",
       live: "https://krashaq-agritech.vercel.app",
       github: "https://github.com/yashdark01/Krashaq-Ai",
       caseStudyPath: "/work/krashaq",
