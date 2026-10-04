@@ -10,7 +10,7 @@ export const site = {
   email: "yashpatidar9691@gmail.com",
   phone: "+91 7987386670",
   resumeUrl:
-    "https://drive.google.com/file/d/1VbUkoZU12HkipJVHGZUfof5RjUdynIO8/view?usp=sharing",
+    "https://drive.google.com/file/d/100asXlkR8WFCpKhWi0OD8Wu_DrOkgBB-/view?usp=sharing",
   /** Set to true when you want LeetCode visible (recommended: 150+ Medium) */
   showLeetCode: false,
   links: {
