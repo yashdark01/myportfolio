@@ -13,6 +13,7 @@ function applyLock() {
   style.left = "0";
   style.right = "0";
   style.overflow = "hidden";
+  style.overflowX = "hidden";
   style.width = "100%";
 }
 
@@ -23,6 +24,7 @@ function clearLockStyles() {
   style.left = "";
   style.right = "";
   style.overflow = "";
+  style.overflowX = "";
   style.width = "";
 }
 
