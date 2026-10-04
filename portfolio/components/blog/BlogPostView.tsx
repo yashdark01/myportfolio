@@ -28,6 +28,19 @@ export default function BlogPostView({ post }: { post: BlogPost }) {
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-text-muted">{post.excerpt}</p>
             <StackTags items={post.tags} className="mt-6" />
+            {/* Author byline — rel=author signals authorship to Google */}
+            <p className="mt-4 text-sm text-text-muted/60">
+              Written by{" "}
+              <Link
+                href="/"
+                rel="author"
+                className="text-text-muted hover:text-accent transition-colors"
+              >
+                Yash Patidar
+              </Link>
+              {" · "}
+              <span>Applied AI Engineer &amp; Full Stack Developer</span>
+            </p>
           </header>
         </div>
 

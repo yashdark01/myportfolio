@@ -91,8 +91,13 @@ export default function HeroClient() {
             <span>IIIT Nagpur · {site.yearsExperience}</span>
           </div>
 
-          <p className="section-label mb-3 text-accent">Engineer / Architect / Builder</p>
+          <p className="section-label mb-3 text-accent">
+            <span className="sr-only">Yash Patidar — </span>
+            Applied AI Engineer · Full Stack Developer · Builder
+          </p>
           <h1 className="hero-title editorial-hero-title uppercase">
+            {/* sr-only span gives Google the exact "Yash Patidar" signal in the h1 */}
+            <span className="sr-only">Yash Patidar — </span>
             <span className="hero-line block">I build digital</span>
             <span className="hero-line hero-line-outline block">systems that</span>
             <span className="hero-line block">think &amp; scale.</span>

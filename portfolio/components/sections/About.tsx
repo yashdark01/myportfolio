@@ -27,7 +27,7 @@ export default function About() {
         >
           <Image
             src={profileImagePath}
-            alt=""
+            alt="Yash Patidar — Applied AI Engineer & Full Stack Developer, IIIT Nagpur"
             width={80}
             height={80}
             sizes="80px"

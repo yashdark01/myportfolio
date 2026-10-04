@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site, socialLinks } from "@/data/site";
 
 export default function Footer() {
@@ -8,7 +9,10 @@ export default function Footer() {
       <div className="site-shell flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-sm text-text-muted">
-            © {new Date().getFullYear()} {site.name}
+            © {new Date().getFullYear()}{" "}
+            <Link href="/" className="hover:text-accent transition-colors">
+              {site.name}
+            </Link>
           </p>
           <p className="mt-1 font-mono text-xs text-text-muted">
             Built with Next.js · Tailwind CSS
