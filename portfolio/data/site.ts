@@ -1,15 +1,16 @@
 export const site = {
   name: "Yash Patidar",
-  title: "Founding Engineer · Full Stack Developer · Horizon17",
+  title: "Full-Stack Engineer specializing in Applied AI · Founding Engineer at Horizon17",
   tagline:
-    "Founding Engineer at Horizon17 — building production AI systems and enterprise sustainability platforms end-to-end.",
+    "Full-stack engineer specializing in applied AI systems. Founding Engineer at Horizon17, building production AI and enterprise sustainability products end-to-end.",
   institution: "IIIT Nagpur · B.Tech CSE",
   yearsExperience: "2+ years of experience",
   status: "Open to opportunities",
   recentlyShipped: "Krashaq AI · Smart Farming Platform",
   email: "yashpatidar9691@gmail.com",
   phone: "+91 7987386670",
-  resumeUrl: "/Yash-Patidar-CV.pdf",
+  resumeUrl:
+    "https://drive.google.com/file/d/1VbUkoZU12HkipJVHGZUfof5RjUdynIO8/view?usp=sharing",
   /** Set to true when you want LeetCode visible (recommended: 150+ Medium) */
   showLeetCode: false,
   links: {
@@ -21,9 +22,9 @@ export const site = {
   },
   heroStats: [
     { value: "Ecometer", label: "enterprise product · EcoMS" },
-    { value: "BRSR", label: "audit-ready reporting" },
-    { value: "Scope 1–3", label: "carbon accounting" },
-    { value: "10+", label: "published client campaigns" },
+    { value: "20+", label: "analytics dashboards" },
+    { value: "7", label: "media categories" },
+    { value: "AI", label: "editable reporting workflows" },
   ],
   aiHeroStats: [
     { value: "Live", label: "Krashaq AI demo" },
@@ -53,10 +54,11 @@ export const site = {
   },
   openTo: {
     roles: [
+      "Applied AI Engineer",
+      "AI Full Stack Developer",
       "Full Stack Engineer",
       "Backend Engineer",
       "Frontend Engineer (React/Next.js)",
-      "Applied AI / LLM Engineer",
     ],
     stage: "Product companies · Series A–D · Enterprise SaaS",
     location:
@@ -91,7 +93,7 @@ export const personas: Record<
 > = {
   product: {
     tagline:
-      "Founding Engineer at Horizon17. I build production-grade full-stack systems — from microservice backends to chart-heavy enterprise dashboards.",
+      "Full-stack engineer specializing in applied AI systems. As a Founding Engineer at Horizon17, I build production products end-to-end — from microservice backends to chart-heavy enterprise dashboards.",
     workIntro:
       "Enterprise product work first — applied AI with a live demo and production internship delivery below.",
     featuredProject: {
@@ -99,14 +101,14 @@ export const personas: Record<
       title: "Ecometer",
       badge: "Featured project · Horizon17",
       headline:
-        "Enterprise sustainability intelligence — measure, manage, and report campaign environmental impact",
+        "Media-focused GHG accounting and AI sustainability reporting across 20+ dashboards",
       outcome:
-        "Founding engineer on EcoMS's patent-filed platform in production across enterprise brands including Amazon, Tata Motors, and HDFC.",
+        "Founding engineer across ingestion, calculations, Recharts dashboards, Google Maps, RBAC, AI report editing, exports, and AWS container delivery.",
       live: "https://ecomsww.com/ecometer-the-carbon-economy-for-advertising",
       caseStudyPath: "/work/horizon17-esg",
       showTechnicalDeepDive: true,
     },
-    projectOrder: ["horizon17-esg", "krashaq", "rent-buddy"],
+    projectOrder: ["horizon17-esg", "ecolynk", "popscan", "krashaq", "rent-buddy"],
     expertiseOrder: [
       "Frontend & Product",
       "Backend & Systems",
@@ -132,7 +134,7 @@ export const personas: Record<
       caseStudyPath: "/work/krashaq",
       showTechnicalDeepDive: true,
     },
-    projectOrder: ["krashaq", "horizon17-esg", "rent-buddy"],
+    projectOrder: ["krashaq", "popscan", "ecolynk", "horizon17-esg", "rent-buddy"],
     expertiseOrder: [
       "AI & LLM",
       "Backend & Systems",
@@ -160,9 +162,11 @@ export const socialLinks = site.showLeetCode
 export const navItems = [
   { id: "work", label: "Work" },
   { id: "process", label: "Process" },
+  { id: "social-proof", label: "Proof" },
   { id: "github", label: "GitHub" },
-  { id: "about", label: "About" },
+  { id: "writing", label: "Writing" },
   { id: "journey", label: "Journey" },
+  { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ] as const;
 
@@ -183,7 +187,7 @@ export const processSteps = [
     number: "03",
     title: "Measure, then optimize",
     description:
-      "On Ecometer's chart-heavy dashboards, per-module code splitting and query tuning cut repeat-load time on filter-heavy views — numbers guided the decision, not intuition. On Rent Buddy I shaved ~30% off hot listing API paths. On Krashaq: 53 Jest tests and streaming chat latency before adding agent complexity.",
+      "On Ecometer's chart-heavy dashboards, per-module code splitting and query tuning improved repeat-load behavior on filter-heavy views. On Rent Buddy I reduced hot listing API response times by ~30%. On Krashaq, 630+ automated tests now cover the nine-service platform before new agent complexity ships.",
   },
   {
     number: "04",
@@ -257,13 +261,13 @@ export function getExpertiseForPersona(persona: Persona) {
 }
 
 export const recruiterSnapshot = {
-  headline: "Founding Engineer · Full Stack Developer · 2+ yrs · React/Next.js · IIIT Nagpur",
+  headline: "Full-Stack Engineer · Applied AI systems · Founding Engineer at Horizon17 · 2+ yrs",
   summary:
-    "Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd., building Ecometer — EcoMS's sustainability intelligence platform. Shipped Krashaq AI — personal full-stack AI farming project with live demo and open-source repo. Experienced with Node.js/Express.js services, microservices, CI/CD, Docker, and event-driven patterns (NATS, Kafka); comfortable with Nginx, S3/MinIO, and AWS EC2/Lambda fundamentals.",
+    "Full-stack engineer specializing in applied AI systems, currently a Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd. I build Ecometer and Ecolynk across ESG analytics, assessments, supplier intelligence, and AI reporting. I also independently architected Krashaq AI with LangGraph agents, governed tools, hybrid RAG, streaming, and a live demo.",
   highlights: [
-    "Founding Engineer · Full Stack Developer at Horizon17 (Apr 2025 – Present)",
-    "Ecometer · enterprise sustainability platform (Horizon17 & EcoMS)",
-    "Krashaq AI · open-source, live at krashaq-agritech.vercel.app",
+    "Current role · Founding Engineer at Horizon17 (Apr 2025 – Present)",
+    "Professional contribution · Ecometer + Ecolynk product engineering",
+    "Independent ownership · Krashaq AI, open-source with a live demo",
     "Platform · microservices, Docker, CI/CD, NATS, Nginx, S3/MinIO",
   ],
   topStack: [
