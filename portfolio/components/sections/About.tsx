@@ -16,7 +16,7 @@ export default function About() {
   const expertiseGroups = getExpertiseForPersona(persona);
 
   return (
-    <SectionWrapper id="about" label="Background" title="About">
+    <SectionWrapper id="about" label="07 / Background" title="Engineer with product instincts." className="editorial-flat">
       <div className="max-w-3xl space-y-6 sm:space-y-8">
         <m.div
           initial={{ opacity: 0, y: 16 }}
@@ -27,7 +27,7 @@ export default function About() {
         >
           <Image
             src={profileImagePath}
-            alt=""
+            alt="Yash Patidar — Applied AI Engineer & Full Stack Developer, IIIT Nagpur"
             width={80}
             height={80}
             sizes="80px"
@@ -46,7 +46,7 @@ export default function About() {
             <p className="mt-1 text-sm leading-relaxed">
               <HighlightText
                 text={site.title}
-                terms={["Founding Engineer", "Horizon17"]}
+                terms={["Full-Stack Engineer", "Applied AI", "Founding Engineer", "Horizon17"]}
                 linkedTerms={{ Horizon17: site.links.horizon17 }}
                 className="text-accent"
               />
@@ -67,21 +67,26 @@ export default function About() {
           className="card-surface space-y-4 p-4 sm:p-6"
         >
           <p className="text-base leading-relaxed text-text-primary sm:text-lg">
-            I&apos;m a Founding Engineer and Full Stack Developer at Horizon17
-            Technology and Sustainability Pvt. Ltd., building enterprise-grade ESG
-            and AI-driven platforms with React.js, Next.js, Node.js, Express.js,
-            and applied LLM systems.
+            I&apos;m a full-stack engineer specializing in applied AI systems and a
+            Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd.
+            I build enterprise ESG and AI products end-to-end with React.js,
+            Next.js, Node.js, Express.js, and applied LLM systems.
           </p>
           <p className="leading-relaxed text-text-muted">
-            At Horizon17, I contribute to Ecometer — EcoMS&apos;s sustainability
-            platform — helping brands and agencies measure and report campaign
-            environmental impact. I&apos;ve worked with microservices, Docker,
-            CI/CD, Nginx, NATS, and object storage (S3/MinIO), and I&apos;m
-            building depth in event-driven systems (Kafka), system design, and AWS
-            EC2/Lambda. Before that, I delivered production client apps during my
-            internship at WebIntegratorz — including Rent Buddy (live at
-            rentbuddy.in), with JWT-secured Express.js backends and mobile-first
-            UIs.
+            At Horizon17, my direct engineering contribution to Ecometer and
+            Ecolynk covers campaign carbon
+            measurement, ESG assessments, materiality, supplier intelligence, AI
+            reporting, and 20+ interactive dashboards. My work spans microservices,
+            RBAC, Google Maps, NATS, Redis/BullMQ, Docker, CI/CD, Nginx, AWS
+            ECR/EC2, and S3/MinIO object storage.
+          </p>
+          <p className="leading-relaxed text-text-muted">
+            My applied AI work includes LangGraph agents, governed tool use,
+            hybrid RAG and vector retrieval, streaming responses, human-in-the-loop
+            workflows, and editable AI artifacts across Krashaq AI, Ecolynk, and
+            an NDA-protected enterprise review platform. Previously, I delivered
+            production client applications at WebIntegratorz, including Rent Buddy,
+            with JWT-secured Express.js backends and mobile-first interfaces.
           </p>
         </m.div>
 
@@ -90,40 +95,20 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="grid gap-3 sm:grid-cols-2"
-        >
-          <div className="card-surface p-4">
-            <p className="section-label mb-1.5">Open to</p>
-            <p className="text-sm leading-relaxed text-text-muted">
-              {site.openTo.roles.join(" · ")}
-            </p>
-          </div>
-          <div className="card-surface p-4">
-            <p className="section-label mb-1.5">Location</p>
-            <p className="text-sm leading-relaxed text-text-muted">
-              {site.openTo.location}
-            </p>
-          </div>
-        </m.div>
-
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.15 }}
         >
           <Button href={site.resumeUrl} external className="w-full sm:w-auto">
-            View Resume ↗
+            View resume ↗
           </Button>
         </m.div>
+      </div>
 
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="border-t border-white/5 pt-8 sm:pt-10"
-        >
+      <m.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.15 }}
+        className="mt-12 border-t border-white/5 pt-8 sm:mt-16 sm:pt-10"
+      >
           <div className="mb-5 sm:mb-6">
             <h3 className="section-label">Where I focus</h3>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">
@@ -148,8 +133,7 @@ export default function About() {
               </div>
             ))}
           </div>
-        </m.div>
-      </div>
+      </m.div>
     </SectionWrapper>
   );
 }

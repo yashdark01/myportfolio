@@ -6,16 +6,20 @@ const RecruiterMode = dynamic(() => import("@/components/RecruiterMode"), {
   ssr: false,
 });
 
-const MobileResumeFab = dynamic(
-  () => import("@/components/layout/MobileResumeFab"),
-  { ssr: false },
-);
+const ScrollProgress = dynamic(() => import("@/components/motion/ScrollProgress"), {
+  ssr: false,
+});
+
+const CustomCursor = dynamic(() => import("@/components/motion/CustomCursor"), {
+  ssr: false,
+});
 
 export default function DeferredWidgets() {
   return (
     <>
+      <ScrollProgress />
+      <CustomCursor />
       <RecruiterMode />
-      <MobileResumeFab />
     </>
   );
 }

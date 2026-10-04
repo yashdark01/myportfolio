@@ -15,6 +15,7 @@ export interface BlogPost {
   title: string;
   excerpt: string;
   date: string;
+  updated?: string;
   tags: string[];
   sections: BlogPostSection[];
 }
@@ -22,207 +23,129 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: "building-krashaq-llm-pipeline",
-    title: "Building Krashaq AI: Multilingual Crop Intelligence at Scale",
+    title: "Evolving Krashaq AI into a Governed Multi-Service Platform",
     excerpt:
-      "How I designed an AI farming platform with multilingual advisory, knowledge-base retrieval, supplier licensing, and proactive crop alerts.",
+      "How I moved Krashaq from an early application prototype to nine services with governed LangGraph tools, hybrid retrieval, durable execution, and proactive crop alerts.",
     date: "2026-04-12",
-    tags: ["AI", "LangGraph", "RAG", "Next.js"],
+    updated: "2026-10-04",
+    tags: ["AI", "LangGraph", "RAG", "Microservices"],
     sections: [
       {
-        title: "The problem",
+        title: "Architecture note",
         content:
-          "Farmers in India need crop advice in Hindi, Hinglish, and English — on mobile, with low bandwidth. Ag-input suppliers need to license access and manage subscriptions at scale. A generic ChatGPT wrapper breaks down quickly: retrieval quality collapses on Roman-script Hinglish, latency spikes on slow networks, and there is no product loop beyond a chat box.",
+          "This article was updated after a major architecture rewrite. The first Krashaq prototype validated multilingual chat, retrieval, and B2B2C access in a smaller application. The current system is a nine-service platform. The sections below describe the current architecture; the earlier version is retained only as an explicit migration lesson, not presented as the production design.",
+      },
+      {
+        title: "The product problem",
+        content:
+          "Smallholder farmers need crop advice in Hindi, Hinglish, and English, plus weather, mandi prices, and proactive risk alerts. Ag-input suppliers need controlled farmer access. A generic chat wrapper cannot provide verified farm context, durable consequential actions, or reliable alerts, so the platform separates reusable AI execution from agricultural domain services.",
         bullets: [
-          "Example query: \"gehu mein peela rang kyun aa raha hai?\" — mixes Hindi morphology with English crop terms",
-          "Pure vector search misses chunks that use formal agronomy vocabulary (\"Triticum aestivum\", \"nitrogen deficiency\")",
-          "Suppliers need B2B2C licensing — farmers linked to a supplier must see trial/expiry before chat access",
+          "Farm-aware answers use verified identity, farm geometry, crop, and growth-stage context",
+          "Tool access is filtered by the authenticated caller's scopes before execution",
+          "High-impact actions require human approval bound to the exact payload",
+          "Weather warnings can trigger proactive alerts without waiting for a chat message",
         ],
       },
       {
-        title: "Architecture overview",
+        title: "Two layers, nine services",
         content:
-          "Krashaq is a Next.js 16 monolith deployed on Vercel (Mumbai region). All backend logic lives in App Router API routes — 90+ endpoints covering chat, auth, supplier/admin dashboards, cron alerts, and LLM session management. Chat flows through a LangGraph StateGraph agent that routes to weather, irrigation, and knowledge-base tools. Retrieved context injects as system messages before the LLM invoke. Groq (Llama 3.3 70B) is the default provider; a configurable fallback chain covers OpenAI, Gemini, and Anthropic when a provider is down or rate-limited.",
+          "I split the system into a reusable UAIP layer and a Krashaq domain layer. UAIP owns the LangGraph runtime, knowledge service, model gateway, and API gateway. Krashaq owns identity and farms, market data and calculators, alerts, weather, and the web experience. The layers communicate through typed HTTP and events; they do not import each other's source or share databases.",
         bullets: [
-          "MongoDB Atlas for users, kb_chunks, subscriptions, chat sessions, notifications",
-          "Hybrid RAG: keyword + vector over kb_chunks with RRF fusion and MMR re-ranking",
-          "Request-scoped RAG cache — agent turns that hit retrieval twice reuse the same result set",
-          "53 Jest tests — auth middleware, RAG scoring, agent graph routing, supplier API contracts",
+          "Reusable layer: agent runtime, knowledge service, model gateway, and API gateway",
+          "Domain layer: auth/farms, data/markets, alerts, weather, gateway, and web client",
+          "Private service paths keep domain APIs away from the public internet",
+          "Independent schemas and migrations keep ownership boundaries enforceable",
         ],
       },
       {
-        title: "Hybrid RAG for Hindi and Hinglish",
+        title: "Hybrid retrieval for short multilingual queries",
         content:
-          "Retrieval lives in src/lib/server/rag/ — vectors co-located with app data in MongoDB, not a separate Pinecone index. Documents in content/kb/ ingest via npm run kb:ingest (4 markdown docs → 8 chunks in the demo seed). Search runs two legs: a BM25-style keyword scorer for short Roman-script queries, and a cosine-similarity vector leg on stored embeddings. Results merge via reciprocal rank fusion (RRF, k=60), then MMR re-ranking removes near-duplicate chunks and a category boost elevates crop-specific docs when detectCrop() finds a crop mention.",
-        code: [
-          {
-            language: "TypeScript · reciprocal rank fusion (src/lib/server/rag/scoring.ts)",
-            code: `export function reciprocalRankFusion<T extends { id: string }>(
-  lists: Array<Array<T & { score: number }>>,
-  k = 60,
-  limit = 5
-): Array<T & { score: number }> {
-  const fused = new Map<string, T & { score: number }>();
-
-  for (const list of lists) {
-    list.forEach((item, rank) => {
-      const rrf = 1 / (k + rank + 1);
-      const existing = fused.get(item.id);
-      if (existing) existing.score += rrf;
-      else fused.set(item.id, { ...item, score: rrf });
-    });
-  }
-
-  return [...fused.values()].sort((a, b) => b.score - a.score).slice(0, limit);
-}`,
-          },
-        ],
+          "The knowledge service combines dense Qdrant retrieval with BM25 lexical search and reciprocal-rank fusion. Dense retrieval captures semantic similarity, while lexical search protects exact crop names, chemical terms, and Roman-script Hinglish tokens that embeddings can underweight. Documents are parsed, token-aware chunked, embedded, and stored behind one retrieval contract.",
         bullets: [
-          "\"gehu mein peela rang\" → keyword leg matches wheat / yellowing / nitrogen deficiency chunks",
-          "\"soybean ke keede\" → category boost pulls pest-management docs ahead of generic irrigation",
-          "No third-party vector DB — fewer dependencies, one deploy target on Vercel",
+          "Qdrant stores 768-dimensional vectors; BM25 supplies the sparse retrieval leg",
+          "RRF merges rankings without pretending the two score scales are directly comparable",
+          "MinIO or S3 stores source artifacts while PostgreSQL tracks ingestion state and metadata",
+          "The knowledge service has 271 passing tests across ingestion, retrieval, and access boundaries",
         ],
       },
       {
-        title: "Agent graph walkthrough",
+        title: "Governed agent execution",
         content:
-          "The LangGraph StateGraph in src/lib/server/agents/graph.ts defines explicit nodes instead of a single-shot prompt. classifyRoute() sends simple weather or irrigation queries down a fast path; crop questions route through RAG injection before the agent node runs. Tool calls dedupe via toolCallKey(name, args) so the same KB search never fires twice in one request. The synthesizer streams over SSE at /api/chat/stream with per-chunk tool status events; the UI deduplicates tool chips and citation sources.",
-        code: [
-          {
-            language: "TypeScript · LangGraph node wiring (simplified)",
-            code: `const graph = new StateGraph(KrashaqStateAnnotation)
-  .addNode("prepare", prepareNode)   // detect language, crop, location
-  .addNode("fast", fastNode)         // weather / irrigation without full RAG
-  .addNode("rag", ragNode)           // retrieve KB context
-  .addNode("injectKb", injectKbNode) // inject citations as system messages
-  .addNode("agent", agentNode)       // LLM with tool binding
-  .addNode("tools", toolNode)        // execute weather, irrigation, KB search
-  .addEdge(START, "prepare")
-  .addConditionalEdges("prepare", routeByIntent)
-  .addEdge("injectKb", "agent")
-  .addConditionalEdges("agent", shouldContinue)
-  .addEdge("tools", "agent")
-  .compile();`,
-          },
-        ],
-      },
-      {
-        title: "Request-scoped RAG cache",
-        content:
-          "Multi-step agent flows often call retrieval more than once per user message — the router checks KB, then the agent re-confirms. Without caching, that doubles MongoDB queries and embedding work. Krashaq uses a Map keyed by query hash, scoped to the request lifecycle, so duplicate tool invocations reuse the same ranked chunk list. This was one of the highest-impact optimizations after consolidating from the split Python backend.",
-        code: [
-          {
-            language: "TypeScript · request-scoped cache pattern",
-            code: `// Map lives on the request context — not global Redis
-const ragCache = new Map<string, RankedChunk[]>();
-
-function cacheKey(query: string, filters: KbFilters): string {
-  return createHash("sha256").update(JSON.stringify({ query, filters })).digest("hex");
-}
-
-async function retrieveWithCache(query: string, filters: KbFilters) {
-  const key = cacheKey(query, filters);
-  const hit = ragCache.get(key);
-  if (hit) return hit;
-
-  const results = await hybridSearch(query, filters);
-  ragCache.set(key, results);
-  return results;
-}`,
-          },
-        ],
-      },
-      {
-        title: "Streaming chat and tool transparency",
-        content:
-          "Farmers on 2G need to see progress — a blank screen while the agent runs three tools feels broken. POST /api/chat/stream returns Server-Sent Events: tool_start, tool_end, citation, and token chunks. The client renders tool chips as they arrive and collapses duplicate citations before the final answer streams. Groq streams tokens quickly on the happy path; fallback providers kick in transparently when resolveLLM() detects a failure.",
-      },
-      {
-        title: "Key trade-off: monolith vs microservices",
-        content:
-          "The project started as split Next.js + FastAPI repos with Ollama, Twilio WhatsApp, and Redis. I consolidated into one codebase because Vercel serverless + MongoDB Atlas covers the production path — fewer deploys, shared TypeScript types, and JWT auth without cross-service tokens. The legacy Python backend is recoverable via git tag legacy/python-backend-v1. WhatsApp/SMS alert delivery is deferred; in-app notifications ship first via hourly Vercel cron at /api/cron/alerts.",
-      },
-      {
-        title: "B2B2C subscription gating",
-        content:
-          "Krashaq is a licensed platform, not a public chatbot. Admins onboard suppliers and set license tiers. Suppliers sell farmer subscriptions; farmers see trial/expiry states before chat access. JWT access (30m) + refresh (7d) tokens with role guards on every protected route. This forced early data-boundary clarity: farmers own their sessions, suppliers see roster analytics, admins see platform-wide usage.",
-      },
-      {
-        title: "Testing what actually breaks",
-        content:
-          "53 Jest tests in __tests__/ cover the paths that fail silently in LLM apps: auth middleware rejecting wrong roles, RRF scoring order, agent router sending crop queries through RAG, supplier API contracts. CI runs lint + test + build on every push. I would add golden-set regression tests for Hinglish queries next — the highest-risk area as the KB grows beyond 4 documents.",
+          "The LangGraph runtime exposes 26 registered tools through a catalog rather than handing the model unrestricted functions. Discovery is scope-aware. A BudgetBroker limits tokens, cost, steps, and wall time. PostgreSQL checkpoints, an action journal, leases, and payload-hash-bound approvals make runs resumable and keep consequential actions auditable.",
         bullets: [
-          "npm run test — ts-jest with mocks for MongoDB and LLM providers",
-          "npm run db:reset — seeds admin, supplier, farmer demo users + KB corpus",
-          "GitHub Actions ci.yml on push; deploy-vercel.yml on workflow_dispatch",
+          "Read-only tools can execute directly when the caller has scope",
+          "Consequential tools pause for approval and resume only if identity, payload, catalog, and preconditions still match",
+          "Idempotency keys and fenced leases prevent duplicate side effects after retries",
+          "The agent runtime has 249 passing tests for routing, budgets, approvals, recovery, and tool contracts",
         ],
       },
       {
-        title: "What I'd do differently",
+        title: "Proactive alerts as an event-driven workflow",
         content:
-          "Retrieval caching and tool deduplication matter as much as model choice — I would instrument RAG cache hit rates and tool-call counts from day one. I would also add structured eval tests for Hinglish queries before expanding the KB, and port WhatsApp webhooks only after in-app alert delivery semantics are stable.",
+          "Weather warnings enter through an internal service boundary, match farms through H3 spatial cells, and fan out to distributed BullMQ workers. PostgreSQL row locking prevents two workers from evaluating the same farm simultaneously. Alert and outbox records commit together so a delivery failure cannot erase the fact that a notification is owed.",
+      },
+      {
+        title: "What changed from the prototype",
+        content:
+          "The earlier application proved the user loop, but its in-process boundaries could not express reusable AI infrastructure, private domain APIs, durable approvals, or independently scaled alert work. The migration introduced operational cost, so I kept the split aligned to concrete ownership and scaling differences rather than creating a service per feature.",
+      },
+      {
+        title: "Evidence and current result",
+        content:
+          "The current platform has 630+ passing automated tests across nine services. The public repository and live demo are linked below, and the case study separates shipped behavior from proposed AWS infrastructure. The main remaining product risk is retrieval quality as the multilingual corpus grows, so the next evidence layer should be a versioned golden-set evaluation for Hindi and Hinglish queries.",
         bullets: [
-          "LangGraph Mongo checkpointer for durable multi-turn sessions",
-          "Per-provider latency histograms to tune the Groq default vs fallback chain",
-          "Golden-set eval: 20 Hinglish crop queries with expected KB doc IDs",
+          "Open source: github.com/yashdark01/Krashaq-Ai",
+          "Live product: krashaq-agritech.vercel.app",
+          "Detailed architecture and ownership: /work/krashaq",
         ],
-      },
-      {
-        title: "Links",
-        content:
-          "Live demo at krashaq-agritech.vercel.app, full case study with engineering deep dive at yashpatidar.vercel.app/work/krashaq, and open-source repo at github.com/yashdark01/Krashaq-Ai. Companion post on B2B2C subscription gating below.",
       },
     ],
   },
   {
     slug: "b2b2c-subscription-gating-nextjs",
-    title: "Building B2B2C Subscription Gating in Next.js",
+    title: "Designing B2B2C Access Boundaries for Krashaq",
     excerpt:
-      "How Krashaq models admin → supplier → farmer licensing with JWT roles, subscription state, and gated route access.",
+      "How Krashaq separates identity, supplier licensing, farmer access, and AI tool authorization across service boundaries.",
     date: "2026-05-02",
-    tags: ["Next.js", "Auth", "B2B2C", "Product"],
+    updated: "2026-10-04",
+    tags: ["Auth", "B2B2C", "Microservices", "Product"],
     sections: [
       {
-        title: "Why gating belongs in the product layer",
+        title: "Authentication is not authorization",
         content:
-          "Krashaq sells through ag-input suppliers — each supplier licenses farmer seats. That means auth is not binary (logged in / out). A farmer can be authenticated but blocked because their subscription expired, or because their supplier's license ran out. The UI must show why access failed, not a generic 403.",
+          "Krashaq uses a B2B2C model: administrators onboard suppliers, suppliers manage farmer access, and farmers use advisory, weather, market, and alert features. A valid session proves identity, but access also depends on role, supplier relationship, subscription state, and the scope required by the requested operation.",
       },
       {
-        title: "Data model",
+        title: "Keep identity authoritative",
         content:
-          "Three roles in the users collection: admin, supplier, farmer. Suppliers hold license records (tier, expiry, seat count). Farmers link to a supplier via farmer_subscriptions with status trial | active | expired. Chat, weather, and alert routes check both JWT role and subscription status before invoking the agent.",
+          "The auth service owns users, sessions, farms, supplier-to-farmer relationships, and verified farm context. Other services consume typed identity claims and private context APIs instead of copying authorization tables or trusting values supplied by the browser.",
         bullets: [
-          "admin → creates supplier licenses via /api/admin/licenses",
-          "supplier → assigns farmer subscriptions via /api/supplier/subscriptions",
-          "farmer → chat gated on active subscription + valid supplier license chain",
+          "Public requests enter through the gateway and carry short-lived identity claims",
+          "Role checks happen at service boundaries, not only in navigation components",
+          "Farm and crop facts come from the authoritative service rather than chat memory",
+          "Private context endpoints expose only the minimum fields required by the caller",
         ],
       },
       {
-        title: "Route guard pattern",
+        title: "Authorize tool discovery before execution",
         content:
-          "API routes use a shared requireRole() middleware and a separate assertFarmerAccess() that walks the subscription chain. The frontend mirrors this — dashboard nav items hide when subscription status is expired, and the chat page shows a renewal prompt instead of an empty input.",
-        code: [
-          {
-            language: "TypeScript · farmer chat gate (simplified)",
-            code: `export async function assertFarmerAccess(userId: string) {
-  const sub = await db.farmerSubscriptions.findOne({ farmer_id: userId });
-  if (!sub || sub.status !== "active") {
-    throw new ApiError(403, "Subscription inactive — contact your supplier");
-  }
-
-  const license = await db.supplierLicenses.findOne({ supplier_id: sub.supplier_id });
-  if (!license || license.expires_at < new Date()) {
-    throw new ApiError(403, "Supplier license expired");
-  }
-
-  return { subscription: sub, license };
-}`,
-          },
+          "The agent runtime filters its 26-tool catalog by caller scope before the model can choose a tool. This is safer than showing every tool and rejecting only at execution time. Tool handlers still re-check authorization because catalog filtering improves least privilege but does not replace enforcement.",
+        bullets: [
+          "Farmer scopes expose advisory, weather, market, and owned-farm operations",
+          "Supplier scopes expose roster and permitted alert workflows",
+          "Administrative operations remain isolated from farmer and supplier sessions",
+          "Consequential actions add payload-bound human approval on top of role checks",
         ],
       },
       {
-        title: "What I'd improve",
+        title: "Make denial states useful",
         content:
-          "Add explicit trial countdown in the farmer UI before expiry, and supplier-facing alerts when they are near seat limits. Audit logs for admin license changes would help enterprise sales conversations.",
+          "The UI mirrors access state so a farmer sees whether access is missing, expired, or awaiting supplier action instead of receiving a generic failure. The server remains authoritative: hiding a control improves usability, while the gateway and owning service enforce the actual boundary.",
+      },
+      {
+        title: "What I would add next",
+        content:
+          "The next layer is better operator evidence: explicit trial countdowns, supplier seat-limit alerts, and an immutable audit trail for license changes. Those features do not change the core model, but they make access decisions easier to explain during support, compliance review, and enterprise onboarding.",
       },
     ],
   },

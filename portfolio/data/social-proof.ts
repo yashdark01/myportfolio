@@ -24,11 +24,11 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [];
 
 export const socialProof = {
-  headline: "Trusted in production",
+  headline: "Public production evidence",
   ecosystem:
-    "Enterprise brands whose sustainability campaigns and events run on Ecometer — part of the EcoMS ecosystem. Published case studies cover large-scale corporate events and OOH campaigns.",
+    "EcoMS publicly documents sustainability campaigns and events for these organizations. I contribute engineering to the Ecometer platform; these names are platform-level evidence, not a claim that I personally owned each client relationship or campaign.",
   linkedInLabel: "View my LinkedIn profile",
   linkedInHref: "https://linkedin.com/in/yash-patidar-97a8861b3",
   linkedInSummary:
-    "Skills endorsements, internship delivery history, and founding-engineer context on Ecometer — all on my LinkedIn profile.",
+    "Role history, skills endorsements, and professional context for my work at Horizon17 and WebIntegratorz.",
 } as const;

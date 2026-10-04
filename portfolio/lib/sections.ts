@@ -1,13 +1,13 @@
 /** Homepage section ids used for in-page navigation */
 export const homeSectionIds = [
   "hero",
-  "process",
   "work",
+  "process",
+  "social-proof",
   "github",
   "writing",
   "journey",
   "about",
-  "open-to",
   "contact",
 ] as const;
 

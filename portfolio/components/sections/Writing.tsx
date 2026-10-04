@@ -8,7 +8,7 @@ import { blogPosts, getReadTime } from "@/data/blog";
 
 export default function Writing() {
   return (
-    <SectionWrapper id="writing" label="Writing" title="Technical Writing">
+    <SectionWrapper id="writing" label="05 / Technical notes" title="Technical writing." className="editorial-flat">
       <p className="-mt-8 mb-8 max-w-2xl text-sm leading-relaxed text-text-muted">
         Long-form notes on applied AI and enterprise frontend work — companion
         pieces to the case studies above.

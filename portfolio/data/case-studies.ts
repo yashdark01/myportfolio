@@ -242,13 +242,40 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "The product — Ecometer",
         content:
-          "Ecometer gives brands, agencies, and event organizers one unified system to measure, manage, and report environmental performance across OOH, DOOH, print, digital, and experiential campaigns — from media planning through post-campaign recovery, without compromising creativity or speed.",
+          "Ecometer is a media-focused GHG accounting and AI sustainability reporting platform. It turns fragmented campaign and activity data into validated emissions metrics, interactive analysis, and editable sustainability reports across seven configured media categories.",
         bullets: [
-          "Measure — real-time carbon footprint across all major campaign and event channels",
-          "Manage — data-driven insights to optimize materials, media choices, and execution",
-          "Circularity — accountability for materials beyond campaign closure; recycling and reuse built in",
-          "Report — BRSR- and ESG-aligned reporting designed to stand up to audit scrutiny",
-          "Visualise — interactive dashboards that translate complex sustainability data into actionable insights",
+          "Capture — structured forms, OCR-assisted bills, standardized Excel imports, and map-based location inputs",
+          "Calculate — normalize activity records and apply configured emission-factor logic",
+          "Visualise — 20+ responsive dashboards built with editable React charting",
+          "Report — AI-assisted BRSR, GRI, TCFD, and other configured framework workflows",
+          "Publish — export reviewed reports as DOCX, PDF, or Markdown",
+          "Govern — backend-enforced RBAC separates enterprise responsibilities and protected operations",
+        ],
+      },
+      {
+        title: "Accounting and ingestion workflow",
+        content:
+          "Every ingestion path feeds one validated accounting pipeline. Users can enter activity data manually, upload supporting bills for Microsoft Azure OCR, or populate a standardized Excel template for bulk import. Parsed values return to the product forms for review before calculation, so automation reduces repetitive work without silently changing accounting records.",
+        bullets: [
+          "Manual forms support structured activity capture across seven media categories",
+          "Azure OCR extracts candidate values from bills and supporting documents",
+          "Excel parsing maps standardized columns into the same logical form fields",
+          "Google Maps and a location picker capture site-level location context where required",
+          "Validation and normalization run before configured emission factors are applied",
+          "The resulting GHG metrics power dashboards and reporting without duplicate calculation paths",
+        ],
+      },
+      {
+        title: "Twenty plus dashboards and location intelligence",
+        content:
+          "The analyst experience includes more than 20 dashboard views and modules for exploring media activity, calculated emissions, reporting progress, and operational context. Recharts turns API data into responsive visualizations, while Google Maps and the location picker connect relevant records to geographic context.",
+        bullets: [
+          "20+ dashboard views across accounting, campaign, reporting, and operational workflows",
+          "Reusable Recharts components for bar, line, pie, and comparison views",
+          "Filter-aware data loading for media category, campaign, time, and other product dimensions",
+          "Google Maps visualization and interactive location selection",
+          "Responsive layouts for dense enterprise data without reducing mobile usability",
+          "Chart configuration remains separate from calculation logic and source data",
         ],
       },
       {
@@ -264,12 +291,16 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "My role",
         content:
-          "As Founding Engineer and Full Stack Developer at Horizon17, I build core product features on Ecometer — the platform EcoMS delivers to enterprise clients. I can't share internal architecture diagrams or proprietary business logic, but here's the type of engineering work I own day-to-day:",
+          "As Founding Engineer and Full Stack Developer at Horizon17, I work across Ecometer's product experience and service platform. The portfolio keeps proprietary calculation rules and production configuration abstract, but the capabilities below reflect my direct engineering contribution:",
         bullets: [
-          "Frontend architecture — chart-heavy sustainability dashboards in Next.js with SSR, dynamic data fetching, and compliance-ready export flows",
-          "Backend services — event-driven microservices with NATS messaging, Docker-based deployments, and MinIO/S3 object storage for audit-ready documents",
-          "Performance — query tuning and caching on dashboard routes where chart render time directly affects analyst workflows",
-          "Trade-off conversations — I can walk through specific decisions in an interview even when implementation details stay under NDA",
+          "Built and maintained 20+ Next.js dashboard views with reusable Recharts visualizations and filter-heavy data workflows",
+          "Implemented Google Maps views and an interactive location picker for geographic activity context",
+          "Built Azure OCR bill ingestion and standardized Excel parsing, validation, mapping, and form population",
+          "Developed the AI-native report editor: editable sections, selection-based AI changes, chart switching, and drag/reorder interactions",
+          "Implemented DOCX, PDF, and Markdown export workflows for reviewed reports",
+          "Worked across Node.js microservices, Redis/BullMQ jobs, MongoDB, PostgreSQL, Pinecone, LangChain/LangGraph, and S3",
+          "Implemented RBAC-aware interfaces and backend permission enforcement for protected enterprise workflows",
+          "Worked on Docker/Nginx services and CI/CD that publishes images to ECR and deploys them on AWS EC2",
         ],
       },
       {
@@ -278,54 +309,103 @@ export const caseStudies: CaseStudy[] = [
           "Ecometer is in active production across enterprise sustainability workflows. Public proof points from EcoMS marketing and published case studies:",
         bullets: [
           "10+ published enterprise campaigns and events — Amazon, Tata Motors, HDFC, Nykaa, Nivea, Wonder Cement, and others",
-          "5 channel types measured — OOH, DOOH, print, digital, and experiential activations",
+          "7 configured media categories, including events, OOH, DOOH, television, digital, and print workflows",
+          "20+ dashboard views and modules for accounting, visualization, and reporting workflows",
+          "3 export formats — DOCX, PDF, and Markdown",
           "Patent-filed platform serving 12+ industries from manufacturing to financial services",
           "Platform: ecomsww.com/ecometer-the-carbon-economy-for-advertising",
         ],
       },
     ],
     challenges: [
-      "Building chart modules that stay responsive when analysts filter across campaign types with very different data shapes — OOH billboards vs digital impressions vs on-ground events",
-      "Designing cache invalidation for compliance-sensitive metrics — stale sustainability data is worse than a slow load",
-      "Shipping dashboard features under NDA while still being able to explain engineering trade-offs to hiring teams",
+      "Keeping 20+ dashboard views responsive when seven media categories produce different record shapes, filters, and aggregation requirements",
+      "Mapping manual, OCR, Excel, and map-selected inputs into one canonical calculation flow without creating inconsistent data paths",
+      "Keeping AI-generated narrative and chart specifications editable while validating structured output at the frontend boundary",
+      "Enforcing RBAC consistently across navigation, frontend actions, API routes, file access, and background workflows",
+      "Automating Docker deployments through ECR and EC2 without exposing production configuration or relying on manual server builds",
     ],
     learnings: [
-      "Audit-readiness is a product constraint, not a reporting afterthought — export flows and data lineage matter as much as the charts",
-      "Activity-based carbon measurement (localized emission factors) requires UX that makes assumptions visible to non-technical stakeholders",
-      "Event-driven microservices pay off when campaign types share reporting standards but have distinct ingestion paths",
+      "A canonical validated data model is what lets forms, OCR, spreadsheets, maps, dashboards, and AI reports reuse the same accounting truth",
+      "AI should produce structured chart data rather than chart images when users need to edit, test, and change visualizations",
+      "Enterprise RBAC must be enforced server-side; hiding UI controls is helpful feedback, not authorization",
+      "Queueing document and AI workloads protects normal API responsiveness and creates clearer retry boundaries",
+      "Immutable container images and automated deployment gates make a small team more confident than rebuilding applications directly on EC2",
     ],
     technicalSections: [
       {
         title: "Platform architecture (abstract)",
         content:
-          "Ecometer runs as an event-driven platform — campaign and event data flows through microservices that compute environmental metrics, generate compliance outputs, and serve interactive dashboards. Specific service boundaries and schemas are confidential; this describes the shape without revealing proprietary internals.",
+          "Ecometer separates the interactive Next.js product, Node.js service layer, background processing, data stores, AI workflows, artifact storage, and AWS runtime. Specific service boundaries, formulas, schemas, and production configuration remain confidential.",
         bullets: [
-          "Event-driven microservices communicating over NATS — decoupled ingestion, calculation, and reporting paths",
-          "Next.js frontend with SSR for chart-heavy dashboard routes and selective lazy loading per module",
-          "MinIO/S3 object storage for audit-ready document exports and compliance artifacts",
-          "Docker-based deployments with CI/CD pipelines across the service mesh",
+          "Next.js frontend — forms, maps, 20+ dashboards, report editor, chart editing, and export UX",
+          "Node.js microservices — APIs, validation, calculation orchestration, RBAC, and workflow boundaries",
+          "Redis/BullMQ — document, AI reporting, and export work outside synchronous request paths",
+          "MongoDB and PostgreSQL — document-oriented and relational operational data by service need",
+          "LangChain/LangGraph and Pinecone — AI workflow orchestration and semantic retrieval where required",
+          "Amazon S3 — uploaded documents, generated reports, and other controlled artifacts",
+          "Docker + ECR + EC2 + Nginx — versioned services delivered through automated CI/CD",
         ],
       },
       {
-        title: "Frontend — dashboards & exports",
+        title: "Frontend — dashboards, charts, and maps",
         content:
-          "My primary ownership is the analyst-facing UI — sustainability dashboards that load heavy charts, campaign filters, and environmental reporting panels teams open daily.",
+          "My primary ownership includes the analyst-facing UI: more than 20 dashboard views, reusable chart modules, geographic inputs, dense filter workflows, and the interactive reporting workspace.",
         bullets: [
-          "Server-side rendering + code splitting per dashboard module — avoids one monolithic bundle for chart-heavy views",
-          "Dynamic data fetching patterns tuned for filter-heavy analyst workflows",
-          "Compliance-ready export flows — BRSR-aligned outputs that stand up to audit scrutiny, even when generation takes longer",
-          "Core Web Vitals and chart render time as the optimization targets, not vanity bundle size",
+          "Reusable Recharts components render calculated metrics across bar, line, pie, and comparison views",
+          "Google Maps presents relevant location context; the location picker captures user-confirmed coordinates",
+          "Filter-aware data fetching supports media category, campaign, reporting period, and workflow-specific dimensions",
+          "Module-level code splitting avoids shipping every chart and enterprise workflow in one bundle",
+          "Responsive information hierarchy keeps dense dashboards usable across desktop and smaller viewports",
         ],
       },
       {
-        title: "Backend & data flow",
+        title: "Ingestion and GHG calculation flow",
         content:
-          "Backend work spans metric computation services, reporting pipelines, and the messaging layer that connects campaign ingestion to dashboard updates.",
+          "Manual forms, OCR results, Excel imports, and relevant location inputs converge on one validation and normalization layer before calculation. The configured carbon formulas and emission factors remain proprietary, but the public architecture shows how the product prevents ingestion method from changing accounting behavior.",
+        bullets: [
+          "Azure OCR proposes bill values; users review and correct them before submission",
+          "Standardized Excel templates make columns and units predictable for bulk parsing",
+          "Parsed spreadsheet values populate product forms instead of bypassing validation",
+          "Normalized records feed configured emission-factor and aggregation logic",
+          "Persisted GHG metrics are reused by dashboards and framework-specific reports",
+        ],
+      },
+      {
+        title: "AI-native reporting and chart contracts",
+        content:
+          "The reporting system uses sustainability metrics and a selected framework to generate narrative blocks and structured chart specifications. The frontend owns rendering and editing, so AI output stays an editable starting point rather than a locked document.",
+        bullets: [
+          "Framework-aware generation supports workflows such as BRSR, GRI, and TCFD",
+          "AI returns machine-readable chart data and configuration rather than static chart images",
+          "Recharts renders the specification and lets users change visualization type or configuration",
+          "Users can manually edit, select text for AI assistance, and drag or reorder report blocks",
+          "Reviewed report content exports to DOCX, PDF, and Markdown",
+        ],
+      },
+      {
+        title: "Backend, RBAC, and asynchronous work",
+        content:
+          "Backend services own validation, calculations, permissions, storage coordination, and long-running workflow state. Authorization is enforced at the service layer, while queues prevent document and AI tasks from blocking interactive APIs.",
         bullets: [
           "REST APIs across Node.js / Express.js microservices — specific endpoints and schemas are confidential",
-          "NATS messaging for event propagation between ingestion, calculation, and reporting services",
-          "Query tuning on hot metric paths — measurable chart render improvements guided optimization decisions",
-          "Write-through cache invalidation for compliance-sensitive data — correctness over hit rate",
+          "RBAC checks protected operations on the backend; role-aware UI improves clarity without becoming the security boundary",
+          "Redis/BullMQ decouples OCR, report generation, chart preparation, and document export workloads",
+          "Controlled S3 access patterns avoid exposing unrestricted object-store credentials in the browser",
+          "Structured AI/frontend contracts reduce fragile parsing and improve testability",
+          "Query tuning and caching focus on the aggregation paths that power filter-heavy dashboards",
+        ],
+      },
+      {
+        title: "AWS deployment and automated delivery",
+        content:
+          "The deployment path packages services as Docker images, publishes approved versions to Amazon ECR, and runs them on AWS EC2 behind Nginx. CI/CD keeps local, validation, and production artifacts consistent while IAM controls infrastructure access.",
+        bullets: [
+          "Automated checks gate the container build and deployment stages",
+          "Versioned images are published to Amazon ECR instead of building source directly on the host",
+          "AWS EC2 runs the approved Docker services",
+          "Nginx provides the reverse-proxy and service-routing boundary",
+          "IAM limits infrastructure and storage access by deployment responsibility",
+          "Exact workflow provider, credentials, network layout, and production commands remain confidential",
         ],
       },
       {
@@ -334,21 +414,451 @@ export const caseStudies: CaseStudy[] = [
           "Every major choice balances enterprise compliance requirements with the speed analysts need in daily workflows.",
         bullets: [
           "Unified platform over point solutions — one measure-through-report system instead of disconnected spreadsheets",
-          "Audit-ready reporting over quick exports — BRSR-aligned outputs even when generation takes longer",
-          "Modular campaign types under shared reporting standards — OOH, digital, print, experiential flexibility without losing comparability",
-          "SSR for dashboard routes over pure client rendering — faster first meaningful paint for chart-heavy views",
+          "One normalized calculation path over ingestion-specific logic — forms, OCR, Excel, and maps cannot silently produce different accounting behavior",
+          "Structured chart JSON + Recharts over generated chart images — editable, testable, and visualization-independent",
+          "Human-reviewed OCR and map selection over automatic submission — automation assists but does not silently commit accounting inputs",
+          "Background jobs over synchronous AI and export requests — better API responsiveness and failure recovery",
+          "Server-enforced RBAC over UI-only restrictions — authorization holds even when clients are bypassed",
+          "Immutable ECR images over production host builds — repeatable CI/CD and clearer rollback boundaries",
         ],
       },
     ],
     technicalChallenges: [
-      "Keeping dashboard modules performant when each campaign type (OOH, DOOH, print, digital, experiential) has distinct data inputs and chart requirements",
-      "Balancing cache hit rates against compliance correctness — sustainability metrics cannot go stale silently",
-      "Coordinating frontend export flows with backend reporting services without exposing proprietary calculation logic",
+      "Keeping 20+ Recharts dashboards performant when media categories have different filters, input density, and aggregation shapes",
+      "Preserving one accounting contract while values arrive from manual forms, Azure OCR, Excel uploads, and location workflows",
+      "Synchronizing an editable AI report canvas with structured chart data and asynchronous export generation",
+      "Applying RBAC consistently across frontend affordances, APIs, job creation, file access, and generated artifacts",
+      "Automating image delivery from CI/CD to ECR and EC2 while keeping Nginx routing and service recovery predictable",
     ],
     technicalLearnings: [
-      "In compliance-heavy domains, cache invalidation strategy is a product decision — not just an infrastructure detail",
-      "Chart-heavy enterprise dashboards need module-level code splitting, not page-level lazy loading alone",
-      "Abstract architecture descriptions in portfolios still land when they're specific about trade-offs, even under NDA",
+      "Chart-heavy enterprise products need reusable visualization contracts and module-level code splitting, not just page-level lazy loading",
+      "Structured AI output is the foundation of an editable report experience; free-form model text is not enough",
+      "OCR and map automation should propose reviewable inputs when those values influence regulated or auditable calculations",
+      "RBAC is a cross-layer contract, not a sidebar-menu feature",
+      "Versioned ECR images and automated deployment gates provide a safer operational boundary than rebuilding applications on EC2",
+    ],
+  },
+  {
+    ...projects.find((project) => project.id === "ecolynk")!,
+    caseStudyTitle:
+      "Building enterprise materiality, supplier assessment, risk intelligence, and AI reporting workflows at scale",
+    timeline:
+      "Apr 2025 – Present · Founding Engineer · Full Stack Developer · Horizon17 Technology and Sustainability Pvt. Ltd.",
+    showTechnicalDetails: true,
+    sections: [
+      {
+        title: "The product — Ecolynk",
+        content:
+          "Ecolynk is the broader enterprise ESG platform in the EcoMS product family. It supports 17 industries across 14 sectors and brings accounting, assessments, stakeholder engagement, supplier intelligence, target setting, disclosure, and AI reporting into one system. The public EcoMS website describes it as a unified platform for emissions, supply chains, governance, social impact, and audit-ready disclosure.",
+        bullets: [
+          "GHG accounting and sustainability data management",
+          "Single- and double-materiality assessment workflows",
+          "Supplier assessment and risk intelligence",
+          "Investor reporting, ESG rating, LCA, and target-setting modules",
+          "AI-native reporting with editable artifacts and multi-format export",
+          "20+ dashboards across assessment, supplier, reporting, and operational workflows",
+        ],
+      },
+      {
+        title: "My ownership",
+        content:
+          "My deepest individual ownership is Supplier Assessment and Materiality Assessment, supported by cross-stack work on dashboards, AI reporting, access control, asynchronous processing, and deployment. I built the workflows from user interaction through backend orchestration and analytical output.",
+        bullets: [
+          "Built materiality topic templates, question-to-topic mapping, and single/double-materiality assessment flows",
+          "Implemented AI topic recommendation using company, sector, knowledge-base, reference-report, and research context",
+          "Built large-scale stakeholder and supplier questionnaire distribution using NATS and Redis/BullMQ",
+          "Implemented response collection, aggregation, materiality matrices, supplier dashboards, and AI-assisted risk signals",
+          "Built 20+ Recharts dashboard views and Google Maps/location-picking workflows",
+          "Worked on RBAC-aware frontend experiences and backend authorization",
+          "Contributed to the chat-plus-artifact AI report editor and HTML/DOCX/PDF exports",
+          "Worked across CI/CD, Docker, ECR, EC2, Nginx, IAM, and supporting AWS services",
+        ],
+      },
+      {
+        title: "Materiality assessment workflow",
+        content:
+          "The materiality module helps organizations identify and prioritize the sustainability topics that matter to the company and its stakeholders. Users can start from reusable templates, receive context-aware AI recommendations, map questions to topics, distribute assessments, and turn collected responses into a recomputable materiality matrix.",
+        bullets: [
+          "Company and sector context guide topic relevance",
+          "Reusable templates prevent teams from rebuilding every assessment from zero",
+          "Questions remain explicitly mapped to materiality topics",
+          "Single- and double-materiality workflows are supported by configuration",
+          "Raw responses, topic aggregation, and visualization data remain separate",
+          "Users review and finalize AI recommendations before assessment use",
+        ],
+      },
+      {
+        title: "AI topic recommendation and research",
+        content:
+          "The recommendation flow combines organization context with curated knowledge and research rather than relying only on generic model memory. AI proposes a draft topic set; sustainability users remain responsible for review, editing, and final approval.",
+        bullets: [
+          "Company profile and sector/industry context personalize the recommendation",
+          "Internal knowledge supports curated ESG and competitor/reference material",
+          "Research context extends evidence where the workflow requires it",
+          "Pinecone-backed retrieval supplies relevant knowledge to LangChain/LangGraph workflows",
+          "Recommendations remain drafts with traceable human review",
+        ],
+      },
+      {
+        title: "Supplier assessment and risk intelligence",
+        content:
+          "Organizations can assign questionnaires to large supplier populations, track completion, aggregate responses, and review supplier-level and portfolio-level performance. AI uses available assessment evidence to help prioritize suppliers that may require closer attention; it supports governance decisions rather than replacing them.",
+        bullets: [
+          "Reusable questionnaire and supplier-assignment workflows",
+          "Bulk assignment and one-action distribution",
+          "Response status and evidence tracking",
+          "Supplier-level and portfolio-level dashboards",
+          "Risk and threat signals tied back to available assessment evidence",
+          "Human interpretation remains part of supplier-governance decisions",
+        ],
+      },
+      {
+        title: "Asynchronous distribution at enterprise scale",
+        content:
+          "Sending assessments to a large stakeholder or supplier population cannot stay inside one API request. Ecolynk validates the business action, publishes distribution events through NATS, and uses Redis/BullMQ queues so workers process recipients independently with controlled retries.",
+        bullets: [
+          "The initiating request stays responsive regardless of recipient count",
+          "Workers consume delivery jobs at a controlled rate",
+          "Failed messages are isolated from successful recipients",
+          "Queue state makes pending, completed, and failed work observable",
+          "NATS decouples service events while Redis/BullMQ provides durable job state, retries, and worker concurrency",
+        ],
+      },
+      {
+        title: "Twenty plus dashboards, charts, and maps",
+        content:
+          "More than 20 dashboards turn assessment and ESG data into actionable views across materiality, suppliers, responses, reporting, and operational workflows. Recharts provides reusable visualization components, while Google Maps and the location picker add geographic context where enterprise records require it.",
+        bullets: [
+          "20+ dashboard views and analytical modules",
+          "Reusable Recharts components for trends, comparisons, portfolio views, and matrices",
+          "Materiality-matrix visualization derived from recomputable aggregation data",
+          "Google Maps visualization and interactive location selection",
+          "Filter-aware API integration across organization, assessment, supplier, status, and time dimensions",
+          "Responsive rendering for dense enterprise workflows",
+        ],
+      },
+      {
+        title: "AI-native reporting workspace",
+        content:
+          "Ecolynk's reporting experience combines a conversational interface with an artifact-style report panel. Users can create a report through chat, continue updating it with prompts, edit the artifact directly, and export the reviewed result without regenerating the whole document for every change.",
+        bullets: [
+          "Chat-driven report creation and iterative updates",
+          "Persistent artifact state in a dedicated report panel",
+          "Direct manual editing and AI-assisted changes",
+          "Layout and content adjustments inside an editable canvas",
+          "HTML, DOCX, and PDF export workflows",
+        ],
+      },
+      {
+        title: "RBAC and enterprise boundaries",
+        content:
+          "Ecolynk serves internal ESG teams, external stakeholders, and suppliers, so permissions must follow the assessment and organization context. Role-aware interfaces improve usability, while backend authorization remains the enforcement boundary for protected operations and artifacts.",
+        bullets: [
+          "RBAC controls protected assessment, supplier, reporting, and administration actions",
+          "Recipient context remains associated with the correct organization and assessment",
+          "S3 access uses controlled application paths rather than unrestricted browser credentials",
+          "Microservice boundaries reduce unnecessary access across modules",
+          "AWS IAM separately governs infrastructure and service access",
+        ],
+      },
+      {
+        title: "Production delivery",
+        content:
+          "Services are packaged as Docker images, validated through CI/CD, published to Amazon ECR, and deployed on AWS EC2 behind Nginx. The public portfolio describes responsibility boundaries while omitting confidential runner identities, network layout, credentials, and production commands.",
+        bullets: [
+          "CI/CD gates image creation and deployment on required validation",
+          "Amazon ECR stores versioned deployable images",
+          "AWS EC2 runs the approved service containers",
+          "Nginx provides reverse-proxy routing and one controlled ingress",
+          "IAM limits cloud access for deployment, messaging, and storage responsibilities",
+          "Amazon S3, NATS messaging, and Redis/BullMQ workers remain isolated behind service boundaries",
+        ],
+      },
+    ],
+    challenges: [
+      "Distributing assessments to large recipient populations without blocking user-facing APIs or losing per-recipient delivery visibility",
+      "Preserving traceability from raw questionnaire responses through topic aggregation, matrix coordinates, supplier metrics, and AI insights",
+      "Keeping 20+ dashboard views responsive across organization, assessment, supplier, and reporting data shapes",
+      "Using AI research and recommendation to accelerate ESG work without turning model output into an unreviewed decision",
+      "Applying RBAC consistently across internal users, external recipients, APIs, background jobs, and generated artifacts",
+      "Operating a multi-service platform through automated ECR/EC2 delivery while keeping Nginx routing and rollback behavior predictable",
+    ],
+    learnings: [
+      "Enterprise fan-out is a workflow problem, not an email loop; NATS and Redis/BullMQ provide the event isolation, durable processing, and visibility large distributions require",
+      "Materiality analytics stay trustworthy when raw responses, topic mappings, aggregation, and matrix rendering remain distinct layers",
+      "AI risk signals are most useful when they remain traceable to assessment evidence and explicitly support—not replace—human judgment",
+      "RBAC must be enforced by backend services even when the frontend already hides unavailable actions",
+      "Versioned container images and automated deployment gates are safer than rebuilding application code directly on EC2",
+    ],
+    technicalSections: [
+      {
+        title: "Multi-service platform architecture",
+        content:
+          "Next.js owns the interactive product; Node.js microservices own validation, permissions, workflow state, and module boundaries; asynchronous infrastructure owns large distributions and internal jobs; specialized stores support operational, relational, queue, semantic, and artifact workloads.",
+        bullets: [
+          "Next.js — assessments, dashboards, maps, materiality matrix, supplier analytics, and report editor",
+          "Node.js microservices — protected APIs, workflow orchestration, response collection, and aggregation",
+          "NATS — decoupled events across assessment and distribution services",
+          "Redis/BullMQ — durable recipient jobs, controlled concurrency, retries, and worker-driven processing",
+          "MongoDB/PostgreSQL — document-oriented and relational data by module requirement",
+          "Pinecone + LangChain/LangGraph — knowledge retrieval and stateful AI workflows",
+          "Amazon S3 — documents, generated reports, and controlled artifacts",
+        ],
+      },
+      {
+        title: "Assessment distribution and data model",
+        content:
+          "One user action creates a durable workload rather than performing downstream sends synchronously. Responses preserve assessment, recipient, question, and topic context so the same evidence can power status views, dashboards, matrices, and risk analysis.",
+        bullets: [
+          "Validated assessment and recipient selection precede job creation",
+          "NATS and Redis/BullMQ separate distribution throughput from API latency",
+          "Per-recipient work isolates failure and retry behavior",
+          "Response records retain links to question and materiality topic",
+          "Aggregations can be recomputed without rewriting raw responses",
+        ],
+      },
+      {
+        title: "Dashboard, map, and matrix rendering",
+        content:
+          "Frontend visualization components consume structured API contracts. Recharts owns interactive chart rendering; Google Maps owns geographic context and location selection; the materiality matrix consumes topic-level coordinates derived from assessment aggregation.",
+        bullets: [
+          "Reusable chart contracts reduce one-off visualization code across 20+ dashboards",
+          "Filter state remains synchronized with the data request that produced each visualization",
+          "Map selections are reviewable inputs rather than silent coordinate mutations",
+          "Matrix visualization stays separate from the underlying scoring configuration",
+          "Module-level loading keeps dense dashboard routes responsive",
+        ],
+      },
+      {
+        title: "RBAC and recipient isolation",
+        content:
+          "Application authorization is enforced by backend services and scoped to organization, role, assessment, supplier, and artifact context. External questionnaire recipients receive only the workflow context required for their assigned assessment.",
+        bullets: [
+          "UI capability state reflects permissions but does not replace backend checks",
+          "Protected mutations validate actor and organization context",
+          "Assessment links remain bound to the intended workflow and response record",
+          "S3 artifacts are accessed through controlled application patterns",
+          "AWS IAM separately restricts cloud infrastructure capabilities",
+        ],
+      },
+      {
+        title: "AI recommendation, risk, and reporting",
+        content:
+          "AI workflows use structured business context and retrieved knowledge. Topic recommendations are human-reviewed drafts, supplier risk remains decision support tied to evidence, and report updates modify persistent artifact state instead of recreating an opaque static output.",
+        bullets: [
+          "Company, sector, template, knowledge, and research context shape topic recommendations",
+          "Supplier risk signals remain connected to assessment evidence where supported",
+          "LangGraph coordinates stateful recommendation and reporting workflows",
+          "The reporting agent updates an editable artifact alongside conversation",
+          "HTML, DOCX, and PDF exports derive from reviewed report state",
+        ],
+      },
+      {
+        title: "CI/CD and AWS runtime",
+        content:
+          "The delivery path validates services, builds versioned Docker images, publishes approved artifacts to ECR, and updates EC2-hosted containers behind Nginx. The same image boundary supports repeatability and rollback without rebuilding source on the production host.",
+        bullets: [
+          "Required checks gate build and deployment stages",
+          "Amazon ECR provides immutable versioned application images",
+          "AWS EC2 hosts the approved multi-service runtime",
+          "Nginx handles reverse-proxy routing",
+          "IAM limits deployment and S3 access while service credentials protect NATS and Redis/BullMQ",
+          "Workflow provider, secrets, exact network layout, and production commands remain confidential",
+        ],
+      },
+    ],
+    technicalChallenges: [
+      "Maintaining per-recipient state across high-volume NATS events, Redis/BullMQ jobs, and independently retried workers",
+      "Designing structured contracts that support dashboards, materiality matrices, supplier risk analysis, and AI reporting from shared evidence",
+      "Preventing role-aware UI from becoming the only authorization layer in a multi-tenant assessment product",
+      "Keeping container delivery repeatable across multiple services without leaking production configuration into the repository or portfolio",
+    ],
+    technicalLearnings: [
+      "Fan-out systems need idempotent recipient work and observable queue state, not simply more concurrent requests",
+      "Materiality and supplier intelligence become explainable when every aggregate can trace back to assessment evidence",
+      "An editable AI artifact is a better enterprise reporting contract than a one-shot generated document",
+      "Container versioning and server-side RBAC are operational controls, not presentation details",
+    ],
+  },
+  {
+    ...projects.find((project) => project.id === "popscan")!,
+    caseStudyTitle:
+      "Building a resilient AI-assisted review workflow for large campaign presentations",
+    timeline:
+      "Enterprise product · Two-person engineering team · Production deployment owned independently",
+    showTechnicalDetails: true,
+    sections: [
+      {
+        title: "The enterprise use case",
+        content:
+          "PopScan helps campaign operations teams review proof-of-performance presentations containing large volumes of installation photographs. Instead of manually inspecting every slide and managing findings in disconnected files, reviewers receive structured AI-assisted findings, annotated presentation outputs, and one place to manage decisions and rectification history.",
+        bullets: [
+          "Large presentation ingestion and slide-level processing",
+          "AI-assisted visual quality review with structured issue regions",
+          "Human acceptance or rejection before findings progress",
+          "Annotated presentation generation for a reviewable final artifact",
+          "Issue history and rectification state across recurring campaign cycles",
+        ],
+      },
+      {
+        title: "My contribution and ownership",
+        content:
+          "I built PopScan with one engineering teammate. We collaborated across the product and processing workflow; my contribution covered full-stack product work, long-running job UX, backend reliability, testing, and production delivery. I independently owned the automated AWS deployment path from validated change to container image and public ingress.",
+        bullets: [
+          "Co-built the Next.js application and Node.js/FastAPI processing workflow in a two-person team",
+          "Implemented live processing visibility with structured Server-Sent Events",
+          "Worked on checkpointed processing, retry behavior, and slide-level idempotency",
+          "Built workflow surfaces for review decisions and issue lifecycle visibility",
+          "Dockerized the services and independently deployed them to AWS EC2",
+          "Owned Amazon ECR image delivery and Nginx reverse-proxy configuration",
+          "Added CI/CD automation so tested, versioned releases deploy without manual server builds",
+          "Used Jest and React Testing Library for component, interaction, and regression coverage",
+        ],
+      },
+      {
+        title: "AI-assisted document pipeline",
+        content:
+          "A presentation review is modeled as an asynchronous workflow rather than one long HTTP request. Slides are extracted and processed in controlled batches by background workers. The vision pipeline returns structured findings and issue regions; the document stage applies approved annotations and produces a reviewable output artifact.",
+        bullets: [
+          "Presentation intake persists the source artifact before background processing begins",
+          "Slide work is queued and processed independently to isolate failures",
+          "Vision analysis returns validated structured output rather than unfiltered model text",
+          "Issue regions remain connected to their source slide for review and annotation",
+          "Processed artifacts are stored separately from originals to preserve traceability",
+        ],
+      },
+      {
+        title: "Real-time progress without coupling the browser to the job",
+        content:
+          "Large reviews can take meaningful time, so the frontend opens a read-only Server-Sent Events stream and translates structured workflow events into a live progress experience. The browser observes the job; it does not own it. Refreshing or temporarily disconnecting does not stop AI processing.",
+        bullets: [
+          "Human-readable stages replace raw infrastructure logs",
+          "Progress includes completed work, current stage, remaining work, and finding counts",
+          "Persisted state lets the interface recover the latest progress after reconnecting",
+          "SSE fits the one-way server-to-browser update pattern without WebSocket complexity",
+        ],
+      },
+      {
+        title: "Resumable processing and failure isolation",
+        content:
+          "The reliability model stores progress at slide level. Successful work is checkpointed continuously, so a worker restart or transient external failure resumes from incomplete work rather than restarting the entire presentation.",
+        bullets: [
+          "Per-slide state separates completed, pending, retryable, and failed work",
+          "Idempotent consumers skip work that has already committed successfully",
+          "Transient failures follow bounded retry behavior before requiring review",
+          "One failed slide does not erase the successful state of the full deck",
+          "Checkpoint recovery reduces repeated AI cost and shortens operational recovery",
+        ],
+      },
+      {
+        title: "Issue continuity across campaign cycles",
+        content:
+          "A presentation position is useful for parsing, but it is not enough for long-term history. PopScan also maintains a stable logical identity for recurring campaign locations, allowing new review instances to reference earlier findings without treating every cycle as unrelated work.",
+        bullets: [
+          "Cycle-specific slide instances remain linked to a stable logical slide",
+          "Findings retain their source cycle and review decision",
+          "Resolved issues can be recognized when they reappear",
+          "Reviewers see useful history without mixing separate campaign records",
+          "The model supports open, resolved, rejected, and reopened workflows at a public-safe level",
+        ],
+      },
+      {
+        title: "Production delivery",
+        content:
+          "I independently translated the application architecture into a repeatable AWS deployment. Services run as Docker containers on EC2, images are versioned in Amazon ECR, and Nginx provides the public HTTPS reverse-proxy boundary while supporting long-lived SSE connections.",
+        bullets: [
+          "Built and versioned production container images through Amazon ECR",
+          "Configured EC2 runtime, environment boundaries, service startup, and restart behavior",
+          "Configured Nginx routing and proxy behavior for application APIs and SSE streams",
+          "Kept application services behind one controlled ingress instead of exposing container ports directly",
+          "Documented deployment and rollback steps for a small engineering team",
+        ],
+      },
+    ],
+    challenges: [
+      "Making a long-running AI workflow understandable without exposing internal logs or coupling completion to an open browser connection",
+      "Recovering safely after partial failure without repeating successful slide analysis or corrupting the generated presentation",
+      "Maintaining issue continuity across recurring campaign cycles while keeping each review instance auditable",
+      "Operating several cooperating services on a focused EC2 deployment without introducing unnecessary orchestration complexity",
+    ],
+    learnings: [
+      "For long-running AI products, progress visibility and recovery design are part of the user experience—not backend implementation details",
+      "Slide-level idempotency and checkpoints are more valuable than retrying an entire job, especially when external AI calls carry time and cost",
+      "Stable domain identity should be separate from file position when the same real-world entity returns across recurring documents",
+      "A small team can operate reliable containerized services on EC2 when image delivery, ingress, health behavior, and rollback paths are explicit",
+    ],
+    technicalSections: [
+      {
+        title: "Asynchronous processing and observability",
+        content:
+          "The API creates durable work and returns control to the browser. Background workers own processing; persistent state owns progress; the SSE layer only publishes normalized updates. This separation means interface connectivity never becomes a processing dependency.",
+        bullets: [
+          "Next.js consumes structured progress events rather than raw worker output",
+          "Node.js coordinates workflow state and the read-only event stream",
+          "FastAPI-based Python services perform controlled slide and document processing",
+          "Queue state and persisted checkpoints remain authoritative after reconnects",
+        ],
+      },
+      {
+        title: "Checkpoint and idempotency model",
+        content:
+          "Each slide is an independently identifiable processing unit. Before executing expensive work, a consumer checks its persisted state. Successful completion commits the result and checkpoint together; retries resume only incomplete work.",
+        bullets: [
+          "Completed slides are not reprocessed during duplicate delivery",
+          "The latest committed checkpoint determines the safe resume position",
+          "Failure isolation preserves successful results from the rest of the presentation",
+          "Retry state stays visible to operators instead of being hidden inside worker logs",
+        ],
+      },
+      {
+        title: "Human review and issue lifecycle",
+        content:
+          "AI output is a proposal inside a governed workflow. A reviewer can accept, reject, or continue an issue through rectification. Stable logical slide identity provides context from earlier cycles while preserving the current cycle as a separate review record.",
+        bullets: [
+          "Structured findings stay linked to slide, cycle, and review state",
+          "Human decisions remain separate from the original model output",
+          "Historical findings provide context without automatically determining the current decision",
+          "Reopened issues are modeled explicitly rather than created as unrelated duplicates",
+        ],
+      },
+      {
+        title: "NDA-safe deployment topology",
+        content:
+          "The public diagram describes responsibility boundaries, not the confidential production configuration. Nginx terminates the public routing boundary on EC2, Docker isolates application processes, ECR supplies versioned images, and the CI/CD pipeline automates validation and deployment while managed storage services hold application state and artifacts.",
+        bullets: [
+          "Public ingress → Nginx → containerized web, API, and worker responsibilities",
+          "Amazon ECR provides versioned, repeatable image delivery",
+          "CI/CD runs automated checks, builds images, publishes approved versions, and updates the EC2 deployment",
+          "AWS S3 separates source and processed document artifacts",
+          "Health, restart, logging, and rollback behavior are treated as deployment requirements",
+          "Exact endpoints, policies, schemas, model settings, and customer infrastructure are intentionally omitted",
+        ],
+      },
+      {
+        title: "Testing and automated delivery",
+        content:
+          "Release confidence comes from testing behavior before deployment and moving the same immutable container images through the delivery path. The frontend test suite uses Jest and React Testing Library, while the CI/CD pipeline blocks deployment when required checks fail.",
+        bullets: [
+          "Jest covers application logic, state transitions, and failure-handling behavior",
+          "React Testing Library verifies user-visible interactions and asynchronous UI states",
+          "FastAPI boundaries keep AI-processing contracts explicit and independently testable",
+          "Successful CI stages build versioned Docker images and publish them to Amazon ECR",
+          "The deployment stage updates the EC2 services behind Nginx without rebuilding source code on the server",
+          "Provider configuration, secret handling, runner identity, and production commands remain confidential",
+        ],
+      },
+    ],
+    technicalChallenges: [
+      "Keeping SSE connections reliable through a reverse proxy while the underlying job remains independent and resumable",
+      "Coordinating AI findings with document annotations without losing slide identity during retries",
+      "Designing container startup and recovery behavior that a small team could operate confidently on EC2",
+      "Automating deployments without allowing a failed test suite or incomplete image build to reach the production host",
+    ],
+    technicalLearnings: [
+      "The most useful progress stream represents domain state, not infrastructure activity",
+      "Commit boundaries must align with idempotency boundaries; otherwise a retry can duplicate AI work or annotations",
+      "Deployment simplicity is earned through explicit image versioning, proxy configuration, health behavior, and rollback discipline",
+      "The strongest CI/CD boundary is an immutable tested image: production should pull an approved artifact rather than rebuild application code in place",
     ],
   },
   {

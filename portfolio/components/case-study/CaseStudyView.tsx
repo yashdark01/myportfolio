@@ -7,6 +7,7 @@ import StackTags from "@/components/ui/StackTags";
 import { getDefaultMediaDomain, getPreviewMedia } from "@/data/preview-media";
 import { CaseStudy } from "@/data/case-studies";
 import DiagramRenderer from "@/components/case-study/DiagramRenderer";
+import EditorialPage from "@/components/motion/EditorialPage";
 
 interface CaseStudyViewProps {
   study: CaseStudy;
@@ -18,7 +19,7 @@ function SectionBlock({
   section: { title: string; content: string; bullets?: string[]; diagram?: string };
 }) {
   return (
-    <section>
+    <section className="case-study-section" data-reveal>
       <h3 className="text-lg font-semibold">{section.title}</h3>
       <p className="mt-3 leading-relaxed text-text-muted">{section.content}</p>
       {section.diagram && <DiagramRenderer diagram={section.diagram} />}
@@ -41,7 +42,7 @@ function SectionBlock({
 
 function BulletList({ items, heading }: { items: string[]; heading: string }) {
   return (
-    <div>
+    <div className="case-study-list" data-reveal>
       <h3 className="text-lg font-semibold">{heading}</h3>
       <ul className="mt-4 space-y-2">
         {items.map((item) => (
@@ -61,27 +62,30 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
     study.technicalSections.length > 0;
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-24 sm:px-6 sm:py-28">
-      <SectionLink
-        sectionId="work"
-        className="section-label inline-flex items-center gap-2 transition-colors hover:text-accent"
-      >
-        ← Back to work
-      </SectionLink>
+    <EditorialPage label={`Case study · ${study.title}`}>
+      <article className="case-study-page site-shell py-24 sm:py-28">
+        <div className="max-w-5xl">
+        <div data-page-intro>
+          <SectionLink
+            sectionId="work"
+            className="section-label editorial-back-link inline-flex items-center gap-2 transition-colors hover:text-accent"
+          >
+            <span aria-hidden>←</span> Back to work
+          </SectionLink>
 
-      <header className="mt-8">
+          <header className="mt-8">
         <div className="mb-4 flex flex-wrap gap-2">
           {study.builtAt && <Badge variant="accent">Built at {study.builtAt}</Badge>}
           <Badge variant="muted">{study.timeline}</Badge>
         </div>
 
-        <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
+        <h1 className="editorial-page-title text-5xl font-semibold tracking-tight md:text-7xl">
           {study.title}
         </h1>
         <p className="mt-3 text-lg text-text-muted">{study.caseStudyTitle}</p>
         <p className="mt-2 text-text-muted">{study.subtitle}</p>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap gap-2" data-reveal-group>
           {study.metrics.map((metric) => (
             <Badge key={metric.label} variant="accent">
               <span className="font-semibold">{metric.value}</span>
@@ -93,7 +97,9 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
         <div className="mt-8 flex flex-wrap gap-4">
           {study.live && (
             <Button href={study.live} external>
-              {study.id === "horizon17-esg" ? "View platform ↗" : "Live demo ↗"}
+              {study.id === "horizon17-esg" || study.id === "ecolynk"
+                ? "View platform ↗"
+                : "Live demo ↗"}
             </Button>
           )}
           {study.github && (
@@ -107,11 +113,12 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
             </Button>
           )}
         </div>
-      </header>
+          </header>
+        </div>
 
       {/* ── Overview (product / narrative) ── */}
-      <div className="mt-12 space-y-10">
-        <div className="border-b border-white/10 pb-4">
+      <div className="mt-16 space-y-12">
+        <div className="editorial-section-rule border-b border-white/10 pb-4" data-reveal>
           <h2 className="section-label">Overview</h2>
           <p className="mt-1 text-sm text-text-muted">
             Product context, problem, and outcomes.
@@ -137,6 +144,27 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
                 campaigns. Internal engineering UI stays in the abstract deep
                 dive below.
               </>
+            ) : study.id === "ecolynk" ? (
+              <>
+                Official public artwork from{" "}
+                <a
+                  href="https://ecomsww.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:text-accent-hover"
+                >
+                  ecomsww.com
+                </a>
+                . This portfolio uses the official Ecolynk product name; product
+                UI and proprietary engineering details remain abstract.
+              </>
+            ) : study.id === "popscan" ? (
+              <>
+                Product interface, campaign material, customer identity, and
+                operational data are intentionally omitted under NDA. The
+                architecture and narrative below are public-safe abstractions of
+                responsibilities and engineering decisions.
+              </>
             ) : study.id === "rent-buddy" ? (
               <>
                 Live captures from{" "}
@@ -154,14 +182,14 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
           }
         />
 
-        <div className="space-y-10">
+        <div className="space-y-12">
           {study.sections.map((section) => (
             <SectionBlock key={section.title} section={section} />
           ))}
         </div>
 
         {(study.challenges.length > 0 || study.learnings.length > 0) && (
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2" data-reveal-group>
             {study.challenges.length > 0 && (
               <BulletList items={study.challenges} heading="Challenges" />
             )}
@@ -174,26 +202,26 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
 
       {/* ── Engineering (personal / open-source projects) ── */}
       {hasTechnical && (
-        <div id="technical" className="mt-20 scroll-mt-28 space-y-10">
-          <div className="border-b border-white/10 pb-4">
+        <div id="technical" className="mt-24 scroll-mt-28 space-y-12">
+          <div className="editorial-section-rule border-b border-white/10 pb-4" data-reveal>
             <h2 className="section-label text-accent">Engineering</h2>
             <p className="mt-1 text-sm text-text-muted">
               Architecture, implementation details, and engineering decisions.
             </p>
           </div>
 
-          <div className="space-y-10">
+          <div className="space-y-12">
             {study.technicalSections!.map((section) => (
               <SectionBlock key={section.title} section={section} />
             ))}
           </div>
 
-          <section>
+          <section className="case-study-section" data-reveal>
             <h3 className="text-lg font-semibold">Architecture</h3>
             <DiagramRenderer diagram={study.architecture} />
           </section>
 
-          <section>
+          <section className="case-study-section" data-reveal>
             <h3 className="text-lg font-semibold">Trade-offs</h3>
             <ul className="mt-4 space-y-2">
               {study.tradeoffs.map((item) => (
@@ -210,7 +238,7 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
 
           {(study.technicalChallenges?.length ||
             study.technicalLearnings?.length) && (
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className="grid gap-8 md:grid-cols-2" data-reveal-group>
               {study.technicalChallenges &&
                 study.technicalChallenges.length > 0 && (
                   <BulletList
@@ -228,14 +256,14 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
             </div>
           )}
 
-          <section>
+          <section className="case-study-section" data-reveal>
             <h3 className="section-label mb-3">Stack</h3>
             <StackTags items={study.stack} />
           </section>
         </div>
       )}
 
-      <footer className="mt-16 border-t border-white/5 pt-8">
+      <footer className="mt-20 border-t border-white/5 pt-8" data-reveal>
         <p className="text-sm text-text-muted">
           {hasTechnical ? (
             <>
@@ -255,6 +283,8 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
           </SectionLink>
         </p>
       </footer>
-    </article>
+        </div>
+      </article>
+    </EditorialPage>
   );
 }

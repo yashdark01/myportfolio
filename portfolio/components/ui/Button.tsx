@@ -30,7 +30,22 @@ export default function Button({
   onClick,
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-all duration-200";
+    "magnetic-button inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-all duration-200";
+
+  const magneticHandlers = {
+    onMouseMove: (event: MouseEvent<HTMLAnchorElement>) => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const rect = event.currentTarget.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 7;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 7;
+      event.currentTarget.style.setProperty("--magnet-x", `${x}px`);
+      event.currentTarget.style.setProperty("--magnet-y", `${y}px`);
+    },
+    onMouseLeave: (event: MouseEvent<HTMLAnchorElement>) => {
+      event.currentTarget.style.setProperty("--magnet-x", "0px");
+      event.currentTarget.style.setProperty("--magnet-y", "0px");
+    },
+  };
 
   if (external || href.startsWith("http")) {
     return (
@@ -40,6 +55,7 @@ export default function Button({
         rel="noopener noreferrer"
         onClick={onClick}
         className={`${base} ${variants[variant]} ${className}`}
+        {...magneticHandlers}
       >
         {children}
       </a>
@@ -53,6 +69,7 @@ export default function Button({
         sectionId={sectionId}
         onClick={onClick}
         className={`${base} ${variants[variant]} ${className}`}
+        {...magneticHandlers}
       >
         {children}
       </SectionLink>
@@ -66,6 +83,7 @@ export default function Button({
         sectionId={sectionId}
         onClick={onClick}
         className={`${base} ${variants[variant]} ${className}`}
+        {...magneticHandlers}
       >
         {children}
       </SectionLink>
@@ -78,6 +96,7 @@ export default function Button({
         href={href}
         onClick={onClick}
         className={`${base} ${variants[variant]} ${className}`}
+        {...magneticHandlers}
       >
         {children}
       </a>
@@ -89,6 +108,7 @@ export default function Button({
       href={href}
       onClick={onClick}
       className={`${base} ${variants[variant]} ${className}`}
+      {...magneticHandlers}
     >
       {children}
     </Link>

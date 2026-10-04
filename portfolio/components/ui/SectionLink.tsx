@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MouseEvent, ReactNode } from "react";
+import { MouseEvent, MouseEventHandler, ReactNode } from "react";
 import {
   cleanHomeUrl,
   homeSectionHref,
@@ -18,6 +18,9 @@ interface SectionLinkProps {
   children: ReactNode;
   className?: string;
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
+  onMouseMove?: MouseEventHandler<HTMLAnchorElement>;
+  onMouseLeave?: MouseEventHandler<HTMLAnchorElement>;
+  ariaCurrent?: "page" | "location";
 }
 
 export default function SectionLink({
@@ -25,6 +28,9 @@ export default function SectionLink({
   children,
   className = "",
   onClick,
+  onMouseMove,
+  onMouseLeave,
+  ariaCurrent,
 }: SectionLinkProps) {
   const pathname = usePathname();
 
@@ -56,7 +62,14 @@ export default function SectionLink({
   };
 
   return (
-    <Link href={homeSectionHref(sectionId)} onClick={handleClick} className={className}>
+    <Link
+      href={homeSectionHref(sectionId)}
+      onClick={handleClick}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      aria-current={ariaCurrent}
+      className={className}
+    >
       {children}
     </Link>
   );

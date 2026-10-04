@@ -31,7 +31,7 @@ export const projectCategories = [
   { id: "enterprise", label: "Enterprise" },
 ] as const;
 
-/** Featured on homepage — depth over breadth (3 max) */
+/** Featured on homepage — depth over breadth */
 export const projects: Project[] = [
   {
     id: "krashaq",
@@ -155,51 +155,196 @@ export const projects: Project[] = [
     id: "horizon17-esg",
     title: "Ecometer",
     subtitle:
-      "Sustainability intelligence platform — measure, manage, and report environmental impact across campaigns and events",
+      "Media-focused GHG accounting and AI sustainability reporting — multi-source ingestion, 20+ dashboards, editable visual reports, and enterprise deployment",
     category: "enterprise",
     featured: true,
     builtAt: "Horizon17 Technology and Sustainability Pvt. Ltd.",
-    role: "Founding Engineer · Full Stack Developer — I own frontend architecture on Ecometer (chart-heavy Next.js dashboards, SSR, compliance-ready export flows) and work across event-driven microservices on the backend (NATS messaging, Docker deployments, MinIO object storage).",
+    role: "Founding Engineer · Full Stack Developer — built major accounting, ingestion, visualization, reporting, access-control, and deployment workflows across the Next.js frontend and Node.js microservices. My work includes 20+ dashboards, Recharts visualizations, Google Maps location picking, RBAC, Azure OCR and Excel ingestion, AI-native report editing, automated exports, and CI/CD delivery to Docker services on AWS EC2 through ECR and Nginx.",
     metrics: [
+      { value: "20+", label: "analytics dashboards" },
+      { value: "7", label: "media categories" },
       { value: "10+", label: "published client campaigns" },
       { value: "Patent-filed", label: "platform · EcoMS" },
-      { value: "BRSR", label: "audit-ready reporting" },
     ],
     problem:
-      "Brands, agencies, and event organizers need to embed sustainability into OOH, DOOH, print, digital, and experiential work — from planning through post-campaign recovery — with credible, audit-ready ESG reporting aligned to BRSR standards.",
+      "Media sustainability data arrives through forms, bills, spreadsheets, campaign systems, and location-specific activity records. Teams need one controlled workflow that validates those inputs, calculates GHG emissions, explains results through dashboards, and turns the same metrics into editable framework-specific reports.",
     outcome:
-      "Contributing to a patent-filed platform in production across enterprise sustainability workflows — from Amazon and Tata Motors events to OOH campaigns for HDFC, Nykaa, and Nivea.",
+      "Shipped production workflows spanning manual, Azure OCR, and Excel ingestion; automated carbon calculations; 20+ map- and chart-driven dashboards; framework-aware AI reporting; editable chart/document composition; RBAC; and DOCX, PDF, and Markdown publishing across a containerized AWS deployment.",
     tradeoffs: [
-      "Unified platform over point solutions — one system for measure-through-report instead of disconnected spreadsheets and tools.",
-      "Audit-ready reporting over quick exports — BRSR-aligned outputs that stand up to scrutiny, even when generation takes longer.",
-      "Modular campaign types (OOH, events, digital) under shared reporting standards — flexibility without losing comparability.",
+      "One canonical calculation flow across manual, OCR, and Excel inputs — users keep flexible ingestion while validation and emission logic stay consistent.",
+      "Structured chart JSON rendered with Recharts over static AI-generated images — visualizations remain editable, testable, and switchable inside the report canvas.",
+      "User-confirmed OCR and location inputs over silent automation — extracted bill values and Google Maps selections remain reviewable before affecting GHG calculations.",
+      "Redis/BullMQ background work over long synchronous requests — AI reporting and document exports do not block normal product APIs.",
+      "Docker + ECR + EC2 + Nginx with CI/CD over manual server builds — approved images move through a repeatable release path.",
     ],
-    architecture: `Brands · Agencies · Event Organizers
+    architecture: `Sustainability teams · Media and campaign operators
         ↓
-Next.js dashboards (SSR, chart modules, export flows)
+Next.js application
+Forms · Google Maps location picker · 20+ dashboards · Recharts · AI report editor
         ↓
-Event-driven microservices (NATS messaging)
+Node.js service layer · RBAC · validation · workflow orchestration
         ↓
-Node.js / Express.js REST services · metric & reporting APIs
+Ingestion paths
+Manual forms · Azure OCR bills · Standardized Excel templates
         ↓
-MinIO/S3 document storage · compliance artifacts
+Canonical activity data → emission-factor calculations → GHG metrics
         ↓
-Ecometer Platform (EcoMS) — Measure · Manage · Circularity · Report · Visualise
+Redis/BullMQ background jobs · AI reporting with LangChain/LangGraph
         ↓
-Scope 1–3 emissions · BRSR-aligned outputs · SDG assessments`,
+MongoDB + PostgreSQL · Pinecone · Amazon S3 artifacts
+        ↓
+DOCX · PDF · Markdown exports
+
+CI/CD → Docker images → Amazon ECR → AWS EC2 → Nginx
+
+Public architecture intentionally omits proprietary formulas, schemas,
+customer data, credentials, and production network details.`,
     stack: [
       "Next.js",
-      "React",
-      "Node.js",
-      "Express.js",
-      "Microservices",
-      "NATS",
-      "Docker",
-      "MinIO / S3",
-      "Nginx",
+      "Recharts",
+      "Google Maps API",
+      "Node.js / Express",
+      "RBAC",
+      "Docker / Nginx",
+      "AWS EC2 / ECR",
       "CI/CD",
+      "Azure OCR",
+      "Redis / BullMQ",
+      "MongoDB / PostgreSQL",
+      "LangChain / LangGraph",
+      "Pinecone",
+      "Amazon S3",
     ],
     live: "https://ecomsww.com/",
+  },
+  {
+    id: "ecolynk",
+    title: "Ecolynk",
+    subtitle:
+      "Enterprise ESG, materiality, supplier assessment, risk intelligence, and AI reporting platform for 14 sectors and 17 industries",
+    category: "enterprise",
+    featured: true,
+    builtAt: "Horizon17 Technology and Sustainability Pvt. Ltd.",
+    role:
+      "Founding Engineer · Full Stack Developer — primary individual ownership across Supplier Assessment and Materiality Assessment, including AI topic research, large-scale stakeholder distribution, response analytics, materiality matrices, supplier risk intelligence, 20+ dashboards, maps/location workflows, RBAC, AI reporting, backend microservices, and AWS delivery.",
+    metrics: [
+      { value: "14", label: "business sectors" },
+      { value: "17", label: "supported industries" },
+      { value: "20+", label: "enterprise dashboards" },
+      { value: "AI-native", label: "assessment and reporting" },
+    ],
+    problem:
+      "Enterprise ESG teams need to collect evidence from large stakeholder and supplier populations, identify material sustainability topics, surface supplier risk, and produce disclosure-ready reports. Spreadsheets and synchronous workflows do not scale across industries, recipients, assessments, and review cycles.",
+    outcome:
+      "Built major workflows for a multi-industry ESG platform: AI-assisted topic recommendation, single- and double-materiality assessments, one-click questionnaire distribution through NATS and Redis/BullMQ, supplier assessment and risk intelligence, 20+ Recharts dashboards, Google Maps/location inputs, RBAC, a chat-plus-artifact AI report editor, and automated AWS container delivery.",
+    tradeoffs: [
+      "NATS event distribution with Redis/BullMQ workers over synchronous recipient loops — large stakeholder and supplier distributions stay responsive, trackable, and independently retryable.",
+      "AI recommendations with user review over autonomous topic selection — company, sector, knowledge-base, and research context accelerate discovery without replacing ESG judgment.",
+      "Raw responses separated from topic aggregation and matrix coordinates — materiality analytics can be recomputed as assessment data changes.",
+      "Structured chart and matrix data rendered with Recharts over static AI images — dashboards remain interactive, testable, and filterable.",
+      "Server-enforced RBAC over UI-only restrictions — protected assessment, supplier, reporting, and artifact operations remain authorized at service boundaries.",
+      "CI/CD + Docker + ECR + EC2 + Nginx over manual server builds — versioned releases and predictable ingress for a multi-service platform.",
+    ],
+    architecture: `Enterprise ESG teams · Suppliers · Stakeholders
+        ↓
+Next.js application
+Assessments · Google Maps/location picker · 20+ Recharts dashboards · AI report editor
+        ↓
+Node.js microservices · RBAC · workflow validation
+        ├── Materiality and topic/question mapping
+        ├── Supplier assessment and risk intelligence
+        ├── Reporting and artifact workflows
+        └── Assessment response collection
+        ↓
+Asynchronous processing
+NATS event distribution · Redis/BullMQ durable jobs, retries, and workers
+        ↓
+MongoDB + PostgreSQL · Pinecone · LangChain/LangGraph · Amazon S3
+        ↓
+Materiality matrix · Supplier analytics · HTML/DOCX/PDF reports
+
+CI/CD → Docker images → Amazon ECR → AWS EC2 → Nginx
+
+Public architecture omits proprietary scoring, schemas, policies,
+customer data, credentials, and production network configuration.`,
+    stack: [
+      "Next.js",
+      "Recharts",
+      "Google Maps API",
+      "Node.js / Express",
+      "RBAC",
+      "NATS",
+      "Docker / Nginx",
+      "AWS EC2 / ECR",
+      "CI/CD",
+      "Redis / BullMQ",
+      "MongoDB / PostgreSQL",
+      "LangChain / LangGraph",
+      "Pinecone",
+      "Amazon S3",
+    ],
+    live: "https://ecomsww.com/",
+  },
+  {
+    id: "popscan",
+    title: "PopScan",
+    subtitle:
+      "NDA-protected enterprise AI platform for reviewing marketing proof-of-performance presentations, tracking visual issues, and managing rectification across campaign cycles",
+    category: "enterprise",
+    featured: true,
+    builtAt: "Horizon17 · NDA-protected",
+    metrics: [
+      { value: "Hundreds", label: "of slides per review" },
+      { value: "Live", label: "SSE processing visibility" },
+      { value: "Resumable", label: "checkpointed AI jobs" },
+    ],
+    problem:
+      "Enterprise campaign teams review presentation decks containing hundreds of site photographs. Manual inspection is slow, inconsistent, and difficult to trace across recurring campaign cycles. Reviewers need AI assistance without losing human approval, issue history, or reliable recovery when a long-running job fails.",
+    role:
+      "Product engineer on a two-person delivery team — co-built the full-stack product and AI document-processing workflow. I independently owned its production delivery on AWS EC2: Dockerized services, automated CI/CD, ECR image delivery, Nginx reverse proxy configuration, environment setup, and operational rollout.",
+    outcome:
+      "Delivered an NDA-protected workflow that turns large campaign presentations into structured, reviewable findings: asynchronous vision analysis, live progress updates, annotated outputs, human acceptance or rejection, rectification tracking, and historical issue continuity across campaign cycles.",
+    tradeoffs: [
+      "Asynchronous workers with Server-Sent Events over request/response processing — long-running reviews continue independently while users receive a readable, one-way progress stream.",
+      "Slide-level checkpoints and idempotency over whole-deck retries — interrupted jobs resume from persisted progress without repeating completed AI work.",
+      "Stable logical slide identity alongside presentation position — recurring campaign locations retain issue history even when each cycle creates a new slide instance.",
+      "Human approval over fully autonomous decisions — AI findings remain reviewable and correctable before they enter the client-facing rectification workflow.",
+      "EC2 + Docker + ECR + Nginx over a more complex orchestration platform — predictable deployment and operational control for a focused two-person delivery team.",
+      "Automated test and deployment gates over manual server updates — Jest and React Testing Library validate application behavior before versioned images can progress through the CI/CD pipeline.",
+    ],
+    architecture: `Enterprise reviewers
+        ↓
+Next.js review workspace — secure upload · live progress · human decisions
+        ↓ HTTPS + Server-Sent Events
+Nginx reverse proxy on AWS EC2
+        ↓
+Docker services delivered through CI/CD and Amazon ECR
+        ├── Node.js API — workflow orchestration · authorization · issue lifecycle
+        ├── FastAPI AI service — slide batching · vision review · structured findings
+        ├── Queue + persistent state — background jobs · retries · checkpoints
+        └── Document worker — presentation parsing · annotation · output generation
+        ↓
+MongoDB — workflow and review history
+AWS S3 — source and processed presentation artifacts
+
+Public architecture intentionally abstracts confidential endpoints, schemas,
+model configuration, campaign rules, and customer infrastructure.`,
+    stack: [
+      "Next.js",
+      "FastAPI",
+      "Node.js",
+      "Server-Sent Events",
+      "Jest / React Testing Library",
+      "CI/CD",
+      "Docker",
+      "AWS EC2 / ECR",
+      "Python",
+      "Vision AI",
+      "Redis / BullMQ",
+      "MongoDB",
+      "AWS S3",
+      "Nginx",
+    ],
   },
   {
     id: "rent-buddy",
@@ -365,25 +510,6 @@ export const moreProjects: MoreProject[] = [
       "4-store context architecture and hybrid RAG pipeline — Qdrant 768-dim vectors + BM25 lexical search + RRF fusion, token-aware chunking (512t/64 overlap), farm-aware context assembly with priority ordering, and multi-modal crop diagnosis.",
     tags: ["Qdrant", "BM25", "RAG", "RRF", "Context Engineering"],
     caseStudyPath: "/work/krashaq-context-kb",
-  },
-  {
-    id: "archflow",
-    title: "Archflow",
-    description:
-      "In-browser system design canvas — drag-drop nodes, connections, and AI-assisted architecture diagrams. Active side project; demo coming soon.",
-    tags: ["System Design", "React", "Canvas"],
-    github: "https://github.com/yashdark01/archflow",
-    caseStudyPath: "/work/archflow",
-    previewComingSoon: true,
-  },
-  {
-    id: "music-player",
-    title: "Music Player",
-    description:
-      "Streaming app — React, Node.js, Express.js, MongoDB, Clerk OAuth, Redux player queue, MongoDB aggregation feeds, Supertest on auth routes, and admin CRUD via Cloudinary. Full engineering case study.",
-    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "Clerk", "Redux"],
-    github: "https://github.com/yashdark01/Music-Player",
-    caseStudyPath: "/work/music-player",
   },
 ];
 

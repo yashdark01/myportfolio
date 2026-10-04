@@ -2,243 +2,116 @@
 
 import { AnimatePresence, m } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { navItems, site } from "@/data/site";
-import { profileNavImagePath } from "@/lib/site-url";
-import Button from "@/components/ui/Button";
 import SectionLink from "@/components/ui/SectionLink";
+import { navItems, site } from "@/data/site";
 import { useScrollLock } from "@/lib/useScrollLock";
 import { trackEvent } from "@/lib/analytics";
 
-const menuVariants = {
-  closed: { opacity: 0, x: "100%" },
-  open: { opacity: 1, x: 0 },
-};
-
-const itemVariants = {
-  closed: { opacity: 0, x: 16 },
-  open: (index: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: { delay: 0.05 + index * 0.04, duration: 0.25 },
-  }),
-};
-
 export default function Navbar() {
   const pathname = usePathname();
-  const [isVisible, setIsVisible] = useState(true);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const lastScrollY = useRef(0);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const menuPanelRef = useRef<HTMLDivElement>(null);
+  const [activeSection, setActiveSection] = useState("hero");
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
+  useScrollLock(open);
+  const close = useCallback(() => setOpen(false), []);
 
-  useScrollLock(isMenuOpen);
-
-  const closeMenu = useCallback(() => {
-    setIsMenuOpen(false);
-  }, []);
-
+  useEffect(() => setMounted(true), []);
+  useEffect(() => close(), [pathname, close]);
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    closeMenu();
-  }, [pathname, closeMenu]);
-
-  useEffect(() => {
-    document.body.classList.toggle("mobile-nav-open", isMenuOpen);
-    return () => {
-      document.body.classList.remove("mobile-nav-open");
-    };
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentY = window.scrollY;
-      if (!isMenuOpen) {
-        setIsVisible(currentY < lastScrollY.current || currentY < 80);
-      }
-      lastScrollY.current = currentY;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    const sections = ["hero", ...navItems.map((n) => n.id)];
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -50% 0px" },
+      (entries) => entries.forEach((entry) => entry.isIntersecting && setActiveSection(entry.target.id)),
+      { rootMargin: "-42% 0px -52%" },
     );
-
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
+    ["hero", ...navItems.map((item) => item.id)].forEach((id) => {
+      const node = document.getElementById(id);
+      if (node) observer.observe(node);
     });
-
     return () => observer.disconnect();
   }, [pathname]);
 
   useEffect(() => {
-    if (!isMenuOpen) return;
-
-    const id = window.setTimeout(() => {
-      menuPanelRef.current
-        ?.querySelector<HTMLElement>("a[href]")
-        ?.focus();
-    }, 80);
-
-    return () => window.clearTimeout(id);
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    if (!isMenuOpen) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
+    if (!open) return;
+    const timer = window.setTimeout(() => panelRef.current?.querySelector<HTMLElement>("a[href]")?.focus(), 180);
+    const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closeMenu();
-        menuButtonRef.current?.focus();
+        close();
+        buttonRef.current?.focus();
         return;
       }
-
-      if (event.key !== "Tab" || !menuPanelRef.current) return;
-
-      const focusable = menuPanelRef.current.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
-      );
-      if (focusable.length === 0) return;
-
+      if (event.key !== "Tab" || !panelRef.current) return;
+      const focusable = panelRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
-        last.focus();
+        last?.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
         event.preventDefault();
-        first.focus();
+        first?.focus();
       }
     };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isMenuOpen, closeMenu]);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const handleChange = (event: MediaQueryListEvent) => {
-      if (event.matches) closeMenu();
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("keydown", onKeyDown);
     };
+  }, [open, close]);
 
-    mq.addEventListener("change", handleChange);
-    return () => mq.removeEventListener("change", handleChange);
-  }, [closeMenu]);
-
-  const toggleMenu = () => {
-    setIsMenuOpen((open) => {
-      const next = !open;
-      if (next) setIsVisible(true);
-      return next;
-    });
-  };
-
-  const mobileMenu = mounted
+  const menu = mounted
     ? createPortal(
         <AnimatePresence>
-          {isMenuOpen && (
-            <>
-              <m.button
-                type="button"
-                aria-label="Close menu"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="fixed inset-0 z-[60] bg-background/80 backdrop-blur-sm md:hidden"
-                onClick={closeMenu}
-              />
-
-              <m.nav
-                ref={menuPanelRef}
-                id="mobile-nav-panel"
-                role="dialog"
-                aria-modal="true"
-                aria-label="Site navigation"
-                initial="closed"
-                animate="open"
-                exit="closed"
-                variants={menuVariants}
-                transition={{ type: "spring", stiffness: 380, damping: 36 }}
-                onKeyDown={(event) => {
-                  if (event.key === "Escape") {
-                    event.preventDefault();
-                    closeMenu();
-                    menuButtonRef.current?.focus();
-                  }
-                }}
-                className="fixed bottom-0 right-0 top-[calc(3.75rem+env(safe-area-inset-top))] z-[70] flex w-[min(100vw,20rem)] flex-col border-l border-white/10 bg-surface shadow-2xl md:hidden"
-                style={{
-                  paddingBottom: "max(1.5rem, env(safe-area-inset-bottom))",
-                }}
-              >
-                <div className="flex flex-1 flex-col gap-1 overflow-y-auto px-3 py-4">
-                  {navItems.map((item, index) => {
-                    const isActive = activeSection === item.id;
-                    return (
-                      <m.div
-                        key={item.id}
-                        custom={index}
-                        variants={itemVariants}
-                        initial="closed"
-                        animate="open"
-                      >
-                        <SectionLink
-                          sectionId={item.id}
-                          onClick={closeMenu}
-                          className={`flex min-h-12 items-center justify-between rounded-lg px-4 py-3 text-base font-medium transition-colors ${
-                            isActive
-                              ? "bg-accent/10 text-accent"
-                              : "text-text-primary hover:bg-white/5"
-                          }`}
-                        >
-                          <span>{item.label}</span>
-                          {isActive && (
-                            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                          )}
-                        </SectionLink>
-                      </m.div>
-                    );
-                  })}
+          {open && (
+            <m.nav
+              ref={panelRef}
+              id="site-menu"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Site navigation"
+              initial={{ clipPath: "circle(0% at calc(100% - 4.5rem) 4.5rem)" }}
+              animate={{ clipPath: "circle(150% at calc(100% - 4.5rem) 4.5rem)" }}
+              exit={{ clipPath: "circle(0% at calc(100% - 4.5rem) 4.5rem)" }}
+              transition={{ duration: 0.72, ease: [0.76, 0, 0.24, 1] }}
+              className="editorial-menu fixed inset-0 z-[90] flex min-h-[100svh] flex-col overflow-y-auto"
+            >
+              <div className="pointer-events-none absolute -right-[12vw] -top-[20vw] h-[55vw] w-[55vw] min-h-96 min-w-96 rounded-full border border-accent/15" aria-hidden />
+              <div className="site-shell flex flex-1 flex-col pb-8 pt-28 sm:pt-32">
+                <p className="section-label mb-6 text-accent">Navigate / Explore</p>
+                <div className="grid flex-1 content-center gap-x-10 py-4 md:grid-cols-2">
+                  {navItems.map((item, index) => (
+                    <m.div
+                      key={item.id}
+                      initial={{ opacity: 0, y: 45 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.22 + index * 0.055, duration: 0.55 }}
+                      className="border-b border-white/10"
+                    >
+                      <SectionLink sectionId={item.id} onClick={close} ariaCurrent={activeSection === item.id ? "location" : undefined} className="menu-editorial-link group flex items-center justify-between py-2.5 sm:py-3">
+                        <span className="flex items-baseline gap-3 sm:gap-5">
+                          <span className="font-mono text-[10px] text-accent">0{index + 1}</span>
+                          <span className="menu-editorial-text">{item.label}</span>
+                        </span>
+                        <span className={`h-2 w-2 rounded-full transition-all ${activeSection === item.id ? "bg-accent shadow-[0_0_0_7px_rgba(16,185,129,.1)]" : "bg-white/15 group-hover:bg-accent"}`} />
+                      </SectionLink>
+                    </m.div>
+                  ))}
                 </div>
-
-                <div className="border-t border-white/5 px-5 pt-4">
-                  <Button
-                    href={site.resumeUrl}
-                    variant="secondary"
-                    external
-                    className="w-full justify-center"
-                    onClick={() => {
-                      trackEvent("resume_download", { source: "mobile_nav" });
-                      closeMenu();
-                    }}
-                  >
-                    Resume ↗
-                  </Button>
+                <div className="mt-8 flex flex-col gap-6 border-t border-white/10 pt-6 text-sm text-text-muted sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="section-label mb-2">Start a conversation</p>
+                    <a href={site.links.email} className="text-lg text-text-primary underline decoration-white/20 underline-offset-8 hover:decoration-accent sm:text-xl">{site.email}</a>
+                  </div>
+                  <div className="flex flex-wrap gap-5">
+                    <a href={site.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                    <a href={site.links.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                    <a href={site.resumeUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("resume_download", { source: "menu" })}>Resume ↗</a>
+                  </div>
                 </div>
-              </m.nav>
-            </>
+              </div>
+            </m.nav>
           )}
         </AnimatePresence>,
         document.body,
@@ -247,94 +120,29 @@ export default function Navbar() {
 
   return (
     <>
-      <header
-        className={`glass-nav fixed top-0 w-full transition-transform duration-300 ${
-          isMenuOpen ? "z-[80]" : "z-50"
-        } ${isVisible || isMenuOpen ? "translate-y-0" : "-translate-y-full"}`}
-        style={{ paddingTop: "env(safe-area-inset-top)" }}
-      >
-        <nav
-          className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4"
-          aria-label="Main navigation"
-        >
-          <SectionLink
-            sectionId="hero"
-            onClick={closeMenu}
-            className="flex min-h-10 items-center gap-2.5 pr-3 text-sm font-semibold tracking-tight text-text-primary sm:text-base"
-          >
-            <Image
-              src={profileNavImagePath}
-              alt=""
-              width={32}
-              height={32}
-              sizes="32px"
-              quality={75}
-              className="h-8 w-8 shrink-0 rounded-full border border-white/10 bg-surface object-cover object-top"
-              priority
-            />
-            <span className="truncate">{site.name}</span>
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-[100] pt-[env(safe-area-inset-top)]">
+        <div className="site-shell flex items-center justify-between py-4 sm:py-6">
+          <SectionLink sectionId="hero" onClick={close} className="pointer-events-auto group flex items-center gap-3 text-sm font-semibold tracking-tight text-text-primary">
+            <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-background/80 font-mono text-xs backdrop-blur-xl transition-colors group-hover:border-accent group-hover:text-accent">YP</span>
+            <span className="hidden sm:block">Yash Patidar</span>
           </SectionLink>
-
-          <div className="hidden items-center gap-6 lg:gap-8 md:flex">
-            {navItems.map((item) => (
-              <SectionLink
-                key={item.id}
-                sectionId={item.id}
-                className={`text-sm transition-colors duration-200 ${
-                  activeSection === item.id
-                    ? "text-accent"
-                    : "text-text-muted hover:text-text-primary"
-                }`}
-              >
-                {item.label}
-              </SectionLink>
-            ))}
-          </div>
-
-          <div className="hidden md:block">
-            <Button
-              href={site.resumeUrl}
-              variant="secondary"
-              external
-              onClick={() =>
-                trackEvent("resume_download", { source: "navbar" })
-              }
-            >
-              Resume ↗
-            </Button>
-          </div>
-
           <button
-            ref={menuButtonRef}
+            ref={buttonRef}
             type="button"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-nav-panel"
-            className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-lg transition-colors hover:bg-white/5 md:hidden"
-            onClick={toggleMenu}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="site-menu"
+            data-cursor={open ? "CLOSE" : "MENU"}
+            onClick={() => setOpen((value) => !value)}
+            className="menu-orb pointer-events-auto relative z-[110] flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-[#f4f2ed] text-[#111] shadow-xl shadow-black/20 transition-transform hover:scale-105 sm:h-16 sm:w-16"
           >
             <span className="sr-only">Menu</span>
-            <div className="relative h-3.5 w-5">
-              <span
-                className={`absolute left-0 block h-0.5 w-5 bg-text-primary transition-all duration-300 ease-out ${
-                  isMenuOpen ? "top-[6px] rotate-45" : "top-0"
-                }`}
-              />
-              <span
-                className={`absolute left-0 top-[6px] block h-0.5 w-5 bg-text-primary transition-all duration-300 ease-out ${
-                  isMenuOpen ? "opacity-0 scale-x-0" : "opacity-100"
-                }`}
-              />
-              <span
-                className={`absolute left-0 block h-0.5 w-5 bg-text-primary transition-all duration-300 ease-out ${
-                  isMenuOpen ? "top-[6px] -rotate-45" : "top-[12px]"
-                }`}
-              />
-            </div>
+            <span className={`absolute h-px w-5 bg-current transition-transform duration-300 ${open ? "rotate-45" : "-translate-y-1"}`} />
+            <span className={`absolute h-px w-5 bg-current transition-transform duration-300 ${open ? "-rotate-45" : "translate-y-1"}`} />
           </button>
-        </nav>
+        </div>
       </header>
-      {mobileMenu}
+      {menu}
     </>
   );
 }

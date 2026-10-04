@@ -1,7 +1,7 @@
 "use client";
 
-import { m } from "framer-motion";
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
+import { useGsap } from "@/lib/useGsap";
 
 interface SectionWrapperProps {
   id: string;
@@ -18,21 +18,40 @@ export default function SectionWrapper({
   children,
   className = "",
 }: SectionWrapperProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGsap(
+    sectionRef,
+    (gsap) => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      gsap.from(
+        ".section-heading-piece",
+        {
+          y: 34,
+          opacity: 0,
+          duration: 0.85,
+          stagger: 0.08,
+          ease: "power3.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 82%",
+            once: true,
+          },
+        },
+      );
+    },
+  );
+
   return (
-    <section id={id} className={`py-20 sm:py-24 md:py-32 ${className}`}>
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-          className="mb-12 md:mb-16"
-        >
-          <p className="section-label mb-3">{label}</p>
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
+    <section ref={sectionRef} id={id} className={`relative py-20 sm:py-24 md:py-32 ${className}`}>
+      <div className="site-shell">
+        <div className="mb-12 overflow-hidden md:mb-16">
+          <p className="section-heading-piece section-label mb-3">{label}</p>
+          <h2 className="section-heading-piece max-w-4xl text-balance text-3xl font-semibold leading-[1.06] tracking-[-0.035em] sm:text-4xl md:text-5xl">
             {title}
           </h2>
-        </m.div>
+        </div>
         {children}
       </div>
     </section>

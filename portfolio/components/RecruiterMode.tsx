@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, m } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
 import StackTags from "@/components/ui/StackTags";
 import { expertiseGroups, recruiterSnapshot, site } from "@/data/site";
@@ -10,35 +10,69 @@ import { trackEvent } from "@/lib/analytics";
 
 export default function RecruiterMode() {
   const [open, setOpen] = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useScrollLock(open);
+
+  useEffect(() => {
+    const contact = document.getElementById("contact");
+    if (!contact) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setContactVisible(entry.isIntersecting),
+      { threshold: 0.08 },
+    );
+    observer.observe(contact);
+    return () => observer.disconnect();
+  }, []);
 
   const handleOpen = () => {
     trackEvent("recruiter_mode_open");
     setOpen(true);
   };
 
+  useEffect(() => {
+    if (!open) return;
+    const timer = window.setTimeout(() => {
+      dialogRef.current?.querySelector<HTMLElement>("button, a[href]")?.focus();
+    }, 100);
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        triggerRef.current?.focus();
+        return;
+      }
+      if (event.key !== "Tab" || !dialogRef.current) return;
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])',
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
   return (
     <>
       <button
+        ref={triggerRef}
         type="button"
         onClick={handleOpen}
-        className="fixed bottom-6 right-6 z-40 hidden rounded-full border border-accent/30 bg-accent px-4 py-2.5 text-sm font-medium text-background shadow-lg shadow-accent/20 transition-transform hover:scale-105 md:block"
+        className={`fixed bottom-6 right-6 z-40 hidden rounded-full border border-white/15 bg-background/80 px-4 py-2.5 text-sm font-medium text-text-primary shadow-lg backdrop-blur-xl transition-all hover:border-accent hover:text-accent lg:block ${contactVisible ? "pointer-events-none translate-y-2 opacity-0" : "opacity-100"}`}
       >
-        For Recruiters
-      </button>
-
-      <button
-        type="button"
-        onClick={handleOpen}
-        aria-label="HR — Open recruiter mode"
-        className="fixed z-40 flex h-12 w-12 items-center justify-center rounded-full border border-accent/30 bg-accent text-background shadow-lg shadow-accent/20 md:hidden"
-        style={{
-          bottom: "max(1.5rem, env(safe-area-inset-bottom))",
-          right: "max(1.5rem, env(safe-area-inset-right))",
-        }}
-      >
-        <span className="text-xs font-bold">HR</span>
+        For recruiters
       </button>
 
       <AnimatePresence>
@@ -54,6 +88,7 @@ export default function RecruiterMode() {
               onClick={() => setOpen(false)}
             />
             <m.div
+              ref={dialogRef}
               initial={{ opacity: 0, y: 24, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 24, scale: 0.98 }}
@@ -78,6 +113,7 @@ export default function RecruiterMode() {
                 </div>
                 <button
                   type="button"
+                  aria-label="Close recruiter snapshot"
                   onClick={() => setOpen(false)}
                   className="rounded-lg border border-white/10 px-2 py-1 text-sm text-text-muted hover:text-text-primary"
                 >
@@ -112,7 +148,7 @@ export default function RecruiterMode() {
                     trackEvent("resume_download", { source: "recruiter_mode" })
                   }
                 >
-                  Download Resume
+                  Download resume
                 </Button>
                 <Button
                   href={site.links.email}
@@ -120,7 +156,7 @@ export default function RecruiterMode() {
                   className="w-full"
                   onClick={() => trackEvent("contact_email_click")}
                 >
-                  Email Me
+                  Email me
                 </Button>
               </div>
 
