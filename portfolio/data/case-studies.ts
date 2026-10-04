@@ -15,15 +15,9 @@ export interface CaseStudySection {
   diagram?: string;
 }
 
-export interface ExecutiveSummary {
-  headline: string;
-  points: { label: string; text: string }[];
-}
-
 export interface CaseStudy extends Project {
   caseStudyTitle: string;
   timeline: string;
-  executiveSummary?: ExecutiveSummary;
   sections: CaseStudySection[];
   challenges: string[];
   learnings: string[];
@@ -40,24 +34,6 @@ export const caseStudies: CaseStudy[] = [
     caseStudyTitle:
       "Architecting a production AI agritech platform — 9 microservices, multi-agent harness, and event-driven intelligence",
     timeline: "2025 – 2026 · Sole Architect & Full-Stack Engineer",
-    executiveSummary: {
-      headline:
-        "Engineered a production 9-microservice platform powering multilingual agronomic intelligence for Indian smallholder farmers through a governed LangGraph agent harness, hybrid RAG, and distributed event-driven alerts.",
-      points: [
-        {
-          label: "Platform Architecture",
-          text: "Two-layer boundary decoupling UAIP AI machinery from Krashaq agricultural services across 9 isolated microservices.",
-        },
-        {
-          label: "Agent Governance",
-          text: "26 tools, BudgetBroker caps, and durable HITL action journal bound to canonical payload hashes and lease fencing.",
-        },
-        {
-          label: "Production Scale",
-          text: "630+ passing tests, Qdrant + BM25 RRF hybrid retrieval, and PostGIS/H3 geospatial hazard alerts with PostgreSQL outbox.",
-        },
-      ],
-    },
     showTechnicalDetails: true,
     sections: [
       {
@@ -126,19 +102,6 @@ export const caseStudies: CaseStudy[] = [
           "Phases 0 and 1 complete: unified Krashaq AI profile, authorized capability contracts, durable action journal wired for ordered sequential approvals",
           "Live demo: krashaq-agritech.vercel.app · Repo: github.com/yashdark01/Krashaq-Ai",
           "3 languages — Hindi, Hinglish, and English crop advisory across all 26 tools",
-        ],
-      },
-      {
-        title: "Architectural evolution: V1 prototype monolith vs. V2 production microservices",
-        content:
-          "The platform evolved from an early Next.js single-service prototype into a production-grade 9-microservice architecture. Building both generations provided direct operational clarity on the limits of monolithic agent backends versus decoupled systems.",
-        bullets: [
-          "Architecture: 1 Next.js App (V1) → 9 Distributed Microservices across UAIP infrastructure and Krashaq domain (V2)",
-          "Execution State: In-memory LangGraph state vulnerable to restarts (V1) → PostgreSQL checkpoints in kq_runtime across 14 migrations with renewable worker lease fencing (V2)",
-          "Retrieval Engine: MongoDB keyword + vector chunking (V1) → Qdrant 768-dim Cloud + BM25 lexical search with Reciprocal Rank Fusion (k=60) and MMR diversity re-ranking (V2)",
-          "Agent Tool Contracts: 4 basic endpoints (V1) → 26 governed tools with defineTool() validation, scope filtering, and typed ToolResult<T> output schemas (V2)",
-          "Consequential Action Safety: Direct unverified LLM writes (V1) → Durable HITL action journal locked to canonical payload hashes and precondition checks (V2)",
-          "Quality Verification: 53 Jest unit tests (V1) → 630+ passing tests across all 6 service test suites with PostgreSQL integration tests (V2)",
         ],
       },
     ],
@@ -229,29 +192,6 @@ export const caseStudies: CaseStudy[] = [
           "Token budget reserves space for model output and future observations before context assembly; budget broker tracks cross-step accumulation including vision, embedding, and research costs",
           "Chat statement 'I planted soybean yesterday' is a candidate fact with provenance — it does not silently update the authoritative crop record; the agent offers a concrete update",
           "PostgreSQL LangGraph checkpoints (kq_runtime) + episodic memory store; conversation threads survive process restarts and support SSE cursor-based reconnect",
-        ],
-      },
-      {
-        title: "Production platform vs. toy wrapper: what makes this real",
-        content:
-          "Most LLM projects are thin API wrappers with prompt instructions attempting to enforce business rules. In Krashaq AI, all mission-critical safety, permission, budget, and transaction invariants are strictly implemented in compiled harness code — never left to vulnerable model prompts.",
-        bullets: [
-          "No prompt-based authorization: capabilities are filtered by caller scopes at discovery time; execution broker re-verifies scopes on every invocation",
-          "Deterministic agronomic math: NPK fertilizer dosing, soil pH liming, and crop yield estimations execute via pure mathematical algorithms in krashaq-data-service — zero LLM hallucination",
-          "Hardened checkpoint persistence: LangGraph StateGraph state persists transactionally to PostgreSQL kq_runtime across 14 migrations — surviving process restarts and pod crashes",
-          "Cryptographic approval locking: consequential actions bind to canonical payload hashes; modifying any argument invalidates approval and forces a fresh preview card",
-          "Hard resource quotas: BudgetBroker enforces strict token and dollar caps per run with an untouchable reserve for final answer synthesis and receipt emission",
-        ],
-      },
-      {
-        title: "Cross-service circuit breakers & multi-agent conflict resolution",
-        content:
-          "In distributed agricultural intelligence, services fail and independent specialists can propose contradictory recommendations. The platform implements explicit fault-tolerance boundaries and supervisor precedence rules.",
-        bullets: [
-          "Degradation over failure: if krashaq-weather-service times out, the system serves validated cached forecasts labeled with explicit observation timestamps — never synthetic hallucinations",
-          "Model gateway circuit breaker: 3 consecutive provider timeouts/rate-limits trip the circuit to half-open, immediately diverting requests to configured fallbacks (Groq → OpenAI → Gemini) within the active token budget",
-          "Specialist conflict arbitration: when the weather specialist forecasts an imminent thunderstorm while the agronomic specialist recommends pesticide spraying, the supervisor enforces safety precedence (hazard avoidance overrides scheduled treatments)",
-          "Reconciliation of ambiguous writes: network timeouts during consequential writes enter outcome_unknown state; workers resolve receipts via idempotency keys instead of blindly retrying",
         ],
       },
       {
@@ -1063,24 +1003,6 @@ export const caseStudies: CaseStudy[] = [
     caseStudyTitle:
       "Designing production AWS infrastructure for a 9-service AI agritech platform",
     timeline: "2025 – 2026 · Infrastructure Design",
-    executiveSummary: {
-      headline:
-        "Designed an enterprise AWS infrastructure topology for 9 independent microservices with dual-AZ high availability, Aurora PostgreSQL schema isolation, EventBridge fanout, and ALB SSE streaming.",
-      points: [
-        {
-          label: "Compute & Network",
-          text: "ECS Fargate tasks across 2 availability zones in private subnets with isolated security groups and zero direct public exposure.",
-        },
-        {
-          label: "Data & Storage",
-          text: "Shared Aurora PostgreSQL clusters with schema-level search_path isolation (kq_*), ElastiCache Redis, and S3 document pipelines.",
-        },
-        {
-          label: "Async Ingestion",
-          text: "EventBridge custom bus for IMD weather warning fanout to BullMQ worker fleets with Dead Letter Queues (DLQ).",
-        },
-      ],
-    },
     showTechnicalDetails: true,
     sections: [
       {
@@ -1194,17 +1116,6 @@ export const caseStudies: CaseStudy[] = [
           "SNS + PagerDuty integration: CloudWatch Alarms → SNS → PagerDuty for on-call alerting on p95 latency breach and error rate spikes",
         ],
       },
-      {
-        title: "Enterprise disaster recovery & RTO / RPO metrics",
-        content:
-          "Production agritech infrastructure requires high availability and resilient disaster recovery strategies to ensure farmer records and autonomous tasks survive regional failures.",
-        bullets: [
-          "Aurora Point-In-Time Recovery (PITR): Continuous transaction log backups retain 35 days of history; enables restoration to any second with RPO < 5 minutes and RTO < 15 minutes",
-          "Multi-AZ automatic failover: Aurora PostgreSQL and ElastiCache Redis operate standby replicas in secondary AZs; automated DNS switchover completes in under 30 seconds with zero manual intervention",
-          "S3 versioning & lifecycle rules: Knowledge base source PDF documents, OCR records, and diagnostic plant images have S3 Object Versioning enabled with cross-region replication for disaster recovery",
-          "Stateless ECS task recovery: Because execution state is fully persisted in PostgreSQL checkpoints (kq_runtime), crashed Fargate tasks are automatically replaced by ECS without losing active agent runs",
-        ],
-      },
     ],
     challenges: [
       "ALB idle timeout for SSE: the 60-second default disconnects in-progress agent runs; tuning to 300s requires load testing to confirm no resource leak on abandoned connections",
@@ -1222,24 +1133,6 @@ export const caseStudies: CaseStudy[] = [
     caseStudyTitle:
       "Building a production multi-agent harness with 26 governed tools, durable HITL approval, and enforced budget control",
     timeline: "2025 – 2026 · Phase 0–2 Complete",
-    executiveSummary: {
-      headline:
-        "Architected a robust LangGraph StateGraph harness governing 26 tools, enforcing multi-tier token and dollar cost budgets, and securing consequential actions with durable cryptographic hash approvals.",
-      points: [
-        {
-          label: "Harness Invariants",
-          text: "Permissions, scope filtering, schema validation, and receipts enforced strictly in TypeScript code rather than prompt text.",
-        },
-        {
-          label: "Multi-Provider Gateway",
-          text: "Unified gateway spanning OpenAI, Anthropic, Gemini, Groq, xAI, and Ollama with circuit breakers and fallback chains.",
-        },
-        {
-          label: "Action Safety",
-          text: "Durable HITL action journal persisted in PostgreSQL kq_runtime; approvals bind to payload hashes and worker lease fencing.",
-        },
-      ],
-    },
     showTechnicalDetails: true,
     sections: [
       {
@@ -1341,24 +1234,6 @@ export const caseStudies: CaseStudy[] = [
     caseStudyTitle:
       "Designing a 4-store context system and hybrid RAG pipeline for agricultural AI queries in Hindi, Hinglish, and English",
     timeline: "2025 – 2026 · Knowledge Service + Context Engineering",
-    executiveSummary: {
-      headline:
-        "Designed a domain-tailored hybrid RAG pipeline (Qdrant Cloud + BM25 + Reciprocal Rank Fusion) and 4-store context architecture overcoming vocabulary sparsity in colloquial Indian agricultural queries.",
-      points: [
-        {
-          label: "Hybrid Retrieval",
-          text: "Dense 768-dim semantic search combined with sparse lexical BM25 via Reciprocal Rank Fusion (k=60) and MMR diversity re-ranking.",
-        },
-        {
-          label: "4-Store Memory",
-          text: "Strict boundary between Conversation, Run State (kq_runtime), User Memory, and Product Records prevents silent state corruption.",
-        },
-        {
-          label: "Ingestion Pipeline",
-          text: "Token-aware 512t chunking with table preservation, OCR confidence scoring, and multi-modal leaf photograph diagnostic integration.",
-        },
-      ],
-    },
     showTechnicalDetails: true,
     sections: [
       {
@@ -1427,26 +1302,6 @@ export const caseStudies: CaseStudy[] = [
           "Evidence fusion: vision analysis findings and RAG excerpts merged as separate evidence items with distinct source types; synthesizer presents both with appropriate confidence labels",
           "Uncertainty enforcement: crop-health skill procedure requires explicit differential causes, image quality limitations, and targeted clarification questions before any treatment recommendation",
           "OCR for soil reports: PDF soil lab reports processed through ingestion pipeline with OCR confidence tracking; unreadable lab values surface as clarification requests rather than assumptions",
-        ],
-      },
-      {
-        title: "Multilingual query expansion & regional agricultural glossary",
-        content:
-          "Farmers across Madhya Pradesh and Maharashtra rarely query using standardized academic terms. Queries mix Devanagari script, Latin phonetics (Hinglish), and regional dialect terms. A raw search for 'yellowing' misses regional expressions for nutrient deficiencies or viral diseases.",
-        bullets: [
-          "Bilingual query expansion: Input queries pass through a curated agricultural glossary mapping colloquial terms ('peela padna', 'haldi rog', 'illiyan') to canonical botanical and pest taxonomies before hybrid retrieval",
-          "Script-agnostic normalization: Devanagari Hindi and phonetic Hinglish terms are canonicalized so vector and BM25 tokenizers match regional variations without discarding farmer intent",
-          "Preservation of localized units: Regional area definitions (Bigha, Guntha, Acre) and weight units (Quintal, Man) are flagged during query parsing to prevent catastrophic dosage calculation errors",
-        ],
-      },
-      {
-        title: "Multi-modal vision analysis correlated with micro-climate risk",
-        content:
-          "Visual leaf symptoms alone can be misleading — fungal leaf spots, bacterial blight, and physiological leaf scorch often appear identical in early stages on low-resolution farmer photos.",
-        bullets: [
-          "Environmental correlation: The crop-health agent correlates vision diagnosis candidates with the farm's micro-climate history (leaf wetness hours, vapor pressure deficit, and recent precipitation from krashaq-weather-service)",
-          "False-positive elimination: A fungal spore risk requires sustained high relative humidity and leaf wetness; if dry micro-climate conditions are verified, the agent lowers fungal diagnosis confidence and prompts for physical pest or irrigation checks",
-          "Multi-modal claim lineage: The final synthesized advisory explicitly breaks down what was observed visually from the photo versus what was inferred from weather sensors and agronomic manuals",
         ],
       },
     ],
