@@ -75,9 +75,9 @@ export default function Navbar() {
               animate={{ clipPath: "circle(150% at calc(100% - 4.5rem) 4.5rem)" }}
               exit={{ clipPath: "circle(0% at calc(100% - 4.5rem) 4.5rem)" }}
               transition={{ duration: 0.72, ease: [0.76, 0, 0.24, 1] }}
-              className="editorial-menu fixed inset-0 z-[90] flex min-h-[100svh] flex-col overflow-y-auto overflow-x-hidden max-w-full"
+              className="editorial-menu fixed inset-0 z-[90] flex min-h-[100svh] flex-col overflow-y-auto"
             >
-              <div className="pointer-events-none absolute -right-[12vw] -top-[20vw] h-[55vw] w-[55vw] min-h-96 min-w-96 rounded-full border border-accent/15 overflow-hidden" aria-hidden />
+              <div className="pointer-events-none absolute -right-[12vw] -top-[20vw] h-[55vw] w-[55vw] min-h-96 min-w-96 rounded-full border border-accent/15" aria-hidden />
               <div className="site-shell flex flex-1 flex-col pb-8 pt-28 sm:pt-32">
                 <p className="section-label mb-6 text-accent">Navigate / Explore</p>
                 <div className="grid flex-1 content-center gap-x-10 py-4 md:grid-cols-2">

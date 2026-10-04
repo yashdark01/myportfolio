@@ -86,7 +86,7 @@ export default function RootLayout({
       lang="en"
       className={`${GeistSans.variable} ${GeistMono.variable} scroll-smooth`}
     >
-      <body className="min-h-screen max-w-full overflow-x-hidden bg-background text-text-primary antialiased">
+      <body className="min-h-screen overflow-x-clip bg-background text-text-primary antialiased">
         <JsonLd />
         <SectionScrollHandler />
         <SkipToContent />

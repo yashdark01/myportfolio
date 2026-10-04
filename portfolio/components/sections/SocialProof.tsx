@@ -5,7 +5,7 @@ import Link from "next/link";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Tag from "@/components/ui/Tag";
 import {
-  ecometerEcosystemClients,
+  ecoMeterEcosystemClients,
   socialProof,
   testimonials,
 } from "@/data/social-proof";
@@ -23,8 +23,8 @@ export default function SocialProof() {
     >
       <div className="client-marquee -mt-5 mb-10" aria-label="Selected organizations and clients">
         <div className="client-marquee-track">
-          {[...ecometerEcosystemClients, ...ecometerEcosystemClients].map((client, index) => (
-            <span key={`${client}-${index}`} className="client-marquee-item" aria-hidden={index >= ecometerEcosystemClients.length}>
+          {[...ecoMeterEcosystemClients, ...ecoMeterEcosystemClients].map((client, index) => (
+            <span key={`${client}-${index}`} className="client-marquee-item" aria-hidden={index >= ecoMeterEcosystemClients.length}>
               {client}<span className="text-accent">·</span>
             </span>
           ))}
@@ -75,7 +75,7 @@ export default function SocialProof() {
             {socialProof.ecosystem}
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
-            {ecometerEcosystemClients.slice(0, 5).map((client) => <Tag key={client}>{client}</Tag>)}
+            {ecoMeterEcosystemClients.slice(0, 5).map((client) => <Tag key={client}>{client}</Tag>)}
           </div>
           <a
             href="https://ecomsww.com/case-studies/"
@@ -84,7 +84,7 @@ export default function SocialProof() {
             className="mt-6 inline-block text-sm text-accent hover:text-accent-hover"
             onClick={() =>
               trackEvent("project_link_click", {
-                project: "ecometer",
+                project: "ecoMeter",
                 type: "live",
                 source: "social_proof",
               })

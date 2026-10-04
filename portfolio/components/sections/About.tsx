@@ -77,7 +77,7 @@ export default function About() {
             Ecolynk covers campaign carbon
             measurement, ESG assessments, materiality, supplier intelligence, AI
             reporting, and 20+ interactive dashboards. My work spans microservices,
-            JWT, OAuth 2.0, RBAC, Google Maps, NATS, Redis/BullMQ, Docker, CI/CD, Nginx, AWS
+            RBAC, Google Maps, NATS, Redis/BullMQ, Docker, CI/CD, Nginx, AWS
             ECR/EC2, and S3/MinIO object storage.
           </p>
           <p className="leading-relaxed text-text-muted">

@@ -249,7 +249,7 @@ export const caseStudies: CaseStudy[] = [
           "Visualise — 20+ responsive dashboards built with editable React charting",
           "Report — AI-assisted BRSR, GRI, TCFD, and other configured framework workflows",
           "Publish — export reviewed reports as DOCX, PDF, or Markdown",
-          "Govern — backend-enforced JWT / OAuth 2.0 RBAC separates enterprise responsibilities and protected operations",
+          "Govern — backend-enforced RBAC separates enterprise responsibilities and protected operations",
         ],
       },
       {
@@ -298,8 +298,8 @@ export const caseStudies: CaseStudy[] = [
           "Built Azure OCR bill ingestion and standardized Excel parsing, validation, mapping, and form population",
           "Developed the AI-native report editor: editable sections, selection-based AI changes, chart switching, and drag/reorder interactions",
           "Implemented DOCX, PDF, and Markdown export workflows for reviewed reports",
-          "Worked across Node.js microservices, Redis/BullMQ jobs, JWT & OAuth 2.0 auth, MongoDB, PostgreSQL, Pinecone, LangChain/LangGraph, and S3",
-          "Implemented JWT / OAuth 2.0 RBAC-aware interfaces and backend permission enforcement for protected enterprise workflows",
+          "Worked across Node.js microservices, Redis/BullMQ jobs, MongoDB, PostgreSQL, Pinecone, LangChain/LangGraph, and S3",
+          "Implemented RBAC-aware interfaces and backend permission enforcement for protected enterprise workflows",
           "Worked on Docker/Nginx services and CI/CD that publishes images to ECR and deploys them on AWS EC2",
         ],
       },
@@ -321,13 +321,13 @@ export const caseStudies: CaseStudy[] = [
       "Keeping 20+ dashboard views responsive when seven media categories produce different record shapes, filters, and aggregation requirements",
       "Mapping manual, OCR, Excel, and map-selected inputs into one canonical calculation flow without creating inconsistent data paths",
       "Keeping AI-generated narrative and chart specifications editable while validating structured output at the frontend boundary",
-      "Enforcing JWT & OAuth 2.0 RBAC consistently across navigation, frontend actions, API routes, file access, and background workflows",
+      "Enforcing RBAC consistently across navigation, frontend actions, API routes, file access, and background workflows",
       "Automating Docker deployments through ECR and EC2 without exposing production configuration or relying on manual server builds",
     ],
     learnings: [
       "A canonical validated data model is what lets forms, OCR, spreadsheets, maps, dashboards, and AI reports reuse the same accounting truth",
       "AI should produce structured chart data rather than chart images when users need to edit, test, and change visualizations",
-      "Enterprise JWT / OAuth 2.0 RBAC must be enforced server-side; hiding UI controls is helpful feedback, not authorization",
+      "Enterprise RBAC must be enforced server-side; hiding UI controls is helpful feedback, not authorization",
       "Queueing document and AI workloads protects normal API responsiveness and creates clearer retry boundaries",
       "Immutable container images and automated deployment gates make a small team more confident than rebuilding applications directly on EC2",
     ],
@@ -338,7 +338,7 @@ export const caseStudies: CaseStudy[] = [
           "EcoMeter separates the interactive Next.js product, Node.js service layer, background processing, data stores, AI workflows, artifact storage, and AWS runtime. Specific service boundaries, formulas, schemas, and production configuration remain confidential.",
         bullets: [
           "Next.js frontend — forms, maps, 20+ dashboards, report editor, chart editing, and export UX",
-          "Node.js microservices — APIs, validation, JWT & OAuth 2.0 authentication, calculation orchestration, RBAC, and workflow boundaries",
+          "Node.js microservices — APIs, validation, calculation orchestration, RBAC, and workflow boundaries",
           "Redis/BullMQ — document, AI reporting, and export work outside synchronous request paths",
           "MongoDB and PostgreSQL — document-oriented and relational operational data by service need",
           "LangChain/LangGraph and Pinecone — AI workflow orchestration and semantic retrieval where required",
@@ -449,7 +449,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "The product — Ecolynk",
         content:
-          "Ecolynk is the broader enterprise ESG platform in the EcoMS product family. It supports 17 industries across 14 sectors and brings accounting, assessments, stakeholder engagement, supplier intelligence, target setting, disclosure, and AI reporting into one system. The public EcoMS website describes it as a unified platform for emissions, supply chains, governance, social impact, and audit-ready disclosure.",
+          "Ecolynk is the broader enterprise ESG platform in the EcoMS product family. It supports 24 industries across 11 sectors and brings accounting, assessments, stakeholder engagement, supplier intelligence, target setting, disclosure, and AI reporting into one system. The public EcoMS website describes it as a unified platform for emissions, supply chains, governance, social impact, and audit-ready disclosure.",
         bullets: [
           "GHG accounting and sustainability data management",
           "Single- and double-materiality assessment workflows",

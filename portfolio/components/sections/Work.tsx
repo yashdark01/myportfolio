@@ -204,10 +204,10 @@ function ProjectSummary({ project, index }: { project: Project; index: number })
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">{project.subtitle}</p>
         <StackTags items={project.stack.slice(0, 6)} className="mt-4" />
       </div>
-      <div className="flex flex-col items-start gap-4 md:items-end">
-        <div className="flex gap-5">
-          {project.metrics.slice(0, 2).map((metric) => (
-            <div key={metric.label} className="md:text-right">
+      <div className="flex w-full flex-col items-start gap-4 md:w-auto md:min-w-[22rem] md:items-end">
+        <div className="grid w-full grid-cols-2 gap-2">
+          {project.metrics.map((metric) => (
+            <div key={metric.label} className="rounded-lg border border-white/8 bg-white/[.025] p-3 md:text-right">
               <p className="font-semibold text-accent">{metric.value}</p>
               <p className="text-xs text-text-muted">{metric.label}</p>
             </div>

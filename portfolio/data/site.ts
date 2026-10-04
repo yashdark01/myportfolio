@@ -2,7 +2,7 @@ export const site = {
   name: "Yash Patidar",
   title: "Full-Stack Engineer specializing in Applied AI · Founding Engineer at Horizon17",
   tagline:
-    "Full-stack engineer specializing in applied AI systems. Founding Engineer at Horizon17, building production AI and enterprise sustainability products end-to-end.",
+    "Full-stack engineer specializing in applied AI systems — GenAI, RAG, LLMs, and production product delivery from IIIT Nagpur.",
   institution: "IIIT Nagpur · B.Tech CSE",
   yearsExperience: "2+ years of experience",
   status: "Open to opportunities",
@@ -31,6 +31,19 @@ export const site = {
     { value: "9", label: "microservices" },
     { value: "630+", label: "automated tests" },
     { value: "26", label: "governed agent tools" },
+  ],
+  marketFocus: [
+    "Agentic Systems",
+    "Hybrid RAG",
+    "Event-Driven Systems",
+  ],
+  highDemandStack: [
+    "TypeScript",
+    "Next.js",
+    "Node.js",
+    "PostgreSQL",
+    "AWS",
+    "LangGraph",
   ],
   featuredProject: {
     id: "krashaq",
@@ -93,7 +106,7 @@ export const personas: Record<
 > = {
   product: {
     tagline:
-      "Full-stack engineer specializing in applied AI systems. As a Founding Engineer at Horizon17, I build production products end-to-end — from microservice backends to chart-heavy enterprise dashboards.",
+      "Full-stack engineer specializing in applied AI. As a Founding Engineer at Horizon17, I build production AI products and enterprise platforms end-to-end.",
     workIntro:
       "Enterprise product work first — applied AI with a live demo and production internship delivery below.",
     featuredProject: {
@@ -220,8 +233,7 @@ export const expertiseGroups = [
       "Microservices",
       "REST APIs",
       "Redis Caching",
-      "JWT / OAuth 2.0",
-      "RBAC Security",
+      "JWT / RBAC",
       "PostgreSQL / MongoDB",
       "System Design",
     ],
@@ -264,7 +276,7 @@ export function getExpertiseForPersona(persona: Persona) {
 export const recruiterSnapshot = {
   headline: "Full-Stack Engineer · Applied AI systems · Founding Engineer at Horizon17 · 2+ yrs",
   summary:
-    "Full-stack engineer specializing in applied AI systems, currently a Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd. I build EcoMeter and Ecolynk across ESG analytics, assessments, supplier intelligence, JWT/OAuth authentication, and AI reporting. I also independently architected Krashaq AI with LangGraph agents, governed tools, hybrid RAG, streaming, and a live demo.",
+    "Full-stack engineer specializing in applied AI systems, currently a Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd. I build EcoMeter and Ecolynk across ESG analytics, assessments, supplier intelligence, and AI reporting. I also independently architected Krashaq AI with LangGraph agents, governed tools, hybrid RAG, streaming, and a live demo.",
   highlights: [
     "Current role · Founding Engineer at Horizon17 (Apr 2025 – Present)",
     "Professional contribution · EcoMeter + Ecolynk product engineering",
@@ -276,7 +288,6 @@ export const recruiterSnapshot = {
     "React",
     "Node.js",
     "Express.js",
-    "JWT / OAuth",
     "Microservices",
     "Docker",
     "CI/CD",

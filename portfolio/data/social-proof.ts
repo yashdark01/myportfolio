@@ -1,5 +1,5 @@
 /** Public client names from EcoMS case studies (ecomsww.com/case-studies) */
-export const ecometerEcosystemClients = [
+export const ecoMeterEcosystemClients = [
   "Amazon",
   "Tata Motors",
   "HDFC",
@@ -7,6 +7,9 @@ export const ecometerEcosystemClients = [
   "Wonder Cement",
   "Nykaa",
 ] as const;
+
+/** Backward-compatible alias for already-loaded development chunks during HMR. */
+export const ecometerEcosystemClients = ecoMeterEcosystemClients;
 
 export interface Testimonial {
   quote: string;
