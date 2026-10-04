@@ -1,5 +1,5 @@
 /**
- * Capture live EcoMS website views for Ecometer portfolio frames.
+ * Capture live EcoMS website views for EcoMeter portfolio frames.
  * Run: node scripts/capture-ecoms-screenshots.cjs
  */
 const { chromium } = require("playwright");
@@ -142,11 +142,11 @@ async function main() {
   await page.waitForTimeout(500);
   await captureViewport(page, "case-studies.png");
 
-  console.log("Capturing homepage Ecometer section…");
+  console.log("Capturing homepage EcoMeter section…");
   await page.goto(HOME_URL, { waitUntil: "domcontentloaded", timeout: 45000 });
   await page.waitForTimeout(3000);
   await dismissOverlays(page);
-  await scrollToHeading(page, "Ecometer", 100);
+  await scrollToHeading(page, "EcoMeter", 100);
   await captureViewport(page, "platform.png");
 
   // Hero preview — best above-the-fold platform shot

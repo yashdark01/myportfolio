@@ -26,7 +26,7 @@ export const testimonials: Testimonial[] = [];
 export const socialProof = {
   headline: "Public production evidence",
   ecosystem:
-    "EcoMS publicly documents sustainability campaigns and events for these organizations. I contribute engineering to the Ecometer platform; these names are platform-level evidence, not a claim that I personally owned each client relationship or campaign.",
+    "EcoMS publicly documents sustainability campaigns and events for these organizations. I contribute engineering to the EcoMeter platform; these names are platform-level evidence, not a claim that I personally owned each client relationship or campaign.",
   linkedInLabel: "View my LinkedIn profile",
   linkedInHref: "https://linkedin.com/in/yash-patidar-97a8861b3",
   linkedInSummary:

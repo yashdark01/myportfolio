@@ -153,13 +153,13 @@ export const projects: Project[] = [
   },
   {
     id: "horizon17-esg",
-    title: "Ecometer",
+    title: "EcoMeter",
     subtitle:
       "Media-focused GHG accounting and AI sustainability reporting — multi-source ingestion, 20+ dashboards, editable visual reports, and enterprise deployment",
     category: "enterprise",
     featured: true,
     builtAt: "Horizon17 Technology and Sustainability Pvt. Ltd.",
-    role: "Founding Engineer · Full Stack Developer — built major accounting, ingestion, visualization, reporting, access-control, and deployment workflows across the Next.js frontend and Node.js microservices. My work includes 20+ dashboards, Recharts visualizations, Google Maps location picking, RBAC, Azure OCR and Excel ingestion, AI-native report editing, automated exports, and CI/CD delivery to Docker services on AWS EC2 through ECR and Nginx.",
+    role: "Founding Engineer · Full Stack Developer — built major accounting, ingestion, visualization, reporting, access-control (JWT & OAuth 2.0 / RBAC), and deployment workflows across the Next.js frontend and Node.js microservices. My work includes 20+ dashboards, Recharts visualizations, Google Maps location picking, JWT/OAuth RBAC security, Azure OCR and Excel ingestion, AI-native report editing, automated exports, and CI/CD delivery to Docker services on AWS EC2 through ECR and Nginx.",
     metrics: [
       { value: "20+", label: "analytics dashboards" },
       { value: "7", label: "media categories" },
@@ -169,7 +169,7 @@ export const projects: Project[] = [
     problem:
       "Media sustainability data arrives through forms, bills, spreadsheets, campaign systems, and location-specific activity records. Teams need one controlled workflow that validates those inputs, calculates GHG emissions, explains results through dashboards, and turns the same metrics into editable framework-specific reports.",
     outcome:
-      "Shipped production workflows spanning manual, Azure OCR, and Excel ingestion; automated carbon calculations; 20+ map- and chart-driven dashboards; framework-aware AI reporting; editable chart/document composition; RBAC; and DOCX, PDF, and Markdown publishing across a containerized AWS deployment.",
+      "Shipped production workflows spanning manual, Azure OCR, and Excel ingestion; automated carbon calculations; 20+ map- and chart-driven dashboards; framework-aware AI reporting; editable chart/document composition; JWT/OAuth RBAC authentication; and DOCX, PDF, and Markdown publishing across a containerized AWS deployment.",
     tradeoffs: [
       "One canonical calculation flow across manual, OCR, and Excel inputs — users keep flexible ingestion while validation and emission logic stay consistent.",
       "Structured chart JSON rendered with Recharts over static AI-generated images — visualizations remain editable, testable, and switchable inside the report canvas.",
@@ -182,7 +182,7 @@ export const projects: Project[] = [
 Next.js application
 Forms · Google Maps location picker · 20+ dashboards · Recharts · AI report editor
         ↓
-Node.js service layer · RBAC · validation · workflow orchestration
+Node.js service layer · JWT / OAuth 2.0 · RBAC · validation · workflow orchestration
         ↓
 Ingestion paths
 Manual forms · Azure OCR bills · Standardized Excel templates
@@ -204,6 +204,8 @@ customer data, credentials, and production network details.`,
       "Recharts",
       "Google Maps API",
       "Node.js / Express",
+      "JWT",
+      "OAuth 2.0",
       "RBAC",
       "Docker / Nginx",
       "AWS EC2 / ECR",
@@ -226,7 +228,7 @@ customer data, credentials, and production network details.`,
     featured: true,
     builtAt: "Horizon17 Technology and Sustainability Pvt. Ltd.",
     role:
-      "Founding Engineer · Full Stack Developer — primary individual ownership across Supplier Assessment and Materiality Assessment, including AI topic research, large-scale stakeholder distribution, response analytics, materiality matrices, supplier risk intelligence, 20+ dashboards, maps/location workflows, RBAC, AI reporting, backend microservices, and AWS delivery.",
+      "Founding Engineer · Full Stack Developer — primary individual ownership across Supplier Assessment and Materiality Assessment, including AI topic research, large-scale stakeholder distribution, response analytics, materiality matrices, supplier risk intelligence, 20+ dashboards, maps/location workflows, JWT & OAuth 2.0 security, RBAC, AI reporting, backend microservices, and AWS delivery.",
     metrics: [
       { value: "14", label: "business sectors" },
       { value: "17", label: "supported industries" },
@@ -236,13 +238,13 @@ customer data, credentials, and production network details.`,
     problem:
       "Enterprise ESG teams need to collect evidence from large stakeholder and supplier populations, identify material sustainability topics, surface supplier risk, and produce disclosure-ready reports. Spreadsheets and synchronous workflows do not scale across industries, recipients, assessments, and review cycles.",
     outcome:
-      "Built major workflows for a multi-industry ESG platform: AI-assisted topic recommendation, single- and double-materiality assessments, one-click questionnaire distribution through NATS and Redis/BullMQ, supplier assessment and risk intelligence, 20+ Recharts dashboards, Google Maps/location inputs, RBAC, a chat-plus-artifact AI report editor, and automated AWS container delivery.",
+      "Built major workflows for a multi-industry ESG platform: AI-assisted topic recommendation, single- and double-materiality assessments, one-click questionnaire distribution through NATS and Redis/BullMQ, supplier assessment and risk intelligence, 20+ Recharts dashboards, Google Maps/location inputs, JWT & OAuth 2.0 RBAC authentication, a chat-plus-artifact AI report editor, and automated AWS container delivery.",
     tradeoffs: [
       "NATS event distribution with Redis/BullMQ workers over synchronous recipient loops — large stakeholder and supplier distributions stay responsive, trackable, and independently retryable.",
       "AI recommendations with user review over autonomous topic selection — company, sector, knowledge-base, and research context accelerate discovery without replacing ESG judgment.",
       "Raw responses separated from topic aggregation and matrix coordinates — materiality analytics can be recomputed as assessment data changes.",
       "Structured chart and matrix data rendered with Recharts over static AI images — dashboards remain interactive, testable, and filterable.",
-      "Server-enforced RBAC over UI-only restrictions — protected assessment, supplier, reporting, and artifact operations remain authorized at service boundaries.",
+      "Server-enforced JWT / OAuth 2.0 RBAC over UI-only restrictions — protected assessment, supplier, reporting, and artifact operations remain authorized at service boundaries.",
       "CI/CD + Docker + ECR + EC2 + Nginx over manual server builds — versioned releases and predictable ingress for a multi-service platform.",
     ],
     architecture: `Enterprise ESG teams · Suppliers · Stakeholders
@@ -250,7 +252,7 @@ customer data, credentials, and production network details.`,
 Next.js application
 Assessments · Google Maps/location picker · 20+ Recharts dashboards · AI report editor
         ↓
-Node.js microservices · RBAC · workflow validation
+Node.js microservices · JWT / OAuth 2.0 · RBAC · workflow validation
         ├── Materiality and topic/question mapping
         ├── Supplier assessment and risk intelligence
         ├── Reporting and artifact workflows
@@ -272,6 +274,8 @@ customer data, credentials, and production network configuration.`,
       "Recharts",
       "Google Maps API",
       "Node.js / Express",
+      "JWT",
+      "OAuth 2.0",
       "RBAC",
       "NATS",
       "Docker / Nginx",
@@ -363,7 +367,7 @@ model configuration, campaign rules, and customer infrastructure.`,
       "Rentbuddy Furnishing Solutions needed a consumer-facing rental marketplace — users browse furniture and home products by city and category, place orders, and get tracked delivery. It had to ship under real client deadlines, not classroom timelines.",
     role: "Full-stack developer on the WebIntegratorz delivery team — owned Rent Buddy feature work end-to-end: JWT-secured REST APIs, listing and category flows, responsive React UI, and production deployment at rentbuddy.in.",
     outcome:
-      "Rent Buddy remains live in production for Rentbuddy Furnishing Solutions — a concrete internship proof point alongside my founding-engineer work on Ecometer.",
+      "Rent Buddy remains live in production for Rentbuddy Furnishing Solutions — a concrete internship proof point alongside my founding-engineer work on EcoMeter.",
     tradeoffs: [
       "JWT session auth over OAuth — matched client infra and sprint timeline; RBAC-ready for admin flows without third-party auth dependency.",
       "React SPA + Node API over SSR — faster client iteration for category/search UX under tight delivery deadlines.",

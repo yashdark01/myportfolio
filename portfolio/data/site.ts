@@ -21,7 +21,7 @@ export const site = {
     email: "mailto:yashpatidar9691@gmail.com",
   },
   heroStats: [
-    { value: "Ecometer", label: "enterprise product · EcoMS" },
+    { value: "EcoMeter", label: "enterprise product · EcoMS" },
     { value: "20+", label: "analytics dashboards" },
     { value: "7", label: "media categories" },
     { value: "AI", label: "editable reporting workflows" },
@@ -98,7 +98,7 @@ export const personas: Record<
       "Enterprise product work first — applied AI with a live demo and production internship delivery below.",
     featuredProject: {
       id: "horizon17-esg",
-      title: "Ecometer",
+      title: "EcoMeter",
       badge: "Featured project · Horizon17",
       headline:
         "Media-focused GHG accounting and AI sustainability reporting across 20+ dashboards",
@@ -187,7 +187,7 @@ export const processSteps = [
     number: "03",
     title: "Measure, then optimize",
     description:
-      "On Ecometer's chart-heavy dashboards, per-module code splitting and query tuning improved repeat-load behavior on filter-heavy views. On Rent Buddy I reduced hot listing API response times by ~30%. On Krashaq, 630+ automated tests now cover the nine-service platform before new agent complexity ships.",
+      "On EcoMeter's chart-heavy dashboards, per-module code splitting and query tuning improved repeat-load behavior on filter-heavy views. On Rent Buddy I reduced hot listing API response times by ~30%. On Krashaq, 630+ automated tests now cover the nine-service platform before new agent complexity ships.",
   },
   {
     number: "04",
@@ -220,7 +220,8 @@ export const expertiseGroups = [
       "Microservices",
       "REST APIs",
       "Redis Caching",
-      "JWT / RBAC",
+      "JWT / OAuth 2.0",
+      "RBAC Security",
       "PostgreSQL / MongoDB",
       "System Design",
     ],
@@ -263,10 +264,10 @@ export function getExpertiseForPersona(persona: Persona) {
 export const recruiterSnapshot = {
   headline: "Full-Stack Engineer · Applied AI systems · Founding Engineer at Horizon17 · 2+ yrs",
   summary:
-    "Full-stack engineer specializing in applied AI systems, currently a Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd. I build Ecometer and Ecolynk across ESG analytics, assessments, supplier intelligence, and AI reporting. I also independently architected Krashaq AI with LangGraph agents, governed tools, hybrid RAG, streaming, and a live demo.",
+    "Full-stack engineer specializing in applied AI systems, currently a Founding Engineer at Horizon17 Technology and Sustainability Pvt. Ltd. I build EcoMeter and Ecolynk across ESG analytics, assessments, supplier intelligence, JWT/OAuth authentication, and AI reporting. I also independently architected Krashaq AI with LangGraph agents, governed tools, hybrid RAG, streaming, and a live demo.",
   highlights: [
     "Current role · Founding Engineer at Horizon17 (Apr 2025 – Present)",
-    "Professional contribution · Ecometer + Ecolynk product engineering",
+    "Professional contribution · EcoMeter + Ecolynk product engineering",
     "Independent ownership · Krashaq AI, open-source with a live demo",
     "Platform · microservices, Docker, CI/CD, NATS, Nginx, S3/MinIO",
   ],
@@ -275,6 +276,7 @@ export const recruiterSnapshot = {
     "React",
     "Node.js",
     "Express.js",
+    "JWT / OAuth",
     "Microservices",
     "Docker",
     "CI/CD",

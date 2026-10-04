@@ -165,7 +165,7 @@ export const blogPosts: BlogPost[] = [
       {
         title: "What moved the needle",
         content:
-          "Performance wins came from specific, measurable frontend and backend changes — not vague 'optimisation'. Details are from my professional work on Ecometer; specific platform internals are confidential.",
+          "Performance wins came from specific, measurable frontend and backend changes — not vague 'optimisation'. Details are from my professional work on EcoMeter; specific platform internals are confidential.",
         bullets: [
           "SSR on chart-heavy dashboard routes — first meaningful paint before client-side chart libraries hydrate",
           "Code splitting per dashboard module (campaign filters, reporting panels, export flows) instead of one monolithic bundle",

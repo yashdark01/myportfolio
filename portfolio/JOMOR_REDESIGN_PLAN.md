@@ -94,7 +94,7 @@ Acceptance criteria:
 
 Project order:
 
-1. Ecometer
+1. EcoMeter
 2. Krashaq AI
 3. Rent Buddy
 4. Additional experiments

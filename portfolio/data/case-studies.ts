@@ -232,24 +232,24 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Where I work",
         content:
-          "I'm a Founding Engineer and Full Stack Developer at Horizon17 Technology and Sustainability Pvt. Ltd. — the tech company behind our sustainability products. EcoMS (EcoMedia Solutions) is our business company offering end-to-end sustainability services to brands, agencies, and enterprises. Ecometer is EcoMS's patent-filed product platform.",
+          "I'm a Founding Engineer and Full Stack Developer at Horizon17 Technology and Sustainability Pvt. Ltd. — the tech company behind our sustainability products. EcoMS (EcoMedia Solutions) is our business company offering end-to-end sustainability services to brands, agencies, and enterprises. EcoMeter is EcoMS's patent-filed product platform.",
         bullets: [
           "Horizon17 Technology and Sustainability Pvt. Ltd. — horizon17ww.com — technology & sustainability innovation (AI-CEA, blockchain CCE, IoT)",
           "EcoMS — ecomsww.com — business company: consulting, ESG reporting, carbon offsetting, and platform delivery",
-          "Ecometer — our product: sustainability intelligence for campaigns and events",
+          "EcoMeter — our product: sustainability intelligence for campaigns and events",
         ],
       },
       {
-        title: "The product — Ecometer",
+        title: "The product — EcoMeter",
         content:
-          "Ecometer is a media-focused GHG accounting and AI sustainability reporting platform. It turns fragmented campaign and activity data into validated emissions metrics, interactive analysis, and editable sustainability reports across seven configured media categories.",
+          "EcoMeter is a media-focused GHG accounting and AI sustainability reporting platform. It turns fragmented campaign and activity data into validated emissions metrics, interactive analysis, and editable sustainability reports across seven configured media categories.",
         bullets: [
           "Capture — structured forms, OCR-assisted bills, standardized Excel imports, and map-based location inputs",
           "Calculate — normalize activity records and apply configured emission-factor logic",
           "Visualise — 20+ responsive dashboards built with editable React charting",
           "Report — AI-assisted BRSR, GRI, TCFD, and other configured framework workflows",
           "Publish — export reviewed reports as DOCX, PDF, or Markdown",
-          "Govern — backend-enforced RBAC separates enterprise responsibilities and protected operations",
+          "Govern — backend-enforced JWT / OAuth 2.0 RBAC separates enterprise responsibilities and protected operations",
         ],
       },
       {
@@ -291,22 +291,22 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "My role",
         content:
-          "As Founding Engineer and Full Stack Developer at Horizon17, I work across Ecometer's product experience and service platform. The portfolio keeps proprietary calculation rules and production configuration abstract, but the capabilities below reflect my direct engineering contribution:",
+          "As Founding Engineer and Full Stack Developer at Horizon17, I work across EcoMeter's product experience and service platform. The portfolio keeps proprietary calculation rules and production configuration abstract, but the capabilities below reflect my direct engineering contribution:",
         bullets: [
           "Built and maintained 20+ Next.js dashboard views with reusable Recharts visualizations and filter-heavy data workflows",
           "Implemented Google Maps views and an interactive location picker for geographic activity context",
           "Built Azure OCR bill ingestion and standardized Excel parsing, validation, mapping, and form population",
           "Developed the AI-native report editor: editable sections, selection-based AI changes, chart switching, and drag/reorder interactions",
           "Implemented DOCX, PDF, and Markdown export workflows for reviewed reports",
-          "Worked across Node.js microservices, Redis/BullMQ jobs, MongoDB, PostgreSQL, Pinecone, LangChain/LangGraph, and S3",
-          "Implemented RBAC-aware interfaces and backend permission enforcement for protected enterprise workflows",
+          "Worked across Node.js microservices, Redis/BullMQ jobs, JWT & OAuth 2.0 auth, MongoDB, PostgreSQL, Pinecone, LangChain/LangGraph, and S3",
+          "Implemented JWT / OAuth 2.0 RBAC-aware interfaces and backend permission enforcement for protected enterprise workflows",
           "Worked on Docker/Nginx services and CI/CD that publishes images to ECR and deploys them on AWS EC2",
         ],
       },
       {
         title: "Results",
         content:
-          "Ecometer is in active production across enterprise sustainability workflows. Public proof points from EcoMS marketing and published case studies:",
+          "EcoMeter is in active production across enterprise sustainability workflows. Public proof points from EcoMS marketing and published case studies:",
         bullets: [
           "10+ published enterprise campaigns and events — Amazon, Tata Motors, HDFC, Nykaa, Nivea, Wonder Cement, and others",
           "7 configured media categories, including events, OOH, DOOH, television, digital, and print workflows",
@@ -321,13 +321,13 @@ export const caseStudies: CaseStudy[] = [
       "Keeping 20+ dashboard views responsive when seven media categories produce different record shapes, filters, and aggregation requirements",
       "Mapping manual, OCR, Excel, and map-selected inputs into one canonical calculation flow without creating inconsistent data paths",
       "Keeping AI-generated narrative and chart specifications editable while validating structured output at the frontend boundary",
-      "Enforcing RBAC consistently across navigation, frontend actions, API routes, file access, and background workflows",
+      "Enforcing JWT & OAuth 2.0 RBAC consistently across navigation, frontend actions, API routes, file access, and background workflows",
       "Automating Docker deployments through ECR and EC2 without exposing production configuration or relying on manual server builds",
     ],
     learnings: [
       "A canonical validated data model is what lets forms, OCR, spreadsheets, maps, dashboards, and AI reports reuse the same accounting truth",
       "AI should produce structured chart data rather than chart images when users need to edit, test, and change visualizations",
-      "Enterprise RBAC must be enforced server-side; hiding UI controls is helpful feedback, not authorization",
+      "Enterprise JWT / OAuth 2.0 RBAC must be enforced server-side; hiding UI controls is helpful feedback, not authorization",
       "Queueing document and AI workloads protects normal API responsiveness and creates clearer retry boundaries",
       "Immutable container images and automated deployment gates make a small team more confident than rebuilding applications directly on EC2",
     ],
@@ -335,10 +335,10 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Platform architecture (abstract)",
         content:
-          "Ecometer separates the interactive Next.js product, Node.js service layer, background processing, data stores, AI workflows, artifact storage, and AWS runtime. Specific service boundaries, formulas, schemas, and production configuration remain confidential.",
+          "EcoMeter separates the interactive Next.js product, Node.js service layer, background processing, data stores, AI workflows, artifact storage, and AWS runtime. Specific service boundaries, formulas, schemas, and production configuration remain confidential.",
         bullets: [
           "Next.js frontend — forms, maps, 20+ dashboards, report editor, chart editing, and export UX",
-          "Node.js microservices — APIs, validation, calculation orchestration, RBAC, and workflow boundaries",
+          "Node.js microservices — APIs, validation, JWT & OAuth 2.0 authentication, calculation orchestration, RBAC, and workflow boundaries",
           "Redis/BullMQ — document, AI reporting, and export work outside synchronous request paths",
           "MongoDB and PostgreSQL — document-oriented and relational operational data by service need",
           "LangChain/LangGraph and Pinecone — AI workflow orchestration and semantic retrieval where required",
@@ -895,7 +895,7 @@ export const caseStudies: CaseStudy[] = [
         bullets: [
           "Live: rentbuddy.in/home — furnishing rental marketplace for Rentbuddy Furnishing Solutions",
           "Repo: github.com/yashdark01/rentbuddy",
-          "Outcome: production platform still serving customers; complements my current founding-engineer work on Ecometer",
+          "Outcome: production platform still serving customers; complements my current founding-engineer work on EcoMeter",
         ],
       },
     ],
