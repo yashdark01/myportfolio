@@ -10,7 +10,7 @@ import { trackEvent } from "@/lib/analytics";
 
 export default function GitHubSection() {
   return (
-    <SectionWrapper id="github" label="Code" title="Open Source & GitHub">
+    <SectionWrapper id="github" label="04 / Code in public" title="The work continues after deploy." className="editorial-flat">
       <p className="-mt-8 mb-8 max-w-2xl text-sm leading-relaxed text-text-muted">
         Production repos with live deployments where available. Recruiters
         typically check GitHub before scheduling — activity and CI status below.

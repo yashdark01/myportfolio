@@ -14,7 +14,7 @@ const fields = [
 
 export default function OpenTo() {
   return (
-    <SectionWrapper id="open-to" label="Next" title="What I'm Looking For">
+    <SectionWrapper id="open-to" label="Next" title="What I’m looking for.">
       <div className="grid gap-4 md:grid-cols-2">
         {fields.map((field, index) => (
           <m.div

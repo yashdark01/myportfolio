@@ -11,6 +11,7 @@ import Navbar from "@/components/layout/Navbar";
 import JsonLd from "@/components/JsonLd";
 import SectionScrollHandler from "@/components/SectionScrollHandler";
 import SkipToContent from "@/components/layout/SkipToContent";
+import RouteTransition from "@/components/motion/RouteTransition";
 import { getSiteUrl, profileIconPath, profileImagePath } from "@/lib/site-url";
 import { site } from "@/data/site";
 import "./globals.css";
@@ -92,7 +93,7 @@ export default function RootLayout({
         <MotionProvider>
           <Navbar />
           <PersonaProvider>
-            <main>{children}</main>
+            <RouteTransition>{children}</RouteTransition>
           </PersonaProvider>
           <Footer />
           <DeferredWidgets />

@@ -17,9 +17,19 @@ export default function SocialProof() {
   return (
     <SectionWrapper
       id="social-proof"
-      label="Social proof"
-      title="Trusted in production"
+      label="03 / Production trust"
+      title="Evidence, with attribution."
+      className="editorial-flat"
     >
+      <div className="client-marquee -mt-5 mb-10" aria-label="Selected organizations and clients">
+        <div className="client-marquee-track">
+          {[...ecometerEcosystemClients, ...ecometerEcosystemClients].map((client, index) => (
+            <span key={`${client}-${index}`} className="client-marquee-item" aria-hidden={index >= ecometerEcosystemClients.length}>
+              {client}<span className="text-accent">·</span>
+            </span>
+          ))}
+        </div>
+      </div>
       {featuredTestimonial && (
         <m.blockquote
           initial={{ opacity: 0, y: 16 }}
@@ -65,9 +75,7 @@ export default function SocialProof() {
             {socialProof.ecosystem}
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
-            {ecometerEcosystemClients.map((client) => (
-              <Tag key={client}>{client}</Tag>
-            ))}
+            {ecometerEcosystemClients.slice(0, 5).map((client) => <Tag key={client}>{client}</Tag>)}
           </div>
           <a
             href="https://ecomsww.com/case-studies/"

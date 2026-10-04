@@ -7,21 +7,22 @@ const BASE = process.env.BASE_URL || "http://localhost:3000";
   const page = await browser.newPage();
   await page.setViewportSize({ width: 390, height: 844 });
 
-  await page.goto(BASE, { waitUntil: "networkidle" });
-  await page.waitForSelector("#hero h1");
+  await page.goto(BASE, { waitUntil: "domcontentloaded", timeout: 120000 });
+  await page.waitForSelector("#hero h1", { timeout: 60000 });
+  await page.waitForTimeout(1500);
 
   // Open mobile menu (scroll lock active)
-  await page.locator('button[aria-controls="mobile-nav-panel"]').click();
+  await page.locator('button[aria-controls="site-menu"]').click();
   await page.waitForFunction(
     () =>
       document
-        .querySelector('button[aria-controls="mobile-nav-panel"]')
+        .querySelector('button[aria-controls="site-menu"]')
         ?.getAttribute("aria-expanded") === "true",
   );
   await page.waitForTimeout(400);
 
   // Tap Work link
-  await page.locator('#mobile-nav-panel a[href="/#work"]').click();
+  await page.locator('#site-menu a[href="/#work"]').click();
   await page.waitForTimeout(800);
 
   const workInView = await page.evaluate(() => {
@@ -33,7 +34,7 @@ const BASE = process.env.BASE_URL || "http://localhost:3000";
       ok: rect.top < window.innerHeight * 0.5 && rect.top >= navH - 20,
       top: rect.top,
       menuClosed:
-        (document.querySelector('button[aria-controls="mobile-nav-panel"]')?.getAttribute("aria-expanded")) === "false",
+        (document.querySelector('button[aria-controls="site-menu"]')?.getAttribute("aria-expanded")) === "false",
       bodyFixed: document.body.style.position === "fixed",
     };
   });
@@ -42,9 +43,12 @@ const BASE = process.env.BASE_URL || "http://localhost:3000";
 
   // Desktop nav on homepage
   await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto(BASE, { waitUntil: "networkidle" });
-  await page.waitForSelector("#hero h1");
-  await page.locator('nav[aria-label="Main navigation"] a[href="/#contact"]').click();
+  await page.goto(BASE, { waitUntil: "domcontentloaded", timeout: 120000 });
+  await page.waitForSelector("#hero h1", { timeout: 60000 });
+  await page.waitForTimeout(1500);
+  await page.locator('button[aria-controls="site-menu"]').click();
+  await page.waitForSelector("#site-menu", { state: "visible" });
+  await page.locator('#site-menu a[href="/#contact"]').click();
   await page.waitForTimeout(800);
 
   const contactInView = await page.evaluate(() => {

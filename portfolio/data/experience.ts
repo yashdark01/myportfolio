@@ -11,12 +11,12 @@ export const timeline: TimelineEntry[] = [
   {
     id: "horizon17",
     period: "Apr 2025 — Present",
-    title: "Founding Engineer · Full Stack Developer",
+    title: "Founding Engineer · Applied AI Engineer · Full Stack Developer",
     organization:
       "Horizon17 Technology and Sustainability Pvt. Ltd. · Gurgaon",
     description:
-      "Founding engineer building Ecometer — EcoMS's sustainability intelligence platform for campaign and event carbon measurement, BRSR-aligned reporting, and interactive dashboards. Work spans Node.js/Express.js microservices, CI/CD, Docker, Nginx, NATS, and S3/MinIO object storage.",
-    badge: "Founding Engineer · Ecometer",
+      "Founding engineer building Ecometer and Ecolynk — EcoMS platforms for campaign and event carbon measurement, enterprise ESG assessments, materiality, supplier intelligence, AI reporting, and 20+ interactive dashboards. Work spans Next.js, Node.js/Express.js microservices, NATS, Redis/BullMQ, RBAC, CI/CD, Docker, Nginx, AWS ECR/EC2, and S3/MinIO object storage.",
+    badge: "Founding Engineer · Applied AI",
   },
   {
     id: "webintegratorz",
@@ -33,6 +33,6 @@ export const timeline: TimelineEntry[] = [
     title: "B.Tech Computer Science Engineering",
     organization: "Indian Institute of Information Technology, Nagpur",
     description:
-      "Focused on full-stack development, system design, data structures, and building production-grade web applications.",
+      "Built a strong foundation in core computer science: C++, Java and object-oriented programming, data structures and algorithms, computer networks, operating systems, database management systems, software engineering, computer architecture, theory of computation, compiler design, and distributed systems.",
   },
 ];

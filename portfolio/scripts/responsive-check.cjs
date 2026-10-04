@@ -22,9 +22,11 @@ async function checkViewport(page, viewport) {
     width: viewport.width,
     height: viewport.height,
   });
-  await page.goto(BASE, { waitUntil: "domcontentloaded" });
-  await page.waitForSelector("#hero h1", { timeout: 15000 });
-  await page.waitForTimeout(600);
+  await page.goto(BASE, { waitUntil: "domcontentloaded", timeout: 120000 });
+  await page.waitForSelector("#hero h1", { timeout: 60000 });
+  // The navigation is client-rendered. Give React hydration a stable checkpoint
+  // before exercising controls, especially on a cold development build.
+  await page.waitForTimeout(1800);
 
   const overflow = await page.evaluate(() => ({
     scrollWidth: document.documentElement.scrollWidth,
@@ -39,78 +41,31 @@ async function checkViewport(page, viewport) {
     );
   }
 
-  const isMobile = viewport.width < 768;
-  const menuBtn = page.locator('button[aria-controls="mobile-nav-panel"]');
-  const desktopNav = page.locator(
-    'nav[aria-label="Main navigation"] >> a[href="/#work"]',
-  );
-
-  if (isMobile) {
-    if (!(await menuBtn.isVisible())) {
-      report(viewport, "nav", "Mobile menu button not visible");
-    } else {
-      await menuBtn.click();
-      await page.waitForSelector("#mobile-nav-panel", { state: "visible" });
-
-      const panel = page.locator("#mobile-nav-panel");
-      const panelBox = await panel.boundingBox();
-      if (!panelBox || panelBox.width < 200) {
-        report(viewport, "nav", "Mobile menu panel too narrow or missing");
-      }
-
-      if ((await menuBtn.getAttribute("aria-expanded")) !== "true") {
-        report(viewport, "nav", "aria-expanded not true when menu open");
-      }
-
-      await page.keyboard.press("Escape");
-      await page.waitForTimeout(600);
-
-      if ((await menuBtn.getAttribute("aria-expanded")) === "true") {
-        report(viewport, "nav", "Menu still marked open after Escape");
-      }
-
-      await menuBtn.click();
-      await page.waitForSelector("#mobile-nav-panel", { state: "visible" });
-      await menuBtn.click();
-      await page.waitForTimeout(500);
-
-      if ((await menuBtn.getAttribute("aria-expanded")) === "true") {
-        report(viewport, "nav", "Menu still open after hamburger toggle");
-      }
-    }
-
-    if (await desktopNav.isVisible()) {
-      report(viewport, "nav", "Desktop nav links visible on mobile");
-    }
-
-    const fabClearance = await page.evaluate(() => {
-      const resume = document.querySelector(".mobile-resume-fab");
-      const hr = document.querySelector('button[aria-label="Open recruiter mode"]');
-      if (!resume || !hr) return null;
-      const a = resume.getBoundingClientRect();
-      const b = hr.getBoundingClientRect();
-      const overlap =
-        a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
-      const bottomClear = Math.min(a.bottom, b.bottom);
-      return {
-        overlap,
-        bottomClear,
-        viewportH: window.innerHeight,
-      };
-    });
-
-    if (fabClearance?.overlap) {
-      report(viewport, "fab", "Resume FAB overlaps HR button");
-    }
-    if (fabClearance && fabClearance.bottomClear > fabClearance.viewportH - 8) {
-      report(viewport, "fab", "Bottom FABs may clip below viewport");
-    }
+  const menuBtn = page.locator('button[aria-controls="site-menu"]');
+  if (!(await menuBtn.isVisible())) {
+    report(viewport, "nav", "Editorial menu button not visible");
   } else {
-    if (await menuBtn.isVisible()) {
-      report(viewport, "nav", "Mobile menu button visible on desktop");
+    await menuBtn.click();
+    await page.waitForFunction(
+      () => document.querySelector('button[aria-controls="site-menu"]')?.getAttribute("aria-expanded") === "true",
+      { timeout: 10000 },
+    );
+    await page.waitForSelector("#site-menu", { state: "visible", timeout: 10000 });
+    const panelBox = await page.locator("#site-menu").boundingBox();
+    if (!panelBox || panelBox.width < viewport.width - 2) {
+      report(viewport, "nav", "Full-screen menu does not cover the viewport");
     }
-    if (!(await desktopNav.isVisible())) {
-      report(viewport, "nav", "Desktop nav links not visible");
+    if ((await menuBtn.getAttribute("aria-expanded")) !== "true") {
+      report(viewport, "nav", "aria-expanded not true when menu open");
+    }
+    const menuLinks = await page.locator("#site-menu a[href]").count();
+    if (menuLinks < 8) {
+      report(viewport, "nav", `Only ${menuLinks} navigation links are available`);
+    }
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(800);
+    if ((await menuBtn.getAttribute("aria-expanded")) === "true") {
+      report(viewport, "nav", "Menu still marked open after Escape");
     }
   }
 
@@ -124,9 +79,10 @@ async function checkViewport(page, viewport) {
     );
   }
 
-  await page.locator('button[role="tab"]').nth(1).click();
+  const personaButtons = page.locator('[aria-label="Portfolio focus"] button');
+  await personaButtons.nth(1).click();
   await page.waitForTimeout(200);
-  await page.locator('button[role="tab"]').first().click();
+  await personaButtons.first().click();
   await page.waitForTimeout(200);
 
   const postToggleOverflow = await page.evaluate(

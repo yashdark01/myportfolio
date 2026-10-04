@@ -7,7 +7,7 @@ import { trackEvent } from "@/lib/analytics";
 
 export default function Coding() {
   return (
-    <SectionWrapper id="coding" label="Interview Prep" title="DSA & Problem Solving">
+    <SectionWrapper id="coding" label="Interview prep" title="DSA and problem solving.">
       <div className="card-surface max-w-2xl p-6 md:p-8">
         <m.div
           initial={{ opacity: 0, y: 12 }}

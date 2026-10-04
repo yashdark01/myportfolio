@@ -78,6 +78,31 @@ export const previewMediaByProject: Record<string, PreviewMediaItem[]> = {
       objectFit: "cover",
     },
   ],
+  ecolynk: [
+    {
+      id: "official-overview",
+      type: "image",
+      src: "/projects/ecolynk/overview.png",
+      alt: "Official EcoMS Ecolynk artwork with the message connected for a greener future",
+      caption:
+        "Official public EcoMS artwork for Ecolynk — connected for a greener future.",
+      domain: "ecomsww.com · Ecolynk",
+      status: "ready",
+      objectFit: "contain",
+    },
+  ],
+  popscan: [
+    {
+      id: "nda-overview",
+      type: "image",
+      alt: "PopScan enterprise AI review workflow — interface withheld under NDA",
+      caption:
+        "Product interface and campaign material withheld under NDA; the case study uses an intentionally abstract architecture.",
+      domain: "PopScan · Enterprise system",
+      status: "restricted",
+      comingSoonLabel: "PopScan — NDA-protected product",
+    },
+  ],
   "rent-buddy": [
     {
       id: "home",
@@ -141,6 +166,8 @@ export function getPreviewMedia(projectId: string): PreviewMediaItem[] {
 /** Best single frame for homepage hero — may differ from gallery order */
 const heroMediaPreference: Record<string, string> = {
   "horizon17-esg": "overview",
+  ecolynk: "official-overview",
+  popscan: "nda-overview",
   krashaq: "dashboard",
   "rent-buddy": "home",
 };
@@ -162,6 +189,10 @@ export function getDefaultMediaDomain(projectId: string): string {
       return "ecomsww.com/ecometer";
     case "rent-buddy":
       return "rentbuddy.in/home";
+    case "popscan":
+      return "PopScan · NDA-protected";
+    case "ecolynk":
+      return "ecomsww.com · Ecolynk";
     case "archflow":
       return "archflow · side project";
     case "music-player":
