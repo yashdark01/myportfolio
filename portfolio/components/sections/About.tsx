@@ -27,7 +27,7 @@ export default function About() {
         >
           <Image
             src={profileImagePath}
-            alt="Yash Patidar — Applied AI Engineer & Full Stack Developer, IIIT Nagpur"
+            alt=""
             width={80}
             height={80}
             sizes="80px"
@@ -73,7 +73,7 @@ export default function About() {
             Next.js, Node.js, Express.js, and applied LLM systems.
           </p>
           <p className="leading-relaxed text-text-muted">
-            At Horizon17, my direct engineering contribution to Ecometer and
+            At Horizon17, my direct engineering contribution to EcoMeter and
             Ecolynk covers campaign carbon
             measurement, ESG assessments, materiality, supplier intelligence, AI
             reporting, and 20+ interactive dashboards. My work spans microservices,

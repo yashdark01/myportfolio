@@ -15,7 +15,7 @@ export const timeline: TimelineEntry[] = [
     organization:
       "Horizon17 Technology and Sustainability Pvt. Ltd. · Gurgaon",
     description:
-      "Founding engineer building Ecometer and Ecolynk — EcoMS platforms for campaign and event carbon measurement, enterprise ESG assessments, materiality, supplier intelligence, AI reporting, and 20+ interactive dashboards. Work spans Next.js, Node.js/Express.js microservices, NATS, Redis/BullMQ, RBAC, CI/CD, Docker, Nginx, AWS ECR/EC2, and S3/MinIO object storage.",
+      "Founding engineer building EcoMeter and Ecolynk — EcoMS platforms for campaign and event carbon measurement, enterprise ESG assessments, materiality, supplier intelligence, AI reporting, and 20+ interactive dashboards. Work spans Next.js, Node.js/Express.js microservices, NATS, Redis/BullMQ, RBAC, CI/CD, Docker, Nginx, AWS ECR/EC2, and S3/MinIO object storage.",
     badge: "Founding Engineer · Applied AI",
   },
   {

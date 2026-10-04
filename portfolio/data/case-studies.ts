@@ -232,17 +232,17 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Where I work",
         content:
-          "I'm a Founding Engineer and Full Stack Developer at Horizon17 Technology and Sustainability Pvt. Ltd. — the tech company behind our sustainability products. EcoMS (EcoMedia Solutions) is our business company offering end-to-end sustainability services to brands, agencies, and enterprises. Ecometer is EcoMS's patent-filed product platform.",
+          "I'm a Founding Engineer and Full Stack Developer at Horizon17 Technology and Sustainability Pvt. Ltd. — the tech company behind our sustainability products. EcoMS (EcoMedia Solutions) is our business company offering end-to-end sustainability services to brands, agencies, and enterprises. EcoMeter is EcoMS's patent-filed product platform.",
         bullets: [
           "Horizon17 Technology and Sustainability Pvt. Ltd. — horizon17ww.com — technology & sustainability innovation (AI-CEA, blockchain CCE, IoT)",
           "EcoMS — ecomsww.com — business company: consulting, ESG reporting, carbon offsetting, and platform delivery",
-          "Ecometer — our product: sustainability intelligence for campaigns and events",
+          "EcoMeter — our product: sustainability intelligence for campaigns and events",
         ],
       },
       {
-        title: "The product — Ecometer",
+        title: "The product — EcoMeter",
         content:
-          "Ecometer is a media-focused GHG accounting and AI sustainability reporting platform. It turns fragmented campaign and activity data into validated emissions metrics, interactive analysis, and editable sustainability reports across seven configured media categories.",
+          "EcoMeter is a media-focused GHG accounting and AI sustainability reporting platform. It turns fragmented campaign and activity data into validated emissions metrics, interactive analysis, and editable sustainability reports across seven configured media categories.",
         bullets: [
           "Capture — structured forms, OCR-assisted bills, standardized Excel imports, and map-based location inputs",
           "Calculate — normalize activity records and apply configured emission-factor logic",
@@ -291,7 +291,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "My role",
         content:
-          "As Founding Engineer and Full Stack Developer at Horizon17, I work across Ecometer's product experience and service platform. The portfolio keeps proprietary calculation rules and production configuration abstract, but the capabilities below reflect my direct engineering contribution:",
+          "As Founding Engineer and Full Stack Developer at Horizon17, I work across EcoMeter's product experience and service platform. The portfolio keeps proprietary calculation rules and production configuration abstract, but the capabilities below reflect my direct engineering contribution:",
         bullets: [
           "Built and maintained 20+ Next.js dashboard views with reusable Recharts visualizations and filter-heavy data workflows",
           "Implemented Google Maps views and an interactive location picker for geographic activity context",
@@ -306,7 +306,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Results",
         content:
-          "Ecometer is in active production across enterprise sustainability workflows. Public proof points from EcoMS marketing and published case studies:",
+          "EcoMeter is in active production across enterprise sustainability workflows. Public proof points from EcoMS marketing and published case studies:",
         bullets: [
           "10+ published enterprise campaigns and events — Amazon, Tata Motors, HDFC, Nykaa, Nivea, Wonder Cement, and others",
           "7 configured media categories, including events, OOH, DOOH, television, digital, and print workflows",
@@ -335,7 +335,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Platform architecture (abstract)",
         content:
-          "Ecometer separates the interactive Next.js product, Node.js service layer, background processing, data stores, AI workflows, artifact storage, and AWS runtime. Specific service boundaries, formulas, schemas, and production configuration remain confidential.",
+          "EcoMeter separates the interactive Next.js product, Node.js service layer, background processing, data stores, AI workflows, artifact storage, and AWS runtime. Specific service boundaries, formulas, schemas, and production configuration remain confidential.",
         bullets: [
           "Next.js frontend — forms, maps, 20+ dashboards, report editor, chart editing, and export UX",
           "Node.js microservices — APIs, validation, calculation orchestration, RBAC, and workflow boundaries",
@@ -449,7 +449,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "The product — Ecolynk",
         content:
-          "Ecolynk is the broader enterprise ESG platform in the EcoMS product family. It supports 17 industries across 14 sectors and brings accounting, assessments, stakeholder engagement, supplier intelligence, target setting, disclosure, and AI reporting into one system. The public EcoMS website describes it as a unified platform for emissions, supply chains, governance, social impact, and audit-ready disclosure.",
+          "Ecolynk is the broader enterprise ESG platform in the EcoMS product family. It supports 24 industries across 11 sectors and brings accounting, assessments, stakeholder engagement, supplier intelligence, target setting, disclosure, and AI reporting into one system. The public EcoMS website describes it as a unified platform for emissions, supply chains, governance, social impact, and audit-ready disclosure.",
         bullets: [
           "GHG accounting and sustainability data management",
           "Single- and double-materiality assessment workflows",
@@ -895,7 +895,7 @@ export const caseStudies: CaseStudy[] = [
         bullets: [
           "Live: rentbuddy.in/home — furnishing rental marketplace for Rentbuddy Furnishing Solutions",
           "Repo: github.com/yashdark01/rentbuddy",
-          "Outcome: production platform still serving customers; complements my current founding-engineer work on Ecometer",
+          "Outcome: production platform still serving customers; complements my current founding-engineer work on EcoMeter",
         ],
       },
     ],

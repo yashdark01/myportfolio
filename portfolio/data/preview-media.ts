@@ -48,7 +48,7 @@ export const previewMediaByProject: Record<string, PreviewMediaItem[]> = {
       id: "overview",
       type: "image",
       src: "/projects/ecometer/overview.png",
-      alt: "Ecometer platform page on ecomsww.com — sustainability intelligence for modern marketing",
+      alt: "EcoMeter platform page on ecomsww.com — sustainability intelligence for modern marketing",
       caption:
         "Live EcoMS platform page — sustainability intelligence for modern marketing",
       domain: "ecomsww.com/ecometer",
@@ -59,7 +59,7 @@ export const previewMediaByProject: Record<string, PreviewMediaItem[]> = {
       id: "platform-info",
       type: "image",
       src: "/projects/ecometer/platform-info.png",
-      alt: "Ecometer one platform section on ecomsww.com — end-to-end accountability for brands and agencies",
+      alt: "EcoMeter one platform section on ecomsww.com — end-to-end accountability for brands and agencies",
       caption:
         "One platform, end-to-end accountability — impressions to measured impact",
       domain: "ecomsww.com/ecometer",

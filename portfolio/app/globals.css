@@ -736,74 +736,63 @@ section[id] {
   animation: status-pulse 2.2s ease-out infinite;
 }
 
+.hero-credential {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid rgba(52, 211, 153, 0.24);
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.08);
+  padding: 0.42rem 0.7rem;
+  color: #a7f3d0;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.hero-credential > span {
+  color: #34d399;
+  font-size: 0.65rem;
+}
+
+.hero-signals {
+  max-width: 38rem;
+  overflow: hidden;
+  border-block: 1px solid rgba(255, 255, 255, 0.07);
+  padding-block: 0.55rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.68);
+}
+
+.hero-signal-row {
+  display: grid;
+  grid-template-columns: 5.75rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding-block: 0.25rem;
+}
+
+.hero-signal-label {
+  color: #34d399;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 480px) {
+  .hero-signal-row {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
+
 .hero-scene,
 .hero-scene-fallback {
   position: absolute;
   inset: -4% -8% 8%;
   min-height: 24rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.075), transparent 62%);
 }
 
-.hero-scene::after {
-  content: "";
-  position: absolute;
-  inset: 8% 4%;
-  border: 1px solid rgba(110, 231, 183, 0.08);
-  border-radius: 50%;
-  box-shadow: inset 0 0 80px rgba(16, 185, 129, 0.035);
-  pointer-events: none;
-}
-
-.hero-viz-readout {
-  position: absolute;
-  right: 10%;
-  bottom: 7%;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: rgba(236, 253, 245, 0.78);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  line-height: 1.35;
-  text-transform: uppercase;
-}
-
-.hero-viz-index {
-  display: grid;
-  width: 2rem;
-  height: 2rem;
-  place-items: center;
-  border: 1px solid rgba(110, 231, 183, 0.25);
-  border-radius: 50%;
-  color: #6ee7b7;
-}
-
-.hero-viz-readout small {
-  display: block;
-  margin-top: 0.18rem;
-  color: rgba(139, 139, 149, 0.75);
-  font-size: 0.52rem;
-  letter-spacing: 0.08em;
-}
-
-.hero-scene-fallback::before,
-.hero-scene-fallback::after {
-  content: "";
-  position: absolute;
-  inset: 22%;
-  border: 1px solid rgba(52, 211, 153, 0.28);
-  border-radius: 42% 58% 61% 39%;
-  animation: fallback-spin 11s linear infinite;
-}
-
-.hero-scene-fallback::after {
-  inset: 34%;
-  border-color: rgba(34, 211, 238, 0.25);
-  animation-direction: reverse;
-  animation-duration: 8s;
-}
 
 .spotlight-card {
   position: relative;

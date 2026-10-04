@@ -12,10 +12,13 @@ export interface Project {
   category: ProjectCategory;
   featured: boolean;
   builtAt?: string;
-  metrics: ProjectMetric[];
+  /** Exactly four recruiter-facing achievement cards on every project. */
+  metrics: [ProjectMetric, ProjectMetric, ProjectMetric, ProjectMetric];
   problem: string;
   role: string;
   outcome: string;
+  evidence: string;
+  nextStep: string;
   tradeoffs: string[];
   architecture: string;
   stack: string[];
@@ -44,12 +47,17 @@ export const projects: Project[] = [
       { value: "9", label: "production microservices" },
       { value: "630+", label: "automated tests" },
       { value: "26", label: "governed agent tools" },
+      { value: "Solo", label: "architecture ownership" },
     ],
     problem:
       "Smallholder farmers in India need real-time multilingual crop advice, weather alerts, and APMC market intelligence — while ag-input suppliers need a scalable B2B2C platform to license farmer access. No existing solution bridges domain-specific AI reasoning with durable, event-driven backend services and a governed multi-agent harness.",
     role: "Sole architect and full-stack engineer — designed the two-layer microservice architecture (UAIP reusable AI infrastructure + Krashaq domain services), built the LangGraph multi-agent harness with 26 governed tools, hybrid RAG knowledge pipeline (Qdrant + BM25 + RRF), and event-driven alert delivery with PostgreSQL outbox pattern.",
     outcome:
       "Shipped a production multi-service platform where the LangGraph agent harness routes farmer queries through governed tools (weather, mandi markets, agronomic calculators, RAG retrieval), executes durable consequential actions with HITL approval, and delivers proactive hazard alerts via PostgreSQL-backed BullMQ workers across 630+ passing tests.",
+    evidence:
+      "Public repository, live product, and service test suites. The 630+ figure is the summed passing-test inventory across nine repositories; it measures engineering coverage, not user adoption or model accuracy.",
+    nextStep:
+      "Publish a versioned Hindi/Hinglish retrieval evaluation set with answer-quality, citation, latency, and tool-success baselines.",
     tradeoffs: [
       "Two-layer microservice split (UAIP infrastructure / Krashaq domain) over a monolith — reusable AI harness stays decoupled from agricultural business rules; cross-layer integration stays HTTP/events only.",
       "PostgreSQL checkpoints + durable action journal over in-memory state — agent runs survive process crashes; HITL approvals bind to exact payload hashes and expire cleanly.",
@@ -153,23 +161,27 @@ export const projects: Project[] = [
   },
   {
     id: "horizon17-esg",
-    title: "Ecometer",
+    title: "EcoMeter",
     subtitle:
-      "Media-focused GHG accounting and AI sustainability reporting — multi-source ingestion, 20+ dashboards, editable visual reports, and enterprise deployment",
+      "Media-focused GHG accounting and AI sustainability audit-ready reporting — multi-source ingestion, 20+ dashboards, editable visual reports, and enterprise deployment",
     category: "enterprise",
     featured: true,
     builtAt: "Horizon17 Technology and Sustainability Pvt. Ltd.",
     role: "Founding Engineer · Full Stack Developer — built major accounting, ingestion, visualization, reporting, access-control, and deployment workflows across the Next.js frontend and Node.js microservices. My work includes 20+ dashboards, Recharts visualizations, Google Maps location picking, RBAC, Azure OCR and Excel ingestion, AI-native report editing, automated exports, and CI/CD delivery to Docker services on AWS EC2 through ECR and Nginx.",
     metrics: [
-      { value: "20+", label: "analytics dashboards" },
-      { value: "7", label: "media categories" },
-      { value: "10+", label: "published client campaigns" },
-      { value: "Patent-filed", label: "platform · EcoMS" },
+      { value: "20+", label: "dashboard views built" },
+      { value: "7", label: "media categories supported" },
+      { value: "3", label: "ingestion paths delivered" },
+      { value: "AWS", label: "production delivery owned" },
     ],
     problem:
       "Media sustainability data arrives through forms, bills, spreadsheets, campaign systems, and location-specific activity records. Teams need one controlled workflow that validates those inputs, calculates GHG emissions, explains results through dashboards, and turns the same metrics into editable framework-specific reports.",
     outcome:
       "Shipped production workflows spanning manual, Azure OCR, and Excel ingestion; automated carbon calculations; 20+ map- and chart-driven dashboards; framework-aware AI reporting; editable chart/document composition; RBAC; and DOCX, PDF, and Markdown publishing across a containerized AWS deployment.",
+    evidence:
+      "The dashboard and ingestion figures are implementation inventory from my direct product scope. Public EcoMS pages and case studies verify the platform; proprietary source, customer data, and internal performance telemetry remain confidential.",
+    nextStep:
+      "Add permission-approved performance baselines and anonymized workflow screenshots so external reviewers can verify impact beyond implementation breadth.",
     tradeoffs: [
       "One canonical calculation flow across manual, OCR, and Excel inputs — users keep flexible ingestion while validation and emission logic stay consistent.",
       "Structured chart JSON rendered with Recharts over static AI-generated images — visualizations remain editable, testable, and switchable inside the report canvas.",
@@ -221,22 +233,26 @@ customer data, credentials, and production network details.`,
     id: "ecolynk",
     title: "Ecolynk",
     subtitle:
-      "Enterprise ESG, materiality, supplier assessment, risk intelligence, and AI reporting platform for 14 sectors and 17 industries",
+      "Enterprise ESG, materiality, supplier assessment, risk intelligence, and AI reporting platform for 11 sectors and 24 industries",
     category: "enterprise",
     featured: true,
     builtAt: "Horizon17 Technology and Sustainability Pvt. Ltd.",
     role:
       "Founding Engineer · Full Stack Developer — primary individual ownership across Supplier Assessment and Materiality Assessment, including AI topic research, large-scale stakeholder distribution, response analytics, materiality matrices, supplier risk intelligence, 20+ dashboards, maps/location workflows, RBAC, AI reporting, backend microservices, and AWS delivery.",
     metrics: [
-      { value: "14", label: "business sectors" },
-      { value: "17", label: "supported industries" },
-      { value: "20+", label: "enterprise dashboards" },
-      { value: "AI-native", label: "assessment and reporting" },
+      { value: "2", label: "core assessment modules owned" },
+      { value: "20+", label: "dashboard views built" },
+      { value: "NATS", label: "large-scale distribution shipped" },
+      { value: "AI", label: "reporting workflows delivered" },
     ],
     problem:
       "Enterprise ESG teams need to collect evidence from large stakeholder and supplier populations, identify material sustainability topics, surface supplier risk, and produce disclosure-ready reports. Spreadsheets and synchronous workflows do not scale across industries, recipients, assessments, and review cycles.",
     outcome:
       "Built major workflows for a multi-industry ESG platform: AI-assisted topic recommendation, single- and double-materiality assessments, one-click questionnaire distribution through NATS and Redis/BullMQ, supplier assessment and risk intelligence, 20+ Recharts dashboards, Google Maps/location inputs, RBAC, a chat-plus-artifact AI report editor, and automated AWS container delivery.",
+    evidence:
+      "The two owned modules and 20+ views are implementation-scope counts, not customer-impact claims. The public EcoMS platform verifies the product family; internal assessment data and operational metrics are withheld.",
+    nextStep:
+      "Add permission-approved aggregate metrics for distribution volume, completion rate, and analyst time saved without exposing customer or assessment data.",
     tradeoffs: [
       "NATS event distribution with Redis/BullMQ workers over synchronous recipient loops — large stakeholder and supplier distributions stay responsive, trackable, and independently retryable.",
       "AI recommendations with user review over autonomous topic selection — company, sector, knowledge-base, and research context accelerate discovery without replacing ESG judgment.",
@@ -295,8 +311,9 @@ customer data, credentials, and production network configuration.`,
     builtAt: "Horizon17 · NDA-protected",
     metrics: [
       { value: "Hundreds", label: "of slides per review" },
-      { value: "Live", label: "SSE processing visibility" },
+      { value: "2-person", label: "delivery team" },
       { value: "Resumable", label: "checkpointed AI jobs" },
+      { value: "AWS", label: "production rollout owned" },
     ],
     problem:
       "Enterprise campaign teams review presentation decks containing hundreds of site photographs. Manual inspection is slow, inconsistent, and difficult to trace across recurring campaign cycles. Reviewers need AI assistance without losing human approval, issue history, or reliable recovery when a long-running job fails.",
@@ -304,6 +321,10 @@ customer data, credentials, and production network configuration.`,
       "Product engineer on a two-person delivery team — co-built the full-stack product and AI document-processing workflow. I independently owned its production delivery on AWS EC2: Dockerized services, automated CI/CD, ECR image delivery, Nginx reverse proxy configuration, environment setup, and operational rollout.",
     outcome:
       "Delivered an NDA-protected workflow that turns large campaign presentations into structured, reviewable findings: asynchronous vision analysis, live progress updates, annotated outputs, human acceptance or rejection, rectification tracking, and historical issue continuity across campaign cycles.",
+    evidence:
+      "The case study documents my two-person-team contribution and independently owned AWS rollout. Workload size is expressed as an order of magnitude because exact customer decks, throughput, accuracy, and infrastructure telemetry are NDA-protected.",
+    nextStep:
+      "Seek approval to publish anonymized throughput, recovery-rate, and reviewer-acceptance metrics while keeping client material confidential.",
     tradeoffs: [
       "Asynchronous workers with Server-Sent Events over request/response processing — long-running reviews continue independently while users receive a readable, one-way progress stream.",
       "Slide-level checkpoints and idempotency over whole-deck retries — interrupted jobs resume from persisted progress without repeating completed AI work.",
@@ -358,12 +379,17 @@ model configuration, campaign rules, and customer infrastructure.`,
       { value: "Live", label: "rentbuddy.in" },
       { value: "30%", label: "faster API responses" },
       { value: "JWT", label: "secured access" },
+      { value: "Full-stack", label: "feature ownership" },
     ],
     problem:
       "Rentbuddy Furnishing Solutions needed a consumer-facing rental marketplace — users browse furniture and home products by city and category, place orders, and get tracked delivery. It had to ship under real client deadlines, not classroom timelines.",
     role: "Full-stack developer on the WebIntegratorz delivery team — owned Rent Buddy feature work end-to-end: JWT-secured REST APIs, listing and category flows, responsive React UI, and production deployment at rentbuddy.in.",
     outcome:
-      "Rent Buddy remains live in production for Rentbuddy Furnishing Solutions — a concrete internship proof point alongside my founding-engineer work on Ecometer.",
+      "Rent Buddy remains live in production for Rentbuddy Furnishing Solutions — a concrete internship proof point alongside my founding-engineer work on EcoMeter.",
+    evidence:
+      "Live product and public repository. The ~30% figure is a relative improvement reported for selected hot listing endpoints against their pre-optimization baseline, not a site-wide latency guarantee.",
+    nextStep:
+      "Capture reproducible p50 and p95 endpoint benchmarks, dataset size, environment, and before/after query plans.",
     tradeoffs: [
       "JWT session auth over OAuth — matched client infra and sprint timeline; RBAC-ready for admin flows without third-party auth dependency.",
       "React SPA + Node API over SSR — faster client iteration for category/search UX under tight delivery deadlines.",
@@ -393,15 +419,20 @@ export const archflowProject: Project = {
   category: "fullstack",
   featured: false,
   metrics: [
-    { value: "Active", label: "side project" },
+    { value: "Solo", label: "product ownership" },
     { value: "Canvas", label: "in-browser editor" },
     { value: "AI", label: "diagram assist" },
+    { value: "Open", label: "source repository" },
   ],
   problem:
     "System design prep and architecture reviews still happen on whiteboards or generic diagram tools that don't understand software components, data flows, or interview-style constraints.",
   role: "Solo builder — designing the canvas engine, node/edge model, export flow, and AI-assisted diagram generation on top of an open-source repo.",
   outcome:
     "Active side project on GitHub: drag-drop architecture nodes, connection routing, and AI-assisted diagram generation. Public demo ships when the canvas UX is stable enough to share.",
+  evidence:
+    "Public source repository and commit history. The current evidence proves implementation progress; it does not yet claim production users or a stable public release.",
+  nextStep:
+    "Ship a public demo with export fixtures, interaction tests, and a short architecture walkthrough.",
   tradeoffs: [
     "Custom canvas over Mermaid-only — richer drag-drop and layout control for interview-style diagrams.",
     "In-browser first — no account required for v1; export/share before multi-user collaboration.",
@@ -427,15 +458,20 @@ export const musicPlayerProject: Project = {
   category: "fullstack",
   featured: false,
   metrics: [
+    { value: "Full-stack", label: "application shipped" },
     { value: "Clerk", label: "OAuth auth" },
     { value: "Admin", label: "upload + delete" },
-    { value: "Express.js", label: "REST API" },
+    { value: "Tested", label: "core API flows" },
   ],
   problem:
     "Users wanted a streaming-style music app with sign-in, discovery feeds, album playback, and an admin path to manage catalog content.",
   role: "Built the full stack — Clerk auth, Express API, MongoDB models, Redux player, ShadCN UI, and admin upload/delete via Cloudinary.",
   outcome:
     "Shipped a production-ready streaming app with protected routes, featured/trending discovery, album pages, admin dashboard, and integration tests on core API flows.",
+  evidence:
+    "Public source repository with client, API, authentication, state-management, and admin flows. No user or streaming-volume claim is made without deployment analytics.",
+  nextStep:
+    "Publish a hosted demo and document integration-test coverage plus media-loading performance.",
   tradeoffs: [
     "Clerk over custom JWT — faster OAuth, session refresh, and admin email gating without building auth infra.",
     "Redux Toolkit for player queue/state vs Context — predictable next/prev and route-safe playback.",
@@ -522,15 +558,20 @@ export const krashaqAwsInfraProject: Project = {
   category: "enterprise",
   featured: false,
   metrics: [
-    { value: "9", label: "services on ECS Fargate" },
-    { value: "Multi-AZ", label: "Aurora PostgreSQL" },
-    { value: "EventBridge", label: "event-driven routing" },
+    { value: "9", label: "services mapped to Fargate" },
+    { value: "Multi-AZ", label: "Aurora design" },
+    { value: "EventBridge", label: "event routing design" },
+    { value: "Solo", label: "infrastructure architecture" },
   ],
   problem:
     "A 9-service microservice platform with per-service PostgreSQL schemas, Redis BullMQ workers, Qdrant vector search, and SSE streaming needs AWS infrastructure that isolates services correctly, scales independently, and avoids shared-database coupling that defeats the microservice boundary.",
   role: "Sole infrastructure designer — VPC topology, ECS task definitions, RDS Aurora schema isolation strategy, EventBridge routing for weather warning fanout, S3/CloudFront for document storage, and CloudWatch/X-Ray observability across all 9 services.",
   outcome:
     "An infrastructure design where each service runs as an isolated ECS Fargate task with its own IAM role, connects to isolated PostgreSQL schemas on shared Aurora clusters (search_path isolation), uses EventBridge for cross-service event routing, and exposes a single ALB entry point with private gateway routes unreachable from the internet.",
+  evidence:
+    "Architecture artifact mapped to the nine-service runtime and its isolation requirements. This is explicitly a production design, not a claim that the complete AWS topology is already provisioned.",
+  nextStep:
+    "Implement the design as Terraform or CDK, then publish validation evidence for failover, autoscaling, SSE behavior, cost, and recovery objectives.",
   tradeoffs: [
     "Shared Aurora clusters with schema isolation over per-service RDS instances — reduces cost and operational overhead while maintaining data isolation via PostgreSQL search_path and IAM role boundaries.",
     "ECS Fargate over EKS — simpler operations for a small team; no cluster management; task definitions version-controlled as infrastructure code.",
@@ -648,12 +689,17 @@ export const krashaqAgentHarnessProject: Project = {
     { value: "26", label: "governed tools registered" },
     { value: "249", label: "runtime test cases" },
     { value: "7", label: "skills · 10 prompts" },
+    { value: "HITL", label: "durable approval workflow" },
   ],
   problem:
     "Single-shot LLM prompts can't reliably handle compound farmer queries that require fetching weather, querying APMC market prices, running agronomic calculations, and searching the knowledge base — all with correct source attribution, bounded cost, and human approval before consequential actions. Production agent harnesses must enforce constraints at the infrastructure level, not the prompt level.",
   role: "Sole engineer — designed and built the LangGraph StateGraph execution engine, 26-tool registry with input/output schemas, multi-provider model gateway with fallback chains, BudgetBroker enforcement, durable HITL approval with payload hash binding, PostgreSQL checkpoint system, and the multi-agent supervisor/specialist architecture.",
   outcome:
     "A production-grade agent harness where the model proposes tool calls and the harness enforces authorization, budget, output validation, and action receipts. 249 tests pass including persistence cases against disposable PostgreSQL 17.",
+  evidence:
+    "Public runtime repository and 249-test suite, including disposable PostgreSQL persistence cases. Test count measures covered contracts and recovery paths, not model quality by itself.",
+  nextStep:
+    "Publish adversarial tool-use evaluations, concurrency/load baselines, and provider-level latency and cost comparisons.",
   tradeoffs: [
     "LangGraph StateGraph over single-shot prompts — explicit node transitions enable deterministic enforcement of budget caps, scope filtering, and output validation at each step.",
     "Harness-level enforcement over prompt-level enforcement — budgets, tool scopes, action receipts, and output validation belong in code, not in model instructions that can be overridden by adversarial inputs.",
@@ -758,12 +804,17 @@ export const krashaqContextKbProject: Project = {
     { value: "768-dim", label: "Qdrant embeddings" },
     { value: "RRF", label: "hybrid retrieval fusion" },
     { value: "271", label: "knowledge service tests" },
+    { value: "4", label: "context stores orchestrated" },
   ],
   problem:
     "Agricultural AI queries in Hindi/Hinglish/English require domain-specific retrieval that pure vector search fails at. Short 3–5 word crop queries need BM25 for exact term matching. Farm context must come from the authoritative auth service, not chat memory that can go stale.",
   role: "Sole engineer — hybrid RAG pipeline (Qdrant + BM25 + RRF + diversity re-ranking), token-aware chunking, 4-store context architecture, context assembly priority ordering, rolling conversation summarization, and farm/crop AI context API.",
   outcome:
-    "Knowledge service with 271 tests covering ingestion, chunker accuracy, RRF fusion, ACL filtering, and storage flows. Hybrid retrieval measurably outperforms pure vector search on short Hindi/Hinglish agricultural queries.",
+    "Knowledge service with 271 tests covering ingestion, chunker accuracy, RRF fusion, ACL filtering, and storage flows. Internal query tests show hybrid retrieval outperforming pure vector search on short Hindi/Hinglish agricultural queries.",
+  evidence:
+    "Public knowledge-service repository and 271-test suite covering ingestion, retrieval, ACLs, and storage. Retrieval improvement still needs a published corpus, query set, and metric table for independent comparison.",
+  nextStep:
+    "Release a versioned multilingual golden set with Recall@k, MRR, citation precision, and dense-versus-hybrid ablations.",
   tradeoffs: [
     "Qdrant + BM25 hybrid RAG over pure vector search — RRF captures lexical matches that dense embeddings miss.",
     "PostgreSQL metadata + Qdrant vectors over single vector DB — ACLs, version history, and ingestion jobs stay relational.",

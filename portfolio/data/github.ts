@@ -16,7 +16,7 @@ export const githubProfile = {
   url: "https://github.com/yashdark01",
   username: "yashdark01",
   /** Paste this into github.com → Settings → Profile → Bio */
-  bio: "Founding Engineer + Applied AI Engineer @Horizon17 · Building Krashaq AI, Ecometer, and Ecolynk · Next.js · Node.js · LangGraph · RAG",
+  bio: "Founding Engineer + Applied AI Engineer @Horizon17 · Building Krashaq AI, EcoMeter, and Ecolynk · Next.js · Node.js · LangGraph · RAG",
   highlights: [
     { label: "Flagship repo", value: "Krashaq-Ai" },
     { label: "Quality gate", value: "CI — lint, test, build on push" },

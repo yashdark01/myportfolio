@@ -85,7 +85,7 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
         <p className="mt-3 text-lg text-text-muted">{study.caseStudyTitle}</p>
         <p className="mt-2 text-text-muted">{study.subtitle}</p>
 
-        <div className="mt-6 flex flex-wrap gap-2" data-reveal-group>
+        <div className="mt-6 flex flex-wrap gap-2" data-reveal-group aria-label="Project achievements">
           {study.metrics.map((metric) => (
             <Badge key={metric.label} variant="accent">
               <span className="font-semibold">{metric.value}</span>
@@ -124,6 +124,33 @@ export default function CaseStudyView({ study }: CaseStudyViewProps) {
             Product context, problem, and outcomes.
           </p>
         </div>
+
+        <section aria-labelledby="recruiter-summary-heading" data-reveal>
+          <div className="mb-5">
+            <h2 id="recruiter-summary-heading" className="section-label text-accent">
+              Recruiter summary
+            </h2>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">
+              Ownership and evidence are separated from product-level outcomes so
+              the scope of each claim stays clear.
+            </p>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2" data-reveal-group>
+            {[
+              { label: "My ownership", value: study.role },
+              { label: "Shipped result", value: study.outcome },
+              { label: "Evidence basis", value: study.evidence },
+              { label: "Next validation step", value: study.nextStep },
+            ].map((item) => (
+              <div key={item.label} className="card-surface p-5 sm:p-6">
+                <h3 className="section-label text-accent">{item.label}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-text-muted">
+                  {item.value}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <ProjectMediaGallery
           items={getPreviewMedia(study.id)}

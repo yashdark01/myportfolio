@@ -6,7 +6,6 @@ export default function JsonLd() {
   const siteUrl = getSiteUrl();
   const profileImageUrl = getProfileImageUrl();
 
-  // 1. Person schema — rich identity signals for Google Knowledge Panel
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -16,7 +15,7 @@ export default function JsonLd() {
     familyName: "Patidar",
     gender: "Male",
     nationality: "Indian",
-    jobTitle: "Applied AI Engineer & Full Stack Developer",
+    jobTitle: "Full-Stack Engineer",
     description: site.tagline,
     email: site.email,
     telephone: site.phone,
@@ -36,7 +35,7 @@ export default function JsonLd() {
     sameAs: [
       site.links.linkedin,
       site.links.github,
-      "https://leetcode.com/u/yashdark_01/",
+      site.links.leetcode,
       site.links.horizon17,
     ],
     worksFor: {
@@ -47,9 +46,9 @@ export default function JsonLd() {
     hasOccupation: [
       {
         "@type": "Occupation",
-        name: "Applied AI Engineer",
+        name: "Full-Stack Engineer specializing in Applied AI",
         skills:
-          "LangGraph, LangChain, RAG, Qdrant, OpenAI, TypeScript, Next.js, Node.js, PostgreSQL, distributed systems",
+          "TypeScript, Next.js, Node.js, PostgreSQL, AWS, Docker, LangGraph, RAG, Qdrant, distributed systems",
         occupationLocation: {
           "@type": "Country",
           name: "India",
@@ -94,17 +93,20 @@ export default function JsonLd() {
       "Next.js",
       "Node.js",
       "Express.js",
-      "TypeScript",
+      "FastAPI",
       "LangChain",
       "LangGraph",
       "Retrieval-Augmented Generation",
       "Qdrant",
       "PostgreSQL",
       "Redis",
+      "NATS",
       "Docker",
       "Amazon Web Services",
+      "TypeScript",
       "System Design",
       "Applied AI",
+      "Agentic systems",
       "Multi-agent systems",
       "Hybrid RAG",
       "Vector databases",
@@ -112,13 +114,12 @@ export default function JsonLd() {
     ],
   };
 
-  // 2. ProfilePage schema — Google's recommended type for personal portfolio pages
   const profilePageSchema = {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
     "@id": `${siteUrl}/#profilepage`,
     url: siteUrl,
-    name: `${site.name} — Applied AI Engineer & Full Stack Developer`,
+    name: `${site.name} — Full-Stack Engineer specializing in Applied AI`,
     description: site.tagline,
     dateCreated: "2025-01-01",
     dateModified: new Date().toISOString().split("T")[0],
@@ -127,7 +128,6 @@ export default function JsonLd() {
     author: { "@id": `${siteUrl}/#person` },
   };
 
-  // 3. WebSite schema — enables Sitelinks search box in Google
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",

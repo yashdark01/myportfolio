@@ -67,18 +67,7 @@ export default function HeroClient() {
 
       <div className="site-shell relative pb-10 pt-14">
         <div className="hero-scene-stage pointer-events-none absolute -right-[8%] top-[12%] hidden h-[66%] w-[56%] opacity-90 md:block">
-          {showScene && (
-            <>
-            <HeroScene persona={persona} />
-            <div className="hero-viz-readout" aria-hidden>
-              <span className="hero-viz-index">{persona === "product" ? "01" : "02"}</span>
-              <span>
-                {persona === "product" ? "Signal synthesis" : "Neural topology"}
-                <small>{persona === "product" ? "7 odd harmonics · live phase" : "76 nodes · live inference"}</small>
-              </span>
-            </div>
-            </>
-          )}
+          {showScene && <HeroScene persona={persona} />}
         </div>
 
         <div className="relative z-10">
@@ -88,16 +77,18 @@ export default function HeroClient() {
               {site.status}
             </span>
             <span className="hidden h-px w-8 bg-white/15 sm:block" />
-            <span>IIIT Nagpur · {site.yearsExperience}</span>
+            <span className="hero-credential">
+              <span aria-hidden>◆</span>
+              IIIT Nagpur
+            </span>
+            <span aria-hidden>·</span>
+            <span>{site.yearsExperience}</span>
           </div>
 
           <p className="section-label mb-3 text-accent">
-            <span className="sr-only">Yash Patidar — </span>
-            Applied AI Engineer · Full Stack Developer · Builder
+            Full-Stack Engineer · Applied AI
           </p>
           <h1 className="hero-title editorial-hero-title uppercase">
-            {/* sr-only span gives Google the exact "Yash Patidar" signal in the h1 */}
-            <span className="sr-only">Yash Patidar — </span>
             <span className="hero-line block">I build digital</span>
             <span className="hero-line hero-line-outline block">systems that</span>
             <span className="hero-line block">think &amp; scale.</span>
@@ -110,6 +101,16 @@ export default function HeroClient() {
                   {content.tagline}
                 </m.p>
               </AnimatePresence>
+              <div className="hero-signals mt-5" aria-label="Engineering focus and core stack">
+                <p className="hero-signal-row">
+                  <span className="hero-signal-label">Focus</span>
+                  <span>{site.marketFocus.join(" · ")}</span>
+                </p>
+                <p className="hero-signal-row">
+                  <span className="hero-signal-label">Core stack</span>
+                  <span>{site.highDemandStack.join(" · ")}</span>
+                </p>
+              </div>
               <div className="mt-5 inline-flex rounded-full border border-white/10 bg-black/20 p-1 backdrop-blur-xl" role="group" aria-label="Portfolio focus">
                 {personaOptions.map((option) => (
                   <button key={option.id} type="button" aria-pressed={persona === option.id} onClick={() => setPersona(option.id)} className={`min-h-10 rounded-full px-4 py-2 text-xs font-medium transition-all ${persona === option.id ? "bg-white text-background" : "text-text-muted hover:text-text-primary"}`}>
