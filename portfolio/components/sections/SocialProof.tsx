@@ -21,6 +21,9 @@ export default function SocialProof() {
       title="Evidence, with attribution."
       className="editorial-flat"
     >
+      <p className="-mt-6 mb-5 max-w-3xl text-sm leading-relaxed text-text-muted">
+        The organization names below come from public EcoMS case studies. They represent the platform ecosystem; I do not claim personal ownership of each client relationship or campaign.
+      </p>
       <div className="client-marquee -mt-5 mb-10" aria-label="Selected organizations and clients">
         <div className="client-marquee-track">
           {[...ecoMeterEcosystemClients, ...ecoMeterEcosystemClients].map((client, index) => (

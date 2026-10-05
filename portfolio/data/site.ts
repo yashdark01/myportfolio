@@ -43,6 +43,7 @@ export const site = {
     "Node.js",
     "PostgreSQL",
     "AWS",
+    "Docker",
     "LangGraph",
   ],
   featuredProject: {

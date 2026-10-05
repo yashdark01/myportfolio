@@ -8,15 +8,10 @@ import { useGsap } from "@/lib/useGsap";
 const terminalLines = [
   { symbol: "❯", text: "architect ./krashaq --production", tone: "command" },
   { symbol: "⟡", text: "Mapping farmer, platform and network constraints", tone: "active" },
-  { symbol: "✓", text: "Hindi / Hinglish flows designed for low bandwidth", tone: "success" },
-  { symbol: "⟡", text: "Building governed agent infrastructure", tone: "active" },
-  { symbol: "✓", text: "9 microservices connected through HTTP + events", tone: "success" },
-  { symbol: "✓", text: "26 tools · LangGraph · Qdrant + BM25 hybrid RAG", tone: "success" },
-  { symbol: "⟡", text: "Running verification suite", tone: "active" },
-  { symbol: "✓", text: "630+ automated tests passing", tone: "success" },
-  { symbol: "✓", text: "PostgreSQL outbox + durable HITL approval verified", tone: "success" },
-  { symbol: "⟡", text: "Deploying production services", tone: "active" },
-  { symbol: "✓", text: "Live system healthy · streaming responses ready", tone: "success" },
+  { symbol: "✓", text: "9 services · HTTP/events · low-bandwidth Hindi/Hinglish flows", tone: "success" },
+  { symbol: "✓", text: "26 governed tools · LangGraph · hybrid RAG", tone: "success" },
+  { symbol: "✓", text: "630+ automated tests · durable HITL approvals", tone: "success" },
+  { symbol: "✓", text: "Live demo · streaming responses", tone: "success" },
   { symbol: "❯", text: "_", tone: "command" },
 ] as const;
 
@@ -59,8 +54,8 @@ export default function Process() {
             <p className="font-mono text-[10px] tracking-[0.12em] text-text-muted">YASH@PORTFOLIO — ~/SYSTEMS/KRASHAQ</p>
             <span className="font-mono text-[10px] text-accent">LIVE</span>
           </div>
-          <div className="min-h-[32rem] p-5 font-mono text-xs leading-6 sm:p-7 sm:text-[13px] sm:leading-7">
-            <p className="mb-6 text-text-muted">AI agent <span className="text-white">~/krashaq</span></p>
+          <div className="min-h-[25rem] p-5 font-mono text-xs leading-6 sm:p-7 sm:text-[13px] sm:leading-7">
+            <p className="mb-5 text-text-muted">AI agent <span className="text-white">~/krashaq</span></p>
             <div className="space-y-1.5">
               {terminalLines.map((line, index) => (
                 <p key={`${line.text}-${index}`} className={`terminal-line terminal-${line.tone} flex gap-3`}>
@@ -69,7 +64,7 @@ export default function Process() {
                 </p>
               ))}
             </div>
-            <div className="mt-8 grid grid-cols-3 gap-2 border-t border-white/8 pt-5">
+            <div className="mt-6 grid grid-cols-3 gap-2 border-t border-white/8 pt-5">
               <div><p className="text-lg font-semibold text-white">630+</p><p className="text-[9px] uppercase tracking-wider text-text-muted">Tests</p></div>
               <div><p className="text-lg font-semibold text-white">26</p><p className="text-[9px] uppercase tracking-wider text-text-muted">Tools</p></div>
               <div><p className="text-lg font-semibold text-accent">Healthy</p><p className="text-[9px] uppercase tracking-wider text-text-muted">Production</p></div>

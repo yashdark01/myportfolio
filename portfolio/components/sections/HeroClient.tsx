@@ -119,7 +119,16 @@ export default function HeroClient() {
                 ))}
               </div>
             </div>
-            <div className="flex items-center gap-5">
+            <div className="flex flex-wrap items-center gap-5">
+              <a
+                href={personas.ai.featuredProject.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("project_link_click", { project: "krashaq", type: "live", source: "hero" })}
+                className="text-sm font-medium text-accent underline decoration-accent/35 underline-offset-8 hover:text-accent-hover"
+              >
+                See Krashaq live ↗
+              </a>
               <a href={site.resumeUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("resume_download", { source: "hero" })} className="text-sm text-text-muted underline decoration-white/20 underline-offset-8 hover:text-white hover:decoration-accent">Resume ↗</a>
               <SectionLink sectionId="work" className="hero-round-cta">
                 <span>Explore work</span><span aria-hidden>↘</span>

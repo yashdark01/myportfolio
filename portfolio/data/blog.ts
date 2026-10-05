@@ -185,6 +185,99 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "hybrid-rag-chunking-for-multilingual-queries",
+    title: "Hybrid RAG Chunking for Short, Multilingual Queries",
+    excerpt:
+      "Why Krashaq combines token-aware chunks, dense Qdrant retrieval, BM25, and reciprocal-rank fusion instead of trusting embeddings alone.",
+    date: "2026-10-05",
+    tags: ["RAG", "Qdrant", "BM25", "Evaluation"],
+    sections: [
+      {
+        title: "The retrieval failure to design for",
+        content:
+          "Agriculture questions are often short, specific, and mixed-language: a crop name in Hindi or Roman-script Hinglish next to a chemical term or a disease symptom. A dense vector search is useful for semantic similarity, but it can soften exactly the token that makes the answer safe. The retrieval design therefore needs both semantic and lexical signals.",
+      },
+      {
+        title: "One ingestion contract, two retrieval legs",
+        content:
+          "In Krashaq, source documents are parsed, token-aware chunked, embedded, and stored with their source metadata. Qdrant supplies dense retrieval while BM25 supplies the lexical leg. Reciprocal-rank fusion combines rank positions rather than treating incomparable score scales as if they were the same measurement.",
+        bullets: [
+          "Chunk boundaries preserve headings and nearby context instead of cutting a procedure mid-step.",
+          "Source artifacts live in MinIO or S3; PostgreSQL tracks ingestion state and metadata.",
+          "The application asks one knowledge-service contract for candidates, rather than duplicating retrieval logic across agents.",
+          "Access rules apply before retrieved content is returned to an agent run.",
+        ],
+      },
+      {
+        title: "What I would measure next",
+        content:
+          "A hybrid pipeline is not automatically better because it has more components. The next proof layer is a versioned Hindi, Hinglish, and English golden set with expected documents, grounded answer checks, and regression thresholds. That would turn retrieval quality from an architecture claim into a repeatable engineering signal.",
+      },
+    ],
+  },
+  {
+    slug: "events-versus-queues-in-product-systems",
+    title: "Events, Queues, and the Boundary Between Them",
+    excerpt:
+      "A practical distinction from Krashaq: use domain events to decouple a fact, and worker queues to execute a unit of work reliably.",
+    date: "2026-10-05",
+    tags: ["Event-Driven", "PostgreSQL", "BullMQ", "System Design"],
+    sections: [
+      {
+        title: "They solve different problems",
+        content:
+          "A queue says that a worker must perform work. An event says that something happened and other parts of the system may care. Treating them as interchangeable blurs ownership and makes retries difficult to reason about. In Krashaq, weather warnings are domain facts; farm-level evaluation and notification delivery are worker jobs.",
+      },
+      {
+        title: "Keep the delivery obligation durable",
+        content:
+          "The alert workflow records the domain change and its outbox entry together in PostgreSQL. A publisher can retry delivery without losing the obligation, while row locking protects a farm from duplicate concurrent evaluation. The key objective is not fashionable asynchronous architecture; it is a system that can explain what is still owed after a failure.",
+        bullets: [
+          "A weather warning becomes a durable input to the alert flow.",
+          "H3 spatial cells narrow the farms that need evaluation.",
+          "BullMQ workers distribute evaluation and delivery work.",
+          "Idempotency and row locks protect retries from creating duplicate effects.",
+        ],
+      },
+      {
+        title: "The trade-off",
+        content:
+          "Async flows add observability, ordering, and recovery work. I use them when the producer should not own the consumer's timing or availability—not merely to make a diagram look more scalable. For a request that must respond immediately, a typed synchronous service boundary remains clearer.",
+      },
+    ],
+  },
+  {
+    slug: "human-approval-for-agent-actions",
+    title: "Human Approval Is a Contract, Not a Button",
+    excerpt:
+      "How payload-bound approval, budgets, and testable tool contracts make consequential AI-agent actions safer to resume.",
+    date: "2026-10-05",
+    tags: ["LangGraph", "AI Agents", "HITL", "Testing"],
+    sections: [
+      {
+        title: "The unsafe shortcut",
+        content:
+          "A confirmation modal alone does not make an agent action safe. Between an approval screen and a resumed run, the caller, requested payload, available tools, or preconditions may have changed. The approval must describe the exact action it authorizes, and the runtime must verify that description before side effects occur.",
+      },
+      {
+        title: "Bound the approval to the run",
+        content:
+          "Krashaq records checkpoints and an action journal in PostgreSQL. Consequential tools pause for human approval, then resume only when the identity, payload hash, tool catalog, and preconditions still match. Fenced leases and idempotency keys prevent a retry from turning one intended action into several effects.",
+        bullets: [
+          "Tool discovery is scope-aware before the model selects a tool.",
+          "Handlers re-check authorization at execution time.",
+          "A BudgetBroker limits steps, token use, cost, and wall time.",
+          "Tests cover routing, authorization, approval, recovery, and tool contracts—not only happy-path chat output.",
+        ],
+      },
+      {
+        title: "Why this is a testing story",
+        content:
+          "Agent behavior is variable; system guarantees should not be. The valuable tests assert deterministic boundaries around the model: who can invoke a tool, what payload is approved, which effects are idempotent, and how a run recovers. That is why the platform's automated suite is presented as engineering evidence, not as a quality claim without scope.",
+      },
+    ],
+  },
 ];
 
 export function getBlogPost(slug: string) {

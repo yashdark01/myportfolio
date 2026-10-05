@@ -29,6 +29,9 @@ function orderProjects(list: Project[], order: readonly string[]) {
 
 function ProjectStory({ project, index }: { project: Project; index: number }) {
   const articleRef = useRef<HTMLElement>(null);
+  const mediaFrameRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const indexRef = useRef<HTMLSpanElement>(null);
   const previewMedia = getHeroPreviewMedia(project.id);
 
   useGsap(
@@ -48,17 +51,36 @@ function ProjectStory({ project, index }: { project: Project; index: number }) {
         },
       );
       gsap.fromTo(
-        ".project-media-inner",
-        { yPercent: -3, scale: 0.98 },
+        mediaFrameRef.current,
         {
-          yPercent: 3,
-          scale: 1.02,
+          xPercent: 0,
+          y: () => {
+            if (window.innerWidth < 1024) return -24;
+            const mediaHeight = mediaFrameRef.current?.offsetHeight ?? 0;
+            const contentHeight = contentRef.current?.offsetHeight ?? 0;
+            return -Math.max(0, (contentHeight - mediaHeight) / 2);
+          },
+          rotation: 0,
+          scale: 1,
+          transformOrigin: "center center",
+        },
+        {
+          xPercent: 0,
+          y: () => {
+            if (window.innerWidth < 1024) return 24;
+            const mediaHeight = mediaFrameRef.current?.offsetHeight ?? 0;
+            const contentHeight = contentRef.current?.offsetHeight ?? 0;
+            return Math.max(0, (contentHeight - mediaHeight) / 2);
+          },
+          rotation: 0,
+          scale: 1,
           ease: "none",
           scrollTrigger: {
             trigger: articleRef.current,
             start: "top bottom",
             end: "bottom top",
-            scrub: 0.7,
+            scrub: 0.03,
+            invalidateOnRefresh: true,
           },
         },
       );
@@ -85,7 +107,7 @@ function ProjectStory({ project, index }: { project: Project; index: number }) {
           },
         },
       );
-      gsap.to(".project-index-bg", {
+      gsap.to(indexRef.current, {
         yPercent: index % 2 ? 14 : -14,
         rotation: index % 2 ? 1.5 : -1.5,
         ease: "none",
@@ -102,6 +124,7 @@ function ProjectStory({ project, index }: { project: Project; index: number }) {
   return (
     <article ref={articleRef} className="project-story relative grid gap-8 border-t border-white/10 py-16 lg:min-h-[88svh] lg:grid-cols-[1.08fr_.92fr] lg:items-center lg:gap-16 lg:py-20">
       <span
+        ref={indexRef}
         className={`project-index-bg ${index % 2 ? "project-index-bg-right" : "project-index-bg-left"}`}
         aria-hidden
       >
@@ -109,7 +132,7 @@ function ProjectStory({ project, index }: { project: Project; index: number }) {
         <span className="project-index-digit">{index + 1}</span>
       </span>
       <div className={`project-media-wrap relative z-10 lg:sticky lg:top-24 lg:h-fit ${index % 2 ? "lg:order-2" : ""}`}>
-        <div className="project-media-inner relative overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/30 p-2 shadow-2xl shadow-black/30">
+        <div ref={mediaFrameRef} className="project-media-inner relative overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/30 p-2 shadow-2xl shadow-black/30">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(16,185,129,.12),transparent_38%)]" />
           {previewMedia ? (
             <MediaFrame
@@ -128,7 +151,7 @@ function ProjectStory({ project, index }: { project: Project; index: number }) {
         </div>
       </div>
 
-      <div className={`relative z-10 flex min-h-[30rem] flex-col justify-center ${index % 2 ? "lg:order-1 lg:pl-8" : ""}`}>
+      <div ref={contentRef} className={`project-media-content relative z-10 flex min-h-[30rem] flex-col justify-center ${index % 2 ? "lg:order-1 lg:pl-8" : ""}`}>
         <div className="project-reveal flex flex-wrap gap-2">
           <Badge variant="muted">{categoryLabels[project.category]}</Badge>
           {project.builtAt && <Badge variant="accent">Built at {project.builtAt}</Badge>}
